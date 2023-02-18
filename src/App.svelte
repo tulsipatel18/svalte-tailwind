@@ -1,58 +1,69 @@
 <script>
-  jQuery(function ($) {
-    var url = "https://silverlight.store/checkout/?add-to-cart=",
-      vid = 'input[name="variation_id"]',
-      pid = 'input[name="product_id"]',
-      qty = "input.qty",
-      button = "a.custom-checkout-btn";
-    cart_pro = "1";
+  // jQuery(function ($) {
+  //   var url = "https://silverlight.store/checkout/?add-to-cart=",
+  //     vid = 'input[name="variation_id"]',
+  //     pid = 'input[name="product_id"]',
+  //     qty = "input.qty",
+  //     button = "a.custom-checkout-btn";
+  //   cart_pro = "1";
 
-    // Once DOM is loaded
-    setTimeout(function () {
-      if ($(vid).val() != "" && 0 < cart_pro) {
-        $(button).attr("href", url + $(vid).val() + "&quantity=0");
-      } else {
-        $(button).attr(
-          "href",
-          url + $(vid).val() + "&quantity=" + $(qty).val()
-        );
-      }
-    }, 2000);
+  //   // Once DOM is loaded
+  //   setTimeout(function () {
+  //     if ($(vid).val() != "" && 0 < cart_pro) {
+  //       $(button).attr("href", url + $(vid).val() + "&quantity=0");
+  //     } else {
+  //       $(button).attr(
+  //         "href",
+  //         url + $(vid).val() + "&quantity=" + $(qty).val()
+  //       );
+  //     }
+  //   }, 2000);
 
-    // On input/change quantity event
-    $(qty).on("input change", function () {
-      if ($(vid).val() != "" && 0 < cart_pro) {
-        $(button).attr("href", url + $(vid).val() + "&quantity=0");
-      } else {
-        $(button).attr(
-          "href",
-          url + $(vid).val() + "&quantity=" + $(this).val()
-        );
-      }
-    });
+  //   // On input/change quantity event
+  //   $(qty).on("input change", function () {
+  //     if ($(vid).val() != "" && 0 < cart_pro) {
+  //       $(button).attr("href", url + $(vid).val() + "&quantity=0");
+  //     } else {
+  //       $(button).attr(
+  //         "href",
+  //         url + $(vid).val() + "&quantity=" + $(this).val()
+  //       );
+  //     }
+  //   });
 
-    // On select attribute field change event
-    $(".variations_form").on("click", "table.variations select", function () {
-      setTimeout(function () {
-        if ($(vid).val() != "" && 0 < cart_pro) {
-          $(button).attr("href", url + $(vid).val() + "&quantity=0");
-        } else {
-          $(button).attr(
-            "href",
-            url + $(vid).val() + "&quantity=" + $(qty).val()
-          );
-        }
-      }, 2000);
-    });
-  });
+  //   // On select attribute field change event
+  //   $(".variations_form").on("click", "table.variations select", function () {
+  //     setTimeout(function () {
+  //       if ($(vid).val() != "" && 0 < cart_pro) {
+  //         $(button).attr("href", url + $(vid).val() + "&quantity=0");
+  //       } else {
+  //         $(button).attr(
+  //           "href",
+  //           url + $(vid).val() + "&quantity=" + $(qty).val()
+  //         );
+  //       }
+  //     }, 2000);
+  //   });
+  // });
 
-  jQuery(function ($) {
-    $(".xzoom,.xzoom-gallery").xzoom({
-      zoomWidth: 400,
-      tint: "#333",
-      xoffset: "15",
-    });
-  });
+  // jQuery(function ($) {
+  //   $(".xzoom,.xzoom-gallery").xzoom({
+  //     zoomWidth: 400,
+  //     tint: "#333",
+  //     xoffset: "15",
+  //   });
+  // });
+
+  let color, type, quantity, size, total;
+  let sizechart = false;
+  $: console.log(sizechart);
+
+  const handleCart = () => {
+    total = 79 * quantity;
+    window.alert(
+      `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
+    );
+  };
 </script>
 
 <div class="main-container">
@@ -242,10 +253,24 @@
               <td class="">
                 <ul role="radiogroup" aria-label="Color" class="d-flex">
                   <li>
-                    <div class=""><button class="">Black</button></div>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          color = "black";
+                        }}>Black</button
+                      >
+                    </div>
                   </li>
                   <li>
-                    <div class=""><button class="">Blue</button></div>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          color = "blue";
+                        }}>Blue</button
+                      >
+                    </div>
                   </li>
                 </ul>
               </td>
@@ -257,12 +282,22 @@
                 <ul role="radiogroup" aria-label="type" class="d-flex">
                   <li>
                     <div class="">
-                      <button class="">Ankle</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          type = "ankle";
+                        }}>Ankle</button
+                      >
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">Crew</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          type = "crew";
+                        }}>Crew</button
+                      >
                     </div>
                   </li>
                 </ul>
@@ -284,17 +319,32 @@
                 <ul role="radiogroup" aria-label="quantity" class="d-flex">
                   <li>
                     <div class="">
-                      <button class="">1 Pack</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          quantity = 1;
+                        }}>1 Pack</button
+                      >
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">3 Pack</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          quantity = 3;
+                        }}>3 Pack</button
+                      >
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">5 Pack</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          quantity = 5;
+                        }}>5 Pack</button
+                      >
                     </div>
                   </li>
                 </ul>
@@ -308,27 +358,52 @@
                   <ul role="radiogroup" aria-label="Size" class="d-flex">
                     <li>
                       <div class="">
-                        <button class="">S</button>
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "s";
+                          }}>S</button
+                        >
                       </div>
                     </li>
                     <li>
                       <div class="">
-                        <button class="">M</button>
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "m";
+                          }}>M</button
+                        >
                       </div>
                     </li>
                     <li>
                       <div class="">
-                        <button class="">L</button>
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "l";
+                          }}>L</button
+                        >
                       </div>
                     </li>
                     <li>
                       <div class="">
-                        <button class="">XL</button>
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "xl";
+                          }}>XL</button
+                        >
                       </div>
                     </li>
                     <li>
                       <div class="">
-                        <button class="">XXL</button>
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "xxl";
+                          }}>XXL</button
+                        >
                       </div>
                     </li>
                   </ul>
@@ -339,13 +414,19 @@
                   <a
                     class="popmake-9356 pum-trigger"
                     href
-                    style="cursor: pointer;">Size Chart</a
+                    style="cursor: pointer;"
+                    on:click|preventDefault={() => {
+                      sizechart = !sizechart;
+                    }}>Size Chart</a
                   >
-                  <img
-                    class="d-none"
-                    src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-                    alt=""
-                  />
+                  <!-- {#if sizechart}
+                    <div class="size-chart-center">
+                      <img
+                        src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+                        alt=""
+                      />
+                    </div>
+                  {/if} -->
                 </p>
               </div>
             </div>
@@ -364,6 +445,14 @@
         </p>
       </div> -->
       </div>
+      {#if sizechart}
+        <div class="size-chart-center">
+          <img
+            src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+            alt=""
+          />
+        </div>
+      {/if}
 
       <div class="">
         <div class="d-flex my-4">
@@ -416,8 +505,10 @@
             <!-- </span> -->
           </div>
         </div>
-        <button type="submit" class="add-to-cart-button button alt"
-          >ADD TO CART</button
+        <button
+          type="submit"
+          class="add-to-cart-button button alt"
+          on:click={handleCart}>ADD TO CART</button
         >
         <button class="checkout-button">
           <a
@@ -533,6 +624,15 @@
     justify-content: center;
   }
 
+  .socks-selection button {
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 3px;
+    /* width: 40px; */
+    background: white;
+  }
+
   .socks-selection li span {
     padding: 0 5px;
   }
@@ -559,6 +659,12 @@
     top: -35px;
     margin: 0;
   } */
+
+  .size-chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
 
   .chart-text {
     margin-bottom: 10px;
