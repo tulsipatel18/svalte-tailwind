@@ -67,9 +67,10 @@
  
  
 </script>
-
 <div class="main-container">
+<div class="container-1080">
   <div class="w-50 socks-slider-wrapper container">
+    <div class="w-100">
     <div class="w-100 xzoom-container">
       <!-- <img
         src="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
@@ -161,6 +162,7 @@
       </div>
     </div> -->
   </div>
+  </div>
   <div class="w-50 silver-hiking-socks-wrapper">
     <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
       SILVERLIGHT HIKING SOCKS
@@ -225,202 +227,122 @@
         </li>
       </ul>
     </span>
-    <table class="socks-selection" cellspacing="0">
-      <tbody>
-        <tr>
-          <td class=""><label for="pa_color">COLOR</label></td>
-
-          <td class="">
-            <select
-              style="display:none"
-              id="pa_color"
-              class=""
-              name="attribute_pa_color"
-            >
-              <option value="">Choose an option</option>
-              <option value="black" selected="selected">Black</option>
-              <option value="blue">Blue</option></select
-            >
-            <ul role="radiogroup" aria-label="Color" class="d-flex">
-              <li>
-                <!-- <div class=""><span class="" >Black</span></div> -->
-                <div class="">
-                  <button class="" on:click={()=>{color='black'}}>Black</button>
-                </div>
-              </li>
-              <li>
-                <!-- <div class=""><span class="">Blue</span></div> -->
-                <div class=""><button class=""  on:click={()=>{color='blue'}}>Blue</button></div>
-              </li>
-            </ul>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label"><label for="type">TYPE</label></td>
-
-          <td class="">
-            <!-- <select
-              style="display:none"
-              id="type"
-              class=""
-              name="attribute_type"
-              ><option value="">Choose an option</option><option value="Ankle"
-                >Ankle</option
-              ><option value="Crew" selected="selected">Crew</option></select
-            > -->
-            <ul role="radiogroup" aria-label="type" class="d-flex">
-              <li>
-                <!-- <div class="">
-                  <span class="">Ankle</span>
-                </div> -->
-                <div class="">
-                  <button class="" on:click={()=>{type='ankle'}}>Ankle</button>
-                </div>
-              </li>
-              <li>
-                <!-- <div class="">
-                  <span class="">Crew</span>
-                </div> -->
-                <div class="">
-                  <button class="" on:click={()=>{type='crew'}}>Crew</button>
-                </div>
-              </li>
-            </ul>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="label"><label for="quantity">QUANTITY</label></td>
-
-          <td class="">
-            <select
-              style="display:none"
-              id="quantity"
-              class=""
-              name="attribute_quantity"
-              ><option value="">Choose an option</option><option value="1 Pack"
-                >1 Pack</option
-              ><option value="3 Pack" selected="selected">3 Pack</option><option
-                value="5 Pack">5 Pack</option
-              ></select
-            >
-            <ul role="radiogroup" aria-label="quantity" class="d-flex">
-              <li>
-                <!-- <div class="">
-                  <span class="">1 Pack</span>
-                </div> -->
-                <div class="">
-                  <button class="" on:click={()=>{quantity=1}}>1 Pack</button>
-                </div>
-              </li>
-              <li>
-                <!-- <div class="">
-                  <span class="" >3 Pack</span>
-                </div> -->
-                <div class="">
-                  <button class="" on:click={()=>{quantity=3}} >3 Pack</button>
-                </div>
-
-              </li>
-              <li>
-                <!-- <div class="">
-                  <span class="">5 Pack</span>
-                </div> -->
-                <div class="">
-                  <button class="" on:click={()=>{quantity=5}}>5 Pack</button>
-                </div>
-              </li>
-            </ul>
-          </td>
-        </tr>
-        <div class="d-flex">
+    <div class="">
+      <table class="socks-selection" cellspacing="0">
+        <tbody>
           <tr>
-            <td class="label"><label for="pa_size">SIZE</label></td>
+            <td class=""><label for="pa_color">COLOR</label></td>
 
             <td class="">
-              <ul role="radiogroup" aria-label="Size" class="d-flex">
+              <ul role="radiogroup" aria-label="Color" class="d-flex">
                 <li>
-                  <!-- <div class="">
-                    <span class="">S</span>
-                  </div> -->
+                  <div class=""><button class="">Black</button></div>
+                </li>
+                <li>
+                  <div class=""><button class="">Blue</button></div>
+                </li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="label"><label for="type">TYPE</label></td>
+            <td class="">
+              <ul role="radiogroup" aria-label="type" class="d-flex">
+                <li>
                   <div class="">
-                    <button class="" on:click={()=>{size='s'}}>S</button>
+                    <button class="">Ankle</button>
                   </div>
                 </li>
                 <li>
-                  <!-- <div class="">
-                    <span class="">M</span>
-                  </div> -->
                   <div class="">
-                    <button class="" on:click={()=>{size='m'}}>M</button>
-                  </div>
-                </li>
-                <li>
-                  <!-- <div class="">
-                    <span class="">L</span>
-                  </div> -->
-                  <div class="">
-                    <button class="" on:click={()=>{size='l'}}>L</button>
-                  </div>
-                </li>
-                <li>
-                  <!-- <div class="">
-                    <span class="">XL</span>
-                  </div> -->
-                  <div class="">
-                    <button class="" on:click={()=>{size='xl'}}>XL</button>
-                  </div>
-                </li>
-                <li>
-                  <!-- <div class="">
-                    <span class="">XXL</span>
-                  </div> -->
-                  <div class="">
-                    <button class="" on:click={()=>{size='xxl'}}>XXL</button>
+                    <button class="">Crew</button>
                   </div>
                 </li>
               </ul>
-              <!-- <div class="chart-text">
-                <p>
-                  <a
-                    class="popmake-9356 pum-trigger"
-                    href
-                    style="cursor: pointer;">Size Chart</a
-                  >
-                  <img
-                    class="d-none"
-                    src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-                    alt=""
-                    />
-                  </p>
-                </div> -->
-              <!-- <a class="reset_variations" href="#">Clear</a> -->
             </td>
           </tr>
           <tr>
-            <td>
-              <div class="chart-text">
-                <p>
-                  <a
-                    class="popmake-9356 pum-trigger"
-                    href
-                    style="cursor: pointer;">Size Chart</a
-                  >
-                  <img
-                    class="d-none"
-                    src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-                    alt=""
-                  />
-                </p>
-              </div>
-            </td></tr
-          >
-        </div>
-      </tbody>
-    </table>
+            <td class="label"><label for="quantity">QUANTITY</label></td>
+            <td class="">
+              <select
+                style="display:none"
+                id="quantity"
+                class=""
+                name="attribute_quantity"
+                ><option value="">Choose an option</option><option
+                  value="1 Pack">1 Pack</option
+                ><option value="3 Pack" selected="selected">3 Pack</option
+                ><option value="5 Pack">5 Pack</option></select
+              >
+              <ul role="radiogroup" aria-label="quantity" class="d-flex">
+                <li>
+                  <div class="">
+                    <button class="">1 Pack</button>
+                  </div>
+                </li>
+                <li>
+                  <div class="">
+                    <button class="">3 Pack</button>
+                  </div>
+                </li>
+                <li>
+                  <div class="">
+                    <button class="">5 Pack</button>
+                  </div>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <div class="d-flex justify-content-between">
+            <tr>
+              <td class="label"><label for="pa_size">SIZE</label></td>
 
-    <div class="">
+              <td class="">
+                <ul role="radiogroup" aria-label="Size" class="d-flex">
+                  <li>
+                    <div class="">
+                      <button class="">S</button>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button class="">M</button>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button class="">L</button>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button class="">XL</button>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button class="">XXL</button>
+                    </div>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <div class="chart-text">
+              <p>
+                <a class="popmake-9356 pum-trigger" href style="cursor: pointer;"
+                  >Size Chart</a
+                >
+                <img
+                  class="d-none"
+                  src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+                  alt=""
+                />
+              </p>
+            </div>
+          </div>
+        </tbody>
+      </table>
       <!-- <div class="chart-text">
         <p>
           <a class="popmake-9356 pum-trigger" href style="cursor: pointer;"
@@ -433,6 +355,9 @@
           />
         </p>
       </div> -->
+    </div>
+
+    <div class="">
       <div class="d-flex my-4">
         <div class="price-wrapper">
           <p class="price product-page-price">
@@ -499,10 +424,18 @@
     </div>
   </div>
 </div>
+</div>
 
 <style>
-  .main-container {
+
+  .main-container{
     display: flex;
+    justify-content: center;
+  }
+
+  .container-1080 {
+    display: flex;
+    max-width: 1080px;
   }
 
   .socks-slider-wrapper {
@@ -537,12 +470,28 @@
     text-decoration: none;
   }
 
+  .socks-selection ul {
+    padding-left: 7px;
+  }
+
   .socks-selection li {
     list-style: none;
-    /* margin: 0 5px;
-    padding: 3px;
-    border: 1px solid;
+    /* margin: 0 5px; */
+    /* padding: 3px; */
+    /* border: 1px solid;
     border-radius: 3px; */
+    height: 37px;
+    align-items: center;
+    display: flex;
+    min-width: 37px;
+    justify-content: center;
+  }
+
+  .socks-selection button {
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 3px; 
     height: 37px;
     align-items: center;
     display: flex;
@@ -586,6 +535,12 @@
     margin: 0;
   } */
 
+  .chart-text {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: end;
+  }
+
   .chart-text a {
     color: #1cb9a2;
     font-weight: 600;
@@ -617,10 +572,10 @@
     text-decoration: none;
   }
 
-  .xzoom-thumbs{
-    grid-template-columns: repeat(4,1fr);
+  .xzoom-thumbs {
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: var(--rtwpvg-thumbnail-gap);
-    display: grid!important;
+    display: grid !important;
     position: relative;
   }
 
@@ -672,7 +627,7 @@
   }
 
   @media screen and (max-width: 850px) {
-    .main-container {
+    .container-1080 {
       display: block;
     }
 
