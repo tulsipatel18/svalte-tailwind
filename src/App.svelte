@@ -53,69 +53,68 @@
   //     xoffset: "15",
   //   });
   // });
- 
-  
-  let color, type,quantity,size,total;
-    
-    
-  
-  const handleCart=()=>{
-    total=79*quantity;
-    window.alert(`color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`)
-  }
 
- 
- 
+  let color, type, quantity, size, total;
+  let sizechart = false;
+  $: console.log(sizechart);
+
+  const handleCart = () => {
+    total = 79 * quantity;
+    window.alert(
+      `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
+    );
+  };
 </script>
+
 <div class="main-container">
-<div class="container-1080">
-  <div class="w-50 socks-slider-wrapper container">
-    <div class="w-100">
-    <div class="w-100 xzoom-container">
-      <!-- <img
+  <div class="container-1080">
+    <div class="w-50 socks-slider-wrapper container">
+      <div class="w-100">
+        <div class="w-100 xzoom-container">
+          <!-- <img
         src="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
         alt=""
         xriginal="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
         class="w-100 d-none"
       /> -->
-      <img
-        src="./images/crew-1-c.jpg"
-        alt=""
-        xoriginal="./images/crew-1.jpg"
-        class="w-100 xzoom"
-      />
-    </div>
-    <div class="xzoom-thumbs">
-      <a href="./images/crew-1.jpg">
-        <img
-          class="xzoom-gallery"
-          src="./images/crew-1-c.jpg"
-          xpreview="./images/crew-1-c.jpg"
-          alt=""
-        /></a
-      >
-      <a href="./images/crew-2.jpg">
-        <img
-          class="xzoom-gallery"
-          src="./images/crew-2-c.jpg"
-          xpreview="./images/crew-2-c.jpg"
-          alt=""
-        /></a
-      >
-      <a href="./images/crew-3.jpg">
-        <img class="xzoom-gallery" src="./images/crew-3-c.jpg" alt="" /></a
-      >
-      <a href="./images/crew-4.jpg">
-        <img class="xzoom-gallery" src="./images/crew-4-c.jpg" alt="" /></a
-      >
-      <a href="./images/crew-5.jpg">
-        <img class="xzoom-gallery" src="./images/crew-5-c.jpg" alt="" /></a
-      >
-      <a href="./images/crew-6.jpg">
-        <img class="xzoom-gallery" src="./images/crew-6-c.jpg" alt="" /></a
-      >
-    </div>
-    <!-- <div class="d-flex thumb">
+          <img
+            src="./images/crew-1-c.jpg"
+            alt=""
+            xoriginal="./images/crew-1.jpg"
+            class="w-100 xzoom"
+          />
+        </div>
+        <div class="xzoom-thumbs">
+          <a href="./images/crew-1.jpg">
+            <img
+              class="xzoom-gallery"
+              src="./images/crew-1-c.jpg"
+              xpreview="./images/crew-1-c.jpg"
+              alt=""
+            /></a
+          >
+          <a href="./images/crew-2.jpg">
+            <img
+              class="xzoom-gallery"
+              src="./images/crew-2-c.jpg"
+              xpreview="./images/crew-2-c.jpg"
+              alt=""
+            /></a
+          >
+          <a href="./images/crew-3.jpg">
+            <img class="xzoom-gallery" src="./images/crew-3-c.jpg" alt="" /></a
+          >
+          <a href="./images/crew-4.jpg">
+            <img class="xzoom-gallery" src="./images/crew-4-c.jpg" alt="" /></a
+          >
+          <a href="./images/crew-5.jpg">
+            <img class="xzoom-gallery" src="./images/crew-5-c.jpg" alt="" /></a
+          >
+          <a href="./images/crew-6.jpg">
+            <img class="xzoom-gallery" src="./images/crew-6-c.jpg" alt="" /></a
+          >
+        </div>
+        <!-- <div class="d-flex thumb">
       <div class="row">
         <div class="w-25">
           <img
@@ -161,189 +160,263 @@
         </div>
       </div>
     </div> -->
-  </div>
-  </div>
-  <div class="w-50 silver-hiking-socks-wrapper">
-    <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
-      SILVERLIGHT HIKING SOCKS
-    </h1>
-    <span
-      class="stamped-badge rating-container"
-      data-rating="4.8"
-      data-lang=""
-      aria-label="Rated 4.8 out of 5 stars 493reviews"
-      ><span
-        class="stamped-starrating stamped-badge-starrating"
-        aria-hidden="true"
-        ><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
-          class="stamped-fa stamped-fa-star"
-          aria-hidden="true"
-        /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
-          class="stamped-fa stamped-fa-star"
-          aria-hidden="true"
-        /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /></span
-      ><span
-        class="stamped-badge-caption"
-        data-reviews="493"
+      </div>
+    </div>
+    <div class="w-50 silver-hiking-socks-wrapper">
+      <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
+        SILVERLIGHT HIKING SOCKS
+      </h1>
+      <span
+        class="stamped-badge rating-container"
         data-rating="4.8"
-        data-label="reviews"
-        aria-label="493 reviews"
-        data-version="2">493<span style="display:none;"> reviews</span></span
-      ></span
-    >
-    <span
-      ><ul class="socks-description">
-        <li>
-          <a href="https://silverlight.store/about/#tab_our-technology"
-            >Silverlight® Technology</a
-          > for odor-free hiking with silver coated threads that never wash out.
-        </li>
-        <li>
-          Blister-Blasting. Fast-Drying. Silky-Smooth Compression Comfort.
-          Long-Lasting Durability.
-        </li>
-        <li>
-          For every pair sold, we <a
-            href="https://silverlight.store/about/#tab_sustainability"
-            >plant a tree</a
-          >
-        </li>
-        <li>
-          <a href="https://silverlight.store/about/#tab_lifetime-guarantee"
-            >Lifetime Guarantee</a
-          >
-        </li>
-        <li>Includes Wash &amp; Care Guide</li>
-        <li>
-          40% <a href="https://silverlight.store/about/#tab_materials">Nylon</a
-          >, 53%
-          <a href="https://silverlight.store/about/#tab_materials"
-            >New Zealand Merino Wool</a
-          >, 5%
-          <a href="https://silverlight.store/about/#tab_materials"
-            >Silver Yarn</a
-          >, 2%
-          <a href="https://silverlight.store/about/#tab_materials">Spandex</a>
-        </li>
-      </ul>
-    </span>
-    <div class="">
-      <table class="socks-selection" cellspacing="0">
-        <tbody>
-          <tr>
-            <td class=""><label for="pa_color">COLOR</label></td>
-
-            <td class="">
-              <ul role="radiogroup" aria-label="Color" class="d-flex">
-                <li>
-                  <div class=""><button class="" on:click={()=>{color='black'}} >Black</button></div>
-                </li>
-                <li>
-                  <div class=""><button class="" on:click={()=>{color='blue'}}>Blue</button></div>
-                </li>
-              </ul>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="label"><label for="type">TYPE</label></td>
-            <td class="">
-              <ul role="radiogroup" aria-label="type" class="d-flex">
-                <li>
-                  <div class="">
-                    <button class="" on:click={()=>{type='ankle'}}>Ankle</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="">
-                    <button class="" on:click={()=>{type='crew'}}>Crew</button>
-                  </div>
-                </li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td class="label"><label for="quantity">QUANTITY</label></td>
-            <td class="">
-              <select
-                style="display:none"
-                id="quantity"
-                class=""
-                name="attribute_quantity"
-                ><option value="">Choose an option</option><option
-                  value="1 Pack">1 Pack</option
-                ><option value="3 Pack" selected="selected">3 Pack</option
-                ><option value="5 Pack">5 Pack</option></select
-              >
-              <ul role="radiogroup" aria-label="quantity" class="d-flex">
-                <li>
-                  <div class="">
-                    <button class="" on:click={()=>{quantity=1}}>1 Pack</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="">
-                    <button class="" on:click={()=>{quantity=3}}>3 Pack</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="">
-                    <button class="" on:click={()=>{quantity=5}}>5 Pack</button>
-                  </div>
-                </li>
-              </ul>
-            </td>
-          </tr>
-          <div class="d-flex justify-content-between">
+        data-lang=""
+        aria-label="Rated 4.8 out of 5 stars 493reviews"
+        ><span
+          class="stamped-starrating stamped-badge-starrating"
+          aria-hidden="true"
+          ><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
+            class="stamped-fa stamped-fa-star"
+            aria-hidden="true"
+          /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
+            class="stamped-fa stamped-fa-star"
+            aria-hidden="true"
+          /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /></span
+        ><span
+          class="stamped-badge-caption"
+          data-reviews="493"
+          data-rating="4.8"
+          data-label="reviews"
+          aria-label="493 reviews"
+          data-version="2">493<span style="display:none;"> reviews</span></span
+        ></span
+      >
+      <span
+        ><ul class="socks-description">
+          <li>
+            <a href="https://silverlight.store/about/#tab_our-technology"
+              >Silverlight® Technology</a
+            > for odor-free hiking with silver coated threads that never wash out.
+          </li>
+          <li>
+            Blister-Blasting. Fast-Drying. Silky-Smooth Compression Comfort.
+            Long-Lasting Durability.
+          </li>
+          <li>
+            For every pair sold, we <a
+              href="https://silverlight.store/about/#tab_sustainability"
+              >plant a tree</a
+            >
+          </li>
+          <li>
+            <a href="https://silverlight.store/about/#tab_lifetime-guarantee"
+              >Lifetime Guarantee</a
+            >
+          </li>
+          <li>Includes Wash &amp; Care Guide</li>
+          <li>
+            40% <a href="https://silverlight.store/about/#tab_materials"
+              >Nylon</a
+            >, 53%
+            <a href="https://silverlight.store/about/#tab_materials"
+              >New Zealand Merino Wool</a
+            >, 5%
+            <a href="https://silverlight.store/about/#tab_materials"
+              >Silver Yarn</a
+            >, 2%
+            <a href="https://silverlight.store/about/#tab_materials">Spandex</a>
+          </li>
+        </ul>
+      </span>
+      <div class="">
+        <table class="socks-selection" cellspacing="0">
+          <tbody>
             <tr>
-              <td class="label"><label for="pa_size">SIZE</label></td>
+              <td class=""><label for="pa_color">COLOR</label></td>
 
               <td class="">
-                <ul role="radiogroup" aria-label="Size" class="d-flex">
+                <ul role="radiogroup" aria-label="Color" class="d-flex">
                   <li>
                     <div class="">
-                      <button class="" on:click={()=>{size='s'}}>S</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          color = "black";
+                        }}>Black</button
+                      >
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="" on:click={()=>{size='m'}}>M</button>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button class="" on:click={()=>{size='l'}}>L</button>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button class="" on:click={()=>{size='xl'}}>XL</button>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button class="" on:click={()=>{size='xxl'}}>XXL</button>
+                      <button
+                        class=""
+                        on:click={() => {
+                          color = "blue";
+                        }}>Blue</button
+                      >
                     </div>
                   </li>
                 </ul>
               </td>
             </tr>
-            <div class="chart-text">
-              <p>
-                <a class="popmake-9356 pum-trigger" href style="cursor: pointer;"
-                  >Size Chart</a
+
+            <tr>
+              <td class="label"><label for="type">TYPE</label></td>
+              <td class="">
+                <ul role="radiogroup" aria-label="type" class="d-flex">
+                  <li>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          type = "ankle";
+                        }}>Ankle</button
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          type = "crew";
+                        }}>Crew</button
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td class="label"><label for="quantity">QUANTITY</label></td>
+              <td class="">
+                <select
+                  style="display:none"
+                  id="quantity"
+                  class=""
+                  name="attribute_quantity"
+                  ><option value="">Choose an option</option><option
+                    value="1 Pack">1 Pack</option
+                  ><option value="3 Pack" selected="selected">3 Pack</option
+                  ><option value="5 Pack">5 Pack</option></select
                 >
-                <img
-                  class="d-none"
-                  src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-                  alt=""
-                />
-              </p>
+                <ul role="radiogroup" aria-label="quantity" class="d-flex">
+                  <li>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          quantity = 1;
+                        }}>1 Pack</button
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          quantity = 3;
+                        }}>3 Pack</button
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <div class="">
+                      <button
+                        class=""
+                        on:click={() => {
+                          quantity = 5;
+                        }}>5 Pack</button
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            <div class="d-flex justify-content-between">
+              <tr>
+                <td class="label"><label for="pa_size">SIZE</label></td>
+
+                <td class="">
+                  <ul role="radiogroup" aria-label="Size" class="d-flex">
+                    <li>
+                      <div class="">
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "s";
+                          }}>S</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "m";
+                          }}>M</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "l";
+                          }}>L</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "xl";
+                          }}>XL</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class=""
+                          on:click={() => {
+                            size = "xxl";
+                          }}>XXL</button
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <div class="chart-text">
+                <p>
+                  <a
+                    class="popmake-9356 pum-trigger"
+                    href
+                    style="cursor: pointer;"
+                    on:click|preventDefault={() => {
+                      sizechart = !sizechart;
+                    }}>Size Chart</a
+                  >
+                  <!-- {#if sizechart}
+                    <div class="size-chart-center">
+                      <img
+                        src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+                        alt=""
+                      />
+                    </div>
+                  {/if} -->
+                </p>
+              </div>
             </div>
-          </div>
-        </tbody>
-      </table>
-      <!-- <div class="chart-text">
+          </tbody>
+        </table>
+
+        <!-- <div class="chart-text">
         <p>
           <a class="popmake-9356 pum-trigger" href style="cursor: pointer;"
             >Size Chart</a
@@ -355,80 +428,89 @@
           />
         </p>
       </div> -->
-    </div>
-
-    <div class="">
-      <div class="d-flex my-4">
-        <div class="price-wrapper">
-          <p class="price product-page-price">
-            <span class="price"
-              ><span class=""
-                ><del aria-hidden="true">
-                  <span class="">
-                    <bdi>
-                      <span class="">$</span>
-                      96</bdi
-                    >
-                  </span>
-                </del>
-                <ins
-                  ><span class=""><bdi><span class="">$</span>79</bdi></span
-                  ></ins
-                ></span
-              ></span
-            >
-          </p>
-          <p class="save">save 18%</p>
-        </div>
-        <div class="quantity buttons_added d-flex round-pill">
-          <!-- <span class="d-flex border round-pill"> -->
-          <!-- <div class=""> -->
-          <input type="button" value="-" class="minus button is-form" />
-          <!-- </div> -->
-          <!-- <div> -->
-          <input
-            type="number"
-            id="quantity_63ef2fbd9a85e"
-            class="input-text qty text"
-            step="1"
-            min="1"
-            max="9999"
-            name="quantity"
-            value="1"
-            title="Qty"
-            size="4"
-            pattern="[0-9]*"
-            inputmode="numeric"
-            aria-labelledby="Silverlight Hiking Socks quantity"
-          />
-          <!-- </div> -->
-          <!-- <div> -->
-          <input type="button" value="+" class="plus button is-form" />
-          <!-- </div> -->
-          <!-- </span> -->
-        </div>
       </div>
-      <button type="submit" class="add-to-cart-button button alt" on:click={handleCart}
-        >ADD TO CART</button
-      >
-      <button class="checkout-button">
-        <a
-          href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
-          class=""
-          >CHECKOUT &nbsp;<i
-            class="fa fa-long-arrow-right"
-            aria-hidden="true"
-          /></a
+      {#if sizechart}
+        <div class="size-chart-center">
+          <img
+            src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+            alt=""
+          />
+        </div>
+      {/if}
+
+      <div class="">
+        <div class="d-flex my-4">
+          <div class="price-wrapper">
+            <p class="price product-page-price">
+              <span class="price"
+                ><span class=""
+                  ><del aria-hidden="true">
+                    <span class="">
+                      <bdi>
+                        <span class="">$</span>
+                        96</bdi
+                      >
+                    </span>
+                  </del>
+                  <ins
+                    ><span class=""><bdi><span class="">$</span>79</bdi></span
+                    ></ins
+                  ></span
+                ></span
+              >
+            </p>
+            <p class="save">save 18%</p>
+          </div>
+          <div class="quantity buttons_added d-flex round-pill">
+            <!-- <span class="d-flex border round-pill"> -->
+            <!-- <div class=""> -->
+            <input type="button" value="-" class="minus button is-form" />
+            <!-- </div> -->
+            <!-- <div> -->
+            <input
+              type="number"
+              id="quantity_63ef2fbd9a85e"
+              class="input-text qty text"
+              step="1"
+              min="1"
+              max="9999"
+              name="quantity"
+              value="1"
+              title="Qty"
+              size="4"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              aria-labelledby="Silverlight Hiking Socks quantity"
+            />
+            <!-- </div> -->
+            <!-- <div> -->
+            <input type="button" value="+" class="plus button is-form" />
+            <!-- </div> -->
+            <!-- </span> -->
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="add-to-cart-button button alt"
+          on:click={handleCart}>ADD TO CART</button
         >
-      </button>
+        <button class="checkout-button">
+          <a
+            href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
+            class=""
+            >CHECKOUT &nbsp;<i
+              class="fa fa-long-arrow-right"
+              aria-hidden="true"
+            /></a
+          >
+        </button>
+      </div>
     </div>
   </div>
 </div>
-</div>
 
 <style>
-
-  .main-container{
+  .main-container {
     display: flex;
     justify-content: center;
   }
@@ -491,7 +573,7 @@
     margin: 0 5px;
     padding: 5px;
     border: 1px solid;
-    border-radius: 3px; 
+    border-radius: 3px;
     height: 37px;
     align-items: center;
     display: flex;
@@ -499,7 +581,7 @@
     justify-content: center;
   }
 
-  .socks-selection button{
+  .socks-selection button {
     margin: 0 5px;
     padding: 5px;
     border: 1px solid;
@@ -534,6 +616,12 @@
     top: -35px;
     margin: 0;
   } */
+
+  .size-chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
 
   .chart-text {
     margin-bottom: 10px;
