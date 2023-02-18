@@ -45,32 +45,63 @@
       }, 2000);
     });
   });
+
+  jQuery(function ($) {
+    $(".xzoom,.xzoom-gallery").xzoom({
+      zoomWidth: 400,
+      tint: "#333",
+      xoffset: "15",
+    });
+  });
 </script>
 
-<div class="d-flex">
-  <div class="w-50 socks-slider-wrapper">
-    <!-- for black crew -->
-    <div class="w-100">
-      <img
+<div class="main-container">
+  <div class="w-50 socks-slider-wrapper container">
+    <div class="w-100 xzoom-container">
+      <!-- <img
         src="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
         alt=""
-        class="w-100"
-      />
-    </div>
-    <!-- for black Ankle -->
-    <div class="w-100 xzoom-container">
-      <img
-        src="https://silverlight.store/wp-content/uploads/2020/03/ankle-1.jpg"
-        alt=""
-        xriginal="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack-100x100.jpg"
+        xriginal="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
         class="w-100 d-none"
+      /> -->
+      <img
+        src="./images/crew-1-c.jpg"
+        alt=""
+        xoriginal="./images/crew-1.jpg"
+        class="w-100 xzoom"
       />
-      <div class="xzoom-thumbs">
-        <a href="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack-100x100.jpg">
-          <img class="xzoom-gallery" src="https://silverlight.store/wp-content/uploads/2020/03/ankle-1.jpg" xpreview="https://silverlight.store/wp-content/uploads/2020/03/ankle-1.jpg" alt="" /></a>
-      </div>
     </div>
-    <div class="d-flex thumb">
+    <div class="xzoom-thumbs">
+      <a href="./images/crew-1.jpg">
+        <img
+          class="xzoom-gallery"
+          src="./images/crew-1-c.jpg"
+          xpreview="./images/crew-1-c.jpg"
+          alt=""
+        /></a
+      >
+      <a href="./images/crew-2.jpg">
+        <img
+          class="xzoom-gallery"
+          src="./images/crew-2-c.jpg"
+          xpreview="./images/crew-2-c.jpg"
+          alt=""
+        /></a
+      >
+      <a href="./images/crew-3.jpg">
+        <img class="xzoom-gallery" src="./images/crew-3-c.jpg" alt="" /></a
+      >
+      <a href="./images/crew-4.jpg">
+        <img class="xzoom-gallery" src="./images/crew-4-c.jpg" alt="" /></a
+      >
+      <a href="./images/crew-5.jpg">
+        <img class="xzoom-gallery" src="./images/crew-5-c.jpg" alt="" /></a
+      >
+      <a href="./images/crew-6.jpg">
+        <img class="xzoom-gallery" src="./images/crew-6-c.jpg" alt="" /></a
+      >
+    </div>
+    <!-- <div class="d-flex thumb">
       <div class="row">
         <div class="w-25">
           <img
@@ -115,7 +146,7 @@
           />
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="w-50 silver-hiking-socks-wrapper">
     <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
@@ -359,52 +390,49 @@
           <p class="price product-page-price">
             <span class="price"
               ><span class=""
-                ><del aria-hidden="true"
-                  ><span class="woocommerce-Price-amount amount"
-                    ><bdi
-                      ><span class="woocommerce-Price-currencySymbol">$</span
-                      >96</bdi
-                    ></span
-                  ></del
-                >
+                ><del aria-hidden="true">
+                  <span class="">
+                    <bdi>
+                      <span class="">$</span>
+                      96</bdi
+                    >
+                  </span>
+                </del>
                 <ins
-                  ><span class="woocommerce-Price-amount amount"
-                    ><bdi
-                      ><span class="woocommerce-Price-currencySymbol">$</span
-                      >79</bdi
-                    ></span
+                  ><span class=""><bdi><span class="">$</span>79</bdi></span
                   ></ins
                 ></span
               ></span
             >
           </p>
+          <p class="save">save 18%</p>
         </div>
         <div class="quantity buttons_added d-flex round-pill">
-          <span class="d-flex border round-pill">
-            <div class="border">
-              <input type="button" value="-" class="minus button is-form" />
-            </div>
-            <div>
-              <input
-                type="number"
-                id="quantity_63ef2fbd9a85e"
-                class="input-text qty text"
-                step="1"
-                min="1"
-                max="9999"
-                name="quantity"
-                value="1"
-                title="Qty"
-                size="4"
-                pattern="[0-9]*"
-                inputmode="numeric"
-                aria-labelledby="Silverlight Hiking Socks quantity"
-              />
-            </div>
-            <div>
-              <input type="button" value="+" class="plus button is-form" />
-            </div>
-          </span>
+          <!-- <span class="d-flex border round-pill"> -->
+          <!-- <div class=""> -->
+          <input type="button" value="-" class="minus button is-form" />
+          <!-- </div> -->
+          <!-- <div> -->
+          <input
+            type="number"
+            id="quantity_63ef2fbd9a85e"
+            class="input-text qty text"
+            step="1"
+            min="1"
+            max="9999"
+            name="quantity"
+            value="1"
+            title="Qty"
+            size="4"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            aria-labelledby="Silverlight Hiking Socks quantity"
+          />
+          <!-- </div> -->
+          <!-- <div> -->
+          <input type="button" value="+" class="plus button is-form" />
+          <!-- </div> -->
+          <!-- </span> -->
         </div>
       </div>
       <button type="submit" class="add-to-cart-button button alt"
@@ -425,6 +453,10 @@
 </div>
 
 <style>
+  .main-container {
+    display: flex;
+  }
+
   .socks-slider-wrapper {
     padding: 0 15px;
   }
@@ -483,6 +515,7 @@
   .socks-selection label {
     font-weight: 500;
     font-size: 12px;
+    min-width: 60px;
   }
 
   /* .chart-text {
@@ -525,5 +558,73 @@
   .checkout-button a {
     color: #ffffff;
     text-decoration: none;
+  }
+
+  .xzoom-thumbs{
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: var(--rtwpvg-thumbnail-gap);
+    display: grid!important;
+    position: relative;
+  }
+
+  .xzoom-thumbs img {
+    display: inline;
+    height: 80px;
+    width: 80px;
+    /* border: 1px solid #ccc; */
+    width: 100%;
+    height: auto;
+  }
+
+  .price {
+    font-size: 24px;
+    margin: 0 20px 20px 0;
+  }
+
+  .quantity {
+    height: 40px;
+  }
+
+  .minus {
+    border-radius: 99px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .plus {
+    border-radius: 99px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .qty {
+    background-color: #f0f0f0;
+    text-align: center;
+    width: 40px;
+    outline: none;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  @media screen and (max-width: 850px) {
+    .main-container {
+      display: block;
+    }
+
+    .socks-slider-wrapper {
+      width: 100% !important;
+    }
+
+    .silver-hiking-socks-wrapper {
+      width: 100% !important;
+    }
   }
 </style>
