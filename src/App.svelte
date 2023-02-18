@@ -424,7 +424,7 @@
                     href
                     style="cursor: pointer;"
                     on:click|preventDefault={() => {
-                      sizechart = !sizechart;
+                      sizechart = true;
                     }}>Size Chart</a
                   >
                 </p>
@@ -504,7 +504,8 @@
     </div>
     {#if sizechart}
       <div class="size-chart-center">
-        <p class="text-right m-0"><span class="close-chart">X</span></p>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <p class="text-right m-0" style="cursor: pointer;"><span class="close-chart" on:click={()=>{sizechart=false}} >X</span></p>
         <img
           src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
           alt=""
