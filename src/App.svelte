@@ -54,16 +54,37 @@
   //   });
   // });
 
-  let color, type, quantity, size, total;
-  let sizechart = false;
-  $: console.log(sizechart);
+  let color, type, quantity, size, total,qty=1,sizechart=false;
+  let price=79;
+  
+  color=localStorage.getItem("color")
+  type=localStorage.getItem("type")
+  quantity=localStorage.getItem("quantity")
+  size=localStorage.getItem("size")
+  total=localStorage.getItem("total")
+
 
   const handleCart = () => {
-    total = 79 * quantity;
+    
+    localStorage.setItem("color", color);
+    localStorage.setItem("type", type);
+    localStorage.setItem("quantity", quantity);
+    localStorage.setItem("size", size);
+    localStorage.setItem("total", total);
+
+    total = 79 * quantity*qty;
     window.alert(
       `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
     );
   };
+  const handleqty=()=>{
+    qty+=1;
+  }
+  const handleqtydec=()=>{
+    if(qty!=1){
+      qty-=1;
+    }
+  }
 </script>
 
 <div class="main-container">
@@ -238,6 +259,7 @@
                   <li>
                     <div class="">
                       <button
+                       
                         class=""
                         on:click={() => {
                           color = "black";
@@ -453,7 +475,7 @@
                     </span>
                   </del>
                   <ins
-                    ><span class=""><bdi><span class="">$</span>79</bdi></span
+                    ><span class=""><bdi><span class="">$</span>{price}</bdi></span
                     ></ins
                   ></span
                 ></span
@@ -464,7 +486,7 @@
           <div class="quantity buttons_added d-flex round-pill">
             <!-- <span class="d-flex border round-pill"> -->
             <!-- <div class=""> -->
-            <input type="button" value="-" class="minus button is-form" />
+            <input type="button" value="-" class="minus button is-form" on:click={handleqtydec} />
             <!-- </div> -->
             <!-- <div> -->
             <input
@@ -473,9 +495,9 @@
               class="input-text qty text"
               step="1"
               min="1"
-              max="9999"
+              max="15"
               name="quantity"
-              value="1"
+              bind:value={qty}
               title="Qty"
               size="4"
               pattern="[0-9]*"
@@ -484,7 +506,7 @@
             />
             <!-- </div> -->
             <!-- <div> -->
-            <input type="button" value="+" class="plus button is-form" />
+            <input type="button" value="+" class="plus button is-form" on:click={handleqty} />
             <!-- </div> -->
             <!-- </span> -->
           </div>
