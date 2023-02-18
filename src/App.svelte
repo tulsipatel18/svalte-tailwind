@@ -236,10 +236,10 @@
             <td class="">
               <ul role="radiogroup" aria-label="Color" class="d-flex">
                 <li>
-                  <div class=""><button class="">Black</button></div>
+                  <div class=""><button class="" on:click={()=>{color='black'}} >Black</button></div>
                 </li>
                 <li>
-                  <div class=""><button class="">Blue</button></div>
+                  <div class=""><button class="" on:click={()=>{color='blue'}}>Blue</button></div>
                 </li>
               </ul>
             </td>
@@ -251,12 +251,12 @@
               <ul role="radiogroup" aria-label="type" class="d-flex">
                 <li>
                   <div class="">
-                    <button class="">Ankle</button>
+                    <button class="" on:click={()=>{type='ankle'}}>Ankle</button>
                   </div>
                 </li>
                 <li>
                   <div class="">
-                    <button class="">Crew</button>
+                    <button class="" on:click={()=>{type='crew'}}>Crew</button>
                   </div>
                 </li>
               </ul>
@@ -278,17 +278,17 @@
               <ul role="radiogroup" aria-label="quantity" class="d-flex">
                 <li>
                   <div class="">
-                    <button class="">1 Pack</button>
+                    <button class="" on:click={()=>{quantity=1}}>1 Pack</button>
                   </div>
                 </li>
                 <li>
                   <div class="">
-                    <button class="">3 Pack</button>
+                    <button class="" on:click={()=>{quantity=3}}>3 Pack</button>
                   </div>
                 </li>
                 <li>
                   <div class="">
-                    <button class="">5 Pack</button>
+                    <button class="" on:click={()=>{quantity=5}}>5 Pack</button>
                   </div>
                 </li>
               </ul>
@@ -302,27 +302,27 @@
                 <ul role="radiogroup" aria-label="Size" class="d-flex">
                   <li>
                     <div class="">
-                      <button class="">S</button>
+                      <button class="" on:click={()=>{size='s'}}>S</button>
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">M</button>
+                      <button class="" on:click={()=>{size='m'}}>M</button>
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">L</button>
+                      <button class="" on:click={()=>{size='l'}}>L</button>
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">XL</button>
+                      <button class="" on:click={()=>{size='xl'}}>XL</button>
                     </div>
                   </li>
                   <li>
                     <div class="">
-                      <button class="">XXL</button>
+                      <button class="" on:click={()=>{size='xxl'}}>XXL</button>
                     </div>
                   </li>
                 </ul>
