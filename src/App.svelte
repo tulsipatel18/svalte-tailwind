@@ -67,23 +67,20 @@
 </script>
 
 <div class="main-container">
-  <div class="video-background">
-    <div class="video-foreground">
-      <video
-        class="video-bg fill hide-for-small"
-        preload="playsinline"
-        autoplay
-        muted="muted"
-        loop
-        style="opacity: 0.5;"
-      >
-        <source
-          src="https://silverlight.store/wp-content/uploads/2019/01/mountainclip-bg720p-final.mp4"
-          type="video/mp4"
-        />
-      </video>
-    </div>
-  </div>
+  <video
+    class="video-bg"
+    preload="playsinline"
+    autoplay
+    muted="muted"
+    loop
+    style="opacity: 1;"
+    id="video"
+  >
+    <source
+      src="https://silverlight.store/wp-content/uploads/2019/01/mountainclip-bg720p-final.mp4"
+      type="video/mp4"
+    />
+  </video>
   <div class="container-1080">
     <div class="w-50 socks-slider-wrapper container">
       <div class="w-100">
@@ -419,40 +416,12 @@
                       sizechart = !sizechart;
                     }}>Size Chart</a
                   >
-                  <!-- {#if sizechart}
-                    <div class="size-chart-center">
-                      <img
-                        src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-                        alt=""
-                      />
-                    </div>
-                  {/if} -->
                 </p>
               </div>
             </div>
           </tbody>
         </table>
-        <!-- <div class="chart-text">
-        <p>
-          <a class="popmake-9356 pum-trigger" href style="cursor: pointer;"
-            >Size Chart</a
-          >
-          <img
-            class="d-none"
-            src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-            alt=""
-          />
-        </p>
-      </div> -->
       </div>
-      {#if sizechart}
-        <div class="size-chart-center">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-            alt=""
-          />
-        </div>
-      {/if}
 
       <div class="">
         <div class="d-flex my-4">
@@ -522,6 +491,15 @@
         </button>
       </div>
     </div>
+    {#if sizechart}
+      <div class="size-chart-center">
+        <p class="text-right m-0"><span class="close-chart">X</span></p>
+        <img
+          src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+          alt=""
+        />
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -531,27 +509,14 @@
     justify-content: center;
   }
 
-  .video-background {
-    /* background-color: rgba(0, 0, 0, 0.7); */
+  .video-bg {
     position: fixed;
-    /* top: 0;
     right: 0;
     bottom: 0;
-    left: 0; */
+    min-width: 100%;
+    min-height: 100%;
     z-index: -99;
-    width: 100%;
   }
-
-  .video-foreground {
-    /* width: 300%; */
-    /* left: -100%; */
-    position: absolute;
-    /* top: 0;
-    left: 0; */
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
 
   .container-1080 {
     display: flex;
@@ -591,8 +556,8 @@
     text-decoration: none;
   }
 
-  .socks-selection{
-    width: 100%;;
+  .socks-selection {
+    width: 100%;
   }
 
   .socks-selection ul {
@@ -661,9 +626,21 @@
   } */
 
   .size-chart-center {
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 0 20px 20px;
+    box-shadow: 0 0 10px 0;
+  }
+
+  .close-chart{
+    font-weight: 700;
+    padding: 0 5px;
+    position: relative;
+    left: 15px;
   }
 
   .chart-text {
