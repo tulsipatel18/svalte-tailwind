@@ -1,4 +1,5 @@
 <script>
+  import jQuery from "jquery";
   // jQuery(function ($) {
   //   var url = "https://silverlight.store/checkout/?add-to-cart=",
   //     vid = 'input[name="variation_id"]',
@@ -64,6 +65,77 @@
       `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
     );
   };
+
+  jQuery(function ($) {
+    $(".slider-single").slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      fade: false,
+      adaptiveHeight: true,
+      infinite: false,
+      useTransform: true,
+      speed: 400,
+      cssEase: "cubic-bezier(0.77, 0, 0.18, 1)",
+    });
+  });
+
+  jQuery(function ($) {
+    $(".slider-nav")
+      .on("init", function (event, slick) {
+        $(".slider-nav .slick-slide.slick-current").addClass("is-active");
+      })
+      .slick({
+        slidesToShow: 7,
+        slidesToScroll: 7,
+        dots: false,
+        focusOnSelect: false,
+        infinite: false,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 5,
+              slidesToScroll: 5,
+            },
+          },
+          {
+            breakpoint: 640,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 4,
+            },
+          },
+          {
+            breakpoint: 420,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+            },
+          },
+        ],
+      });
+  });
+  jQuery(function ($) {
+    $(".slider-single").on(
+      "afterChange",
+      function (event, slick, currentSlide) {
+        $(".slider-nav").slick("slickGoTo", currentSlide);
+        var currrentNavSlideElem =
+          '.slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+        $(".slider-nav .slick-slide.is-active").removeClass("is-active");
+        $(currrentNavSlideElem).addClass("is-active");
+      }
+    );
+  });
+  jQuery(function ($) {
+    $(".slider-nav").on("click", ".slick-slide", function (event) {
+      event.preventDefault();
+      var goToSingleSlide = $(this).data("slick-index");
+
+      $(".slider-single").slick("slickGoTo", goToSingleSlide);
+    });
+  });
 </script>
 
 <div class="main-container">
@@ -81,415 +153,372 @@
       type="video/mp4"
     />
   </video>
-  <div class="container-1080">
-    <div class="w-50 socks-slider-wrapper container">
-      <div class="w-100">
-        <div class="w-100 xzoom-container">
-          <!-- <img
-        src="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
-        alt=""
-        xriginal="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack.jpg"
-        class="w-100 d-none"
-      /> -->
-          <img
-            src="./images/crew-1-c.jpg"
-            alt=""
-            xoriginal="./images/crew-1.jpg"
-            class="w-100 xzoom"
-          />
-        </div>
-        <div class="xzoom-thumbs">
-          <a href="./images/crew-1.jpg">
-            <img
-              class="xzoom-gallery"
-              src="./images/crew-1-c.jpg"
-              xpreview="./images/crew-1-c.jpg"
-              alt=""
-            /></a
-          >
-          <a href="./images/crew-2.jpg">
-            <img
-              class="xzoom-gallery"
-              src="./images/crew-2-c.jpg"
-              xpreview="./images/crew-2-c.jpg"
-              alt=""
-            /></a
-          >
-          <a href="./images/crew-3.jpg">
-            <img class="xzoom-gallery" src="./images/crew-3-c.jpg" alt="" /></a
-          >
-          <a href="./images/crew-4.jpg">
-            <img class="xzoom-gallery" src="./images/crew-4-c.jpg" alt="" /></a
-          >
-          <a href="./images/crew-5.jpg">
-            <img class="xzoom-gallery" src="./images/crew-5-c.jpg" alt="" /></a
-          >
-          <a href="./images/crew-6.jpg">
-            <img class="xzoom-gallery" src="./images/crew-6-c.jpg" alt="" /></a
-          >
-        </div>
-        <!-- <div class="d-flex thumb">
-      <div class="row">
-        <div class="w-25">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack-100x100.jpg"
-            alt=""
-            class="w-100"
-          />
-        </div>
-        <div class="w-25">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2019/10/crew-2-100x100.jpg"
-            alt=""
-            class="w-100"
-          />
-        </div>
-        <div class="w-25">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2019/10/crew-6-100x100.jpg"
-            alt=""
-            class="w-100"
-          />
-        </div>
-        <div class="w-25">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2019/10/crew-3-100x100.jpg"
-            alt=""
-            class="w-100"
-          />
-        </div>
-        <div class="w-25">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2019/10/crew-4-100x100.jpg"
-            alt=""
-            class="w-100"
-          />
-        </div>
-        <div class="w-25">
-          <img
-            src="https://silverlight.store/wp-content/uploads/2019/10/crew-5-100x100.jpg"
-            alt=""
-            class="w-100"
-          />
-        </div>
-      </div>
-    </div> -->
-      </div>
+  <div>
+    <div class="navbar justify-content-end">
+      <a href="https://silverlight.store/cart/">
+        <li class="cart-item">
+          <span class="cart-icon">
+            <strong>0</strong>
+          </span>
+        </li>
+      </a>
     </div>
-    <div class="w-50 silver-hiking-socks-wrapper">
-      <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
-        SILVERLIGHT HIKING SOCKS
-      </h1>
-      <span
-        class="stamped-badge rating-container"
-        data-rating="4.8"
-        data-lang=""
-        aria-label="Rated 4.8 out of 5 stars 493reviews"
-        ><span
-          class="stamped-starrating stamped-badge-starrating"
-          aria-hidden="true"
-          ><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
-            class="stamped-fa stamped-fa-star"
-            aria-hidden="true"
-          /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
-            class="stamped-fa stamped-fa-star"
-            aria-hidden="true"
-          /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /></span
-        ><span
-          class="stamped-badge-caption"
-          data-reviews="493"
+    <div class="container-1080">
+      <div class="w-50 socks-slider-wrapper container">
+        <!-- <div id="page">
+          <div class="">
+            <div class="">
+              <h2>Slick Slider Syncing</h2>
+              <div class="slider slider-single">
+                <div><img src="./images/crew-1.jpg" alt="" /></div>
+                <div><img src="./images/crew-2.jpg" alt="" /></div>
+                <div><img src="./images/crew-3.jpg" alt="" /></div>
+                <div><img src="./images/crew-4.jpg" alt="" /></div>
+                <div><img src="./images/crew-5.jpg" alt="" /></div>
+                <div><img src="./images/crew-6.jpg" alt="" /></div>
+              </div>
+              <div class="slider slider-nav">
+                <div class="thumb-image">
+                  <img src="./images/crew-1.jpg" alt="" />
+                </div>
+                <div class="thumb-image">
+                  <img src="./images/crew-2.jpg" alt="" />
+                </div>
+                <div class="thumb-image">
+                  <img src="./images/crew-3.jpg" alt="" />
+                </div>
+                <div class="thumb-image">
+                  <img src="./images/crew-4.jpg" alt="" />
+                </div>
+                <div class="thumb-image">
+                  <img src="./images/crew-5.jpg" alt="" />
+                </div>
+                <div class="thumb-image">
+                  <img src="./images/crew-6.jpg" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="w-50 silver-hiking-socks-wrapper">
+        <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
+          SILVERLIGHT HIKING SOCKS
+        </h1>
+        <span
+          class="stamped-badge rating-container"
           data-rating="4.8"
-          data-label="reviews"
-          aria-label="493 reviews"
-          data-version="2">493<span style="display:none;"> reviews</span></span
-        ></span
-      >
-      <span
-        ><ul class="socks-description">
-          <li>
-            <a href="https://silverlight.store/about/#tab_our-technology"
-              >Silverlight® Technology</a
-            > for odor-free hiking with silver coated threads that never wash out.
-          </li>
-          <li>
-            Blister-Blasting. Fast-Drying. Silky-Smooth Compression Comfort.
-            Long-Lasting Durability.
-          </li>
-          <li>
-            For every pair sold, we <a
-              href="https://silverlight.store/about/#tab_sustainability"
-              >plant a tree</a
-            >
-          </li>
-          <li>
-            <a href="https://silverlight.store/about/#tab_lifetime-guarantee"
-              >Lifetime Guarantee</a
-            >
-          </li>
-          <li>Includes Wash &amp; Care Guide</li>
-          <li>
-            40% <a href="https://silverlight.store/about/#tab_materials"
-              >Nylon</a
-            >, 53%
-            <a href="https://silverlight.store/about/#tab_materials"
-              >New Zealand Merino Wool</a
-            >, 5%
-            <a href="https://silverlight.store/about/#tab_materials"
-              >Silver Yarn</a
-            >, 2%
-            <a href="https://silverlight.store/about/#tab_materials">Spandex</a>
-          </li>
-        </ul>
-      </span>
-      <div class="">
-        <table class="socks-selection" cellspacing="0">
-          <tbody>
-            <tr>
-              <td class=""><label for="pa_color">COLOR</label></td>
-
-              <td class="">
-                <ul role="radiogroup" aria-label="Color" class="d-flex">
-                  <li>
-                    <div class="">
-                      <button
-                      class="{color === 'black' ? 'selected' : ''}"
-                        on:click={() => {
-                          color = "black";
-                        }}>Black</button
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button
-                      class="{color === 'blue' ? 'selected' : ''}"
-                        on:click={() => {
-                          color = "blue";
-                        }}>Blue</button
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="label"><label for="type">TYPE</label></td>
-              <td class="">
-                <ul role="radiogroup" aria-label="type" class="d-flex">
-                  <li>
-                    <div class="">
-                      <button
-                      class="{type === 'ankle' ? 'selected' : ''}"
-                        on:click={() => {
-                          type = "ankle";
-                        }}>Ankle</button
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button
-                      class="{type === 'crew' ? 'selected' : ''}"
-                        on:click={() => {
-                          type = "crew";
-                        }}>Crew</button
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <td class="label"><label for="quantity">QUANTITY</label></td>
-              <td class="">
-                <ul role="radiogroup" aria-label="quantity" class="d-flex">
-                  <li>
-                    <div class="">
-                      <button
-                      class="{quantity === 1 ? 'selected' : ''}"
-                        on:click={() => {
-                          quantity = 1;
-                        }}>1 Pack</button
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button
-                      class="{quantity === 3 ? 'selected' : ''}"
-                        on:click={() => {
-                          quantity = 3;
-                        }}>3 Pack</button
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div class="">
-                      <button
-                      class="{quantity === 5 ? 'selected' : ''}"
-                        on:click={() => {
-                          quantity = 5;
-                        }}>5 Pack</button
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-            <div class="d-flex justify-content-between">
+          data-lang=""
+          aria-label="Rated 4.8 out of 5 stars 493reviews"
+          ><span
+            class="stamped-starrating stamped-badge-starrating"
+            aria-hidden="true"
+            ><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
+              class="stamped-fa stamped-fa-star"
+              aria-hidden="true"
+            /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
+              class="stamped-fa stamped-fa-star"
+              aria-hidden="true"
+            /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /></span
+          ><span
+            class="stamped-badge-caption"
+            data-reviews="493"
+            data-rating="4.8"
+            data-label="reviews"
+            aria-label="493 reviews"
+            data-version="2"
+            >493<span style="display:none;"> reviews</span></span
+          ></span
+        >
+        <span
+          ><ul class="socks-description">
+            <li>
+              <a href="https://silverlight.store/about/#tab_our-technology"
+                >Silverlight® Technology</a
+              > for odor-free hiking with silver coated threads that never wash out.
+            </li>
+            <li>
+              Blister-Blasting. Fast-Drying. Silky-Smooth Compression Comfort.
+              Long-Lasting Durability.
+            </li>
+            <li>
+              For every pair sold, we <a
+                href="https://silverlight.store/about/#tab_sustainability"
+                >plant a tree</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/about/#tab_lifetime-guarantee"
+                >Lifetime Guarantee</a
+              >
+            </li>
+            <li>Includes Wash &amp; Care Guide</li>
+            <li>
+              40% <a href="https://silverlight.store/about/#tab_materials"
+                >Nylon</a
+              >, 53%
+              <a href="https://silverlight.store/about/#tab_materials"
+                >New Zealand Merino Wool</a
+              >, 5%
+              <a href="https://silverlight.store/about/#tab_materials"
+                >Silver Yarn</a
+              >, 2%
+              <a href="https://silverlight.store/about/#tab_materials"
+                >Spandex</a
+              >
+            </li>
+          </ul>
+        </span>
+        <div class="">
+          <table class="socks-selection" cellspacing="0">
+            <tbody>
               <tr>
-                <td class="label"><label for="pa_size">SIZE</label></td>
+                <td class=""><label for="pa_color">COLOR</label></td>
 
                 <td class="">
-                  <ul role="radiogroup" aria-label="Size" class="d-flex">
+                  <ul role="radiogroup" aria-label="Color" class="d-flex">
                     <li>
                       <div class="">
                         <button
-                        class="{size === "s" ? 'selected' : ''}"
+                          class={color === "black" ? "selected" : ""}
                           on:click={() => {
-                            size = "s";
-                          }}>S</button
+                            color = "black";
+                          }}>Black</button
                         >
                       </div>
                     </li>
                     <li>
                       <div class="">
                         <button
-                        class="{size === "m" ? 'selected' : ''}"
+                          class={color === "blue" ? "selected" : ""}
                           on:click={() => {
-                            size = "m";
-                          }}>M</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                        class="{size === "l" ? 'selected' : ''}"
-                          on:click={() => {
-                            size = "l";
-                          }}>L</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                        class="{size === "xl" ? 'selected' : ''}"
-                          on:click={() => {
-                            size = "xl";
-                          }}>XL</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                        class="{size === "xxl" ? 'selected' : ''}"
-                          on:click={() => {
-                            size = "xxl";
-                          }}>XXL</button
+                            color = "blue";
+                          }}>Blue</button
                         >
                       </div>
                     </li>
                   </ul>
                 </td>
               </tr>
-              <div class="chart-text">
-                <p>
-                  <a
-                    class="popmake-9356 pum-trigger"
-                    href
-                    style="cursor: pointer;"
-                    on:click|preventDefault={() => {
-                      sizechart = !sizechart;
-                    }}>Size Chart</a
-                  >
-                </p>
-              </div>
-            </div>
-          </tbody>
-        </table>
-      </div>
 
-      <div class="">
-        <div class="d-flex my-4">
-          <div class="price-wrapper">
-            <p class="price product-page-price">
-              <span class="price"
-                ><span class=""
-                  ><del aria-hidden="true">
-                    <span class="">
-                      <bdi>
-                        <span class="">$</span>
-                        96</bdi
-                      >
-                    </span>
-                  </del>
-                  <ins
-                    ><span class=""><bdi><span class="">$</span>79</bdi></span
-                    ></ins
-                  ></span
-                ></span
-              >
-            </p>
-            <p class="save">save 18%</p>
-          </div>
-          <div class="quantity buttons_added d-flex round-pill">
-            <!-- <span class="d-flex border round-pill"> -->
-            <!-- <div class=""> -->
-            <input type="button" value="-" class="minus button is-form" />
-            <!-- </div> -->
-            <!-- <div> -->
-            <input
-              type="number"
-              id="quantity_63ef2fbd9a85e"
-              class="input-text qty text"
-              step="1"
-              min="1"
-              max="9999"
-              name="quantity"
-              value="1"
-              title="Qty"
-              size="4"
-              pattern="[0-9]*"
-              inputmode="numeric"
-              aria-labelledby="Silverlight Hiking Socks quantity"
-            />
-            <!-- </div> -->
-            <!-- <div> -->
-            <input type="button" value="+" class="plus button is-form" />
-            <!-- </div> -->
-            <!-- </span> -->
-          </div>
+              <tr>
+                <td class="label"><label for="type">TYPE</label></td>
+                <td class="">
+                  <ul role="radiogroup" aria-label="type" class="d-flex">
+                    <li>
+                      <div class="">
+                        <button
+                          class={type === "ankle" ? "selected" : ""}
+                          on:click={() => {
+                            type = "ankle";
+                          }}>Ankle</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class={type === "crew" ? "selected" : ""}
+                          on:click={() => {
+                            type = "crew";
+                          }}>Crew</button
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td class="label"><label for="quantity">QUANTITY</label></td>
+                <td class="">
+                  <ul role="radiogroup" aria-label="quantity" class="d-flex">
+                    <li>
+                      <div class="">
+                        <button
+                          class={quantity === 1 ? "selected" : ""}
+                          on:click={() => {
+                            quantity = 1;
+                          }}>1 Pack</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class={quantity === 3 ? "selected" : ""}
+                          on:click={() => {
+                            quantity = 3;
+                          }}>3 Pack</button
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <div class="">
+                        <button
+                          class={quantity === 5 ? "selected" : ""}
+                          on:click={() => {
+                            quantity = 5;
+                          }}>5 Pack</button
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <div class="d-flex justify-content-between">
+                <tr>
+                  <td class="label"><label for="pa_size">SIZE</label></td>
+
+                  <td class="">
+                    <ul role="radiogroup" aria-label="Size" class="d-flex">
+                      <li>
+                        <div class="">
+                          <button
+                            class={size === "s" ? "selected" : ""}
+                            on:click={() => {
+                              size = "s";
+                            }}>S</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={size === "m" ? "selected" : ""}
+                            on:click={() => {
+                              size = "m";
+                            }}>M</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={size === "l" ? "selected" : ""}
+                            on:click={() => {
+                              size = "l";
+                            }}>L</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={size === "xl" ? "selected" : ""}
+                            on:click={() => {
+                              size = "xl";
+                            }}>XL</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={size === "xxl" ? "selected" : ""}
+                            on:click={() => {
+                              size = "xxl";
+                            }}>XXL</button
+                          >
+                        </div>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <div class="chart-text">
+                  <p>
+                    <a
+                      class="popmake-9356 pum-trigger"
+                      href
+                      style="cursor: pointer;"
+                      on:click|preventDefault={() => {
+                        sizechart = !sizechart;
+                      }}>Size Chart</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </tbody>
+          </table>
         </div>
-        <button
-          type="submit"
-          class="add-to-cart-button button alt"
-          on:click={handleCart}>ADD TO CART</button
-        >
-        <button class="checkout-button">
-          <a
-            href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
-            class=""
-            >CHECKOUT &nbsp;<i
-              class="fa fa-long-arrow-right"
-              aria-hidden="true"
-            /></a
+
+        <div class="">
+          <div class="d-flex my-4">
+            <div class="price-wrapper">
+              <p class="price product-page-price">
+                <span class="price"
+                  ><span class=""
+                    ><del aria-hidden="true">
+                      <span class="">
+                        <bdi>
+                          <span class="">$</span>
+                          96</bdi
+                        >
+                      </span>
+                    </del>
+                    <ins
+                      ><span class=""><bdi><span class="">$</span>79</bdi></span
+                      ></ins
+                    ></span
+                  ></span
+                >
+              </p>
+              <p class="save">save 18%</p>
+            </div>
+            <div class="quantity buttons_added d-flex round-pill">
+              <!-- <span class="d-flex border round-pill"> -->
+              <!-- <div class=""> -->
+              <input type="button" value="-" class="minus button is-form" />
+              <!-- </div> -->
+              <!-- <div> -->
+              <input
+                type="number"
+                id="quantity_63ef2fbd9a85e"
+                class="input-text qty text"
+                step="1"
+                min="1"
+                max="9999"
+                name="quantity"
+                value="1"
+                title="Qty"
+                size="4"
+                pattern="[0-9]*"
+                inputmode="numeric"
+                aria-labelledby="Silverlight Hiking Socks quantity"
+              />
+              <!-- </div> -->
+              <!-- <div> -->
+              <input type="button" value="+" class="plus button is-form" />
+              <!-- </div> -->
+              <!-- </span> -->
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="add-to-cart-button button alt"
+            on:click={handleCart}>ADD TO CART</button
           >
-        </button>
+          <button class="checkout-button">
+            <a
+              href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
+              class=""
+              >CHECKOUT &nbsp;<i
+                class="fa fa-long-arrow-right"
+                aria-hidden="true"
+              /></a
+            >
+          </button>
+        </div>
       </div>
+      {#if sizechart}
+        <div class="size-chart-center">
+          <p class="text-right m-0"><span class="close-chart">X</span></p>
+          <img
+            src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+            alt=""
+          />
+        </div>
+      {/if}
     </div>
-    {#if sizechart}
-      <div class="size-chart-center">
-        <p class="text-right m-0"><span class="close-chart">X</span></p>
-        <img
-          src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
-          alt=""
-        />
-      </div>
-    {/if}
   </div>
 </div>
 
@@ -512,6 +541,7 @@
     display: flex;
     max-width: 1080px;
     background-color: #ffffff;
+    /* margin-top: 10%; */
   }
 
   .socks-slider-wrapper {
@@ -626,7 +656,7 @@
     box-shadow: 0 0 10px 0;
   }
 
-  .close-chart{
+  .close-chart {
     font-weight: 700;
     padding: 0 5px;
     position: relative;
@@ -725,8 +755,100 @@
   }
 
   .selected {
-		border: 2px solid #000000 !important;
-	}
+    border: 2px solid #000000 !important;
+  }
+
+  .slider-single h3 {
+    line-height: 10rem;
+  }
+
+  .slider-nav h3::before {
+    content: "";
+    display: block;
+    padding-top: 75%;
+  }
+
+  .slider-nav h3 span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .slider-nav,
+  .slick-slide {
+    cursor: pointer;
+  }
+
+  .slider-nav {
+    display: flex;
+  }
+
+  .slider-nav img {
+    width: 100%;
+  }
+
+  .slick-slide.is-active h3 {
+    color: #c00;
+    background-color: #fff;
+  }
+
+  .slider-single div:nth-child(1n + 2) {
+    display: none;
+  }
+
+  .slick-initialized div:nth-child(1n + 2) {
+    display: block;
+  }
+
+  .thumb-image {
+    width: 25%;
+  }
+
+  .navbar li {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    margin: 0 7px;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    width: 30px;
+    height: 30px;
+    margin: 10px 0 0 0;
+    text-align: -webkit-right;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar li:hover {
+    background-color: #ffffff;
+    color: #777777;
+  }
+
+  .navbar a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .cart-icon strong:after {
+    transition: height 0.1s ease-out;
+    bottom: 100%;
+    margin-bottom: 0;
+    margin-left: -7px;
+    height: 8px;
+    width: 14px;
+    left: 50%;
+    content: " ";
+    position: absolute;
+    pointer-events: none;
+    border: 2px solid #ffffff;
+    border-top-left-radius: 99px;
+    border-top-right-radius: 99px;
+    border-bottom: 0;
+  }
 
   @media screen and (max-width: 850px) {
     .container-1080 {

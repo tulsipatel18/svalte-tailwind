@@ -5,6 +5,9 @@ import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
+import adapter from '@sveltejs/adapter-auto';
+import { vitePreprocess } from '@sveltejs/kit/vite';
+import('@sveltejs/kit').Config
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -76,3 +79,15 @@ export default {
 		clearScreen: false
 	}
 };
+
+
+
+
+export  const config = {
+  kit: {
+    adapter: adapter()
+  },
+  preprocess: vitePreprocess()
+};
+
+// export default config;
