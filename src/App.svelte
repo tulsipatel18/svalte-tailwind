@@ -55,12 +55,29 @@
   //   });
   // });
 
-  let color, type, quantity, size, total;
-  let sizechart = false;
-  $: console.log(sizechart);
+  let color,
+    type,
+    quantity,
+    size,
+    total,
+    qty = 1,
+    sizechart = false;
+  let price = 79;
+
+  color = localStorage.getItem("color");
+  type = localStorage.getItem("type");
+  quantity = localStorage.getItem("quantity");
+  size = localStorage.getItem("size");
+  total = localStorage.getItem("total");
 
   const handleCart = () => {
-    total = 79 * quantity;
+    localStorage.setItem("color", color);
+    localStorage.setItem("type", type);
+    localStorage.setItem("quantity", quantity);
+    localStorage.setItem("size", size);
+    localStorage.setItem("total", total);
+
+    total = 79 * quantity * qty;
     window.alert(
       `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
     );
@@ -136,6 +153,14 @@
       $(".slider-single").slick("slickGoTo", goToSingleSlide);
     });
   });
+  const handleqty = () => {
+    qty += 1;
+  };
+  const handleqtydec = () => {
+    if (qty != 1) {
+      qty -= 1;
+    }
+  };
 </script>
 
 <div class="main-container">
@@ -439,76 +464,103 @@
               </div>
             </tbody>
           </table>
-        </div>
-
-        <div class="">
-          <div class="d-flex my-4">
-            <div class="price-wrapper">
-              <p class="price product-page-price">
-                <span class="price"
-                  ><span class=""
-                    ><del aria-hidden="true">
-                      <span class="">
-                        <bdi>
-                          <span class="">$</span>
-                          96</bdi
-                        >
-                      </span>
-                    </del>
-                    <ins
-                      ><span class=""><bdi><span class="">$</span>79</bdi></span
-                      ></ins
+          <div class="chart-text">
+            <p>
+              <a
+                class="popmake-9356 pum-trigger"
+                href
+                style="cursor: pointer;"
+                on:click|preventDefault={() => {
+                  sizechart = true;
+                }}>Size Chart</a
+              >
+            </p>
+          </div>
+          <div class="">
+            <div class="d-flex my-4">
+              <div class="price-wrapper">
+                <p class="price product-page-price">
+                  <span class="price"
+                    ><span class=""
+                      ><del aria-hidden="true">
+                        <span class="">
+                          <bdi>
+                            <span class="">$</span>
+                            96</bdi
+                          >
+                        </span>
+                      </del>
+                      <ins
+                        ><span class=""
+                          ><bdi><span class="">$</span>{price}</bdi></span
+                        ></ins
+                      ></span
                     ></span
-                  ></span
-                >
-              </p>
-              <p class="save">save 18%</p>
+                  >
+                </p>
+                <p class="save">save 18%</p>
+              </div>
+              <div class="quantity buttons_added d-flex round-pill">
+                <!-- <span class="d-flex border round-pill"> -->
+                <!-- <div class=""> -->
+                <input
+                  type="button"
+                  value="-"
+                  class="minus button is-form"
+                  on:click={handleqtydec}
+                />
+                <!-- </div> -->
+                <!-- <div> -->
+                <input
+                  type="number"
+                  id="quantity_63ef2fbd9a85e"
+                  class="input-text qty text"
+                  step="1"
+                  min="1"
+                  max="15"
+                  name="quantity"
+                  bind:value={qty}
+                  title="Qty"
+                  size="4"
+                  pattern="[0-9]*"
+                  inputmode="numeric"
+                  aria-labelledby="Silverlight Hiking Socks quantity"
+                />
+                <!-- </div> -->
+                <!-- <div> -->
+                <input
+                  type="button"
+                  value="+"
+                  class="plus button is-form"
+                  on:click={handleqty}
+                />
+                <!-- </div> -->
+                <!-- </span> -->
+              </div>
             </div>
-            <div class="quantity buttons_added d-flex round-pill">
-              <!-- <span class="d-flex border round-pill"> -->
-              <!-- <div class=""> -->
-              <input type="button" value="-" class="minus button is-form" />
-              <!-- </div> -->
-              <!-- <div> -->
-              <input
-                type="number"
-                id="quantity_63ef2fbd9a85e"
-                class="input-text qty text"
-                step="1"
-                min="1"
-                max="9999"
-                name="quantity"
-                value="1"
-                title="Qty"
-                size="4"
-                pattern="[0-9]*"
-                inputmode="numeric"
-                aria-labelledby="Silverlight Hiking Socks quantity"
-              />
-              <!-- </div> -->
-              <!-- <div> -->
-              <input type="button" value="+" class="plus button is-form" />
-              <!-- </div> -->
-              <!-- </span> -->
+    
+            <div class="">
+              <button
+                type="submit"
+                class="add-to-cart-button button alt"
+                on:click={handleCart}>ADD TO CART</button
+              >
+              <button class="checkout-button">
+                <a
+                  href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
+                  class=""
+                  >CHECKOUT &nbsp;<i
+                    class="fa fa-long-arrow-right"
+                    aria-hidden="true"
+                  /></a
+                >
+              </button>
             </div>
           </div>
-          <button
-            type="submit"
-            class="add-to-cart-button button alt"
-            on:click={handleCart}>ADD TO CART</button
-          >
-          <button class="checkout-button">
-            <a
-              href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
-              class=""
-              >CHECKOUT &nbsp;<i
-                class="fa fa-long-arrow-right"
-                aria-hidden="true"
-              /></a
-            >
-          </button>
         </div>
       </div>
+
+      
       {#if sizechart}
         <div class="size-chart-center">
           <p class="text-right m-0"><span class="close-chart">X</span></p>
@@ -519,6 +571,23 @@
         </div>
       {/if}
     </div>
+    {#if sizechart}
+      <div class="size-chart-center">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <p class="text-right m-0" style="cursor: pointer;">
+          <span
+            class="close-chart"
+            on:click={() => {
+              sizechart = false;
+            }}>X</span
+          >
+        </p>
+        <img
+          src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
+          alt=""
+        />
+      </div>
+    {/if}
   </div>
 </div>
 
