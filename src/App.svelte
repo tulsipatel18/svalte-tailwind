@@ -1,4 +1,7 @@
 <script>
+  import { loop_guard } from "svelte/internal";
+
+
   // jQuery(function ($) {
   //   var url = "https://silverlight.store/checkout/?add-to-cart=",
   //     vid = 'input[name="variation_id"]',
@@ -56,26 +59,32 @@
 
   let color, type, quantity, size, total,qty=1,sizechart=false;
   let price=79;
+
+
+
+
+ $: orders=JSON.parse(localStorage.getItem("orders"))
+    $:console.log(orders);
   
-  color=localStorage.getItem("color")
-  type=localStorage.getItem("type")
-  quantity=localStorage.getItem("quantity")
-  size=localStorage.getItem("size")
-  total=localStorage.getItem("total")
-
-
+  //  $:console.log(orders);
   const handleCart = () => {
     
-    localStorage.setItem("color", color);
-    localStorage.setItem("type", type);
-    localStorage.setItem("quantity", quantity);
-    localStorage.setItem("size", size);
-    localStorage.setItem("total", total);
+
 
     total = 79 * quantity*qty;
+    orders=[...orders,{color,type,quantity,size,total}]
+    
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    // console.log(JSON.stringify(orders));
+
+
+    
+
     window.alert(
       `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
     );
+   
   };
   const handleqty=()=>{
     qty+=1;
@@ -102,6 +111,9 @@
       type="video/mp4"
     />
   </video>
+  
+   
+
   <div class="container-1080">
     <div class="w-50 socks-slider-wrapper container">
       <div class="w-100">
@@ -424,7 +436,7 @@
                     href
                     style="cursor: pointer;"
                     on:click|preventDefault={() => {
-                      sizechart = !sizechart;
+                      sizechart = true;
                     }}>Size Chart</a
                   >
                 </p>
@@ -504,7 +516,8 @@
     </div>
     {#if sizechart}
       <div class="size-chart-center">
-        <p class="text-right m-0"><span class="close-chart">X</span></p>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <p class="text-right m-0" style="cursor: pointer;"><span class="close-chart" on:click={()=>{sizechart=false}} >X</span></p>
         <img
           src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
           alt=""
@@ -533,6 +546,7 @@
     display: flex;
     max-width: 1080px;
     background-color: #ffffff;
+    margin-top: 10%;
   }
 
   .socks-slider-wrapper {
