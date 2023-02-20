@@ -273,8 +273,7 @@
                   <li>
                     <div class="">
                       <button
-                       
-                        class=""
+                      class="{color === 'black' ? 'selected' : ''}"
                         on:click={() => {
                           color = "black";
                         }}>Black</button
@@ -284,7 +283,7 @@
                   <li>
                     <div class="">
                       <button
-                        class=""
+                      class="{color === 'blue' ? 'selected' : ''}"
                         on:click={() => {
                           color = "blue";
                         }}>Blue</button
@@ -302,7 +301,7 @@
                   <li>
                     <div class="">
                       <button
-                        class=""
+                      class="{type === 'ankle' ? 'selected' : ''}"
                         on:click={() => {
                           type = "ankle";
                         }}>Ankle</button
@@ -312,7 +311,7 @@
                   <li>
                     <div class="">
                       <button
-                        class=""
+                      class="{type === 'crew' ? 'selected' : ''}"
                         on:click={() => {
                           type = "crew";
                         }}>Crew</button
@@ -325,21 +324,11 @@
             <tr>
               <td class="label"><label for="quantity">QUANTITY</label></td>
               <td class="">
-                <select
-                  style="display:none"
-                  id="quantity"
-                  class=""
-                  name="attribute_quantity"
-                  ><option value="">Choose an option</option><option
-                    value="1 Pack">1 Pack</option
-                  ><option value="3 Pack" selected="selected">3 Pack</option
-                  ><option value="5 Pack">5 Pack</option></select
-                >
                 <ul role="radiogroup" aria-label="quantity" class="d-flex">
                   <li>
                     <div class="">
                       <button
-                        class=""
+                      class="{quantity === 1 ? 'selected' : ''}"
                         on:click={() => {
                           quantity = 1;
                         }}>1 Pack</button
@@ -349,7 +338,7 @@
                   <li>
                     <div class="">
                       <button
-                        class=""
+                      class="{quantity === 3 ? 'selected' : ''}"
                         on:click={() => {
                           quantity = 3;
                         }}>3 Pack</button
@@ -359,7 +348,7 @@
                   <li>
                     <div class="">
                       <button
-                        class=""
+                      class="{quantity === 5 ? 'selected' : ''}"
                         on:click={() => {
                           quantity = 5;
                         }}>5 Pack</button
@@ -378,7 +367,7 @@
                     <li>
                       <div class="">
                         <button
-                          class=""
+                        class="{size === "s" ? 'selected' : ''}"
                           on:click={() => {
                             size = "s";
                           }}>S</button
@@ -388,7 +377,7 @@
                     <li>
                       <div class="">
                         <button
-                          class=""
+                        class="{size === "m" ? 'selected' : ''}"
                           on:click={() => {
                             size = "m";
                           }}>M</button
@@ -398,7 +387,7 @@
                     <li>
                       <div class="">
                         <button
-                          class=""
+                        class="{size === "l" ? 'selected' : ''}"
                           on:click={() => {
                             size = "l";
                           }}>L</button
@@ -408,7 +397,7 @@
                     <li>
                       <div class="">
                         <button
-                          class=""
+                        class="{size === "xl" ? 'selected' : ''}"
                           on:click={() => {
                             size = "xl";
                           }}>XL</button
@@ -418,7 +407,7 @@
                     <li>
                       <div class="">
                         <button
-                          class=""
+                        class="{size === "xxl" ? 'selected' : ''}"
                           on:click={() => {
                             size = "xxl";
                           }}>XXL</button
@@ -755,6 +744,10 @@
   input[type="number"] {
     -moz-appearance: textfield;
   }
+
+  .selected {
+		border: 2px solid #000000 !important;
+	}
 
   @media screen and (max-width: 850px) {
     .container-1080 {
