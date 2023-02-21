@@ -1,19 +1,53 @@
 <script>
   import jQuery from "jquery";
+  import {onMount} from 'svelte'
+
+  export let balckCrewSocksImages;
+  export let balckAnkleSocksImages;
+  export let balckAnkleSocksImagesThreePack;
+  export let balckAnkleSocksImagesFivePack;
+  export let blueCrewSocksImages;
+  export let blueAnkleSocksImages;
+
   let color,
   fprice=25,discount=0,discountedprice=25,
-    type='ankle',
+    type,
     quantity,
     size,
     total,
     qty = 1,
     sizechart = false;
-  let price = 79;
+  
+  color=localStorage.getItem("color")
+  type=localStorage.getItem("type")
+  quantity=localStorage.getItem("quantity")
+  size=localStorage.getItem("size")
+
 
   $: orders = JSON.parse(localStorage.getItem("orders"));
   $: console.log(orders);
   $: localStorage.setItem("orders", JSON.stringify(orders));
   $:handleprice(type,quantity);
+  $:handlephotos(color,type,quantity);
+
+
+  let photos=balckCrewSocksImages
+
+  const handlephotos=()=>{
+    if(color=="BLACK"){
+    if(type=="CREW"){
+      
+    }
+    if(type=="ANKLE"){
+
+    }
+  }
+    if(color=="BLUE"){
+
+    }
+
+
+  }
   
   const handleprice=()=>{
     if(quantity==1){
@@ -25,7 +59,7 @@
     if(quantity==5){
       discount=26;
     }
-    if(type=='ankle'){
+    if(type!=='undefined' && type=='ANKLE'){
       if(quantity==1){
         fprice=25      
       }
@@ -38,7 +72,7 @@
 
 
     }
-    if(type=='crew'){
+    if(type!=='undefined' && type=='CREW'){
       if(quantity==1){
         fprice=32 
       }
@@ -57,6 +91,12 @@
 
   }
   const handleCart = () => {
+
+    localStorage.setItem("color",color);
+    localStorage.setItem("type",type);
+    localStorage.setItem("quantity",quantity);
+    localStorage.setItem("size",size);
+    
     //write calculation function again
     total = 0;
     let newOrder = {
@@ -146,9 +186,9 @@
       type="video/mp4"
     />
   </video>
-  <div style="max-width:1080px" class="w-100">
+  <div style="max-width:1080px" class="w-100 d1">
     <div class="navbar justify-content-end">
-      <a href="https://silverlight.store/cart/">
+      <a href="#">
         <li class="cart-item">
           <span class="cart-icon">
             {#if orders}
@@ -164,7 +204,7 @@
               <div>
                 <p>Silverlight Hiking Socks</p>
                 COLOR : {order.color}
-                Type : {order.type}
+                TYPE  : {order.type}
                 Quantity : {order.quantity} Pack Size : {order.size}
                 <button on:click|preventDefault={() => handleDelete(order.id)}
                   >x</button
@@ -190,7 +230,7 @@
       <div class="w-50 socks-slider-wrapper container">
         <div class="black-crew">
           <div class="slider slider-single opacity-100">
-            {#each balckCrewSocksImages as image}
+            {#each photos as image}
               <div class="slider slider-single">
                 <img class="opacity-100" src={image.largeImg} alt="" />
               </div>
@@ -363,7 +403,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={color === "black" ? "selected" : ""}
+                          class={color == "BLACK" ? "selected" : ""}
                           on:click={() => {
                             color = "BLACK";
                           }}>Black</button
@@ -373,7 +413,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={color === "blue" ? "selected" : ""}
+                          class={color == "BLUE" ? "selected" : ""}
                           on:click={() => {
                             color = "BLUE";
                           }}>Blue</button
@@ -391,7 +431,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={type === "ankle" ? "selected" : ""}
+                          class={type == "ANKLE" ? "selected" : ""}
                           on:click={() => {
                             type = "ANKLE";
                           }}>Ankle</button
@@ -401,7 +441,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={type === "crew" ? "selected" : ""}
+                          class={type =="CREW" ? "selected" : ""}
                           on:click={() => {
                             type = "CREW";
                           }}>Crew</button
@@ -418,7 +458,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={quantity === 1 ? "selected" : ""}
+                          class={quantity == 1 ? "selected" : ""}
                           on:click={() => {
                             quantity = 1;
                           }}>1 Pack</button
@@ -428,7 +468,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={quantity === 3 ? "selected" : ""}
+                          class={quantity == 3 ? "selected" : ""}
                           on:click={() => {
                             quantity = 3;
                           }}>3 Pack</button
@@ -438,7 +478,7 @@
                     <li>
                       <div class="">
                         <button
-                          class={quantity === 5 ? "selected" : ""}
+                          class={quantity == 5 ? "selected" : ""}
                           on:click={() => {
                             quantity = 5;
                           }}>5 Pack</button
@@ -457,7 +497,7 @@
                       <li>
                         <div class="">
                           <button
-                            class={size === "s" ? "selected" : ""}
+                            class={size =="S" ? "selected" : ""}
                             on:click={() => {
                               size = "S";
                             }}>S</button
@@ -467,7 +507,7 @@
                       <li>
                         <div class="borde">
                           <button
-                            class={size === "m" ? "selected" : ""}
+                            class={size == "M" ? "selected" : ""}
                             on:click={() => {
                               size = "M";
                             }}>M</button
@@ -477,7 +517,7 @@
                       <li>
                         <div class="">
                           <button
-                            class={size === "l" ? "selected" : ""}
+                            class={size == "L" ? "selected" : ""}
                             on:click={() => {
                               size = "L";
                             }}>L</button
@@ -487,7 +527,7 @@
                       <li>
                         <div class="">
                           <button
-                            class={size === "xl" ? "selected" : ""}
+                            class={size == "XL" ? "selected" : ""}
                             on:click={() => {
                               size = "XL";
                             }}>XL</button
@@ -497,7 +537,7 @@
                       <li>
                         <div class="">
                           <button
-                            class={size === "xxl" ? "selected" : ""}
+                            class={size == "XXL" ? "selected" : ""}
                             on:click={() => {
                               size = "XXL";
                             }}>XXL</button
@@ -613,15 +653,16 @@
     </div>
     {#if sizechart}
       <div class="size-chart-center">
-        <p class="text-right m-0" style="cursor: pointer;">
+        
+        <div class="text-right m- d-flex justify-content-between" style="cursor: pointer;">
+          <div class="w-100 text-center"><strong>SIZE CHART</strong></div>
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <span
             class="close-chart"
             on:click={() => {
               sizechart = false;
-            }}>X</span
-          >
-        </p>
+            }}>X</span>
+        </div>
         <img
           src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
           alt=""
@@ -790,6 +831,13 @@
     padding: 0 20px 20px;
     box-shadow: 0 0 10px 0;
   }
+
+  .size-chart-center img{
+    padding: 20px;
+  }
+  .size-chart-center strong{
+    font-size: 20px;
+  } 
 
   .close-chart {
     font-weight: 700;
