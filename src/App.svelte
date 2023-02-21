@@ -1,10 +1,12 @@
 <script>
   import jQuery from "jquery";
   import { onMount } from "svelte";
-  export let balckCrewSocksImages;
-  export let balckAnkleSocksImages;
-  export let balckAnkleSocksImagesThreePack;
-  export let balckAnkleSocksImagesFivePack;
+  export let blackCrewSocksImages;
+  export let blackCrewSocksImagesThreePack;
+  export let blackCrewSocksImagesFivePack;
+  export let blackAnkleSocksImages;
+  export let blackAnkleSocksImagesThreePack;
+  export let blackAnkleSocksImagesFivePack;
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
   let color,
@@ -93,14 +95,46 @@
       <div class="w-50 socks-slider-wrapper container">
         <div class="black-crew">
           <div class="slider slider-single opacity-100">
-            {#each balckCrewSocksImages as image}
+            {#each blackCrewSocksImages as image}
               <div class="slider slider-single">
                 <img class="opacity-100" src={image.largeImg} alt="" />
               </div>
             {/each}
           </div>
           <div class="slider slider-nav">
-            {#each balckCrewSocksImages as image}
+            {#each blackCrewSocksImages as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-crew-three-pack d-none">
+          <div class="slider slider-single opacity-100">
+            {#each blackCrewSocksImagesThreePack as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each blackCrewSocksImagesThreePack as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-crew-five-pack d-none">
+          <div class="slider slider-single opacity-100">
+            {#each blackCrewSocksImagesFivePack as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each blackCrewSocksImagesFivePack as image}
               <div class="thumb-image">
                 <img src={image.thumbImg} alt="" />
               </div>
@@ -109,14 +143,14 @@
         </div>
         <div class="black-ankle d-none">
           <div class="slider slider-single opacity-100">
-            {#each balckAnkleSocksImages as image}
+            {#each blackAnkleSocksImages as image}
               <div class="slider slider-single">
                 <img class="opacity-100" src={image.largeImg} alt="" />
               </div>
             {/each}
           </div>
           <div class="slider slider-nav">
-            {#each balckAnkleSocksImages as image}
+            {#each blackAnkleSocksImages as image}
               <div class="thumb-image">
                 <img src={image.thumbImg} alt="" />
               </div>
@@ -125,14 +159,14 @@
         </div>
         <div class="black-ankle-three-pack d-none">
           <div class="slider slider-single opacity-100">
-            {#each balckAnkleSocksImagesThreePack as image}
+            {#each blackAnkleSocksImagesThreePack as image}
               <div class="slider slider-single">
                 <img class="opacity-100" src={image.largeImg} alt="" />
               </div>
             {/each}
           </div>
           <div class="slider slider-nav">
-            {#each balckAnkleSocksImagesThreePack as image}
+            {#each blackAnkleSocksImagesThreePack as image}
               <div class="thumb-image">
                 <img src={image.thumbImg} alt="" />
               </div>
@@ -141,14 +175,14 @@
         </div>
         <div class="black-ankle-five-pack d-none">
           <div class="slider slider-single opacity-100">
-            {#each balckAnkleSocksImagesFivePack as image}
+            {#each blackAnkleSocksImagesFivePack as image}
               <div class="slider slider-single">
                 <img class="opacity-100" src={image.largeImg} alt="" />
               </div>
             {/each}
           </div>
           <div class="slider slider-nav">
-            {#each balckAnkleSocksImagesFivePack as image}
+            {#each blackAnkleSocksImagesFivePack as image}
               <div class="thumb-image">
                 <img src={image.thumbImg} alt="" />
               </div>
@@ -201,11 +235,11 @@
             class="stamped-starrating stamped-badge-starrating"
             aria-hidden="true"
           >
-            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
-            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
-            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
-            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
-            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
+            <i class="fa-solid fa-star star" />
+            <i class="fa-solid fa-star star" />
+            <i class="fa-solid fa-star star" />
+            <i class="fa-solid fa-star star" />
+            <i class="fa-solid fa-star star" />
           </span>
           <span
             class="stamped-badge-caption"
@@ -426,22 +460,22 @@
             </tbody>
           </table>
           <div class="">
-            <div class="d-flex">
+            <div class="d-flex" style="margin:12px 0 15px 0">
               <div class="price-wrapper">
                 <p class="price product-page-price">
                   <span class="price"
                     ><span class=""
                       ><del aria-hidden="true">
-                        <span class="">
+                        <span class="original-price">
                           <bdi>
-                            <span class="">$</span>
+                            <span>$</span>
                             96</bdi
                           >
                         </span>
                       </del>
                       <ins
-                        ><span class=""
-                          ><bdi><span class="">$</span>{price}</bdi></span
+                        ><span class="sale-price"
+                          ><bdi><span>$</span>{price}</bdi></span
                         ></ins
                       ></span
                     ></span
@@ -589,6 +623,10 @@
     color: #777777;
   }
 
+  .star{
+    color: gold;
+  }
+
   .socks-description {
     padding: 20px 0;
     color: #777777;
@@ -725,9 +763,18 @@
     margin: 0 5px 0 0;
   }
 
+  .original-price {
+    color: #777777;
+  }
+
+  .sale-price {
+    text-decoration: none;
+  }
+
   .save {
     font-size: 24px;
     color: green;
+    margin: 0;
   }
   .quantity {
     height: 40px;
