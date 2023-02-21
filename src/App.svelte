@@ -1,168 +1,116 @@
 <script>
   import jQuery from "jquery";
-  // jQuery(function ($) {
-  //   var url = "https://silverlight.store/checkout/?add-to-cart=",
-  //     vid = 'input[name="variation_id"]',
-  //     pid = 'input[name="product_id"]',
-  //     qty = "input.qty",
-  //     button = "a.custom-checkout-btn";
-  //   cart_pro = "1";
 
-  //   // Once DOM is loaded
-  //   setTimeout(function () {
-  //     if ($(vid).val() != "" && 0 < cart_pro) {
-  //       $(button).attr("href", url + $(vid).val() + "&quantity=0");
-  //     } else {
-  //       $(button).attr(
-  //         "href",
-  //         url + $(vid).val() + "&quantity=" + $(qty).val()
-  //       );
-  //     }
-  //   }, 2000);
+  let color,
+  fprice=25,discount=0,discountedprice=25,
+    type='ankle',
+    quantity,
+    size,
+    total,
+    qty = 1,
+    sizechart = false;
+  let price = 79;
 
-  //   // On input/change quantity event
-  //   $(qty).on("input change", function () {
-  //     if ($(vid).val() != "" && 0 < cart_pro) {
-  //       $(button).attr("href", url + $(vid).val() + "&quantity=0");
-  //     } else {
-  //       $(button).attr(
-  //         "href",
-  //         url + $(vid).val() + "&quantity=" + $(this).val()
-  //       );
-  //     }
-  //   });
-
-  //   // On select attribute field change event
-  //   $(".variations_form").on("click", "table.variations select", function () {
-  //     setTimeout(function () {
-  //       if ($(vid).val() != "" && 0 < cart_pro) {
-  //         $(button).attr("href", url + $(vid).val() + "&quantity=0");
-  //       } else {
-  //         $(button).attr(
-  //           "href",
-  //           url + $(vid).val() + "&quantity=" + $(qty).val()
-  //         );
-  //       }
-  //     }, 2000);
-  //   });
-  // });
-
-  // jQuery(function ($) {
-  //   $(".xzoom,.xzoom-gallery").xzoom({
-  //     zoomWidth: 400,
-  //     tint: "#333",
-  //     xoffset: "15",
-  //   });
-  // });
-
-  let color, type, quantity, size, total,qty=1,sizechart=false;
-  let price=79;
-
-
-
-
- $: orders=JSON.parse(localStorage.getItem("orders"))
-    $:console.log(orders);
+  $: orders = JSON.parse(localStorage.getItem("orders"));
+  $: console.log(orders);
+  $: localStorage.setItem("orders", JSON.stringify(orders));
+  $:handleprice(type,quantity);
   
-  //  $:console.log(orders);
+  const handleprice=()=>{
+    if(quantity==1){
+      discount=0;
+    }
+    if(quantity==3){
+      discount=21;
+    }
+    if(quantity==5){
+      discount=26;
+    }
+    if(type=='ankle'){
+      if(quantity==1){
+        fprice=25      
+      }
+      if(quantity==3){
+        fprice=75;
+      }
+      if(quantity==5){
+        fprice=125;
+      }
+
+
+    }
+    if(type=='crew'){
+      if(quantity==1){
+        fprice=32 
+      }
+      if(quantity==3){
+        fprice=96;
+        
+      }
+      if(quantity==5){
+        fprice=160;
+      }
+     
+    }
+    discountedprice=fprice-(fprice*discount/100);
+    discountedprice=Math.floor(discountedprice);
+
+
+  }
   const handleCart = () => {
-    
+    //write calculation function again
+    total = 0;
+    let newOrder = {
+      color,
+      type,
+      quantity,
+      size,
+      total,
+      qty,
+      id: Math.random(),
+    };
+    let flag = false;
 
-
-    total = 79 * quantity*qty;
-    orders=[...orders,{color,type,quantity,size,total}]
-    
-    localStorage.setItem("orders", JSON.stringify(orders));
-
-    // console.log(JSON.stringify(orders));
-
-
-    
+    if (orders) {
+      for (let i = 0; i < orders.length; i++) {
+        let order = orders[i];
+        if (
+          order.color == color &&
+          order.type == type &&
+          order.quantity == quantity &&
+          order.size == size
+        ) {
+          flag = true;
+          order.qty += qty;
+        }
+        order = { ...order, id: Math.random() };
+      }
+      if (!flag) {
+        orders = [...orders, newOrder];
+      }
+    } else {
+      orders = [newOrder];
+    }
 
     window.alert(
       `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
     );
-   
   };
 
-  jQuery(function ($) {
-    $(".slider-single").slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: true,
-      fade: false,
-      adaptiveHeight: true,
-      infinite: false,
-      useTransform: true,
-      speed: 400,
-      cssEase: "cubic-bezier(0.77, 0, 0.18, 1)",
-    });
-  });
+  const handleDelete = (id) => {
+    console.log(id);
+    orders = orders.filter((order) => order.id !== id);
+  }
 
-  jQuery(function ($) {
-    $(".slider-nav")
-      .on("init", function (event, slick) {
-        $(".slider-nav .slick-slide.slick-current").addClass("is-active");
-      })
-      .slick({
-        slidesToShow: 7,
-        slidesToScroll: 7,
-        dots: false,
-        focusOnSelect: false,
-        infinite: false,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 5,
-              slidesToScroll: 5,
-            },
-          },
-          {
-            breakpoint: 640,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-            },
-          },
-          {
-            breakpoint: 420,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-            },
-          },
-        ],
-      });
-  });
-  jQuery(function ($) {
-    $(".slider-single").on(
-      "afterChange",
-      function (event, slick, currentSlide) {
-        $(".slider-nav").slick("slickGoTo", currentSlide);
-        var currrentNavSlideElem =
-          '.slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-        $(".slider-nav .slick-slide.is-active").removeClass("is-active");
-        $(currrentNavSlideElem).addClass("is-active");
-      }
-    );
-  });
-  jQuery(function ($) {
-    $(".slider-nav").on("click", ".slick-slide", function (event) {
-      event.preventDefault();
-      var goToSingleSlide = $(this).data("slick-index");
-
-      $(".slider-single").slick("slickGoTo", goToSingleSlide);
-    });
-  });
   const handleqty = () => {
     qty += 1;
-  };
+  }
   const handleqtydec = () => {
-    if (qty != 1) {
+    if (qty != 1) 
       qty -= 1;
-    }
-  };
+  }
+
+
 </script>
 
 <div class="main-container">
@@ -181,14 +129,45 @@
     />
   </video>
   <div>
-    <div class="navbar justify-content-end">
-      <a href="https://silverlight.store/cart/">
-        <li class="cart-item">
+    <div class="navbar justify-content-end d1">
+      <!-- <a href="https://silverlight.store/cart/" > -->
+      <a href="">
+        <li class="cart-item temp">
           <span class="cart-icon">
-            <strong>0</strong>
+            {#if orders}
+              <strong>{orders.length}</strong>
+            {:else}
+              <strong>{0}</strong>
+            {/if}
           </span>
         </li>
+        <div class="d2">
+          {#if orders.length!=0}
+            {#each orders as order}
+              <div>
+                <p>Silverlight Hiking Socks</p>
+                COLOR : {order.color}
+                Type : {order.type}
+                Quantity : {order.quantity} Pack Size : {order.size}
+                <button on:click|preventDefault={() => handleDelete(order.id)}
+                  >x</button
+                >
+              </div>
+            {/each}
+         
+          <hr />
+          <h2>Subtotal :</h2>
+          <hr />
+          <button>VIEW CART</button>
+          <button>GO TO CHECKOUT</button>
+          {:else}
+          <div>There are no items in your cart</div>
+          {/if}
+        </div>
       </a>
+      <!-- <div class="hide">
+        hello 
+       </div> -->
     </div>
     <div class="container-1080">
       <div class="w-50 socks-slider-wrapper container">
@@ -309,7 +288,7 @@
                         <button
                           class={color === "black" ? "selected" : ""}
                           on:click={() => {
-                            color = "black";
+                            color = "BLACK";
                           }}>Black</button
                         >
                       </div>
@@ -319,7 +298,7 @@
                         <button
                           class={color === "blue" ? "selected" : ""}
                           on:click={() => {
-                            color = "blue";
+                            color = "BLUE";
                           }}>Blue</button
                         >
                       </div>
@@ -337,7 +316,7 @@
                         <button
                           class={type === "ankle" ? "selected" : ""}
                           on:click={() => {
-                            type = "ankle";
+                            type = "ANKLE";
                           }}>Ankle</button
                         >
                       </div>
@@ -347,7 +326,7 @@
                         <button
                           class={type === "crew" ? "selected" : ""}
                           on:click={() => {
-                            type = "crew";
+                            type = "CREW";
                           }}>Crew</button
                         >
                       </div>
@@ -403,7 +382,7 @@
                           <button
                             class={size === "s" ? "selected" : ""}
                             on:click={() => {
-                              size = "s";
+                              size = "S";
                             }}>S</button
                           >
                         </div>
@@ -413,7 +392,7 @@
                           <button
                             class={size === "m" ? "selected" : ""}
                             on:click={() => {
-                              size = "m";
+                              size = "M";
                             }}>M</button
                           >
                         </div>
@@ -423,7 +402,7 @@
                           <button
                             class={size === "l" ? "selected" : ""}
                             on:click={() => {
-                              size = "l";
+                              size = "L";
                             }}>L</button
                           >
                         </div>
@@ -433,7 +412,7 @@
                           <button
                             class={size === "xl" ? "selected" : ""}
                             on:click={() => {
-                              size = "xl";
+                              size = "XL";
                             }}>XL</button
                           >
                         </div>
@@ -443,7 +422,7 @@
                           <button
                             class={size === "xxl" ? "selected" : ""}
                             on:click={() => {
-                              size = "xxl";
+                              size = "XXL";
                             }}>XXL</button
                           >
                         </div>
@@ -486,21 +465,24 @@
                     ><span class=""
                       ><del aria-hidden="true">
                         <span class="">
-                          <bdi>
-                            <span class="">$</span>
-                            96</bdi
-                          >
+                          {#if discount!=0}
+                          <bdi><span class="">$</span>{fprice}</bdi>
+                          {/if}
                         </span>
                       </del>
                       <ins
                         ><span class=""
-                          ><bdi><span class="">$</span>{price}</bdi></span
+                          ><bdi><span class="">$</span>{discountedprice}</bdi></span
                         ></ins
                       ></span
                     ></span
                   >
                 </p>
-                <p class="save">save 18%</p>
+               
+                {#if discount!=0}
+                <p class="save">Save {discount}%</p>
+                
+                {/if}
               </div>
               <div class="quantity buttons_added d-flex round-pill">
                 <!-- <span class="d-flex border round-pill"> -->
@@ -540,7 +522,7 @@
                 <!-- </span> -->
               </div>
             </div>
-    
+
             <div class="">
               <button
                 type="submit"
@@ -562,7 +544,6 @@
         </div>
       </div>
 
-      
       {#if sizechart}
         <div class="size-chart-center">
           <p class="text-right m-0"><span class="close-chart">X</span></p>
@@ -594,6 +575,21 @@
 </div>
 
 <style>
+  .d2 {
+    display: none;
+  }
+  .d1:hover .d2 {
+    display: block;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    position: absolute;
+    width: 40%;
+    margin-top: 8px;
+    right: -78px;
+    text-align: center;
+  }
+
   .main-container {
     display: flex;
     justify-content: center;
@@ -897,6 +893,11 @@
   .navbar li:hover {
     background-color: #ffffff;
     color: #777777;
+  }
+
+  .hide {
+    display: block;
+    color: red;
   }
 
   .navbar a {
