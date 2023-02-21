@@ -1,60 +1,12 @@
 <script>
   import jQuery from "jquery";
-  // jQuery(function ($) {
-  //   var url = "https://silverlight.store/checkout/?add-to-cart=",
-  //     vid = 'input[name="variation_id"]',
-  //     pid = 'input[name="product_id"]',
-  //     qty = "input.qty",
-  //     button = "a.custom-checkout-btn";
-  //   cart_pro = "1";
-
-  //   // Once DOM is loaded
-  //   setTimeout(function () {
-  //     if ($(vid).val() != "" && 0 < cart_pro) {
-  //       $(button).attr("href", url + $(vid).val() + "&quantity=0");
-  //     } else {
-  //       $(button).attr(
-  //         "href",
-  //         url + $(vid).val() + "&quantity=" + $(qty).val()
-  //       );
-  //     }
-  //   }, 2000);
-
-  //   // On input/change quantity event
-  //   $(qty).on("input change", function () {
-  //     if ($(vid).val() != "" && 0 < cart_pro) {
-  //       $(button).attr("href", url + $(vid).val() + "&quantity=0");
-  //     } else {
-  //       $(button).attr(
-  //         "href",
-  //         url + $(vid).val() + "&quantity=" + $(this).val()
-  //       );
-  //     }
-  //   });
-
-  //   // On select attribute field change event
-  //   $(".variations_form").on("click", "table.variations select", function () {
-  //     setTimeout(function () {
-  //       if ($(vid).val() != "" && 0 < cart_pro) {
-  //         $(button).attr("href", url + $(vid).val() + "&quantity=0");
-  //       } else {
-  //         $(button).attr(
-  //           "href",
-  //           url + $(vid).val() + "&quantity=" + $(qty).val()
-  //         );
-  //       }
-  //     }, 2000);
-  //   });
-  // });
-
-  // jQuery(function ($) {
-  //   $(".xzoom,.xzoom-gallery").xzoom({
-  //     zoomWidth: 400,
-  //     tint: "#333",
-  //     xoffset: "15",
-  //   });
-  // });
-
+  import { onMount } from "svelte";
+  export let balckCrewSocksImages;
+  export let balckAnkleSocksImages;
+  export let balckAnkleSocksImagesThreePack;
+  export let balckAnkleSocksImagesFivePack;
+  export let blueCrewSocksImages;
+  export let blueAnkleSocksImages;
   let color,
     type,
     quantity,
@@ -82,77 +34,26 @@
       `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
     );
   };
-
-  jQuery(function ($) {
-    $(".slider-single").slick({
+  onMount(() => {
+    jQuery(".slider-single").slick({
       slidesToShow: 1,
       slidesToScroll: 1,
-      arrows: true,
-      fade: false,
-      adaptiveHeight: true,
-      infinite: false,
-      useTransform: true,
-      speed: 400,
-      cssEase: "cubic-bezier(0.77, 0, 0.18, 1)",
+      arrows: false,
+      fade: true,
+      useTransform: false,
+    });
+
+    jQuery(".slider-nav").slick({
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      asNavFor: ".slider-single",
+      dots: false,
+      centerMode: false,
+      focusOnSelect: true,
+      draggable: false,
     });
   });
 
-  jQuery(function ($) {
-    $(".slider-nav")
-      .on("init", function (event, slick) {
-        $(".slider-nav .slick-slide.slick-current").addClass("is-active");
-      })
-      .slick({
-        slidesToShow: 7,
-        slidesToScroll: 7,
-        dots: false,
-        focusOnSelect: false,
-        infinite: false,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 5,
-              slidesToScroll: 5,
-            },
-          },
-          {
-            breakpoint: 640,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-            },
-          },
-          {
-            breakpoint: 420,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-            },
-          },
-        ],
-      });
-  });
-  jQuery(function ($) {
-    $(".slider-single").on(
-      "afterChange",
-      function (event, slick, currentSlide) {
-        $(".slider-nav").slick("slickGoTo", currentSlide);
-        var currrentNavSlideElem =
-          '.slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
-        $(".slider-nav .slick-slide.is-active").removeClass("is-active");
-        $(currrentNavSlideElem).addClass("is-active");
-      }
-    );
-  });
-  jQuery(function ($) {
-    $(".slider-nav").on("click", ".slick-slide", function (event) {
-      event.preventDefault();
-      var goToSingleSlide = $(this).data("slick-index");
-
-      $(".slider-single").slick("slickGoTo", goToSingleSlide);
-    });
-  });
   const handleqty = () => {
     qty += 1;
   };
@@ -178,7 +79,7 @@
       type="video/mp4"
     />
   </video>
-  <div>
+  <div style="max-width:1080px" class="w-100">
     <div class="navbar justify-content-end">
       <a href="https://silverlight.store/cart/">
         <li class="cart-item">
@@ -190,41 +91,102 @@
     </div>
     <div class="container-1080">
       <div class="w-50 socks-slider-wrapper container">
-        <!-- <div id="page">
-          <div class="">
-            <div class="">
-              <h2>Slick Slider Syncing</h2>
+        <div class="black-crew">
+          <div class="slider slider-single opacity-100">
+            {#each balckCrewSocksImages as image}
               <div class="slider slider-single">
-                <div><img src="./images/crew-1.jpg" alt="" /></div>
-                <div><img src="./images/crew-2.jpg" alt="" /></div>
-                <div><img src="./images/crew-3.jpg" alt="" /></div>
-                <div><img src="./images/crew-4.jpg" alt="" /></div>
-                <div><img src="./images/crew-5.jpg" alt="" /></div>
-                <div><img src="./images/crew-6.jpg" alt="" /></div>
+                <img class="opacity-100" src={image.largeImg} alt="" />
               </div>
-              <div class="slider slider-nav">
-                <div class="thumb-image">
-                  <img src="./images/crew-1.jpg" alt="" />
-                </div>
-                <div class="thumb-image">
-                  <img src="./images/crew-2.jpg" alt="" />
-                </div>
-                <div class="thumb-image">
-                  <img src="./images/crew-3.jpg" alt="" />
-                </div>
-                <div class="thumb-image">
-                  <img src="./images/crew-4.jpg" alt="" />
-                </div>
-                <div class="thumb-image">
-                  <img src="./images/crew-5.jpg" alt="" />
-                </div>
-                <div class="thumb-image">
-                  <img src="./images/crew-6.jpg" alt="" />
-                </div>
-              </div>
-            </div>
+            {/each}
           </div>
-        </div> -->
+          <div class="slider slider-nav">
+            {#each balckCrewSocksImages as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-ankle d-none">
+          <div class="slider slider-single opacity-100">
+            {#each balckAnkleSocksImages as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each balckAnkleSocksImages as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-ankle-three-pack d-none">
+          <div class="slider slider-single opacity-100">
+            {#each balckAnkleSocksImagesThreePack as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each balckAnkleSocksImagesThreePack as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-ankle-five-pack d-none">
+          <div class="slider slider-single opacity-100">
+            {#each balckAnkleSocksImagesFivePack as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each balckAnkleSocksImagesFivePack as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-crew d-none">
+          <div class="slider slider-single opacity-100">
+            {#each blueCrewSocksImages as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each blueCrewSocksImages as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
+        <div class="black-ankle d-none">
+          <div class="slider slider-single opacity-100">
+            {#each blueAnkleSocksImages as image}
+              <div class="slider slider-single">
+                <img class="opacity-100" src={image.largeImg} alt="" />
+              </div>
+            {/each}
+          </div>
+          <div class="slider slider-nav">
+            {#each blueAnkleSocksImages as image}
+              <div class="thumb-image">
+                <img src={image.thumbImg} alt="" />
+              </div>
+            {/each}
+          </div>
+        </div>
       </div>
       <div class="w-50 silver-hiking-socks-wrapper">
         <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
@@ -238,25 +200,24 @@
           ><span
             class="stamped-starrating stamped-badge-starrating"
             aria-hidden="true"
-            ><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
-              class="stamped-fa stamped-fa-star"
-              aria-hidden="true"
-            /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /><i
-              class="stamped-fa stamped-fa-star"
-              aria-hidden="true"
-            /><i class="stamped-fa stamped-fa-star" aria-hidden="true" /></span
-          ><span
+          >
+            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
+            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
+            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
+            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
+            <i class="stamped-fa stamped-fa-star" aria-hidden="true" />
+          </span>
+          <span
             class="stamped-badge-caption"
             data-reviews="493"
             data-rating="4.8"
             data-label="reviews"
             aria-label="493 reviews"
-            data-version="2"
-            >493<span style="display:none;"> reviews</span></span
+            data-version="2">493 <span> reviews</span></span
           ></span
         >
         <span
-          ><ul class="socks-description">
+          ><ul class="socks-description flex">
             <li>
               <a href="https://silverlight.store/about/#tab_our-technology"
                 >Silverlight® Technology</a
@@ -277,7 +238,7 @@
                 >Lifetime Guarantee</a
               >
             </li>
-            <li>Includes Wash &amp; Care Guide</li>
+            <li class="text-yellow-400">Includes Wash &amp; Care Guide</li>
             <li>
               40% <a href="https://silverlight.store/about/#tab_materials"
                 >Nylon</a
@@ -407,7 +368,7 @@
                         </div>
                       </li>
                       <li>
-                        <div class="">
+                        <div class="borde">
                           <button
                             class={size === "m" ? "selected" : ""}
                             on:click={() => {
@@ -464,20 +425,8 @@
               </div>
             </tbody>
           </table>
-          <div class="chart-text">
-            <p>
-              <a
-                class="popmake-9356 pum-trigger"
-                href
-                style="cursor: pointer;"
-                on:click|preventDefault={() => {
-                  sizechart = true;
-                }}>Size Chart</a
-              >
-            </p>
-          </div>
           <div class="">
-            <div class="d-flex my-4">
+            <div class="d-flex">
               <div class="price-wrapper">
                 <p class="price product-page-price">
                   <span class="price"
@@ -501,16 +450,12 @@
                 <p class="save">save 18%</p>
               </div>
               <div class="quantity buttons_added d-flex round-pill">
-                <!-- <span class="d-flex border round-pill"> -->
-                <!-- <div class=""> -->
                 <input
                   type="button"
                   value="-"
                   class="minus button is-form"
                   on:click={handleqtydec}
                 />
-                <!-- </div> -->
-                <!-- <div> -->
                 <input
                   type="number"
                   id="quantity_63ef2fbd9a85e"
@@ -526,31 +471,27 @@
                   inputmode="numeric"
                   aria-labelledby="Silverlight Hiking Socks quantity"
                 />
-                <!-- </div> -->
-                <!-- <div> -->
                 <input
                   type="button"
                   value="+"
                   class="plus button is-form"
                   on:click={handleqty}
                 />
-                <!-- </div> -->
-                <!-- </span> -->
               </div>
             </div>
-    
-            <div class="">
+
+            <div>
               <button
                 type="submit"
-                class="add-to-cart-button button alt"
+                class="add-to-cart-button button alt mr-2"
                 on:click={handleCart}>ADD TO CART</button
               >
               <button class="checkout-button">
                 <a
                   href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
                   class=""
-                  >CHECKOUT &nbsp;<i
-                    class="fa fa-long-arrow-right"
+                  >CHECKOUT<i
+                    class="fa fa-long-arrow-right mx-2"
                     aria-hidden="true"
                   /></a
                 >
@@ -560,7 +501,6 @@
         </div>
       </div>
 
-      
       {#if sizechart}
         <div class="size-chart-center">
           <p class="text-right m-0"><span class="close-chart">X</span></p>
@@ -573,7 +513,6 @@
     </div>
     {#if sizechart}
       <div class="size-chart-center">
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <p class="text-right m-0" style="cursor: pointer;">
           <span
             class="close-chart"
@@ -610,11 +549,6 @@
     display: flex;
     max-width: 1080px;
     background-color: #ffffff;
-    /* margin-top: 10%; */
-  }
-
-  .socks-slider-wrapper {
-    padding: 0 15px;
   }
 
   .silver-hiking-socks-wrapper {
@@ -626,13 +560,46 @@
     text-decoration: none;
   }
 
+  .slider {
+    opacity: 1 !important;
+  }
+
+  .slider img {
+    opacity: 1 !important;
+  }
+
+  .slider-nav {
+    display: grid;
+  }
+
+  .slick-list,
+  .draggable {
+    padding: 0px 0px !important;
+  }
+
+  .slick-track {
+    width: 100%;
+  }
+
+  .thumb-image {
+    min-width: 25%;
+  }
+
   .rating-container {
     color: #777777;
   }
 
   .socks-description {
-    padding: 20px;
+    padding: 20px 0;
     color: #777777;
+  }
+
+  .socks-description ul {
+    padding: 0 20px;
+  }
+
+  .socks-description li {
+    margin: 0 0 10px 20px;
   }
 
   .socks-description a {
@@ -655,10 +622,6 @@
 
   .socks-selection li {
     list-style: none;
-    /* margin: 0 5px; */
-    /* padding: 3px; */
-    /* border: 1px solid;
-    border-radius: 3px; */
     height: 37px;
     align-items: center;
     display: flex;
@@ -683,7 +646,6 @@
     padding: 5px;
     border: 1px solid;
     border-radius: 3px;
-    /* width: 40px; */
     background: white;
   }
 
@@ -702,17 +664,6 @@
     font-size: 12px;
     min-width: 60px;
   }
-
-  /* .chart-text {
-    margin-bottom: 1.5em;
-  }
-
-  .chart-text {
-    position: absolute;
-    right: 12px;
-    top: -35px;
-    margin: 0;
-  } */
 
   .size-chart-center {
     margin: 0;
@@ -769,27 +720,15 @@
     text-decoration: none;
   }
 
-  .xzoom-thumbs {
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: var(--rtwpvg-thumbnail-gap);
-    display: grid !important;
-    position: relative;
-  }
-
-  .xzoom-thumbs img {
-    display: inline;
-    height: 80px;
-    width: 80px;
-    /* border: 1px solid #ccc; */
-    width: 100%;
-    height: auto;
-  }
-
   .price {
     font-size: 24px;
-    margin: 0 20px 20px 0;
+    margin: 0 5px 0 0;
   }
 
+  .save {
+    font-size: 24px;
+    color: green;
+  }
   .quantity {
     height: 40px;
   }
@@ -825,53 +764,6 @@
 
   .selected {
     border: 2px solid #000000 !important;
-  }
-
-  .slider-single h3 {
-    line-height: 10rem;
-  }
-
-  .slider-nav h3::before {
-    content: "";
-    display: block;
-    padding-top: 75%;
-  }
-
-  .slider-nav h3 span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .slider-nav,
-  .slick-slide {
-    cursor: pointer;
-  }
-
-  .slider-nav {
-    display: flex;
-  }
-
-  .slider-nav img {
-    width: 100%;
-  }
-
-  .slick-slide.is-active h3 {
-    color: #c00;
-    background-color: #fff;
-  }
-
-  .slider-single div:nth-child(1n + 2) {
-    display: none;
-  }
-
-  .slick-initialized div:nth-child(1n + 2) {
-    display: block;
-  }
-
-  .thumb-image {
-    width: 25%;
   }
 
   .navbar li {
