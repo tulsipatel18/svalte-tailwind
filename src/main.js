@@ -53,20 +53,20 @@ const app = new App({
 			{largeImg:"./images/ankle-6.jpg",thumbImg:"./images/ankle-6s.jpg",id:6},
 		],
 		blueCrewSocksImages : [
-			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/ankle-5s-pack.jpg",id:1},
-			{largeImg:"./images/ankle-2.jpg",thumbImg:"./images/ankle-2s.jpg",id:2},
-			{largeImg:"./images/ankle-3.jpg",thumbImg:"./images/ankle-3s.jpg",id:3},
-			{largeImg:"./images/ankle-4.jpg",thumbImg:"./images/ankle-4s.jpg",id:4},
-			{largeImg:"./images/ankle-5.jpg",thumbImg:"./images/ankle-5s.jpg",id:5},
-			{largeImg:"./images/ankle-6.jpg",thumbImg:"./images/ankle-6s.jpg",id:6},
+			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:1},
+			{largeImg:"",thumbImg:"",id:2},
+			{largeImg:"",thumbImg:"",id:3},
+			{largeImg:"",thumbImg:"",id:4},
+			{largeImg:"",thumbImg:"",id:5},
+			{largeImg:"",thumbImg:"",id:6},
 		],
 		blueAnkleSocksImages : [
-			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/ankle-5s-pack.jpg",id:1},
-			{largeImg:"./images/ankle-2.jpg",thumbImg:"./images/ankle-2s.jpg",id:2},
-			{largeImg:"./images/ankle-3.jpg",thumbImg:"./images/ankle-3s.jpg",id:3},
-			{largeImg:"./images/ankle-4.jpg",thumbImg:"./images/ankle-4s.jpg",id:4},
-			{largeImg:"./images/ankle-5.jpg",thumbImg:"./images/ankle-5s.jpg",id:5},
-			{largeImg:"./images/ankle-6.jpg",thumbImg:"./images/ankle-6s.jpg",id:6},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-crew.jpg",id:1},
+			{largeImg:"",thumbImg:"",id:2},
+			{largeImg:"",thumbImg:"",id:3},
+			{largeImg:"",thumbImg:"",id:4},
+			{largeImg:"",thumbImg:"",id:5},
+			{largeImg:"",thumbImg:"",id:6},
 		]
 	}
 });

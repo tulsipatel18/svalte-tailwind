@@ -1,6 +1,12 @@
+  <!-- svelte-ignore missing-declaration -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
   import jQuery from "jquery";
   import { onMount } from "svelte";
+  import {fade} from 'svelte/transition';
+  import SimpleGallery from "./components/SimpleGallery.svelte";
+	import { beforeUpdate, afterUpdate } from 'svelte';
+
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
   export let blackCrewSocksImagesFivePack;
@@ -10,15 +16,12 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
-  let color,
-  fprice=25,discount=0,discountedprice=25,
-    type,
-    quantity,
-    size,
-    total,
-    qty = 1,
-    sizechart = false;
+  let color,fprice=25,discount=0,discountedprice=25,type,quantity,size,total,qty = 1,sizechart = false;
+  let photos=blackCrewSocksImages;
+  let totalprice=0;
+  let currentimageid=1;
   
+
   color=localStorage.getItem("color")
   type=localStorage.getItem("type")
   quantity=localStorage.getItem("quantity")
@@ -26,24 +29,78 @@
 
 
   $: orders = JSON.parse(localStorage.getItem("orders"));
-  $: console.log(orders);
   $: localStorage.setItem("orders", JSON.stringify(orders));
   $:handleprice(type,quantity);
   $:handlephotos(color,type,quantity);
+  $:handlecarttotal(orders);
+  
+  $:
+  { 
+    console.log(photos),
+    console.log(currentimageid);
+  }
+
+  beforeUpdate(() => {
+		
+	});
+
+	afterUpdate(() => {
+		
+	});
+
+  const handlecarttotal=()=>{
+    let total=0;
+    if(orders){
+      for(let i=0;i<orders.length;i++){
+        let order=orders[i];
+        total+=order.discountedprice*order.qty;
+
+      }
+    }
+    totalprice=total
+    
+  }
+
+  
 
 
-  let photos=balckCrewSocksImages
+
+
+ 
 
   const handlephotos=()=>{
     if(color=="BLACK"){
     if(type=="CREW"){
-      
+      if(quantity==1){
+        photos=blackCrewSocksImages;
+      }
+      if(quantity==3){
+        photos=blackCrewSocksImagesThreePack
+      }
+      if(quantity==5){
+        photos=blackCrewSocksImagesFivePack
+      }
     }
     if(type=="ANKLE"){
-
+      if(quantity==1){
+        photos=blackAnkleSocksImages
+      }
+      if(quantity==3){
+        photos=blackAnkleSocksImagesThreePack
+      }
+      if(quantity==5){
+        photos=blackAnkleSocksImagesFivePack
+      }
     }
   }
     if(color=="BLUE"){
+      if(type=="CREW"){
+        photos=blueCrewSocksImages
+        
+      }
+      if(type=="ANKLE"){
+        photos=blueAnkleSocksImages
+      }
 
     }
 
@@ -107,27 +164,30 @@
       size,
       total,
       qty,
+      discountedprice,
       id: Math.random(),
     };
     let flag = false;
 
     if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
-        if (
-          order.color == color &&
-          order.type == type &&
-          order.quantity == quantity &&
-          order.size == size
-        ) {
-          flag = true;
-          order.qty += qty;
-        }
-        order = { ...order, id: Math.random() };
-      }
-      if (!flag) {
-        orders = [...orders, newOrder];
-      }
+      // for (let i = 0; i < orders.length; i++) {
+      //   let order = orders[i];
+      //   if (
+      //     order.color == color &&
+      //     order.type == type &&
+      //     order.quantity == quantity &&
+      //     order.size == size
+      //   ) {
+      //     flag = true;
+      //     order.qty += qty;
+      //   }
+      //   order = { ...order, id: Math.random() };
+      // }
+      // if (!flag) {
+        // orders = [...orders, newOrder];
+      // }
+      orders = [...orders, newOrder];
+
     } else {
       orders = [newOrder];
     }
@@ -141,25 +201,7 @@
     console.log(id);
     orders = orders.filter((order) => order.id !== id);
   }
-  onMount(() => {
-    jQuery(".slider-single").slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      fade: true,
-      useTransform: false,
-    });
 
-    jQuery(".slider-nav").slick({
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      asNavFor: ".slider-single",
-      dots: false,
-      centerMode: false,
-      focusOnSelect: true,
-      draggable: false,
-    });
-  });
 
   const handleqty = () => {
     qty += 1;
@@ -169,8 +211,50 @@
       qty -= 1;
   }
 
+  
+  
+
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+  let galleryID="my-test-gallery"
+
+
+
+
+  onMount(() => {
+    
+    jQuery(".slider-single").slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: false,
+      fade: true,
+      useTransform: false,
+     
+    });
+    
+    jQuery(".slider-nav").slick({
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      asNavFor: ".slider-single",
+      dots: false,
+      centerMode: false,
+      focusOnSelect: true,
+      draggable: false,
+     
+    });
+    let lightbox = new PhotoSwipeLightbox({
+          gallery: '#' + galleryID,
+          children: 'a',
+          pswpModule: () => import('photoswipe'),
+        });
+        lightbox.init();
+  });
+  
 
 </script>
+
+
+<SimpleGallery galleryID="my-test-gallery" {photos} />
 
 <div class="main-container">
   <video
@@ -187,9 +271,10 @@
       type="video/mp4"
     />
   </video>
-  <div style="max-width:1080px" class="w-100 d1">
-    <div class="navbar justify-content-end">
-      <a href="#">
+  <div style="max-width:1080px" class="w-100 ">
+    <div class="navbar justify-content-end d1">
+     
+      <a href="">
         <li class="cart-item">
           <span class="cart-icon">
             {#if orders}
@@ -200,13 +285,18 @@
           </span>
         </li>
         <div class="d2">
-          {#if orders.length!=0}
+          {#if totalprice!=0}
+          
             {#each orders as order}
               <div>
                 <p>Silverlight Hiking Socks</p>
                 COLOR : {order.color}
                 TYPE  : {order.type}
-                Quantity : {order.quantity} Pack Size : {order.size}
+                QUANTITY : {order.quantity} PACK
+                SIZE : {order.size}
+                
+
+                {order.qty} x {order.discountedprice}
                 <button on:click|preventDefault={() => handleDelete(order.id)}
                   >x</button
                 >
@@ -214,150 +304,71 @@
             {/each}
          
           <hr />
-          <h2>Subtotal :</h2>
+          <h2>Subtotal :{totalprice}</h2>
           <hr />
           <button>VIEW CART</button>
           <button>GO TO CHECKOUT</button>
           {:else}
           <div>There are no items in your cart</div>
           {/if}
+         
         </div>
       </a>
-      <!-- <div class="hide">
-        hello 
-       </div> -->
+     
     </div>
     <div class="container-1080">
       <div class="w-50 socks-slider-wrapper container">
-        <div class="black-crew">
-          <div class="slider slider-single opacity-100">
-            {#each blackCrewSocksImages as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
+
+       
+        <div class="">
+          <div transition:fade={{duration:10}}  class="slider slider-single opacity-100">
+            {#each photos as image}
+            <!-- {#if currentimageid==image.id} -->
+            <!-- in:fade out:fade -->
+              <div  class="slider slider-single">
+
+                <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
+
+                <div class="pswp-gallery tmp"  id={galleryID} >
+               
+                  <a 
+                      href={image.largeImg}
+                      data-pswp-width={1875}
+                      data-pswp-height={2000}
+                      target="_blank"
+                      rel="noreferrer"
+                     >
+                     
+                      <img  class="opacity-100 w-100 tmp"  src={image.largeImg} alt="" /> 
+                   
+                  </a>
+                 
+
+                </div> 
+
+
+              </div>
+              <!-- {/if} -->
+            {/each}
+          </div>
+         
+          <div class="slider slider-nav" class:d-none={color=='BLUE'} >
+            {#each photos as image}
+            
+              <!-- svelte-ignore a11y-click-events-have-key-events -->
+              <div  class="thumb-image" on:click|preventDefault={()=>{currentimageid=image.id}}>
+                <img class="opactiy-50" class:slider-nav-img={currentimageid==image.id} src={image.thumbImg} alt="" />
               </div>
             {/each}
           </div>
-          <div class="slider slider-nav">
-            {#each blackCrewSocksImages as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
+         
         </div>
-        <div class="black-crew-three-pack d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blackCrewSocksImagesThreePack as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blackCrewSocksImagesThreePack as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
-        <div class="black-crew-five-pack d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blackCrewSocksImagesFivePack as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blackCrewSocksImagesFivePack as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
-        <div class="black-ankle d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blackAnkleSocksImages as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blackAnkleSocksImages as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
-        <div class="black-ankle-three-pack d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blackAnkleSocksImagesThreePack as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blackAnkleSocksImagesThreePack as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
-        <div class="black-ankle-five-pack d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blackAnkleSocksImagesFivePack as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blackAnkleSocksImagesFivePack as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
-        <div class="black-crew d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blueCrewSocksImages as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blueCrewSocksImages as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
-        <div class="black-ankle d-none">
-          <div class="slider slider-single opacity-100">
-            {#each blueAnkleSocksImages as image}
-              <div class="slider slider-single">
-                <img class="opacity-100" src={image.largeImg} alt="" />
-              </div>
-            {/each}
-          </div>
-          <div class="slider slider-nav">
-            {#each blueAnkleSocksImages as image}
-              <div class="thumb-image">
-                <img src={image.thumbImg} alt="" />
-              </div>
-            {/each}
-          </div>
-        </div>
+        
+
       </div>
+
+
+
       <div class="w-50 silver-hiking-socks-wrapper">
         <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
           SILVERLIGHT HIKING SOCKS
@@ -438,7 +449,7 @@
                         <button
                           class={color == "BLACK" ? "selected" : ""}
                           on:click={() => {
-                            color = "BLACK";
+                            color = "BLACK",currentimageid = 1;
                           }}>Black</button
                         >
                       </div>
@@ -448,7 +459,7 @@
                         <button
                           class={color == "BLUE" ? "selected" : ""}
                           on:click={() => {
-                            color = "BLUE";
+                            color = "BLUE",currentimageid = 1;
                           }}>Blue</button
                         >
                       </div>
@@ -466,7 +477,7 @@
                         <button
                           class={type == "ANKLE" ? "selected" : ""}
                           on:click={() => {
-                            type = "ANKLE";
+                            type = "ANKLE",currentimageid = 1;
                           }}>Ankle</button
                         >
                       </div>
@@ -476,7 +487,7 @@
                         <button
                           class={type =="CREW" ? "selected" : ""}
                           on:click={() => {
-                            type = "CREW";
+                            type = "CREW",currentimageid = 1;
                           }}>Crew</button
                         >
                       </div>
@@ -493,7 +504,7 @@
                         <button
                           class={quantity == 1 ? "selected" : ""}
                           on:click={() => {
-                            quantity = 1;
+                            quantity = 1,currentimageid = 1;
                           }}>1 Pack</button
                         >
                       </div>
@@ -503,7 +514,7 @@
                         <button
                           class={quantity == 3 ? "selected" : ""}
                           on:click={() => {
-                            quantity = 3;
+                            quantity = 3,currentimageid = 1;
                           }}>3 Pack</button
                         >
                       </div>
@@ -513,7 +524,7 @@
                         <button
                           class={quantity == 5 ? "selected" : ""}
                           on:click={() => {
-                            quantity = 5;
+                            quantity = 5,currentimageid = 1;
                           }}>5 Pack</button
                         >
                       </div>
@@ -532,7 +543,7 @@
                           <button
                             class={size =="S" ? "selected" : ""}
                             on:click={() => {
-                              size = "S";
+                              size = "S",currentimageid = 1;
                             }}>S</button
                           >
                         </div>
@@ -542,7 +553,7 @@
                           <button
                             class={size == "M" ? "selected" : ""}
                             on:click={() => {
-                              size = "M";
+                              size = "M",currentimageid = 1;
                             }}>M</button
                           >
                         </div>
@@ -552,7 +563,7 @@
                           <button
                             class={size == "L" ? "selected" : ""}
                             on:click={() => {
-                              size = "L";
+                              size = "L",currentimageid = 1;
                             }}>L</button
                           >
                         </div>
@@ -562,7 +573,7 @@
                           <button
                             class={size == "XL" ? "selected" : ""}
                             on:click={() => {
-                              size = "XL";
+                              size = "XL",currentimageid = 1;
                             }}>XL</button
                           >
                         </div>
@@ -572,7 +583,7 @@
                           <button
                             class={size == "XXL" ? "selected" : ""}
                             on:click={() => {
-                              size = "XXL";
+                              size = "XXL",currentimageid = 1;
                             }}>XXL</button
                           >
                         </div>
@@ -604,13 +615,14 @@
                       ><del aria-hidden="true">
                         <span class="">
                           {#if discount!=0}
-                          <bdi><span class="">$</span>{fprice}</bdi>
+                          <span><span class="">$</span>{fprice}</span>
                           {/if}
                         </span>
                       </del>
-                      <ins
-                        ><span class=""
-                          ><bdi><span class="">$</span>{discountedprice}</bdi></span
+                      <ins style="text-decoration: none;"
+
+                        ><span 
+                          ><span><span class="">$</span>{discountedprice}</span></span
                         ></ins
                       ></span
                     ></span
@@ -675,9 +687,10 @@
       </div>
 
       {#if sizechart}
-        <div class="size-chart-center">
+        <div  transition:fade={{duration:200}} class="size-chart-center">
           <p class="text-right m-0"><span class="close-chart">X</span></p>
           <img
+            
             src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
             alt=""
           />
@@ -685,7 +698,7 @@
       {/if}
     </div>
     {#if sizechart}
-      <div class="size-chart-center">
+      <div  transition:fade={{duration:200}} class="size-chart-center">
         
         <div class="text-right m- d-flex justify-content-between" style="cursor: pointer;">
           <div class="w-100 text-center"><strong>SIZE CHART</strong></div>
@@ -697,6 +710,7 @@
             }}>X</span>
         </div>
         <img
+          
           src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
           alt=""
         />
@@ -750,16 +764,30 @@
     text-decoration: none;
   }
 
-  .slider {
+  /* .slider {
+    opacity: 1 !important;
+  } */
+
+  /* .slider img {
+    opacity: 1 !important;
+  } */
+
+  .slider-single img{
     opacity: 1 !important;
   }
 
-  .slider img {
-    opacity: 1 !important;
-  }
+
 
   .slider-nav {
     display: grid;
+  }
+
+  /* .slider-nav img{
+    opacity: 0.5 !important;
+  } */
+
+  .slider-nav-img{
+    opacity: 1 !important;
   }
 
   .slick-list,.draggable {
@@ -769,9 +797,17 @@
   .slick-track {
     width: 100%;
   }
+  .tmp{
+    opacity: 1 !important;
+  }
 
   .thumb-image {
     min-width: 25%;
+    
+  }
+  
+  .thumb-image img{
+    opacity: 0.5;
   }
 
   .rating-container {
