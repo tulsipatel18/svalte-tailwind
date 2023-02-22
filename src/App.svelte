@@ -54,7 +54,7 @@
       focusOnSelect: true,
       draggable: false,
     });
-  });
+          });
 
   const handleqty = () => {
     qty += 1;
@@ -623,7 +623,7 @@
     color: #777777;
   }
 
-  .star{
+  .star {
     color: gold;
   }
 
