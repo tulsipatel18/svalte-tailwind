@@ -354,7 +354,7 @@
               <div  class="slider slider-single">
 
                 <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
-
+              
                 <div class="pswp-gallery tmp"  id={galleryID} >
                
                   <a 
@@ -368,10 +368,8 @@
                       <img  class="opacity-100 w-100 tmp"  src={image.largeImg} alt="" /> 
                    
                   </a>
-                 
-
                 </div> 
-
+               
 
               </div>
               <!-- {/if} -->
