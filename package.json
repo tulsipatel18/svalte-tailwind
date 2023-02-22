@@ -25,6 +25,7 @@
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.7.2",
     "bootstrap": "^5.2.3",
+    "photoswipe": "^5.3.5",
     "sirv-cli": "^2.0.0"
   }
 }
