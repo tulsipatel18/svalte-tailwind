@@ -15,17 +15,25 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
-  let color,fprice=25,discount=0,discountedprice=25,type,quantity,size,total,qty = 1,sizechart = false;
-  let photos=blackCrewSocksImages;
-  let totalprice=0;
-  let currentimageid=1;
+  let color,
+    fprice = 25,
+    discount = 0,
+    discountedprice = 25,
+    type,
+    quantity,
+    size,
+    total,
+    qty = 1,
+    sizechart = false;
+  let photos = blackCrewSocksImages;
+  let totalprice = 0;
+  let currentimageid = 1;
   let img;
-  
 
-  color=localStorage.getItem("color")
-  type=localStorage.getItem("type")
-  quantity=localStorage.getItem("quantity")
-  size=localStorage.getItem("size")
+  color = localStorage.getItem("color");
+  type = localStorage.getItem("type");
+  quantity = localStorage.getItem("quantity");
+  size = localStorage.getItem("size");
 
   color = localStorage.getItem("color");
   type = localStorage.getItem("type");
@@ -34,38 +42,32 @@
 
   $: orders = JSON.parse(localStorage.getItem("orders"));
   $: localStorage.setItem("orders", JSON.stringify(orders));
-  $:handleprice(type,quantity);
-  $:handlephotos(color,type,quantity);
-  $:handlecarttotal(orders);
-  $:handleimg(color,type);
+  $: handleprice(type, quantity);
+  $: handlephotos(color, type, quantity);
+  $: handlecarttotal(orders);
+  $: handleimg(color, type);
 
-  const handleimg=()=>{
-    if(color=='BLACK'){
-      if(type=='ANKLE'){
-          img=blackAnkleSocksImages[0].thumbImg;
-
+  const handleimg = () => {
+    if (color == "BLACK") {
+      if (type == "ANKLE") {
+        img = blackAnkleSocksImages[0].thumbImg;
       }
-      if(type=='CREW'){
-        img=blackCrewSocksImages[0].thumbImg;
-
+      if (type == "CREW") {
+        img = blackCrewSocksImages[0].thumbImg;
       }
     }
-    if(color=='BLUE'){
-      if(type=='ANKLE'){
-        img=blueAnkleSocksImages[0].thumbImg;
-
+    if (color == "BLUE") {
+      if (type == "ANKLE") {
+        img = blueAnkleSocksImages[0].thumbImg;
       }
-      if(type=='CREW'){
-        img=blueCrewSocksImages[0].thumbImg;
-        
+      if (type == "CREW") {
+        img = blueCrewSocksImages[0].thumbImg;
       }
     }
+  };
 
-  }
-  
-  $:
-  { 
-    console.log(orders)
+  $: {
+    console.log(orders);
   }
 
   beforeUpdate(() => {});
@@ -276,35 +278,42 @@
           </span>
         </li>
         <div class="d2">
-          {#if totalprice != 0}
-            {#each orders as order}
-              <div class="cart-container">
-                <div><img src="" alt="" /></div>
-                <div>
-                  <p>Silverlight Hiking Socks</p>
-                  <span>COLOR : {order.color}</span>
-                  <span>TYPE : {order.type}</span>
-                  <span>QUANTITY : {order.quantity} </span>
-                  <span>PACK SIZE : {order.size}</span>
-                  <span>{order.qty} x {order.discountedprice}</span>
+          <div class="p-4">
+            {#if totalprice != 0}
+              {#each orders as order}
+                <div class="cart-container d-flex justify-content-between">
+                  <div><img src={order.img} alt="" /></div>
+                  <div class="d-flex flex-column align-items-start">
+                    <p>Silverlight Hiking Socks</p>
+                    <span>COLOR : {order.color}</span>
+                    <span>TYPE : {order.type}</span>
+                    <span>QUANTITY : {order.quantity} </span>
+                    <span>PACK SIZE : {order.size}</span>
+                    <span>{order.qty} x {order.discountedprice}</span>
+                  </div>
                   <div>
-                    <button
+                    <button class="rounded-circle remove-item-button"
                       on:click|preventDefault={() => handleDelete(order.id)}
                       >x</button
                     >
                   </div>
                 </div>
-              </div>
-            {/each}
+              {/each}
 
-            <hr />
-            <h2>Subtotal :{totalprice}</h2>
-            <hr />
-            <button>VIEW CART</button>
-            <button>GO TO CHECKOUT</button>
-          {:else}
-            <div>There are no items in your cart</div>
-          {/if}
+              <div class="border border-right-0 border-left-0">
+                <h2>Subtotal :{totalprice}</h2>
+              </div>
+              <div class="d-flex flex-column mt-3">
+                <button class="text-light bg-dark">VIEW CART</button>
+                <button
+                  class="mt-2 text-light"
+                  style="background-color: #1cb9a2">GO TO CHECKOUT</button
+                >
+              </div>
+            {:else}
+              <div>There are no items in your cart</div>
+            {/if}
+          </div>
         </div>
       </a>
     </div>
@@ -716,8 +725,7 @@
   .d2 {
     display: none;
   }
-  /* .d1:hover  */
-  .d2 {
+  .d1:hover .d2 {
     display: block;
     background-color: white;
     border: 1px solid black;
@@ -727,6 +735,14 @@
     margin-top: 8px;
     right: -78px;
     text-align: center;
+  }
+
+  .remove-item-button{
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 
   .main-container {
