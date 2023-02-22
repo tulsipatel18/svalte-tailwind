@@ -20,6 +20,7 @@
   let photos=blackCrewSocksImages;
   let totalprice=0;
   let currentimageid=1;
+  let img;
   
 
   color=localStorage.getItem("color")
@@ -33,11 +34,35 @@
   $:handleprice(type,quantity);
   $:handlephotos(color,type,quantity);
   $:handlecarttotal(orders);
+  $:handleimg(color,type);
+
+  const handleimg=()=>{
+    if(color=='BLACK'){
+      if(type=='ANKLE'){
+          img=blackAnkleSocksImages[0].thumbImg;
+
+      }
+      if(type=='CREW'){
+        img=blackCrewSocksImages[0].thumbImg;
+
+      }
+    }
+    if(color=='BLUE'){
+      if(type=='ANKLE'){
+        img=blueAnkleSocksImages[0].thumbImg;
+
+      }
+      if(type=='CREW'){
+        img=blueCrewSocksImages[0].thumbImg;
+        
+      }
+    }
+
+  }
   
   $:
   { 
-    console.log(photos),
-    console.log(currentimageid);
+    console.log(orders)
   }
 
   beforeUpdate(() => {
@@ -164,6 +189,7 @@
       size,
       total,
       qty,
+      img,
       discountedprice,
       id: Math.random(),
     };
