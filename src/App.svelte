@@ -1,11 +1,10 @@
-  <!-- svelte-ignore missing-declaration -->
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
   import jQuery from "jquery";
   import { onMount } from "svelte";
-  import {fade} from 'svelte/transition';
+  import { fade } from "svelte/transition";
   import SimpleGallery from "./components/SimpleGallery.svelte";
-	import { beforeUpdate, afterUpdate } from 'svelte';
+  import { beforeUpdate, afterUpdate } from "svelte";
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -16,170 +15,152 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
-  let color,fprice=25,discount=0,discountedprice=25,type,quantity,size,total,qty = 1,sizechart = false;
-  let photos=blackCrewSocksImages;
-  let totalprice=0;
-  let currentimageid=1;
+  let color,
+    fprice = 25,
+    discount = 0,
+    discountedprice = 25,
+    type,
+    quantity,
+    size,
+    total,
+    qty = 1,
+    sizechart = false;
+  let photos = blackCrewSocksImages;
+  let totalprice = 0;
+  let currentimageid = 1;
   let img;
-  
 
-  color=localStorage.getItem("color")
-  type=localStorage.getItem("type")
-  quantity=localStorage.getItem("quantity")
-  size=localStorage.getItem("size")
+  color = localStorage.getItem("color");
+  type = localStorage.getItem("type");
+  quantity = localStorage.getItem("quantity");
+  size = localStorage.getItem("size");
 
+  color = localStorage.getItem("color");
+  type = localStorage.getItem("type");
+  quantity = localStorage.getItem("quantity");
+  size = localStorage.getItem("size");
 
   $: orders = JSON.parse(localStorage.getItem("orders"));
   $: localStorage.setItem("orders", JSON.stringify(orders));
-  $:handleprice(type,quantity);
-  $:handlephotos(color,type,quantity);
-  $:handlecarttotal(orders);
-  $:handleimg(color,type);
+  $: handleprice(type, quantity);
+  $: handlephotos(color, type, quantity);
+  $: handlecarttotal(orders);
+  $: handleimg(color, type);
 
-  const handleimg=()=>{
-    if(color=='BLACK'){
-      if(type=='ANKLE'){
-          img=blackAnkleSocksImages[0].thumbImg;
-
+  const handleimg = () => {
+    if (color == "BLACK") {
+      if (type == "ANKLE") {
+        img = blackAnkleSocksImages[0].thumbImg;
       }
-      if(type=='CREW'){
-        img=blackCrewSocksImages[0].thumbImg;
-
+      if (type == "CREW") {
+        img = blackCrewSocksImages[0].thumbImg;
       }
     }
-    if(color=='BLUE'){
-      if(type=='ANKLE'){
-        img=blueAnkleSocksImages[0].thumbImg;
-
+    if (color == "BLUE") {
+      if (type == "ANKLE") {
+        img = blueAnkleSocksImages[0].thumbImg;
       }
-      if(type=='CREW'){
-        img=blueCrewSocksImages[0].thumbImg;
-        
+      if (type == "CREW") {
+        img = blueCrewSocksImages[0].thumbImg;
       }
     }
+  };
 
-  }
-  
-  $:
-  { 
-    console.log(orders)
+  $: {
+    console.log(orders);
   }
 
-  beforeUpdate(() => {
-		
-	});
+  beforeUpdate(() => {});
 
-	afterUpdate(() => {
-		
-	});
+  afterUpdate(() => {});
 
-  const handlecarttotal=()=>{
-    let total=0;
-    if(orders){
-      for(let i=0;i<orders.length;i++){
-        let order=orders[i];
-        total+=order.discountedprice*order.qty;
-
+  const handlecarttotal = () => {
+    let total = 0;
+    if (orders) {
+      for (let i = 0; i < orders.length; i++) {
+        let order = orders[i];
+        total += order.discountedprice * order.qty;
       }
     }
-    totalprice=total
-    
-  }
+    totalprice = total;
+  };
 
-  
-
-
-
-
- 
-
-  const handlephotos=()=>{
-    if(color=="BLACK"){
-    if(type=="CREW"){
-      if(quantity==1){
-        photos=blackCrewSocksImages;
+  const handlephotos = () => {
+    if (color == "BLACK") {
+      if (type == "CREW") {
+        if (quantity == 1) {
+          photos = blackCrewSocksImages;
+        }
+        if (quantity == 3) {
+          photos = blackCrewSocksImagesThreePack;
+        }
+        if (quantity == 5) {
+          photos = blackCrewSocksImagesFivePack;
+        }
       }
-      if(quantity==3){
-        photos=blackCrewSocksImagesThreePack
-      }
-      if(quantity==5){
-        photos=blackCrewSocksImagesFivePack
+      if (type == "ANKLE") {
+        if (quantity == 1) {
+          photos = blackAnkleSocksImages;
+        }
+        if (quantity == 3) {
+          photos = blackAnkleSocksImagesThreePack;
+        }
+        if (quantity == 5) {
+          photos = blackAnkleSocksImagesFivePack;
+        }
       }
     }
-    if(type=="ANKLE"){
-      if(quantity==1){
-        photos=blackAnkleSocksImages
+    if (color == "BLUE") {
+      if (type == "CREW") {
+        photos = blueCrewSocksImages;
       }
-      if(quantity==3){
-        photos=blackAnkleSocksImagesThreePack
-      }
-      if(quantity==5){
-        photos=blackAnkleSocksImagesFivePack
+      if (type == "ANKLE") {
+        photos = blueAnkleSocksImages;
       }
     }
-  }
-    if(color=="BLUE"){
-      if(type=="CREW"){
-        photos=blueCrewSocksImages
-        
-      }
-      if(type=="ANKLE"){
-        photos=blueAnkleSocksImages
-      }
+  };
 
+  const handleprice = () => {
+    if (quantity == 1) {
+      discount = 0;
     }
-
-
-  }
-  
-  const handleprice=()=>{
-    if(quantity==1){
-      discount=0;
+    if (quantity == 3) {
+      discount = 21;
     }
-    if(quantity==3){
-      discount=21;
+    if (quantity == 5) {
+      discount = 26;
     }
-    if(quantity==5){
-      discount=26;
+    if (type !== "undefined" && type == "ANKLE") {
+      if (quantity == 1) {
+        fprice = 25;
+      }
+      if (quantity == 3) {
+        fprice = 75;
+      }
+      if (quantity == 5) {
+        fprice = 125;
+      }
     }
-    if(type!=='undefined' && type=='ANKLE'){
-      if(quantity==1){
-        fprice=25      
+    if (type !== "undefined" && type == "CREW") {
+      if (quantity == 1) {
+        fprice = 32;
       }
-      if(quantity==3){
-        fprice=75;
+      if (quantity == 3) {
+        fprice = 96;
       }
-      if(quantity==5){
-        fprice=125;
+      if (quantity == 5) {
+        fprice = 160;
       }
-
-
     }
-    if(type!=='undefined' && type=='CREW'){
-      if(quantity==1){
-        fprice=32 
-      }
-      if(quantity==3){
-        fprice=96;
-        
-      }
-      if(quantity==5){
-        fprice=160;
-      }
-     
-    }
-    discountedprice=fprice-(fprice*discount/100);
-    discountedprice=Math.floor(discountedprice);
-
-
-  }
+    discountedprice = fprice - (fprice * discount) / 100;
+    discountedprice = Math.floor(discountedprice);
+  };
   const handleCart = () => {
+    localStorage.setItem("color", color);
+    localStorage.setItem("type", type);
+    localStorage.setItem("quantity", quantity);
+    localStorage.setItem("size", size);
 
-    localStorage.setItem("color",color);
-    localStorage.setItem("type",type);
-    localStorage.setItem("quantity",quantity);
-    localStorage.setItem("size",size);
-    
     //write calculation function again
     total = 0;
     let newOrder = {
@@ -210,10 +191,9 @@
       //   order = { ...order, id: Math.random() };
       // }
       // if (!flag) {
-        // orders = [...orders, newOrder];
+      // orders = [...orders, newOrder];
       // }
       orders = [...orders, newOrder];
-
     } else {
       orders = [newOrder];
     }
@@ -226,38 +206,28 @@
   const handleDelete = (id) => {
     console.log(id);
     orders = orders.filter((order) => order.id !== id);
-  }
-
+  };
 
   const handleqty = () => {
     qty += 1;
-  }
+  };
   const handleqtydec = () => {
-    if (qty != 1) 
-      qty -= 1;
-  }
+    if (qty != 1) qty -= 1;
+  };
 
-  
-  
-
-  import PhotoSwipeLightbox from 'photoswipe/lightbox';
-  import 'photoswipe/style.css';
-  let galleryID="my-test-gallery"
-
-
-
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+  let galleryID = "my-test-gallery";
 
   onMount(() => {
-    
     jQuery(".slider-single").slick({
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
       fade: true,
       useTransform: false,
-     
     });
-    
+
     jQuery(".slider-nav").slick({
       slidesToShow: 6,
       slidesToScroll: 1,
@@ -266,19 +236,17 @@
       centerMode: false,
       focusOnSelect: true,
       draggable: false,
-     
     });
     let lightbox = new PhotoSwipeLightbox({
-          gallery: '#' + galleryID,
-          children: 'a',
-          pswpModule: () => import('photoswipe'),
-        });
-        lightbox.init();
+      gallery: "#" + galleryID,
+      children: "a",
+      pswpModule: () => import("photoswipe"),
+    });
+    lightbox.init();
   });
-  
-
 </script>
 
+<!-- svelte-ignore missing-declaration -->
 
 <SimpleGallery galleryID="my-test-gallery" {photos} />
 
@@ -299,7 +267,6 @@
   </video>
   <div style="max-width:1080px" class="w-100 ">
     <div class="navbar justify-content-end d1">
-     
       <a href="">
         <li class="cart-item">
           <span class="cart-icon">
@@ -311,87 +278,98 @@
           </span>
         </li>
         <div class="d2">
-          {#if totalprice!=0}
-          
-            {#each orders as order}
-              <div>
-                <p>Silverlight Hiking Socks</p>
-                COLOR : {order.color}
-                TYPE  : {order.type}
-                QUANTITY : {order.quantity} PACK
-                SIZE : {order.size}
-                
+          <div class="p-4">
+            {#if totalprice != 0}
+              {#each orders as order}
+                <div class="cart-container d-flex justify-content-between">
+                  <div><img src={order.img} alt="" /></div>
+                  <div class="d-flex flex-column align-items-start">
+                    <p>Silverlight Hiking Socks</p>
+                    <span>COLOR : {order.color}</span>
+                    <span>TYPE : {order.type}</span>
+                    <span>QUANTITY : {order.quantity} </span>
+                    <span>PACK SIZE : {order.size}</span>
+                    <span>{order.qty} x {order.discountedprice}</span>
+                  </div>
+                  <div>
+                    <button class="rounded-circle remove-item-button"
+                      on:click|preventDefault={() => handleDelete(order.id)}
+                      >x</button
+                    >
+                  </div>
+                </div>
+              {/each}
 
-                {order.qty} x {order.discountedprice}
-                <button on:click|preventDefault={() => handleDelete(order.id)}
-                  >x</button
+              <div class="border border-right-0 border-left-0">
+                <h2>Subtotal :{totalprice}</h2>
+              </div>
+              <div class="d-flex flex-column mt-3">
+                <button class="text-light bg-dark">VIEW CART</button>
+                <button
+                  class="mt-2 text-light"
+                  style="background-color: #1cb9a2">GO TO CHECKOUT</button
                 >
               </div>
-            {/each}
-         
-          <hr />
-          <h2>Subtotal :{totalprice}</h2>
-          <hr />
-          <button>VIEW CART</button>
-          <button>GO TO CHECKOUT</button>
-          {:else}
-          <div>There are no items in your cart</div>
-          {/if}
-         
+            {:else}
+              <div>There are no items in your cart</div>
+            {/if}
+          </div>
         </div>
       </a>
-     
     </div>
     <div class="container-1080">
       <div class="w-50 socks-slider-wrapper container">
-
-       
         <div class="">
-          <div transition:fade={{duration:10}}  class="slider slider-single opacity-100">
+          <div
+            transition:fade={{ duration: 10 }}
+            class="slider slider-single opacity-100"
+          >
             {#each photos as image}
-            <!-- {#if currentimageid==image.id} -->
-            <!-- in:fade out:fade -->
-              <div  class="slider slider-single">
-
+              <!-- {#if currentimageid==image.id} -->
+              <!-- in:fade out:fade -->
+              <div class="slider slider-single">
                 <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
-              
-                <div class="pswp-gallery tmp"  id={galleryID} >
-               
-                  <a 
-                      href={image.largeImg}
-                      data-pswp-width={1875}
-                      data-pswp-height={2000}
-                      target="_blank"
-                      rel="noreferrer"
-                     >
-                     
-                      <img  class="opacity-100 w-100 tmp"  src={image.largeImg} alt="" /> 
-                   
-                  </a>
-                </div> 
-               
 
+                <div class="pswp-gallery tmp" id={galleryID}>
+                  <a
+                    href={image.largeImg}
+                    data-pswp-width={1875}
+                    data-pswp-height={2000}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      class="opacity-100 w-100 tmp"
+                      src={image.largeImg}
+                      alt=""
+                    />
+                  </a>
+                </div>
               </div>
               <!-- {/if} -->
             {/each}
           </div>
-         
-          <div class="slider slider-nav" class:d-none={color=='BLUE'} >
+
+          <div class="slider slider-nav" class:d-none={color == "BLUE"}>
             {#each photos as image}
-            
               <!-- svelte-ignore a11y-click-events-have-key-events -->
-              <div  class="thumb-image" on:click|preventDefault={()=>{currentimageid=image.id}}>
-                <img class="opactiy-50" class:slider-nav-img={currentimageid==image.id} src={image.thumbImg} alt="" />
+              <div
+                class="thumb-image"
+                on:click|preventDefault={() => {
+                  currentimageid = image.id;
+                }}
+              >
+                <img
+                  class="opactiy-50"
+                  class:slider-nav-img={currentimageid == image.id}
+                  src={image.thumbImg}
+                  alt=""
+                />
               </div>
             {/each}
           </div>
-         
         </div>
-        
-
       </div>
-
-
 
       <div class="w-50 silver-hiking-socks-wrapper">
         <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
@@ -473,7 +451,7 @@
                         <button
                           class={color == "BLACK" ? "selected" : ""}
                           on:click={() => {
-                            color = "BLACK",currentimageid = 1;
+                            (color = "BLACK"), (currentimageid = 1);
                           }}>Black</button
                         >
                       </div>
@@ -483,7 +461,7 @@
                         <button
                           class={color == "BLUE" ? "selected" : ""}
                           on:click={() => {
-                            color = "BLUE",currentimageid = 1;
+                            (color = "BLUE"), (currentimageid = 1);
                           }}>Blue</button
                         >
                       </div>
@@ -501,7 +479,7 @@
                         <button
                           class={type == "ANKLE" ? "selected" : ""}
                           on:click={() => {
-                            type = "ANKLE",currentimageid = 1;
+                            (type = "ANKLE"), (currentimageid = 1);
                           }}>Ankle</button
                         >
                       </div>
@@ -509,9 +487,9 @@
                     <li>
                       <div class="">
                         <button
-                          class={type =="CREW" ? "selected" : ""}
+                          class={type == "CREW" ? "selected" : ""}
                           on:click={() => {
-                            type = "CREW",currentimageid = 1;
+                            (type = "CREW"), (currentimageid = 1);
                           }}>Crew</button
                         >
                       </div>
@@ -528,7 +506,7 @@
                         <button
                           class={quantity == 1 ? "selected" : ""}
                           on:click={() => {
-                            quantity = 1,currentimageid = 1;
+                            (quantity = 1), (currentimageid = 1);
                           }}>1 Pack</button
                         >
                       </div>
@@ -538,7 +516,7 @@
                         <button
                           class={quantity == 3 ? "selected" : ""}
                           on:click={() => {
-                            quantity = 3,currentimageid = 1;
+                            (quantity = 3), (currentimageid = 1);
                           }}>3 Pack</button
                         >
                       </div>
@@ -548,7 +526,7 @@
                         <button
                           class={quantity == 5 ? "selected" : ""}
                           on:click={() => {
-                            quantity = 5,currentimageid = 1;
+                            (quantity = 5), (currentimageid = 1);
                           }}>5 Pack</button
                         >
                       </div>
@@ -565,9 +543,9 @@
                       <li>
                         <div class="">
                           <button
-                            class={size =="S" ? "selected" : ""}
+                            class={size == "S" ? "selected" : ""}
                             on:click={() => {
-                              size = "S",currentimageid = 1;
+                              (size = "S"), (currentimageid = 1);
                             }}>S</button
                           >
                         </div>
@@ -577,7 +555,7 @@
                           <button
                             class={size == "M" ? "selected" : ""}
                             on:click={() => {
-                              size = "M",currentimageid = 1;
+                              (size = "M"), (currentimageid = 1);
                             }}>M</button
                           >
                         </div>
@@ -587,7 +565,7 @@
                           <button
                             class={size == "L" ? "selected" : ""}
                             on:click={() => {
-                              size = "L",currentimageid = 1;
+                              (size = "L"), (currentimageid = 1);
                             }}>L</button
                           >
                         </div>
@@ -597,7 +575,7 @@
                           <button
                             class={size == "XL" ? "selected" : ""}
                             on:click={() => {
-                              size = "XL",currentimageid = 1;
+                              (size = "XL"), (currentimageid = 1);
                             }}>XL</button
                           >
                         </div>
@@ -607,7 +585,7 @@
                           <button
                             class={size == "XXL" ? "selected" : ""}
                             on:click={() => {
-                              size = "XXL",currentimageid = 1;
+                              (size = "XXL"), (currentimageid = 1);
                             }}>XXL</button
                           >
                         </div>
@@ -638,24 +616,23 @@
                     ><span class=""
                       ><del aria-hidden="true">
                         <span class="">
-                          {#if discount!=0}
-                          <span><span class="">$</span>{fprice}</span>
+                          {#if discount != 0}
+                            <span><span class="">$</span>{fprice}</span>
                           {/if}
                         </span>
                       </del>
                       <ins style="text-decoration: none;"
-
-                        ><span 
-                          ><span><span class="">$</span>{discountedprice}</span></span
+                        ><span
+                          ><span><span class="">$</span>{discountedprice}</span
+                          ></span
                         ></ins
                       ></span
                     ></span
                   >
                 </p>
-               
-                {#if discount!=0}
-                <p class="save">Save {discount}%</p>
-                
+
+                {#if discount != 0}
+                  <p class="save">Save {discount}%</p>
                 {/if}
               </div>
               <div class="quantity buttons_added d-flex round-pill">
@@ -711,10 +688,9 @@
       </div>
 
       {#if sizechart}
-        <div  transition:fade={{duration:200}} class="size-chart-center">
+        <div transition:fade={{ duration: 200 }} class="size-chart-center">
           <p class="text-right m-0"><span class="close-chart">X</span></p>
           <img
-            
             src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
             alt=""
           />
@@ -722,19 +698,21 @@
       {/if}
     </div>
     {#if sizechart}
-      <div  transition:fade={{duration:200}} class="size-chart-center">
-        
-        <div class="text-right m- d-flex justify-content-between" style="cursor: pointer;">
+      <div transition:fade={{ duration: 200 }} class="size-chart-center">
+        <div
+          class="text-right m- d-flex justify-content-between"
+          style="cursor: pointer;"
+        >
           <div class="w-100 text-center"><strong>SIZE CHART</strong></div>
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <span
             class="close-chart"
             on:click={() => {
               sizechart = false;
-            }}>X</span>
+            }}>X</span
+          >
         </div>
         <img
-          
           src="https://silverlight.store/wp-content/uploads/2019/10/Size-chart2021-510x305.jpg"
           alt=""
         />
@@ -757,6 +735,14 @@
     margin-top: 8px;
     right: -78px;
     text-align: center;
+  }
+
+  .remove-item-button{
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 
   .main-container {
@@ -796,11 +782,9 @@
     opacity: 1 !important;
   } */
 
-  .slider-single img{
+  .slider-single img {
     opacity: 1 !important;
   }
-
-
 
   .slider-nav {
     display: grid;
@@ -810,27 +794,27 @@
     opacity: 0.5 !important;
   } */
 
-  .slider-nav-img{
+  .slider-nav-img {
     opacity: 1 !important;
   }
 
-  .slick-list,.draggable {
+  .slick-list,
+  .draggable {
     padding: 0px 0px !important;
   }
 
   .slick-track {
     width: 100%;
   }
-  .tmp{
+  .tmp {
     opacity: 1 !important;
   }
 
   .thumb-image {
     min-width: 25%;
-    
   }
-  
-  .thumb-image img{
+
+  .thumb-image img {
     opacity: 0.5;
   }
 
@@ -838,7 +822,7 @@
     color: #777777;
   }
 
-  .star{
+  .star {
     color: gold;
   }
 
@@ -929,12 +913,12 @@
     box-shadow: 0 0 10px 0;
   }
 
-  .size-chart-center img{
+  .size-chart-center img {
     padding: 20px;
   }
-  .size-chart-center strong{
+  .size-chart-center strong {
     font-size: 20px;
-  } 
+  }
 
   .close-chart {
     font-weight: 700;
