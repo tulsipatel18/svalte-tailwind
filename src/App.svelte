@@ -221,7 +221,6 @@
 
 <!-- svelte-ignore missing-declaration -->
 
-
 <SimpleGallery galleryID="my-test-gallery" {photos} />
 
 <div class="main-container">
@@ -254,16 +253,22 @@
         <div class="d2">
           {#if totalprice != 0}
             {#each orders as order}
-              <div>
-                <p>Silverlight Hiking Socks</p>
-                COLOR : {order.color}
-                TYPE : {order.type}
-                QUANTITY : {order.quantity} PACK SIZE : {order.size}
-
-                {order.qty} x {order.discountedprice}
-                <button on:click|preventDefault={() => handleDelete(order.id)}
-                  >x</button
-                >
+              <div class="cart-container">
+                <div><img src="" alt="" /></div>
+                <div>
+                  <p>Silverlight Hiking Socks</p>
+                  <span>COLOR : {order.color}</span>
+                  <span>TYPE : {order.type}</span>
+                  <span>QUANTITY : {order.quantity} </span>
+                  <span>PACK SIZE : {order.size}</span>
+                  <span>{order.qty} x {order.discountedprice}</span>
+                  <div>
+                    <button
+                      on:click|preventDefault={() => handleDelete(order.id)}
+                      >x</button
+                    >
+                  </div>
+                </div>
               </div>
             {/each}
 
@@ -686,7 +691,8 @@
   .d2 {
     display: none;
   }
-  .d1:hover .d2 {
+  /* .d1:hover  */
+  .d2 {
     display: block;
     background-color: white;
     border: 1px solid black;
