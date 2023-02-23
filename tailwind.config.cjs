@@ -1,8 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  purge: [
+           "./**/*.svelte",  // Look for .svelte files
+           "./**/*.html" // Look for .html files
+        ],
   theme: {
     extend: {},
   },
+  variants: {},
   plugins: [],
 }

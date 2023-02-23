@@ -1,3 +1,4 @@
+
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
   import jQuery from "jquery";
@@ -5,6 +6,7 @@
   import { fade } from "svelte/transition";
   import SimpleGallery from "./components/SimpleGallery.svelte";
   import { beforeUpdate, afterUpdate } from "svelte";
+  import Tailwind from '../Tailwind.svelte'
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -50,10 +52,33 @@
   const handleimg = () => {
     if (color == "BLACK") {
       if (type == "ANKLE") {
-        img = blackAnkleSocksImages[0].thumbImg;
+        if(quantity==1){
+          img = blackAnkleSocksImages[0].thumbImg;
+        }
+        if(quantity==3){
+          img=blackAnkleSocksImagesThreePack[0].thumbImg;
+          
+        }
+        if(quantity==5){
+          img=blackAnkleSocksImagesFivePack[0].thumbImg;
+
+        }
+
+       
       }
       if (type == "CREW") {
-        img = blackCrewSocksImages[0].thumbImg;
+        if(quantity==1){
+          img = blackCrewSocksImages[0].thumbImg;
+        }
+        if(quantity==3){
+          img=blackCrewSocksImagesThreePack[0].thumbImg;
+          
+        }
+        if(quantity==5){
+          img=blackCrewSocksImagesFivePack[0].thumbImg;
+
+        }
+
       }
     }
     if (color == "BLUE") {
@@ -160,7 +185,6 @@
     localStorage.setItem("type", type);
     localStorage.setItem("quantity", quantity);
     localStorage.setItem("size", size);
-
     //write calculation function again
     total = 0;
     let newOrder = {
@@ -171,6 +195,7 @@
       total,
       qty,
       img,
+      discount,
       discountedprice,
       id: Math.random(),
     };
@@ -248,9 +273,20 @@
 
 <!-- svelte-ignore missing-declaration -->
 
+
+
+
+
+<Tailwind/>
+<div class="bg-teal-800">
+  hello
+</div>
+
+
 <SimpleGallery galleryID="my-test-gallery" {photos} />
 
-<div class="main-container">
+
+<div class="main-container" >
   <video
     class="video-bg"
     preload="playsinline"
@@ -282,7 +318,8 @@
             {#if totalprice != 0}
               {#each orders as order}
                 <div class="cart-container d-flex justify-content-between">
-                  <div><img src={order.img} alt="" /></div>
+                  <div>
+                    <img  src={order.img} alt="" /></div>
                   <div class="d-flex flex-column align-items-start">
                     <p>Silverlight Hiking Socks</p>
                     <span>COLOR : {order.color}</span>
@@ -725,7 +762,8 @@
   .d2 {
     display: none;
   }
-  .d1:hover .d2 {
+  /* .d1:hover */
+   .d2 {
     display: block;
     background-color: white;
     border: 1px solid black;
@@ -839,6 +877,8 @@
     margin: 0 0 10px 20px;
   }
 
+
+
   .socks-description a {
     color: #777777;
     text-decoration: none;
@@ -900,6 +940,11 @@
     font-weight: 500;
     font-size: 12px;
     min-width: 60px;
+  }
+
+  .cart-container img{
+    width: 100px;
+    height: 100px;
   }
 
   .size-chart-center {

@@ -54,19 +54,19 @@ const app = new App({
 		],
 		blueCrewSocksImages : [
 			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:1},
-			{largeImg:"",thumbImg:"",id:2},
-			{largeImg:"",thumbImg:"",id:3},
-			{largeImg:"",thumbImg:"",id:4},
-			{largeImg:"",thumbImg:"",id:5},
-			{largeImg:"",thumbImg:"",id:6},
+			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:2},
+			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:3},
+			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:4},
+			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:5},
+			{largeImg:"./images/blue-crew.jpg",thumbImg:"./images/blue-crew.jpg",id:6},
 		],
 		blueAnkleSocksImages : [
-			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-crew.jpg",id:1},
-			{largeImg:"",thumbImg:"",id:2},
-			{largeImg:"",thumbImg:"",id:3},
-			{largeImg:"",thumbImg:"",id:4},
-			{largeImg:"",thumbImg:"",id:5},
-			{largeImg:"",thumbImg:"",id:6},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-ankle.jpg",id:1},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-ankle.jpg",id:2},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-ankle.jpg",id:3},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-ankle.jpg",id:4},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-ankle.jpg",id:5},
+			{largeImg:"./images/blue-ankle.jpg",thumbImg:"./images/blue-ankle.jpg",id:6},
 		]
 	}
 });
