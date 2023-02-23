@@ -47,7 +47,7 @@
   $: handleprice(type, quantity);
   $: handlephotos(color, type, quantity);
   $: handlecarttotal(orders);
-  $: handleimg(color, type);
+  $: handleimg(color, type,quantity);
 
   const handleimg = () => {
     if (color == "BLACK") {
@@ -61,7 +61,6 @@
         }
         if(quantity==5){
           img=blackAnkleSocksImagesFivePack[0].thumbImg;
-
         }
 
        
@@ -302,6 +301,7 @@
     />
   </video>
   <div style="max-width:1080px" class="w-100 ">
+    
     <div class="navbar justify-content-end d1">
       <a href="">
         <li class="cart-item">
@@ -313,9 +313,12 @@
             {/if}
           </span>
         </li>
-        <div class="d2">
+       
+        
+        <div class="d2" class:d-none={orders.length==0}>
           <div class="p-4">
             {#if totalprice != 0}
+
               <div style="max-height:500px;overflow-y:scroll">
                 {#each orders as order}
                   <div
@@ -324,7 +327,7 @@
                   >
                     <div>
                       <img
-                        style="max-width: 80px;max-hight:80px"
+                        style="max-width: 100px;max-hight:100px"
                         src={order.img}
                         alt=""
                       />
@@ -343,6 +346,11 @@
                           <span>QUANTITY : {order.quantity} </span>
                           <span>PACK SIZE : {order.size}</span>
                         </div>
+
+                        <div class="text-left" style="font-weight: bold; color: green; opacity: 0.8;">
+                          <span>Save {order.discount}%</span>
+                        </div>
+
                         <div class="text-left">
                           <span>{order.qty} x ${order.discountedprice}.00</span>
                         </div>
@@ -358,7 +366,9 @@
                   </div>
                 {/each}
               </div>
+             
               <div
+
                 class="border border-right-0 border-left-0"
                 style="color:#777777"
               >
@@ -380,8 +390,7 @@
                   /></button
                 >
               </div>
-            {:else}
-              <div>There are no items in your cart</div>
+           
             {/if}
           </div>
         </div>
