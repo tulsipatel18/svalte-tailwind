@@ -6,7 +6,7 @@
   import { fade } from "svelte/transition";
   import SimpleGallery from "./components/SimpleGallery.svelte";
   import { beforeUpdate, afterUpdate } from "svelte";
-  import Tailwind from '../Tailwind.svelte'
+  
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -276,10 +276,8 @@
 
 
 
-<Tailwind/>
-<div class="bg-teal-800">
-  hello
-</div>
+
+
 
 
 <SimpleGallery galleryID="my-test-gallery" {photos} />
