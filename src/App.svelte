@@ -316,35 +316,68 @@
         <div class="d2">
           <div class="p-4">
             {#if totalprice != 0}
-              {#each orders as order}
-                <div class="cart-container d-flex justify-content-between">
-                  <div>
-                    <img  src={order.img} alt="" /></div>
-                  <div class="d-flex flex-column align-items-start">
-                    <p>Silverlight Hiking Socks</p>
-                    <span>COLOR : {order.color}</span>
-                    <span>TYPE : {order.type}</span>
-                    <span>QUANTITY : {order.quantity} </span>
-                    <span>PACK SIZE : {order.size}</span>
-                    <span>{order.qty} x {order.discountedprice}</span>
-                  </div>
-                  <div>
-                    <button class="rounded-circle remove-item-button"
-                      on:click|preventDefault={() => handleDelete(order.id)}
-                      >x</button
+              <div style="max-height:500px;overflow-y:scroll">
+                {#each orders as order}
+                  <div
+                    class="cart-container d-flex justify-content-between"
+                    style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                  >
+                    <div>
+                      <img
+                        style="max-width: 80px;max-hight:80px"
+                        src={order.img}
+                        alt=""
+                      />
+                    </div>
+                    <div
+                      class="d-flex flex-column align-items-start"
+                      style="color:#777777"
                     >
+                      <div style="margin-bottom: 10px;margin:0 10px">
+                        <div class="text-left">
+                          <h6>Silverlight Hiking Socks</h6>
+                        </div>
+                        <div class="text-left" style="font-size:13px">
+                          <span>COLOR : {order.color}</span>
+                          <span>TYPE : {order.type}</span>
+                          <span>QUANTITY : {order.quantity} </span>
+                          <span>PACK SIZE : {order.size}</span>
+                        </div>
+                        <div class="text-left">
+                          <span>{order.qty} x ${order.discountedprice}.00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-block mr-1">
+                      <button
+                        class="rounded-circle remove-item-button"
+                        on:click|preventDefault={() => handleDelete(order.id)}
+                        >x</button
+                      >
+                    </div>
                   </div>
-                </div>
-              {/each}
-
-              <div class="border border-right-0 border-left-0">
-                <h2>Subtotal :{totalprice}</h2>
+                {/each}
+              </div>
+              <div
+                class="border border-right-0 border-left-0"
+                style="color:#777777"
+              >
+                <h6 style="padding:15px 0;margin:0">
+                  Subtotal: ${totalprice}.00
+                </h6>
               </div>
               <div class="d-flex flex-column mt-3">
-                <button class="text-light bg-dark">VIEW CART</button>
                 <button
-                  class="mt-2 text-light"
-                  style="background-color: #1cb9a2">GO TO CHECKOUT</button
+                  class="text-light bg-dark font-weight-bold"
+                  style="letter-spacing:1px">VIEW CART</button
+                >
+                <button
+                  class="mt-2 text-light font-weight-bold"
+                  style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                  >GO TO CHECKOUT <i
+                    class="fa fa-long-arrow-right mx-2"
+                    aria-hidden="true"
+                  /></button
                 >
               </div>
             {:else}
@@ -759,27 +792,44 @@
 </div>
 
 <style>
+  .d2::before {
+    transition: opacity 0.25s;
+    opacity: 1;
+    z-index: -999;
+    border-bottom-color: #ddd;
+    border-width: 11px;
+    margin-left: -11px;
+    bottom: -2px;
+    z-index: 10;
+    opacity: 0;
+    left: 50%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+  }
   .d2 {
     display: none;
   }
-  /* .d1:hover */
-   .d2 {
+  .d1:hover .d2 {
     display: block;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #777777a4;
     color: black;
     position: absolute;
-    width: 40%;
+    width: 30%;
     margin-top: 8px;
     right: -78px;
     text-align: center;
   }
 
-  .remove-item-button{
-    width: 30px;
-    height: 30px;
+  .remove-item-button {
+    width: 25px;
+    height: 26px;
     align-items: center;
     display: flex;
+    font-size: 13px;
     justify-content: center;
   }
 
