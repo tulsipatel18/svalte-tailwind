@@ -5,6 +5,7 @@
     export let galleryID;
     export let photos;
     
+    
     onMount(() => {
         let lightbox = new PhotoSwipeLightbox({
           gallery: '#' + galleryID,

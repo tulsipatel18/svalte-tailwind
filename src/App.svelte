@@ -7,6 +7,7 @@
   import SimpleGallery from "./components/SimpleGallery.svelte";
   import { beforeUpdate, afterUpdate } from "svelte";
   
+  
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -91,6 +92,7 @@
   };
 
   $: {
+    console.log(currentimageid),
     console.log(orders);
   }
 
@@ -250,6 +252,7 @@
       arrows: false,
       fade: true,
       useTransform: false,
+      
     });
 
     jQuery(".slider-nav").slick({
@@ -261,6 +264,7 @@
       focusOnSelect: true,
       draggable: false,
     });
+
     let lightbox = new PhotoSwipeLightbox({
       gallery: "#" + galleryID,
       children: "a",
@@ -268,6 +272,7 @@
     });
     lightbox.init();
   });
+  
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -280,7 +285,6 @@
 
 
 
-<SimpleGallery galleryID="my-test-gallery" {photos} />
 
 
 <div class="main-container" >
@@ -300,8 +304,8 @@
   </video>
   <div style="max-width:1080px" class="w-100 ">
     
-    <div class="navbar justify-content-end d1">
-      <a href="">
+    <div class="navbar justify-content-end">
+      <a href="" class="d1">
         <li class="cart-item">
           <span class="cart-icon">
             {#if orders}
@@ -312,10 +316,10 @@
           </span>
         </li>
        
-        
-        <div class="d2" class:d-none={orders.length==0}>
+        {#if totalprice != 0}
+        <div class="d2">
           <div class="p-4">
-            {#if totalprice != 0}
+           
 
               <div style="max-height:500px;overflow-y:scroll">
                 {#each orders as order}
@@ -344,10 +348,11 @@
                           <span>QUANTITY : {order.quantity} </span>
                           <span>PACK SIZE : {order.size}</span>
                         </div>
-
-                        <div class="text-left" style="font-weight: bold; color: green; opacity: 0.8;">
+                      
+                        <div class="text-left" style="font-weight: bold; color: green; opacity: 0.8;" class:d-none={order.discount==0}>
                           <span>Save {order.discount}%</span>
                         </div>
+                     
 
                         <div class="text-left">
                           <span>{order.qty} x ${order.discountedprice}.00</span>
@@ -364,6 +369,7 @@
                   </div>
                 {/each}
               </div>
+              
              
               <div
 
@@ -389,9 +395,10 @@
                 >
               </div>
            
-            {/if}
+           
           </div>
         </div>
+        {/if}
       </a>
     </div>
     <div class="container-1080">
@@ -404,7 +411,9 @@
             {#each photos as image}
               <!-- {#if currentimageid==image.id} -->
               <!-- in:fade out:fade -->
-              <div class="slider slider-single">
+              <div class="slider slider-single" on:click|preventDefault={() => {
+                currentimageid = image.id;
+              }} >
                 <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
 
                 <div class="pswp-gallery tmp" id={galleryID}>
@@ -415,12 +424,16 @@
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img
-                      class="opacity-100 w-100 tmp"
-                      src={image.largeImg}
-                      alt=""
-                    />
+                    <span class="magnifier">
+                      <i class="fa-solid fa-magnifying-glass" />
+                    </span>
                   </a>
+                  <img
+                  class="opacity-100 w-100 tmp slider-nav"
+                  src={image.largeImg}
+                  alt=""
+                  />
+                  
                 </div>
               </div>
               <!-- {/if} -->
@@ -800,21 +813,16 @@
 
 <style>
   .d2::before {
-    transition: opacity 0.25s;
-    opacity: 1;
-    z-index: -999;
-    border-bottom-color: #ddd;
-    border-width: 11px;
-    margin-left: -11px;
-    bottom: -2px;
-    z-index: 10;
-    opacity: 0;
-    left: 50%;
-    border: solid transparent;
-    content: "";
-    height: 0;
-    width: 0;
+    content: "A";
+    color: #DEE2E6;
     position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -5px;
+    background-color: #DEE2E6;
+    transform: rotateY(0deg) rotate(45deg);
+    right: 98px;
+    z-index: -1;
   }
   .d2 {
     display: none;
@@ -830,6 +838,7 @@
     right: -78px;
     text-align: center;
   }
+  
 
   .remove-item-button {
     width: 25px;
@@ -896,6 +905,21 @@
   .slick-list,
   .draggable {
     padding: 0px 0px !important;
+  }
+
+  .magnifier {
+    z-index: 1;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    color: #000000;
+    background: #FFFFFF;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .slick-track {
