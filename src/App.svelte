@@ -1,4 +1,3 @@
-
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
   import jQuery from "jquery";
@@ -6,8 +5,6 @@
   import { fade } from "svelte/transition";
   import SimpleGallery from "./components/SimpleGallery.svelte";
   import { beforeUpdate, afterUpdate } from "svelte";
-  
-  
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -48,37 +45,31 @@
   $: handleprice(type, quantity);
   $: handlephotos(color, type, quantity);
   $: handlecarttotal(orders);
-  $: handleimg(color, type,quantity);
+  $: handleimg(color, type, quantity);
 
   const handleimg = () => {
     if (color == "BLACK") {
       if (type == "ANKLE") {
-        if(quantity==1){
+        if (quantity == 1) {
           img = blackAnkleSocksImages[0].thumbImg;
         }
-        if(quantity==3){
-          img=blackAnkleSocksImagesThreePack[0].thumbImg;
-          
+        if (quantity == 3) {
+          img = blackAnkleSocksImagesThreePack[0].thumbImg;
         }
-        if(quantity==5){
-          img=blackAnkleSocksImagesFivePack[0].thumbImg;
+        if (quantity == 5) {
+          img = blackAnkleSocksImagesFivePack[0].thumbImg;
         }
-
-       
       }
       if (type == "CREW") {
-        if(quantity==1){
+        if (quantity == 1) {
           img = blackCrewSocksImages[0].thumbImg;
         }
-        if(quantity==3){
-          img=blackCrewSocksImagesThreePack[0].thumbImg;
-          
+        if (quantity == 3) {
+          img = blackCrewSocksImagesThreePack[0].thumbImg;
         }
-        if(quantity==5){
-          img=blackCrewSocksImagesFivePack[0].thumbImg;
-
+        if (quantity == 5) {
+          img = blackCrewSocksImagesFivePack[0].thumbImg;
         }
-
       }
     }
     if (color == "BLUE") {
@@ -92,8 +83,7 @@
   };
 
   $: {
-    console.log(currentimageid),
-    console.log(orders);
+    console.log(currentimageid), console.log(orders);
   }
 
   beforeUpdate(() => {});
@@ -252,7 +242,6 @@
       arrows: false,
       fade: true,
       useTransform: false,
-      
     });
 
     jQuery(".slider-nav").slick({
@@ -272,22 +261,11 @@
     });
     lightbox.init();
   });
-  
 </script>
 
 <!-- svelte-ignore missing-declaration -->
 
-
-
-
-
-
-
-
-
-
-
-<div class="main-container" >
+<div class="main-container">
   <video
     class="video-bg"
     preload="playsinline"
@@ -303,7 +281,6 @@
     />
   </video>
   <div style="max-width:1080px" class="w-100 ">
-    
     <div class="navbar justify-content-end">
       <a href="" class="d1">
         <li class="cart-item">
@@ -315,12 +292,10 @@
             {/if}
           </span>
         </li>
-       
-        {#if totalprice != 0}
-        <div class="d2">
-          <div class="p-4">
-           
 
+        {#if totalprice != 0}
+          <div class="d2">
+            <div class="p-4">
               <div style="max-height:500px;overflow-y:scroll">
                 {#each orders as order}
                   <div
@@ -348,11 +323,14 @@
                           <span>QUANTITY : {order.quantity} </span>
                           <span>PACK SIZE : {order.size}</span>
                         </div>
-                      
-                        <div class="text-left" style="font-weight: bold; color: green; opacity: 0.8;" class:d-none={order.discount==0}>
+
+                        <div
+                          class="text-left"
+                          style="font-weight: bold; color: green; opacity: 0.8;"
+                          class:d-none={order.discount == 0}
+                        >
                           <span>Save {order.discount}%</span>
                         </div>
-                     
 
                         <div class="text-left">
                           <span>{order.qty} x ${order.discountedprice}.00</span>
@@ -369,10 +347,8 @@
                   </div>
                 {/each}
               </div>
-              
-             
-              <div
 
+              <div
                 class="border border-right-0 border-left-0"
                 style="color:#777777"
               >
@@ -394,10 +370,8 @@
                   /></button
                 >
               </div>
-           
-           
+            </div>
           </div>
-        </div>
         {/if}
       </a>
     </div>
@@ -411,9 +385,12 @@
             {#each photos as image}
               <!-- {#if currentimageid==image.id} -->
               <!-- in:fade out:fade -->
-              <div class="slider slider-single" on:click|preventDefault={() => {
-                currentimageid = image.id;
-              }} >
+              <div
+                class="slider slider-single"
+                on:click|preventDefault={() => {
+                  currentimageid = image.id;
+                }}
+              >
                 <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
 
                 <div class="pswp-gallery tmp" id={galleryID}>
@@ -429,11 +406,10 @@
                     </span>
                   </a>
                   <img
-                  class="opacity-100 w-100 tmp slider-nav"
-                  src={image.largeImg}
-                  alt=""
+                    class="opacity-100 w-100 tmp slider-nav"
+                    src={image.largeImg}
+                    alt=""
                   />
-                  
                 </div>
               </div>
               <!-- {/if} -->
@@ -814,12 +790,12 @@
 <style>
   .d2::before {
     content: "A";
-    color: #DEE2E6;
+    color: #dee2e6;
     position: absolute;
     width: 20px;
     height: 20px;
     top: -5px;
-    background-color: #DEE2E6;
+    background-color: #dee2e6;
     transform: rotateY(0deg) rotate(45deg);
     right: 98px;
     z-index: -1;
@@ -838,7 +814,6 @@
     right: -78px;
     text-align: center;
   }
-  
 
   .remove-item-button {
     width: 25px;
@@ -913,7 +888,7 @@
     right: 30px;
     top: 30px;
     color: #000000;
-    background: #FFFFFF;
+    background: #ffffff;
     width: 30px;
     height: 30px;
     border-radius: 20px;
@@ -957,8 +932,6 @@
   .socks-description li {
     margin: 0 0 10px 20px;
   }
-
-
 
   .socks-description a {
     color: #777777;
@@ -1023,7 +996,7 @@
     min-width: 60px;
   }
 
-  .cart-container img{
+  .cart-container img {
     width: 100px;
     height: 100px;
   }
