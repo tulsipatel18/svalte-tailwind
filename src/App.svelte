@@ -261,6 +261,18 @@
     });
     lightbox.init();
   });
+
+  import { initZoomy } from "./initZoomy";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var options = {
+      zoomFactor: 2,
+      class: "zoomy",
+      direction: "both",
+      cursor: true,
+    };
+    initZoomy(options);
+  });
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -393,7 +405,7 @@
               >
                 <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
 
-                <div class="pswp-gallery tmp" id={galleryID}>
+                <div class="pswp-gallery tmp " id={galleryID}>
                   <a
                     href={image.largeImg}
                     data-pswp-width={1875}
@@ -405,11 +417,13 @@
                       <i class="fa-solid fa-magnifying-glass" />
                     </span>
                   </a>
-                  <img
-                    class="opacity-100 w-100 tmp slider-nav"
-                    src={image.largeImg}
-                    alt=""
-                  />
+                  <figure class="zoomy">
+                    <img
+                      class="opacity-100 w-100 tmp slider-nav "
+                      src={image.largeImg}
+                      alt=""
+                    />
+                  </figure>
                 </div>
               </div>
               <!-- {/if} -->
@@ -788,6 +802,21 @@
 </div>
 
 <style>
+  .zoomy {
+    overflow: hidden;
+
+    cursor: auto;
+  }
+  .zoomy span {
+    cursor: auto;
+  }
+
+  .zoomy img {
+    cursor: auto;
+    width: 100%;
+    height: auto;
+    backface-visibility: hidden;
+  }
   .d2::before {
     content: "A";
     color: #dee2e6;
@@ -1166,6 +1195,9 @@
     border-top-left-radius: 99px;
     border-top-right-radius: 99px;
     border-bottom: 0;
+  }
+  .socks-slider-wrapper {
+    padding: 15px;
   }
 
   @media screen and (max-width: 850px) {
