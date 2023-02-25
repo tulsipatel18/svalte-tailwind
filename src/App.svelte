@@ -3,7 +3,6 @@
   import jQuery from "jquery";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import SimpleGallery from "./components/SimpleGallery.svelte";
   import { beforeUpdate, afterUpdate } from "svelte";
 
   export let blackCrewSocksImages;
@@ -29,11 +28,6 @@
   let totalprice = 0;
   let currentimageid = 1;
   let img;
-
-  color = localStorage.getItem("color");
-  type = localStorage.getItem("type");
-  quantity = localStorage.getItem("quantity");
-  size = localStorage.getItem("size");
 
   color = localStorage.getItem("color");
   type = localStorage.getItem("type");
@@ -417,7 +411,7 @@
                       <i class="fa-solid fa-magnifying-glass" />
                     </span>
                   </a>
-                  <figure class="zoomy">
+                  <figure class="zoomy zoom-image">
                     <img
                       class="opacity-100 w-100 tmp slider-nav "
                       src={image.largeImg}
@@ -688,9 +682,9 @@
               </div>
             </tbody>
           </table>
-          <div class="">
-            <div class="d-flex" style="margin:12px 0 15px 0">
-              <div class="price-wrapper">
+          <div class="price-container">
+            <div class="d-flex price-sub-container" style="margin:12px 0 15px 0">
+              <div class="price-wrapper ">
                 <p class="price product-page-price">
                   <span class="price"
                     ><span class=""
@@ -817,6 +811,11 @@
     height: auto;
     backface-visibility: hidden;
   }
+
+  .image-zoom {
+    height: 100% !important;
+  }
+
   .d2::before {
     content: "A";
     color: #dee2e6;
@@ -871,6 +870,7 @@
     display: flex;
     max-width: 1080px;
     background-color: #ffffff;
+    padding: 15px;
   }
 
   .silver-hiking-socks-wrapper {
@@ -915,7 +915,7 @@
     z-index: 1;
     position: absolute;
     right: 30px;
-    top: 30px;
+    top: 15px;
     color: #000000;
     background: #ffffff;
     width: 30px;
@@ -1196,13 +1196,20 @@
     border-top-right-radius: 99px;
     border-bottom: 0;
   }
-  .socks-slider-wrapper {
+  /* .socks-slider-wrapper {
     padding: 15px;
-  }
+  } */
 
   @media screen and (max-width: 850px) {
     .container-1080 {
       display: block;
+      width: 100%;
+    }
+
+    .container {
+      padding: 0;
+      margin: 0;
+      width: 100% !important;
     }
 
     .socks-slider-wrapper {
@@ -1211,6 +1218,30 @@
 
     .silver-hiking-socks-wrapper {
       width: 100% !important;
+      padding: 0;
+    }
+
+    .thumb-image img{
+      width: 100%;
+    }
+
+    .price-sub-container{
+      flex-direction: column;
+    }
+
+    .quantity{
+      margin: 10px 0;
+    }
+  }
+
+  @media screen and (max-width: 420px){
+    .socks-selection ul{
+      padding-left: 0px;
+    }
+
+    .socks-selection button{
+      margin: 0 1px;
+      padding: 5px;
     }
   }
 </style>
