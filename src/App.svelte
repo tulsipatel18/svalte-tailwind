@@ -288,8 +288,13 @@
   </video>
   <div style="max-width:1080px" class="w-100 ">
     <div class="navbar justify-content-end">
-      <a href="" class="d1">
-        <li class="cart-item">
+      <a href="" class="d1 py-2">
+        <li
+          class="cart-item"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+        >
           <span class="cart-icon">
             {#if orders}
               <strong>{orders.length}</strong>
@@ -301,7 +306,7 @@
 
         {#if totalprice != 0}
           <div class="d2">
-            <div class="p-4">
+            <div class="p-4 offcanvas-body">
               <div style="max-height:500px;overflow-y:scroll">
                 {#each orders as order}
                   <div
@@ -381,6 +386,111 @@
         {/if}
       </a>
     </div>
+    {#if totalprice != 0}
+      <div
+        class="sidebar offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div class="offcanvas-header d-flex align-items-center">
+          <div class="w-100 text-center">
+            <h5
+              class="offcanvas-title"
+              id="offcanvasRightLabel"
+              style="letter-spacing: 1px;"
+            >
+              CART
+            </h5>
+            <div class="is-divider mr-auto ml-auto" />
+          </div>
+        </div>
+        <!-- <span > -->
+        <button
+          type="button"
+          class="btn-close sidebar-close d-flex align-items-center"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close">X</button
+        >
+        <!-- </span> -->
+        <div class="offcanvas-body">
+          <div>
+            {#each orders as order}
+              <div
+                class="cart-container d-flex justify-content-between"
+                style="border-bottom: 1px solid #dee2e6;margin: 10px 10px 0 0;"
+              >
+                <div>
+                  <img
+                    style="max-width: 60px;max-height:60px"
+                    src={order.img}
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="d-flex flex-column align-items-start"
+                  style="color:#777777"
+                >
+                  <div style="margin-bottom: 10px;margin:0 10px">
+                    <div class="text-left">
+                      <h6>Silverlight Hiking Socks</h6>
+                    </div>
+                    <div class="text-left" style="font-size:13px">
+                      <span>COLOR : {order.color}</span>
+                      <span>TYPE : {order.type}</span>
+                      <span>QUANTITY : {order.quantity} </span>
+                      <span>PACK SIZE : {order.size}</span>
+                    </div>
+
+                    <div
+                      class="text-left"
+                      style="font-weight: bold; color: green; opacity: 0.8;"
+                      class:d-none={order.discount == 0}
+                    >
+                      <span>Save {order.discount}%</span>
+                    </div>
+
+                    <div class="text-left">
+                      <span>{order.qty} x ${order.discountedprice}.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-block mr-1">
+                  <button
+                    class="rounded-circle remove-item-button"
+                    on:click|preventDefault={() => handleDelete(order.id)}
+                    >x</button
+                  >
+                </div>
+              </div>
+            {/each}
+          </div>
+
+          <div
+            class="border border-right-0 border-left-0"
+            style="color:#777777"
+          >
+            <h6 style="padding:15px 0;margin:0">
+              Subtotal: ${totalprice}.00
+            </h6>
+          </div>
+          <div class="d-flex flex-column mt-3">
+            <button
+              class="text-light bg-dark font-weight-bold"
+              style="letter-spacing:1px">VIEW CART</button
+            >
+            <button
+              class="mt-2 text-light font-weight-bold"
+              style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+              >GO TO CHECKOUT <i
+                class="fa fa-long-arrow-right mx-2"
+                aria-hidden="true"
+              /></button
+            >
+          </div>
+        </div>
+      </div>
+    {/if}
     <div class="container-1080">
       <div class="w-50 socks-slider-wrapper container">
         <div class="">
@@ -683,7 +793,10 @@
             </tbody>
           </table>
           <div class="price-container">
-            <div class="d-flex price-sub-container" style="margin:12px 0 15px 0">
+            <div
+              class="d-flex price-sub-container"
+              style="margin:12px 0 15px 0"
+            >
               <div class="price-wrapper ">
                 <p class="price product-page-price">
                   <span class="price"
@@ -709,7 +822,7 @@
                   <p class="save">Save {discount}%</p>
                 {/if}
               </div>
-              <div class="quantity buttons_added d-flex round-pill">
+              <div class="quantity d-flex round-pill">
                 <input
                   type="button"
                   value="-"
@@ -793,14 +906,152 @@
       </div>
     {/if}
   </div>
+
+  <div class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap">
+    <div
+      class="d-flex left-socks-selection justify-content-center align-items-center"
+    >
+      <div style="width:48px; height:48px">
+        <img src=".././images/crew-1.jpg" alt="" class="w-100" />
+      </div>
+      <div style="margin-left:10px; font-size:14px">
+        <div>Silverlight Hiking Socks</div>
+      </div>
+    </div>
+    <div class="center-socks-selection d-flex align-items-center">
+      <div style="padding-left:10px; font-size:14px">
+        <span class="">
+          <span class="">
+            <del>
+              <span style="color:#777777"> $75 </span>
+            </del>
+            <span style="font-weight: 700">$59</span>
+          </span>
+        </span>
+        {#if discount != 0}
+          <span
+            class="save"
+            style="margin-left:10px; font-size:14px; font-weight:700"
+            >Save {discount}%
+          </span>
+        {/if}
+      </div>
+    </div>
+    <div
+      class="right-socks-selection d-flex align-items-center"
+      style="height: 38px;"
+    >
+      <div class="d-flex">
+        <select>
+          <option selected disabled>Color</option>
+          <option value="black">Black</option>
+          <option value="blue">Blue</option>
+        </select>
+        <select>
+          <option selected disabled>Type</option>
+          <option value="Ankle">Ankle</option>
+          <option value="Crew">Crew</option>
+        </select>
+        <select>
+          <option selected disabled>Quantity</option>
+          <option value="1 Pack">1 Pack</option>
+          <option value="3 Pack">3 Pack</option>
+          <option value="5 Pack">5 Pack</option>
+        </select>
+        <select>
+          <option selected disabled>Size</option>
+          <option value="small">S</option>
+          <option value="medium">M</option>
+          <option value="large">L</option>
+          <option value="extra-large">XL</option>
+          <option value="xxl">XXL</option>
+        </select>
+      </div>
+      <div class="" style="margin:0 5px">
+        <div class="quantity d-flex round-pill">
+          <input type="button" value="-" class="" on:click={handleqtydec} />
+          <input
+            type="number"
+            class="qty"
+            style="background-color: #ffffff;"
+            step="1"
+            min="1"
+            max="15"
+            name="quantity"
+            bind:value={qty}
+            title="Qty"
+            size="4"
+            pattern="[0-9]*"
+            inputmode="numeric"
+          />
+          <input type="button" value="+" class="" on:click={handleqty} />
+        </div>
+      </div>
+      <div class="d-flex">
+        <button
+          type="submit"
+          class="add-to-cart-button button alt mr-2"
+          on:click={handleCart}>ADD TO CART</button
+        >
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
+  .fixed-socks-selection {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);
+  }
+
+  /* .left-socks-selection {
+    width: 30%;
+  }
+
+  .center-socks-selection {
+    width: 25%;
+  }
+
+  .right-socks-selection {
+    width: 40%;
+  } */
+
+  .right-socks-selection select {
+    margin: 0 3px;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .right-socks-selection button {
+    animation: wiggle 5s infinite;
+    min-width: 145px;
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    90% {
+      transform: rotate(0deg);
+    }
+    93% {
+      transform: rotate(5deg);
+    }
+    96% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
   .zoomy {
     overflow: hidden;
 
     cursor: auto;
   }
+
   .zoomy span {
     cursor: auto;
   }
@@ -828,9 +1079,11 @@
     right: 98px;
     z-index: -1;
   }
+
   .d2 {
     display: none;
   }
+
   .d1:hover .d2 {
     display: block;
     background-color: white;
@@ -926,9 +1179,6 @@
     align-items: center;
   }
 
-  .slick-track {
-    width: 100%;
-  }
   .tmp {
     opacity: 1 !important;
   }
@@ -952,10 +1202,6 @@
   .socks-description {
     padding: 20px 0;
     color: #777777;
-  }
-
-  .socks-description ul {
-    padding: 0 20px;
   }
 
   .socks-description li {
@@ -1097,14 +1343,6 @@
     margin: 0 5px 0 0;
   }
 
-  .original-price {
-    color: #777777;
-  }
-
-  .sale-price {
-    text-decoration: none;
-  }
-
   .save {
     font-size: 24px;
     color: green;
@@ -1196,11 +1434,51 @@
     border-top-right-radius: 99px;
     border-bottom: 0;
   }
-  /* .socks-slider-wrapper {
-    padding: 15px;
-  } */
+
+  .sidebar {
+    display: none;
+  }
 
   @media screen and (max-width: 850px) {
+    .sidebar {
+      /* display: block; */
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      padding: 20px;
+      width: 260px;
+      background-color: rgba(255, 255, 255, 0.95);
+      z-index: 1;
+      bottom: 0;
+      overflow: scroll;
+    }
+
+    .is-divider {
+      height: 3px;
+      display: block;
+      background-color: rgba(0, 0, 0, 0.1);
+      margin: 1em 0 1em;
+      width: 100%;
+      max-width: 30px;
+    }
+
+    .sidebar-close {
+      width: 25px;
+      height: 25px;
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      border: none;
+      background: none;
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .d2 {
+      display: none;
+    }
+
     .container-1080 {
       display: block;
       width: 100%;
@@ -1221,25 +1499,25 @@
       padding: 0;
     }
 
-    .thumb-image img{
+    .thumb-image img {
       width: 100%;
     }
 
-    .price-sub-container{
+    .price-sub-container {
       flex-direction: column;
     }
 
-    .quantity{
+    .quantity {
       margin: 10px 0;
     }
   }
 
-  @media screen and (max-width: 420px){
-    .socks-selection ul{
+  @media screen and (max-width: 420px) {
+    .socks-selection ul {
       padding-left: 0px;
     }
 
-    .socks-selection button{
+    .socks-selection button {
       margin: 0 1px;
       padding: 5px;
     }
