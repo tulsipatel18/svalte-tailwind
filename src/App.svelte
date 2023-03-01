@@ -718,7 +718,7 @@
                   </ul>
                 </td>
               </tr>
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between size-div">
                 <tr>
                   <td class="label"><label for="pa_size">SIZE</label></td>
 
@@ -907,41 +907,45 @@
     {/if}
   </div>
 
-  <div class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap">
-    <div
-      class="d-flex left-socks-selection justify-content-center align-items-center"
-    >
-      <div style="width:48px; height:48px">
-        <img src=".././images/crew-1.jpg" alt="" class="w-100" />
+  <div
+    class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
+  >
+    <div class="d-flex">
+      <div
+        class="d-flex left-socks-selection justify-content-center align-items-center"
+      >
+        <div style="width:48px; height:48px">
+          <img src=".././images/crew-1.jpg" alt="" class="w-100" />
+        </div>
+        <div style="margin-left:10px; font-size:14px">
+          <div>Silverlight Hiking Socks</div>
+        </div>
       </div>
-      <div style="margin-left:10px; font-size:14px">
-        <div>Silverlight Hiking Socks</div>
-      </div>
-    </div>
-    <div class="center-socks-selection d-flex align-items-center">
-      <div style="padding-left:10px; font-size:14px">
-        <span class="">
-          <span class="">
+      <div class="center-socks-selection d-flex align-items-center">
+        <div style="padding-left:10px; font-size:14px">
+          <span style="margin-left: 10px;">
             <del>
               <span style="color:#777777"> $75 </span>
             </del>
             <span style="font-weight: 700">$59</span>
           </span>
-        </span>
-        {#if discount != 0}
-          <span
-            class="save"
-            style="margin-left:10px; font-size:14px; font-weight:700"
-            >Save {discount}%
-          </span>
-        {/if}
+          {#if discount != 0}
+            <span
+              class="save d-flex"
+              style="margin-left:10px; font-size:14px; font-weight:700"
+              >Save {discount}%
+            </span>
+          {/if}
+        </div>
       </div>
     </div>
     <div
-      class="right-socks-selection d-flex align-items-center"
-      style="height: 38px;"
+      class="right-socks-selection d-flex align-items-center justify-content-center flex-wrap "
     >
-      <div class="d-flex">
+      <div
+        class="d-flex justify-content-center flex-wrap"
+        style="font-size: 14px;"
+      >
         <select>
           <option selected disabled>Color</option>
           <option value="black">Black</option>
@@ -1149,6 +1153,7 @@
 
   .slider-nav {
     display: grid;
+    margin-bottom: 25px;
   }
 
   /* .slider-nav img{
@@ -1520,6 +1525,12 @@
     .socks-selection button {
       margin: 0 1px;
       padding: 5px;
+    }
+  }
+
+  @media screen and (max-width: 370px) {
+    .size-div{
+      display: block !important;
     }
   }
 </style>
