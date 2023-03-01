@@ -208,9 +208,9 @@
       orders = [newOrder];
     }
 
-    window.alert(
-      `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
-    );
+    // window.alert(
+    //   `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
+    // );
   };
 
   const handleDelete = (id) => {
@@ -288,7 +288,7 @@
   </video>
   <div style="max-width:1080px" class="w-100 ">
     <div class="navbar justify-content-end">
-      <a href="" class="d1">
+      <a href="" class="d1 py-2">
         <li class="cart-item">
           <span class="cart-icon">
             {#if orders}
