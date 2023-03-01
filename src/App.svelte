@@ -2,7 +2,7 @@
 <script>
   import jQuery from "jquery";
   import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
+  import { fade,slide,fly } from "svelte/transition";
   import { beforeUpdate, afterUpdate } from "svelte";
 
   export let blackCrewSocksImages;
@@ -14,15 +14,17 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
+ 
   let color,
+    canvas=false,
     fprice = 25,
     discount = 0,
     discountedprice = 25,
     type,
-    quantity,
+    quantity=1,
     size,
     total,
-    qty = 1,
+    qty=1,
     sizechart = false;
   let photos = blackCrewSocksImages;
   let totalprice = 0;
@@ -77,7 +79,8 @@
   };
 
   $: {
-    console.log(currentimageid), console.log(orders);
+    console.log(orders),
+    console.log(quantity);
   }
 
   beforeUpdate(() => {});
@@ -288,7 +291,7 @@
   </video>
   <div style="max-width:1080px" class="w-100 ">
     <div class="navbar justify-content-end">
-      <a href="" class="d1 py-2">
+      <a href="" class="d1 py-2" on:click|preventDefault={()=>canvas=true}>
         <li
           class="cart-item"
           data-bs-toggle="offcanvas"
@@ -386,8 +389,9 @@
         {/if}
       </a>
     </div>
-    {#if totalprice != 0}
-      <div
+    {#if totalprice != 0 && canvas==true}
+    
+      <div  transition:fly={{ x:200, duration: 200 }}
         class="sidebar offcanvas offcanvas-end"
         tabindex="-1"
         id="offcanvasRight"
@@ -407,6 +411,7 @@
         </div>
         <!-- <span > -->
         <button
+        on:click|preventDefault={()=>{canvas=false}}
           type="button"
           class="btn-close sidebar-close d-flex align-items-center"
           data-bs-dismiss="offcanvas"
@@ -829,6 +834,7 @@
                   class="minus button is-form"
                   on:click={handleqtydec}
                 />
+                
                 <input
                   type="number"
                   id="quantity_63ef2fbd9a85e"
@@ -922,12 +928,18 @@
         </div>
       </div>
       <div class="center-socks-selection d-flex align-items-center">
-        <div style="padding-left:10px; font-size:14px">
+        <div class="d-flex flex-wrap" style="padding-left:10px; font-size:14px">
           <span style="margin-left: 10px;">
+            {#if discount!= 0}
             <del>
-              <span style="color:#777777"> $75 </span>
+              <span style="color:#777777"> ${fprice} </span>
             </del>
-            <span style="font-weight: 700">$59</span>
+           
+
+            <span style="font-weight: 700">${discountedprice}</span>
+            {:else}
+            <span style="color:#777777"> ${fprice} </span>
+            {/if}
           </span>
           {#if discount != 0}
             <span
@@ -946,29 +958,29 @@
         class="d-flex justify-content-center flex-wrap"
         style="font-size: 14px;"
       >
-        <select>
-          <option selected disabled>Color</option>
-          <option value="black">Black</option>
-          <option value="blue">Blue</option>
+        <select bind:value={color} >
+          <option disabled>Color</option>
+          <option value="BLACK">Black</option>
+          <option value="BLUE">Blue</option>
         </select>
-        <select>
-          <option selected disabled>Type</option>
-          <option value="Ankle">Ankle</option>
-          <option value="Crew">Crew</option>
+        <select bind:value={type}>
+          <option disabled>Type</option>
+          <option value="ANKLE">Ankle</option>
+          <option value="CREW">Crew</option>
         </select>
-        <select>
-          <option selected disabled>Quantity</option>
-          <option value="1 Pack">1 Pack</option>
-          <option value="3 Pack">3 Pack</option>
-          <option value="5 Pack">5 Pack</option>
+        <select bind:value={quantity}>
+          <option  disabled>Quantity</option>
+          <option value={1}>1 Pack</option>
+          <option value={3}>3 Pack</option>
+          <option value={5}>5 Pack</option>
         </select>
-        <select>
-          <option selected disabled>Size</option>
-          <option value="small">S</option>
-          <option value="medium">M</option>
-          <option value="large">L</option>
-          <option value="extra-large">XL</option>
-          <option value="xxl">XXL</option>
+        <select bind:value={size}>
+          <option  disabled>Size</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
         </select>
       </div>
       <div class="" style="margin:0 5px">
@@ -1128,6 +1140,7 @@
     max-width: 1080px;
     background-color: #ffffff;
     padding: 15px;
+    margin-bottom: 150px;
   }
 
   .silver-hiking-socks-wrapper {
@@ -1446,7 +1459,7 @@
 
   @media screen and (max-width: 850px) {
     .sidebar {
-      /* display: block; */
+      display: block;
       position: fixed;
       top: 0;
       right: 0;
@@ -1457,7 +1470,12 @@
       z-index: 1;
       bottom: 0;
       overflow: scroll;
+      scroll-behavior: smooth;
+    
     }
+
+   
+  
 
     .is-divider {
       height: 3px;
@@ -1478,11 +1496,15 @@
       background: none;
       font-size: 25px;
       font-weight: 500;
+      cursor: pointer;
+      outline: none;
+
     }
 
     .d2 {
-      display: none;
+      display: none !important;
     }
+
 
     .container-1080 {
       display: block;
