@@ -2,7 +2,7 @@
 <script>
   import jQuery from "jquery";
   import { onMount } from "svelte";
-  import { fade,slide,fly } from "svelte/transition";
+  import { fade, slide, fly } from "svelte/transition";
   import { beforeUpdate, afterUpdate } from "svelte";
 
   export let blackCrewSocksImages;
@@ -15,18 +15,16 @@
   export let blueAnkleSocksImages;
 
  
-
- 
   let color,
-    canvas=false,
+    canvas = false,
     fprice = 25,
     discount = 0,
     discountedprice = 25,
     type,
-    quantity=1,
+    quantity = 1,
     size,
     total,
-    qty=1,
+    qty = 1,
     sizechart = false;
   let photos = blackCrewSocksImages;
   let totalprice = 0;
@@ -81,8 +79,7 @@
   };
 
   $: {
-    console.log(orders),
-    console.log(quantity);
+    console.log(orders), console.log(quantity);
   }
 
   beforeUpdate(() => {});
@@ -273,14 +270,6 @@
     };
     initZoomy(options);
   });
-
-  const data = {
-		'foo': [1,2,3],
-		'bar': [4,5,6,7,8,9,10,11],
-		'baz': [12,24,42]
-	}
-
-
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -302,7 +291,11 @@
   </video>
   <div style="max-width:1080px" class="w-100 ">
     <div class="navbar justify-content-end">
-      <a href="" class="d1 py-2" on:click|preventDefault={()=>canvas=true}>
+      <a
+        href=""
+        class="d1 py-2"
+        on:click|preventDefault={() => (canvas = true)}
+      >
         <li
           class="cart-item"
           data-bs-toggle="offcanvas"
@@ -400,9 +393,9 @@
         {/if}
       </a>
     </div>
-    {#if totalprice != 0 && canvas==true}
-    
-      <div  transition:fly={{ x:200, duration: 200 }}
+    {#if totalprice != 0 && canvas == true}
+      <div
+        transition:fly={{ x: 200, duration: 200 }}
         class="sidebar offcanvas offcanvas-end"
         tabindex="-1"
         id="offcanvasRight"
@@ -422,7 +415,9 @@
         </div>
         <!-- <span > -->
         <button
-        on:click|preventDefault={()=>{canvas=false}}
+          on:click|preventDefault={() => {
+            canvas = false;
+          }}
           type="button"
           class="btn-close sidebar-close d-flex align-items-center"
           data-bs-dismiss="offcanvas"
@@ -497,396 +492,400 @@
               style="letter-spacing:1px">VIEW CART</button
             >
             <button
-              class="mt-2 text-light font-weight-bold"
+              class="mt-2 text-light font-weight-bold d-flex align-items-center justify-content-center"
               style="background-color: {'#1cb9a2'}; letter-spacing:1px"
-              >GO TO CHECKOUT <i
-                class="fa fa-long-arrow-right mx-2"
-                aria-hidden="true"
-              /></button
             >
+              GO TO CHECKOUT
+              <i class="fa fa-long-arrow-right ml-2" aria-hidden="true" />
+            </button>
           </div>
         </div>
       </div>
     {/if}
     <div class="container-1080">
-      <div class="w-50 socks-slider-wrapper container">
-        <div class="">
-          <div
-            transition:fade={{ duration: 10 }}
-            class="slider slider-single opacity-100"
-          >
-            {#each photos as image}
-              <!-- {#if currentimageid==image.id} -->
-              <!-- in:fade out:fade -->
-              <div
-                class="slider slider-single"
-                on:click|preventDefault={() => {
-                  currentimageid = image.id;
-                }}
-              >
-                <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
+      <div class="socks-container">
+        <div class="w-50 socks-slider-wrapper container">
+          <div class="">
+            <div
+              transition:fade={{ duration: 10 }}
+              class="slider slider-single opacity-100"
+            >
+              {#each photos as image}
+                <!-- {#if currentimageid==image.id} -->
+                <!-- in:fade out:fade -->
+                <div
+                  class="slider slider-single"
+                  on:click|preventDefault={() => {
+                    currentimageid = image.id;
+                  }}
+                >
+                  <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
 
-                <div class="pswp-gallery tmp " id={galleryID}>
-                  <a
-                    href={image.largeImg}
-                    data-pswp-width={1875}
-                    data-pswp-height={2000}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <span class="magnifier">
-                      <i class="fa-solid fa-magnifying-glass" />
-                    </span>
-                  </a>
-                  <figure class="zoomy zoom-image">
-                    <img
-                      class="opacity-100 w-100 tmp slider-nav "
-                      src={image.largeImg}
-                      alt=""
-                    />
-                  </figure>
+                  <div class="pswp-gallery tmp " id={galleryID}>
+                    <a
+                      href={image.largeImg}
+                      data-pswp-width={1875}
+                      data-pswp-height={2000}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <span class="magnifier">
+                        <i class="fa-solid fa-magnifying-glass" />
+                      </span>
+                    </a>
+                    <figure class="zoomy zoom-image">
+                      <img
+                        class="opacity-100 w-100 tmp slider-nav "
+                        src={image.largeImg}
+                        alt=""
+                      />
+                    </figure>
+                  </div>
                 </div>
-              </div>
-              <!-- {/if} -->
-            {/each}
-          </div>
+                <!-- {/if} -->
+              {/each}
+            </div>
 
-          <div class="slider slider-nav" class:d-none={color == "BLUE"}>
-            {#each photos as image}
-              <!-- svelte-ignore a11y-click-events-have-key-events -->
-              <div
-                class="thumb-image"
-                on:click|preventDefault={() => {
-                  currentimageid = image.id;
-                }}
-              >
-                <img
-                  class="opactiy-50"
-                  class:slider-nav-img={currentimageid == image.id}
-                  src={image.thumbImg}
-                  alt=""
-                />
-              </div>
-            {/each}
+            <div class="slider slider-nav" class:d-none={color == "BLUE"}>
+              {#each photos as image}
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div
+                  class="thumb-image"
+                  on:click|preventDefault={() => {
+                    currentimageid = image.id;
+                  }}
+                >
+                  <img
+                    class="opactiy-50"
+                    class:slider-nav-img={currentimageid == image.id}
+                    src={image.thumbImg}
+                    alt=""
+                  />
+                </div>
+              {/each}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="w-50 silver-hiking-socks-wrapper">
-        <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
-          SILVERLIGHT HIKING SOCKS
-        </h1>
-        <span
-          class="stamped-badge rating-container"
-          data-rating="4.8"
-          data-lang=""
-          aria-label="Rated 4.8 out of 5 stars 493reviews"
-          ><span
-            class="stamped-starrating stamped-badge-starrating"
-            aria-hidden="true"
-          >
-            <i class="fa-solid fa-star star" />
-            <i class="fa-solid fa-star star" />
-            <i class="fa-solid fa-star star" />
-            <i class="fa-solid fa-star star" />
-            <i class="fa-solid fa-star star" />
-          </span>
+        <div class="w-50 silver-hiking-socks-wrapper">
+          <h1 class="font-bold" style="font-size: 27.2px; margin-bottom: 20px;">
+            SILVERLIGHT HIKING SOCKS
+          </h1>
           <span
-            class="stamped-badge-caption"
-            data-reviews="493"
+            class="stamped-badge rating-container"
             data-rating="4.8"
-            data-label="reviews"
-            aria-label="493 reviews"
-            data-version="2">493 <span> reviews</span></span
-          ></span
-        >
-        <span
-          ><ul class="socks-description flex">
-            <li>
-              <a href="https://silverlight.store/about/#tab_our-technology"
-                >Silverlight® Technology</a
-              > for odor-free hiking with silver coated threads that never wash out.
-            </li>
-            <li>
-              Blister-Blasting. Fast-Drying. Silky-Smooth Compression Comfort.
-              Long-Lasting Durability.
-            </li>
-            <li>
-              For every pair sold, we <a
-                href="https://silverlight.store/about/#tab_sustainability"
-                >plant a tree</a
-              >
-            </li>
-            <li>
-              <a href="https://silverlight.store/about/#tab_lifetime-guarantee"
-                >Lifetime Guarantee</a
-              >
-            </li>
-            <li class="text-yellow-400">Includes Wash &amp; Care Guide</li>
-            <li>
-              40% <a href="https://silverlight.store/about/#tab_materials"
-                >Nylon</a
-              >, 53%
-              <a href="https://silverlight.store/about/#tab_materials"
-                >New Zealand Merino Wool</a
-              >, 5%
-              <a href="https://silverlight.store/about/#tab_materials"
-                >Silver Yarn</a
-              >, 2%
-              <a href="https://silverlight.store/about/#tab_materials"
-                >Spandex</a
-              >
-            </li>
-          </ul>
-        </span>
-        <div class="">
-          <table class="socks-selection" cellspacing="0">
-            <tbody>
-              <tr>
-                <td class=""><label for="pa_color">COLOR</label></td>
-
-                <td class="">
-                  <ul role="radiogroup" aria-label="Color" class="d-flex">
-                    <li>
-                      <div class="">
-                        <button
-                          class={color == "BLACK" ? "selected" : ""}
-                          on:click={() => {
-                            (color = "BLACK"), (currentimageid = 1);
-                          }}>Black</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                          class={color == "BLUE" ? "selected" : ""}
-                          on:click={() => {
-                            (color = "BLUE"), (currentimageid = 1);
-                          }}>Blue</button
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-
-              <tr>
-                <td class="label"><label for="type">TYPE</label></td>
-                <td class="">
-                  <ul role="radiogroup" aria-label="type" class="d-flex">
-                    <li>
-                      <div class="">
-                        <button
-                          class={type == "ANKLE" ? "selected" : ""}
-                          on:click={() => {
-                            (type = "ANKLE"), (currentimageid = 1);
-                          }}>Ankle</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                          class={type == "CREW" ? "selected" : ""}
-                          on:click={() => {
-                            (type = "CREW"), (currentimageid = 1);
-                          }}>Crew</button
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr>
-                <td class="label"><label for="quantity">QUANTITY</label></td>
-                <td class="">
-                  <ul role="radiogroup" aria-label="quantity" class="d-flex">
-                    <li>
-                      <div class="">
-                        <button
-                          class={quantity == 1 ? "selected" : ""}
-                          on:click={() => {
-                            (quantity = 1), (currentimageid = 1);
-                          }}>1 Pack</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                          class={quantity == 3 ? "selected" : ""}
-                          on:click={() => {
-                            (quantity = 3), (currentimageid = 1);
-                          }}>3 Pack</button
-                        >
-                      </div>
-                    </li>
-                    <li>
-                      <div class="">
-                        <button
-                          class={quantity == 5 ? "selected" : ""}
-                          on:click={() => {
-                            (quantity = 5), (currentimageid = 1);
-                          }}>5 Pack</button
-                        >
-                      </div>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <div class="d-flex justify-content-between size-div">
+            data-lang=""
+            aria-label="Rated 4.8 out of 5 stars 493reviews"
+            ><span
+              class="stamped-starrating stamped-badge-starrating"
+              aria-hidden="true"
+            >
+              <i class="fa-solid fa-star star" />
+              <i class="fa-solid fa-star star" />
+              <i class="fa-solid fa-star star" />
+              <i class="fa-solid fa-star star" />
+              <i class="fa-solid fa-star star" />
+            </span>
+            <span
+              class="stamped-badge-caption"
+              data-reviews="493"
+              data-rating="4.8"
+              data-label="reviews"
+              aria-label="493 reviews"
+              data-version="2">493 <span> reviews</span></span
+            ></span
+          >
+          <span
+            ><ul class="socks-description flex">
+              <li>
+                <a href="https://silverlight.store/about/#tab_our-technology"
+                  >Silverlight® Technology</a
+                > for odor-free hiking with silver coated threads that never wash
+                out.
+              </li>
+              <li>
+                Blister-Blasting. Fast-Drying. Silky-Smooth Compression Comfort.
+                Long-Lasting Durability.
+              </li>
+              <li>
+                For every pair sold, we <a
+                  href="https://silverlight.store/about/#tab_sustainability"
+                  >plant a tree</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://silverlight.store/about/#tab_lifetime-guarantee"
+                  >Lifetime Guarantee</a
+                >
+              </li>
+              <li class="text-yellow-400">Includes Wash &amp; Care Guide</li>
+              <li>
+                40% <a href="https://silverlight.store/about/#tab_materials"
+                  >Nylon</a
+                >, 53%
+                <a href="https://silverlight.store/about/#tab_materials"
+                  >New Zealand Merino Wool</a
+                >, 5%
+                <a href="https://silverlight.store/about/#tab_materials"
+                  >Silver Yarn</a
+                >, 2%
+                <a href="https://silverlight.store/about/#tab_materials"
+                  >Spandex</a
+                >
+              </li>
+            </ul>
+          </span>
+          <div class="">
+            <table class="socks-selection" cellspacing="0">
+              <tbody>
                 <tr>
-                  <td class="label"><label for="pa_size">SIZE</label></td>
+                  <td class=""><label for="pa_color">COLOR</label></td>
 
                   <td class="">
-                    <ul role="radiogroup" aria-label="Size" class="d-flex">
+                    <ul role="radiogroup" aria-label="Color" class="d-flex">
                       <li>
                         <div class="">
                           <button
-                            class={size == "S" ? "selected" : ""}
+                            class={color == "BLACK" ? "selected" : ""}
                             on:click={() => {
-                              (size = "S"), (currentimageid = 1);
-                            }}>S</button
-                          >
-                        </div>
-                      </li>
-                      <li>
-                        <div class="borde">
-                          <button
-                            class={size == "M" ? "selected" : ""}
-                            on:click={() => {
-                              (size = "M"), (currentimageid = 1);
-                            }}>M</button
+                              (color = "BLACK"), (currentimageid = 1);
+                            }}>Black</button
                           >
                         </div>
                       </li>
                       <li>
                         <div class="">
                           <button
-                            class={size == "L" ? "selected" : ""}
+                            class={color == "BLUE" ? "selected" : ""}
                             on:click={() => {
-                              (size = "L"), (currentimageid = 1);
-                            }}>L</button
-                          >
-                        </div>
-                      </li>
-                      <li>
-                        <div class="">
-                          <button
-                            class={size == "XL" ? "selected" : ""}
-                            on:click={() => {
-                              (size = "XL"), (currentimageid = 1);
-                            }}>XL</button
-                          >
-                        </div>
-                      </li>
-                      <li>
-                        <div class="">
-                          <button
-                            class={size == "XXL" ? "selected" : ""}
-                            on:click={() => {
-                              (size = "XXL"), (currentimageid = 1);
-                            }}>XXL</button
+                              (color = "BLUE"), (currentimageid = 1);
+                            }}>Blue</button
                           >
                         </div>
                       </li>
                     </ul>
                   </td>
                 </tr>
-                <div class="chart-text">
-                  <p>
-                    <a
-                      class="popmake-9356 pum-trigger"
-                      href
-                      style="cursor: pointer;"
-                      on:click|preventDefault={() => {
-                        sizechart = !sizechart;
-                      }}>Size Chart</a
+
+                <tr>
+                  <td class="label"><label for="type">TYPE</label></td>
+                  <td class="">
+                    <ul role="radiogroup" aria-label="type" class="d-flex">
+                      <li>
+                        <div class="">
+                          <button
+                            class={type == "ANKLE" ? "selected" : ""}
+                            on:click={() => {
+                              (type = "ANKLE"), (currentimageid = 1);
+                            }}>Ankle</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={type == "CREW" ? "selected" : ""}
+                            on:click={() => {
+                              (type = "CREW"), (currentimageid = 1);
+                            }}>Crew</button
+                          >
+                        </div>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="label"><label for="quantity">QUANTITY</label></td>
+                  <td class="">
+                    <ul role="radiogroup" aria-label="quantity" class="d-flex">
+                      <li>
+                        <div class="">
+                          <button
+                            class={quantity == 1 ? "selected" : ""}
+                            on:click={() => {
+                              (quantity = 1), (currentimageid = 1);
+                            }}>1 Pack</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={quantity == 3 ? "selected" : ""}
+                            on:click={() => {
+                              (quantity = 3), (currentimageid = 1);
+                            }}>3 Pack</button
+                          >
+                        </div>
+                      </li>
+                      <li>
+                        <div class="">
+                          <button
+                            class={quantity == 5 ? "selected" : ""}
+                            on:click={() => {
+                              (quantity = 5), (currentimageid = 1);
+                            }}>5 Pack</button
+                          >
+                        </div>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <div class="d-flex justify-content-between size-div">
+                  <tr>
+                    <td class="label"><label for="pa_size">SIZE</label></td>
+
+                    <td class="">
+                      <ul role="radiogroup" aria-label="Size" class="d-flex">
+                        <li>
+                          <div class="">
+                            <button
+                              class={size == "S" ? "selected" : ""}
+                              on:click={() => {
+                                (size = "S"), (currentimageid = 1);
+                              }}>S</button
+                            >
+                          </div>
+                        </li>
+                        <li>
+                          <div class="borde">
+                            <button
+                              class={size == "M" ? "selected" : ""}
+                              on:click={() => {
+                                (size = "M"), (currentimageid = 1);
+                              }}>M</button
+                            >
+                          </div>
+                        </li>
+                        <li>
+                          <div class="">
+                            <button
+                              class={size == "L" ? "selected" : ""}
+                              on:click={() => {
+                                (size = "L"), (currentimageid = 1);
+                              }}>L</button
+                            >
+                          </div>
+                        </li>
+                        <li>
+                          <div class="">
+                            <button
+                              class={size == "XL" ? "selected" : ""}
+                              on:click={() => {
+                                (size = "XL"), (currentimageid = 1);
+                              }}>XL</button
+                            >
+                          </div>
+                        </li>
+                        <li>
+                          <div class="">
+                            <button
+                              class={size == "XXL" ? "selected" : ""}
+                              on:click={() => {
+                                (size = "XXL"), (currentimageid = 1);
+                              }}>XXL</button
+                            >
+                          </div>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                  <div class="chart-text">
+                    <p>
+                      <a
+                        class="popmake-9356 pum-trigger"
+                        href
+                        style="cursor: pointer;"
+                        on:click|preventDefault={() => {
+                          sizechart = !sizechart;
+                        }}>Size Chart</a
+                      >
+                    </p>
+                  </div>
+                </div>
+              </tbody>
+            </table>
+            <div class="price-container">
+              <div
+                class="d-flex price-sub-container"
+                style="margin:12px 0 15px 0"
+              >
+                <div class="price-wrapper ">
+                  <p class="price product-page-price">
+                    <span class="price"
+                      ><span class=""
+                        ><del aria-hidden="true">
+                          <span class="">
+                            {#if discount != 0}
+                              <span><span class="">$</span>{fprice}</span>
+                            {/if}
+                          </span>
+                        </del>
+                        <ins style="text-decoration: none;"
+                          ><span
+                            ><span
+                              ><span class="">$</span>{discountedprice}</span
+                            ></span
+                          ></ins
+                        ></span
+                      ></span
                     >
                   </p>
+
+                  {#if discount != 0}
+                    <p class="save">Save {discount}%</p>
+                  {/if}
+                </div>
+                <div class="quantity d-flex round-pill">
+                  <input
+                    type="button"
+                    value="-"
+                    class="minus button is-form"
+                    on:click={handleqtydec}
+                  />
+
+                  <input
+                    type="number"
+                    id="quantity_63ef2fbd9a85e"
+                    class="input-text qty text"
+                    step="1"
+                    min="1"
+                    max="15"
+                    name="quantity"
+                    bind:value={qty}
+                    title="Qty"
+                    size="4"
+                    pattern="[0-9]*"
+                    inputmode="numeric"
+                    aria-labelledby="Silverlight Hiking Socks quantity"
+                  />
+                  <input
+                    type="button"
+                    value="+"
+                    class="plus button is-form"
+                    on:click={handleqty}
+                  />
                 </div>
               </div>
-            </tbody>
-          </table>
-          <div class="price-container">
-            <div
-              class="d-flex price-sub-container"
-              style="margin:12px 0 15px 0"
-            >
-              <div class="price-wrapper ">
-                <p class="price product-page-price">
-                  <span class="price"
-                    ><span class=""
-                      ><del aria-hidden="true">
-                        <span class="">
-                          {#if discount != 0}
-                            <span><span class="">$</span>{fprice}</span>
-                          {/if}
-                        </span>
-                      </del>
-                      <ins style="text-decoration: none;"
-                        ><span
-                          ><span><span class="">$</span>{discountedprice}</span
-                          ></span
-                        ></ins
-                      ></span
-                    ></span
-                  >
-                </p>
 
-                {#if discount != 0}
-                  <p class="save">Save {discount}%</p>
-                {/if}
-              </div>
-              <div class="quantity d-flex round-pill">
-                <input
-                  type="button"
-                  value="-"
-                  class="minus button is-form"
-                  on:click={handleqtydec}
-                />
-                
-                <input
-                  type="number"
-                  id="quantity_63ef2fbd9a85e"
-                  class="input-text qty text"
-                  step="1"
-                  min="1"
-                  max="15"
-                  name="quantity"
-                  bind:value={qty}
-                  title="Qty"
-                  size="4"
-                  pattern="[0-9]*"
-                  inputmode="numeric"
-                  aria-labelledby="Silverlight Hiking Socks quantity"
-                />
-                <input
-                  type="button"
-                  value="+"
-                  class="plus button is-form"
-                  on:click={handleqty}
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                class="add-to-cart-button button alt mr-2"
-                on:click={handleCart}>ADD TO CART</button
-              >
-              <button class="checkout-button">
-                <a
-                  href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
-                  class=""
-                  >CHECKOUT<i
-                    class="fa fa-long-arrow-right mx-2"
-                    aria-hidden="true"
-                  /></a
+              <div>
+                <button
+                  type="submit"
+                  class="add-to-cart-button button alt mr-2"
+                  on:click={handleCart}>ADD TO CART</button
                 >
-              </button>
+                <button class="checkout-button">
+                  <a
+                    href="https://silverlight.store/checkout/?add-to-cart=6977&amp;quantity=1"
+                    class=""
+                    >CHECKOUT<i
+                      class="fa fa-long-arrow-right mx-2"
+                      aria-hidden="true"
+                    /></a
+                  >
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -901,16 +900,6 @@
           />
         </div>
       {/if}
-
-
-      
-    <!-- accordian -->
-  <div>
-    {#each Object.entries(data) as entry}
-    <Item {entry} />
-    {/each}
-  </div>
-
     </div>
     {#if sizechart}
       <div transition:fade={{ duration: 200 }} class="size-chart-center">
@@ -958,15 +947,14 @@
       <div class="center-socks-selection d-flex align-items-center">
         <div class="d-flex flex-wrap" style="padding-left:10px; font-size:14px">
           <span style="margin-left: 10px;">
-            {#if discount!= 0}
-            <del>
-              <span style="color:#777777"> ${fprice} </span>
-            </del>
-           
+            {#if discount != 0}
+              <del>
+                <span style="color:#777777"> ${fprice} </span>
+              </del>
 
-            <span style="font-weight: 700">${discountedprice}</span>
+              <span style="font-weight: 700">${discountedprice}</span>
             {:else}
-            <span style="color:#777777"> ${fprice} </span>
+              <span style="color:#777777"> ${fprice} </span>
             {/if}
           </span>
           {#if discount != 0}
@@ -986,7 +974,7 @@
         class="d-flex justify-content-center flex-wrap"
         style="font-size: 14px;"
       >
-        <select bind:value={color} >
+        <select bind:value={color}>
           <option disabled>Color</option>
           <option value="BLACK">Black</option>
           <option value="BLUE">Blue</option>
@@ -997,13 +985,13 @@
           <option value="CREW">Crew</option>
         </select>
         <select bind:value={quantity}>
-          <option  disabled>Quantity</option>
+          <option disabled>Quantity</option>
           <option value={1}>1 Pack</option>
           <option value={3}>3 Pack</option>
           <option value={5}>5 Pack</option>
         </select>
         <select bind:value={size}>
-          <option  disabled>Size</option>
+          <option disabled>Size</option>
           <option value="S">S</option>
           <option value="M">M</option>
           <option value="L">L</option>
@@ -1047,19 +1035,9 @@
     background-color: #ffffff;
     padding: 10px 20px;
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);
+    bottom: 0;
+    display: none;
   }
-
-  /* .left-socks-selection {
-    width: 30%;
-  }
-
-  .center-socks-selection {
-    width: 25%;
-  }
-
-  .right-socks-selection {
-    width: 40%;
-  } */
 
   .right-socks-selection select {
     margin: 0 3px;
@@ -1092,7 +1070,6 @@
 
   .zoomy {
     overflow: hidden;
-
     cursor: auto;
   }
 
@@ -1164,11 +1141,16 @@
   }
 
   .container-1080 {
-    display: flex;
+    /* display: flex; */
     max-width: 1080px;
     background-color: #ffffff;
     padding: 15px;
     margin-bottom: 150px;
+  }
+
+  .socks-container {
+    display: flex;
+    padding: 15px 0 40px;
   }
 
   .silver-hiking-socks-wrapper {
@@ -1180,14 +1162,6 @@
     text-decoration: none;
   }
 
-  /* .slider {
-    opacity: 1 !important;
-  } */
-
-  /* .slider img {
-    opacity: 1 !important;
-  } */
-
   .slider-single img {
     opacity: 1 !important;
   }
@@ -1196,10 +1170,6 @@
     display: grid;
     margin-bottom: 25px;
   }
-
-  /* .slider-nav img{
-    opacity: 0.5 !important;
-  } */
 
   .slider-nav-img {
     opacity: 1 !important;
@@ -1485,6 +1455,147 @@
     display: none;
   }
 
+  .facility-container {
+    padding: 0 15px 15px;
+  }
+
+  .icon-inner svg {
+    width: 50px;
+    height: 53px;
+  }
+
+  .icon-inner path {
+    fill: #777777;
+  }
+
+  .facility-title h6 {
+    margin-left: 10px;
+    margin-bottom: 0;
+    opacity: 0.8;
+  }
+
+  .advantage-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+  }
+
+  .advantage-list li {
+    width: 49%;
+    display: inline-block;
+    padding: 5px;
+    transition: 0.1s;
+    padding-left: 20px;
+    position: relative;
+    margin: 5px;
+    overflow: hidden;
+    background: #f2f2f2;
+  }
+
+  .advantage-list li:hover {
+    transform: scale(1.01);
+  }
+
+  .advantage-list li:hover:before {
+    background: #303e48 !important;
+  }
+
+  .advantage-list li:before {
+    content: "";
+    background: #1cb9a2;
+    width: 40px;
+    height: 100px;
+    left: -21px;
+    top: -40px;
+    position: absolute;
+    transform: rotate(22deg);
+  }
+
+  .advantage-list li:nth-child(odd) {
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 10px;
+  }
+
+  .advantage-list li:nth-child(even) {
+    margin: 0;
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+
+  .advantage-image-icon {
+    float: left;
+  }
+
+  .advantage-image-icon img {
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+  }
+
+  .advantage-list li a {
+    text-decoration: none;
+  }
+
+  .content-area h3 {
+    color: #1cb9a2;
+    font-size: 18px;
+    margin-bottom: 0;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+
+  .content-area p {
+    color: #5e646b;
+    font-size: 14px;
+    margin-top: 0;
+  }
+
+  .heading-area {
+    background: url(../public/images/bg-image.jpeg);
+    background-repeat: no-repeat;
+    border-radius: 10px px 10px 0 0;
+    background-position: right;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #1cb9a2;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .img-sec {
+    width: 8%;
+  }
+
+  .img-sec img {
+    width: 100%;
+    margin: 0 !important;
+    background: #fff;
+    border: 4px solid #fff;
+  }
+
+  .text-area {
+    padding-left: 15px;
+    width: 92%;
+  }
+
+  .text-area h3 {
+    color: #fff;
+    margin-top: 0;
+    margin: 0;
+    line-height: normal;
+    font-size: 26px;
+  }
+
+  .text-area p {
+    color: #fff;
+    font-size: 1vw;
+    margin: 0;
+    line-height: 1.2vw;
+  }
+
   @media screen and (max-width: 850px) {
     .sidebar {
       display: block;
@@ -1499,11 +1610,7 @@
       bottom: 0;
       overflow: scroll;
       scroll-behavior: smooth;
-    
     }
-
-   
-  
 
     .is-divider {
       height: 3px;
@@ -1526,13 +1633,11 @@
       font-weight: 500;
       cursor: pointer;
       outline: none;
-
     }
 
     .d2 {
       display: none !important;
     }
-
 
     .container-1080 {
       display: block;
@@ -1543,6 +1648,10 @@
       padding: 0;
       margin: 0;
       width: 100% !important;
+    }
+
+    .socks-container {
+      display: block;
     }
 
     .socks-slider-wrapper {
@@ -1565,6 +1674,10 @@
     .quantity {
       margin: 10px 0;
     }
+
+    .single-facility {
+      flex-direction: column;
+    }
   }
 
   @media screen and (max-width: 420px) {
@@ -1579,7 +1692,7 @@
   }
 
   @media screen and (max-width: 370px) {
-    .size-div{
+    .size-div {
       display: block !important;
     }
   }
