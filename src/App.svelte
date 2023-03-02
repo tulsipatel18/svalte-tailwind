@@ -14,6 +14,7 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
+ 
   let color,
     canvas = false,
     fprice = 25,
@@ -431,6 +432,7 @@
           aria-label="Close">X</button
         >
         <!-- </span> -->
+       
         <div class="offcanvas-body">
           <div>
             {#each orders as order}
