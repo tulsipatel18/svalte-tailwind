@@ -14,7 +14,7 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
-  //coment
+ 
 
  
   let color,
