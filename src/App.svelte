@@ -262,6 +262,7 @@
   });
 
   import { initZoomy } from "./initZoomy";
+  import Item from "./Item.svelte";
 
   document.addEventListener("DOMContentLoaded", function () {
     var options = {
@@ -272,6 +273,14 @@
     };
     initZoomy(options);
   });
+
+  const data = {
+		'foo': [1,2,3],
+		'bar': [4,5,6,7,8,9,10,11],
+		'baz': [12,24,42]
+	}
+
+
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -892,6 +901,16 @@
           />
         </div>
       {/if}
+
+
+      
+    <!-- accordian -->
+  <div>
+    {#each Object.entries(data) as entry}
+    <Item {entry} />
+    {/each}
+  </div>
+
     </div>
     {#if sizechart}
       <div transition:fade={{ duration: 200 }} class="size-chart-center">
@@ -914,7 +933,13 @@
         />
       </div>
     {/if}
+
+
+
+
   </div>
+
+  
 
   <div
     class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
