@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import { fade, slide, fly } from "svelte/transition";
   import { beforeUpdate, afterUpdate } from "svelte";
+  import Accordion from './Accordion.svelte'
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -269,14 +270,8 @@
     initZoomy(options);
   });
 
-  jQuery(window).scroll(function () {
-    var scroll = jQuery(document).scrollTOp();
-    if (scroll <= 50) {
-      jQuery(".fixed-socks-selection").slideUp();
-    } else {
-      jQuery(".fixed-socks-selection").slideDown();
-    }
-  });
+  
+
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -998,6 +993,10 @@
         </div>
       {/if}
 
+
+      
+    
+
       <!-- Facility container -->
       <div class="facility-container">
         <div class="d-flex justify-content-between align-items-center">
@@ -1534,6 +1533,122 @@
                 />
               </p>
               <h2 style="text-align: center;">FREQUENTLY ASKED QUESTIONS</h2>
+              <!-- <div class="accordion" rel="" />
+              <div class="accordion-item">
+                <h2 href="" class="accordion-header" id="headingOne">
+                  <button class="toggle accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="icon-angle-down" />
+                  </button>
+                  <span>Where are they made?</span>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                  <p>
+                    There are very few factories in the world who are able to
+                    work with silver yarns and can produce dual-layer socks with
+                    compression at the same time. It requires state of the art
+                    machinery, that’s just been available in the last few years
+                    as well as knowledge how to blend silver yarns into the
+                    socks, a delicate process.
+                  </p>
+                  <p>
+                    We have been testing factories throughout the world and we
+                    found only one that was able to produce Silverlight socks in
+                    the quality we require, a small specialized factory in
+                    China. Out of 15 factories, 8 of them in China, we were left
+                    only with one who is able to produce the socks that so many
+                    of our customers fell in love with. For a more detailed
+                    explanation, we wrote a blog post about <a
+                      href="https://silverlight.store/made-in-china/"
+                      >Why Silverlight socks are made in China</a
+                    ><br />
+                  </p>
+                </div>  
+                </div>
+              </div>
+              <div class="accordion-item">
+                <a href="" class="accordion-title plain">
+                  <button class="toggle">
+                    <i class="icon-angle-down" />
+                  </button>
+                  <span
+                    >Why are Silverlight socks slightly more expensive than
+                    other hiking sock brands?</span
+                  >
+                </a>
+                <div class="accordion-inner">
+                  <p>
+                    Our production price is about twice as high as for socks
+                    that don’t contain silver. Silver is a very expensive
+                    material, but we believe strongly that to make the best
+                    hiking socks possible, silver yarn has to be part of the
+                    equation. Unlike most other brands we offer free worldwide
+                    shipping even for the first pair. By utilizing a direct to
+                    consumer (DTC) model without middlemen and savings for
+                    shipping when sending multiple pairs in one package, we are
+                    able to offer our socks for a similar price as other
+                    high-end hiking sock brands, for purchases of 3 pairs, even
+                    though we have much higher production cost. We sell 5-packs
+                    at an even greater discount, keeping pricing aligned with
+                    our true cost.<br />
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <a href="" class="accordion-title plain">
+                  <button class="toggle">
+                    <i class="icon-angle-down" />
+                  </button>
+                  <span
+                    >What makes them different from the brand I'm wearing now?</span
+                  >
+                </a>
+                <div class="accordion-inner">
+                  <p>
+                    Our socks are the only dual-layer compression hiking socks
+                    with silver yarns on the market. Compared to most hiking
+                    socks available, this is how Silverlight socks are
+                    different:
+                  </p>
+                  <ul>
+                    <li>
+                      They dry faster, thanks to the dual-layer blend of merino
+                      wool and nylon/spandex
+                    </li>
+                    <li>
+                      They don’t smell. Merino wool is naturally anti-bacterial,
+                      however it doesn’t actively kill bacteria like silver
+                      does.
+                    </li>
+                    <li>
+                      They fit snug and never move, because of the outer
+                      compression layer.
+                    </li>
+                    <li>
+                      Silverlight socks are designed to prevent blisters better
+                      than any other sock.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <a href="" class="accordion-title plain">
+                  <button class="toggle">
+                    <i class="icon-angle-down" />
+                  </button>
+                  <span
+                    >How to recognize which sock is for left and which is for
+                    right?</span
+                  >
+                </a>
+                <div class="accordion-inner">
+                  <p>
+                    Silverlight socks have a different text inside the rib top
+                    front for left and right socks. “Venture” on left socks and
+                    “Out” for the right side.
+                  </p>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -1560,7 +1675,13 @@
         />
       </div>
     {/if}
+
+
+
+
   </div>
+
+  
 
   <!-- <div
     class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
