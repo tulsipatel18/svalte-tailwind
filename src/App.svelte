@@ -14,7 +14,6 @@
   export let blueCrewSocksImages;
   export let blueAnkleSocksImages;
 
- 
   let color,
     canvas = false,
     fprice = 25,
@@ -297,109 +296,210 @@
       type="video/mp4"
     />
   </video>
-  <div style="max-width:1080px" class="w-100 ">
-    <div class="navbar justify-content-end">
-      <a
-        href=""
-        class="d1 py-2"
-        on:click|preventDefault={() => (canvas = true)}
+
+  <div style="max-width:1080px" class="w-100 m-auto">
+    <!-- TOP Header -->
+    <div class="">
+      <div class="top-header">
+        <ul class="text-center">
+          <li class="text-white decoration-none">
+            <a href="" class="text-white">Worldwide Free Shipping</a>
+            ｜
+            <a href="" class="text-white">Lifetime Guarantee</a>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="header w-100 d-flex justify-content-between align-items-center"
       >
-        <li
-          class="cart-item"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight"
-        >
-          <span class="cart-icon">
-            {#if orders}
-              <strong>{orders.length}</strong>
-            {:else}
-              <strong>{0}</strong>
-            {/if}
-          </span>
-        </li>
+        <div class="d-flex inner-header-left">
+          <ul class="d-flex align-items-center">
+            <li class="">
+              <a
+                href="https://silverlight.store/product/silverlight-socks/"
+                class="">SOCKS</a
+              >
+            </li>
+            <li class="">
+              <a href="https://app.silverlight.store" class="">HIKE-TO-EARN</a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/about/" class="">ABOUT</a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/blog/" class="">BLOG</a>
+            </li>
+          </ul>
+        </div>
 
-        {#if totalprice != 0}
-          <div class="d2">
-            <div class="p-4 offcanvas-body">
-              <div style="max-height:500px;overflow-y:scroll">
-                {#each orders as order}
-                  <div
-                    class="cart-container d-flex justify-content-between"
-                    style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
-                  >
-                    <div>
-                      <img
-                        style="max-width: 100px;max-hight:100px"
-                        src={order.img}
-                        alt=""
-                      />
-                    </div>
-                    <div
-                      class="d-flex flex-column align-items-start"
-                      style="color:#777777"
-                    >
-                      <div style="margin-bottom: 10px;margin:0 10px">
-                        <div class="text-left">
-                          <h6>Silverlight Hiking Socks</h6>
-                        </div>
-                        <div class="text-left" style="font-size:13px">
-                          <span>COLOR : {order.color}</span>
-                          <span>TYPE : {order.type}</span>
-                          <span>QUANTITY : {order.quantity} </span>
-                          <span>PACK SIZE : {order.size}</span>
-                        </div>
+        <div class="inner-header-center d-flex align-items-center">
+          <a
+            href="https://silverlight.store/"
+            title="Silverlight - Discover Something New Today"
+          >
+            <!-- <img
+              width="150"
+              height="100"
+              src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
+              class=""
+              alt="Silverlight"
+            /> -->
+            <img
+              width="150"
+              height="41"
+              src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
+              class="header-logo-dark"
+              alt="Silverlight"
+            />
+          </a>
+        </div>
 
-                        <div
-                          class="text-left"
-                          style="font-weight: bold; color: green; opacity: 0.8;"
-                          class:d-none={order.discount == 0}
+        <div class="inner-header-right">
+          <ul class="d-flex align-items-center">
+            <li class="">
+              <a href="https://silverlight.store/help/#tab_faq">
+                <i class="fa-regular fa-circle-question" />
+              </a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/account/" class="">
+                <i class="fa-solid fa-user" />
+              </a>
+            </li>
+            <li class="cart-box py-2">
+              <a
+                href=""
+                class="d1 py-2"
+                on:click|preventDefault={() => (canvas = true)}
+              >
+                <li
+                  class="cart-item"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasRight"
+                  aria-controls="offcanvasRight"
+                >
+                  <span class="cart-icon">
+                    {#if orders}
+                      <strong>{orders.length}</strong>
+                    {:else}
+                      <strong>{0}</strong>
+                    {/if}
+                  </span>
+                </li>
+
+                {#if totalprice != 0}
+                  <div class="d2">
+                    <div class="p-4 offcanvas-body">
+                      <div style="max-height:500px;overflow-y:scroll">
+                        {#each orders as order}
+                          <div
+                            class="cart-container d-flex justify-content-between"
+                            style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                          >
+                            <div>
+                              <img
+                                style="max-width: 100px;max-hight:100px"
+                                src={order.img}
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="d-flex flex-column align-items-start"
+                              style="color:#777777"
+                            >
+                              <div style="margin-bottom: 10px;margin:0 10px">
+                                <div class="text-left">
+                                  <h6>Silverlight Hiking Socks</h6>
+                                </div>
+                                <div class="text-left" style="font-size:13px">
+                                  <span>COLOR : {order.color}</span>
+                                  <span>TYPE : {order.type}</span>
+                                  <span>QUANTITY : {order.quantity} </span>
+                                  <span>PACK SIZE : {order.size}</span>
+                                </div>
+
+                                <div
+                                  class="text-left"
+                                  style="font-weight: bold; color: green; opacity: 0.8;"
+                                  class:d-none={order.discount == 0}
+                                >
+                                  <span>Save {order.discount}%</span>
+                                </div>
+
+                                <div class="text-left">
+                                  <span
+                                    >{order.qty} x ${order.discountedprice}.00</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-block mr-1">
+                              <button
+                                class="rounded-circle remove-item-button"
+                                on:click|preventDefault={() =>
+                                  handleDelete(order.id)}>x</button
+                              >
+                            </div>
+                          </div>
+                        {/each}
+                      </div>
+
+                      <div
+                        class="border border-right-0 border-left-0"
+                        style="color:#777777"
+                      >
+                        <h6 style="padding:15px 0;margin:0">
+                          Subtotal: ${totalprice}.00
+                        </h6>
+                      </div>
+                      <div class="d-flex flex-column mt-3">
+                        <button
+                          class="text-light bg-dark font-weight-bold"
+                          style="letter-spacing:1px">VIEW CART</button
                         >
-                          <span>Save {order.discount}%</span>
-                        </div>
-
-                        <div class="text-left">
-                          <span>{order.qty} x ${order.discountedprice}.00</span>
-                        </div>
+                        <button
+                          class="mt-2 text-light font-weight-bold"
+                          style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                          >GO TO CHECKOUT <i
+                            class="fa fa-long-arrow-right mx-2"
+                            aria-hidden="true"
+                          /></button
+                        >
                       </div>
                     </div>
-                    <div class="d-block mr-1">
-                      <button
-                        class="rounded-circle remove-item-button"
-                        on:click|preventDefault={() => handleDelete(order.id)}
-                        >x</button
-                      >
-                    </div>
                   </div>
-                {/each}
-              </div>
+                {/if}
+              </a>
+            </li>
+            <li class="html custom html_top_right_text">
+              <select class="select-currency">
+                <option valuse="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option valuse="AUD">AUD</option>
+                <option value="NZD">NZD</option>
+                <option value="CAD">CAD</option>
+                <option valuse="DKK">DKK</option>
+                <option value="SEK">SEK</option>
+                <option value="NOK">NOK</option>
+                <option valuse="CHF">CHF</option>
+                <option value="PLN">PLN</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-              <div
-                class="border border-right-0 border-left-0"
-                style="color:#777777"
-              >
-                <h6 style="padding:15px 0;margin:0">
-                  Subtotal: ${totalprice}.00
-                </h6>
-              </div>
-              <div class="d-flex flex-column mt-3">
-                <button
-                  class="text-light bg-dark font-weight-bold"
-                  style="letter-spacing:1px">VIEW CART</button
-                >
-                <button
-                  class="mt-2 text-light font-weight-bold"
-                  style="background-color: {'#1cb9a2'}; letter-spacing:1px"
-                  >GO TO CHECKOUT <i
-                    class="fa fa-long-arrow-right mx-2"
-                    aria-hidden="true"
-                  /></button
-                >
-              </div>
-            </div>
-          </div>
-        {/if}
-      </a>
+    <!-- HOME / SOCKS -->
+    <div class="home-socks">
+      <a class="text-white" href="https://silverlight.store">HOME</a>
+      <span class="divider text-white">/</span>
+      <a
+        class="text-white"
+        href="https://silverlight.store/product-category/socks/">SOCKS</a
+      >
     </div>
     {#if totalprice != 0 && canvas == true}
       <div
@@ -421,7 +521,6 @@
             <div class="is-divider mr-auto ml-auto" />
           </div>
         </div>
-        <!-- <span > -->
         <button
           on:click|preventDefault={() => {
             canvas = false;
@@ -431,8 +530,6 @@
           data-bs-dismiss="offcanvas"
           aria-label="Close">X</button
         >
-        <!-- </span> -->
-       
         <div class="offcanvas-body">
           <div>
             {#each orders as order}
@@ -519,16 +616,12 @@
               class="slider slider-single opacity-100"
             >
               {#each photos as image}
-                <!-- {#if currentimageid==image.id} -->
-                <!-- in:fade out:fade -->
                 <div
                   class="slider slider-single"
                   on:click|preventDefault={() => {
                     currentimageid = image.id;
                   }}
                 >
-                  <!-- <img  class="opacity-100 w-100"  src={image.largeImg} alt="" /> -->
-
                   <div class="pswp-gallery tmp " id={galleryID}>
                     <a
                       href={image.largeImg}
@@ -550,13 +643,11 @@
                     </figure>
                   </div>
                 </div>
-                <!-- {/if} -->
               {/each}
             </div>
 
             <div class="slider slider-nav" class:d-none={color == "BLUE"}>
               {#each photos as image}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div
                   class="thumb-image"
                   on:click|preventDefault={() => {
@@ -821,24 +912,22 @@
               >
                 <div class="price-wrapper ">
                   <p class="price product-page-price">
-                    <span class="price"
-                      ><span class=""
-                        ><del aria-hidden="true">
+                    <span class="price">
+                      <span class="">
+                        <del aria-hidden="true">
                           <span class="">
                             {#if discount != 0}
                               <span><span class="">$</span>{fprice}</span>
                             {/if}
                           </span>
                         </del>
-                        <ins style="text-decoration: none;"
-                          ><span
-                            ><span
-                              ><span class="">$</span>{discountedprice}</span
-                            ></span
-                          ></ins
-                        ></span
-                      ></span
-                    >
+                        <ins style="text-decoration: none;">
+                          <span>
+                            ${discountedprice}
+                          </span>
+                        </ins>
+                      </span>
+                    </span>
                   </p>
 
                   {#if discount != 0}
@@ -1445,122 +1534,6 @@
                 />
               </p>
               <h2 style="text-align: center;">FREQUENTLY ASKED QUESTIONS</h2>
-              <!-- <div class="accordion" rel="" />
-              <div class="accordion-item">
-                <h2 href="" class="accordion-header" id="headingOne">
-                  <button class="toggle accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <i class="icon-angle-down" />
-                  </button>
-                  <span>Where are they made?</span>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                  <p>
-                    There are very few factories in the world who are able to
-                    work with silver yarns and can produce dual-layer socks with
-                    compression at the same time. It requires state of the art
-                    machinery, that’s just been available in the last few years
-                    as well as knowledge how to blend silver yarns into the
-                    socks, a delicate process.
-                  </p>
-                  <p>
-                    We have been testing factories throughout the world and we
-                    found only one that was able to produce Silverlight socks in
-                    the quality we require, a small specialized factory in
-                    China. Out of 15 factories, 8 of them in China, we were left
-                    only with one who is able to produce the socks that so many
-                    of our customers fell in love with. For a more detailed
-                    explanation, we wrote a blog post about <a
-                      href="https://silverlight.store/made-in-china/"
-                      >Why Silverlight socks are made in China</a
-                    ><br />
-                  </p>
-                </div>  
-                </div>
-              </div>
-              <div class="accordion-item">
-                <a href="" class="accordion-title plain">
-                  <button class="toggle">
-                    <i class="icon-angle-down" />
-                  </button>
-                  <span
-                    >Why are Silverlight socks slightly more expensive than
-                    other hiking sock brands?</span
-                  >
-                </a>
-                <div class="accordion-inner">
-                  <p>
-                    Our production price is about twice as high as for socks
-                    that don’t contain silver. Silver is a very expensive
-                    material, but we believe strongly that to make the best
-                    hiking socks possible, silver yarn has to be part of the
-                    equation. Unlike most other brands we offer free worldwide
-                    shipping even for the first pair. By utilizing a direct to
-                    consumer (DTC) model without middlemen and savings for
-                    shipping when sending multiple pairs in one package, we are
-                    able to offer our socks for a similar price as other
-                    high-end hiking sock brands, for purchases of 3 pairs, even
-                    though we have much higher production cost. We sell 5-packs
-                    at an even greater discount, keeping pricing aligned with
-                    our true cost.<br />
-                  </p>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <a href="" class="accordion-title plain">
-                  <button class="toggle">
-                    <i class="icon-angle-down" />
-                  </button>
-                  <span
-                    >What makes them different from the brand I'm wearing now?</span
-                  >
-                </a>
-                <div class="accordion-inner">
-                  <p>
-                    Our socks are the only dual-layer compression hiking socks
-                    with silver yarns on the market. Compared to most hiking
-                    socks available, this is how Silverlight socks are
-                    different:
-                  </p>
-                  <ul>
-                    <li>
-                      They dry faster, thanks to the dual-layer blend of merino
-                      wool and nylon/spandex
-                    </li>
-                    <li>
-                      They don’t smell. Merino wool is naturally anti-bacterial,
-                      however it doesn’t actively kill bacteria like silver
-                      does.
-                    </li>
-                    <li>
-                      They fit snug and never move, because of the outer
-                      compression layer.
-                    </li>
-                    <li>
-                      Silverlight socks are designed to prevent blisters better
-                      than any other sock.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="accordion-item">
-                <a href="" class="accordion-title plain">
-                  <button class="toggle">
-                    <i class="icon-angle-down" />
-                  </button>
-                  <span
-                    >How to recognize which sock is for left and which is for
-                    right?</span
-                  >
-                </a>
-                <div class="accordion-inner">
-                  <p>
-                    Silverlight socks have a different text inside the rib top
-                    front for left and right socks. “Venture” on left socks and
-                    “Out” for the right side.
-                  </p>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -1589,7 +1562,7 @@
     {/if}
   </div>
 
-  <div
+  <!-- <div
     class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
   >
     <div class="d-flex">
@@ -1686,10 +1659,14 @@
         >
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <style>
+  .main-container {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
   .fixed-socks-selection {
     background-color: #ffffff;
     padding: 10px 20px;
@@ -1785,11 +1762,6 @@
     justify-content: center;
   }
 
-  .main-container {
-    display: flex;
-    justify-content: center;
-  }
-
   .video-bg {
     position: fixed;
     right: 0;
@@ -1797,6 +1769,104 @@
     min-width: 100%;
     min-height: 100%;
     z-index: -99;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .top-header ul {
+    margin: 0;
+  }
+
+  .top-header li {
+    list-style: none;
+  }
+
+  .top-header a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 100;
+    opacity: 0.8;
+  }
+
+  .top-header a:hover {
+    opacity: 1;
+  }
+
+  .header {
+    padding: 0 28px;
+    height: 100px;
+  }
+
+  .inner-header-left ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .inner-header-right ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .inner-header-left li {
+    list-style: none;
+    margin: 0 5px;
+    color: #ffffff;
+  }
+
+  .inner-header-left a {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.8;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .inner-header-right a {
+    color: #ffffff;
+    text-decoration: none;
+    opacity: 0.8;
+  }
+
+  .inner-header-left a:hover {
+    opacity: 1;
+  }
+
+  .inner-header-right a:hover {
+    opacity: 1;
+  }
+
+  .inner-header-right li {
+    list-style: none;
+    margin: 0 5px;
+    color: #ffffff;
+  }
+
+  .select-currency {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  .select-currency option {
+    color: #303e48;
+    background-color: #ffffff !important;
+  }
+
+  .select-currency option:hover {
+    color: #000000;
+    background: none;
+  }
+
+  .home-socks {
+    padding: 20px 28px 0;
+    font-size: 18px;
+  }
+
+  .home-socks a {
+    text-decoration: none;
   }
 
   .container-1080 {
@@ -2023,6 +2093,7 @@
     color: green;
     margin: 0;
   }
+
   .quantity {
     height: 40px;
   }
@@ -2060,10 +2131,9 @@
     border: 2px solid #000000 !important;
   }
 
-  .navbar li {
+  .cart-box li {
     display: flex;
     list-style: none;
-    margin: 0;
     padding: 0;
     position: relative;
     margin: 0 7px;
@@ -2072,13 +2142,12 @@
     border: 2px solid #ffffff;
     width: 30px;
     height: 30px;
-    margin: 10px 0 0 0;
     text-align: -webkit-right;
     justify-content: center;
     align-items: center;
   }
 
-  .navbar li:hover {
+  .cart-box li:hover {
     background-color: #ffffff;
     color: #777777;
   }
@@ -2108,6 +2177,10 @@
     border-top-left-radius: 99px;
     border-top-right-radius: 99px;
     border-bottom: 0;
+  }
+
+  .cart-box li:hover .cart-icon strong:after {
+    height: 10px;
   }
 
   .sidebar {
@@ -2211,7 +2284,7 @@
   }
 
   .heading-area {
-    background: url(../public/images/bg-image.jpeg);
+    background: url(../images/bg-image.jpeg);
     background-repeat: no-repeat;
     border-radius: 10px px 10px 0 0;
     background-position: right;
@@ -2219,9 +2292,6 @@
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: #1cb9a2;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
   }
 
   .img-sec {
@@ -2336,6 +2406,12 @@
 
     .single-facility {
       flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .advantage-list {
+      display: none;
     }
   }
 
