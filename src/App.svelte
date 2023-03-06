@@ -554,12 +554,13 @@
       type="video/mp4"
     />
   </video>
-
-  <div class="bg-white" style="height:70px">
+  {#if scroll>=300}
+  <div class="bg-white fixed-header-container" style="height:70px"  transition:slide={{duration: 200 }} >
+  
   <div
-  class="fixed-header header w-100 d-flex justify-content-between align-items-center"
-  style="max-width:1080px;margin:auto"
->
+    class="fixed-header header w-100 d-flex justify-content-between align-items-center"
+    style="max-width:1080px;margin:auto"
+  >
   <div class="d-flex inner-header-left">
     <ul class="d-flex align-items-center">
       <li class="">
@@ -579,6 +580,7 @@
       </li>
     </ul>
   </div>
+  
   <div class="bar-icon">
     <i
       class="fa-solid fa-bars text-white"
@@ -783,6 +785,9 @@
   </div>
 </div>
 </div>
+{/if}
+
+
 
   <div style="max-width:1080px" class="w-100 m-auto position-relative">
     <!-- TOP Header -->
@@ -2260,9 +2265,9 @@
       id="top-link"><i class="icon-angle-up" /></a
     > -->
   </footer>
-
+  {#if scroll>=200}
   <div
-    class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
+    class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap" transition:fade={{ duration: 200 }}
   >
     <div class="d-flex">
       <div
@@ -2359,7 +2364,9 @@
       </div>
     </div>
   </div>
+  {/if}
 </div>
+
 
 <style>
  
@@ -2369,6 +2376,13 @@
 
   .bar-icon{
     display: none;
+  }
+  .fixed-header-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left:0;
+    z-index: 500;
   }
 
   .fixed-header{
