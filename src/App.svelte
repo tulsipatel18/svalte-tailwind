@@ -527,6 +527,231 @@
           </ul>
         </div>
       </div>
+      <div
+        class="header w-100 d-flex justify-content-between align-items-center"
+      >
+        <div class="d-flex inner-header-left">
+          <ul class="d-flex align-items-center">
+            <li class="">
+              <a
+                href="https://silverlight.store/product/silverlight-socks/"
+                class="">SOCKS</a
+              >
+            </li>
+            <li class="">
+              <a href="https://app.silverlight.store" class="">HIKE-TO-EARN</a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/about/" class="">ABOUT</a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/blog/" class="">BLOG</a>
+            </li>
+          </ul>
+        </div>
+        <div class="bar-icon">
+          <i
+            class="fa-solid fa-bars text-white"
+            style="font-size: 25px;margin-top:5px"
+          />
+        </div>
+        <div class="left-sidebar text-white">
+          <button> x </button>
+          <ul class="p-0">
+            <li>
+              <a
+                href="https://silverlight.store/product/silverlight-socks/"
+                class="nav-top-link">SOCKS</a
+              >
+            </li>
+            <li>
+              <a href="https://app.silverlight.store/" class="nav-top-link"
+                >HIKE-TO-EARN</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/about/" class="nav-top-link"
+                >ABOUT</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/help/" class="nav-top-link"
+                >FAQ</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/blog/" class="nav-top-link"
+                >BLOG</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://silverlight.store/account/"
+                class="nav-top-link nav-top-not-logged-in"
+              >
+                <span class="header-account-title"> Login </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="inner-header-center d-flex align-items-center">
+          <a
+            href="https://silverlight.store/"
+            title="Silverlight - Discover Something New Today"
+          >
+            <!-- <img
+              width="150"
+              height="100"
+              src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
+              class=""
+              alt="Silverlight"
+            /> -->
+            <img
+              width="150"
+              height="41"
+              src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
+              class="header-logo-dark"
+              alt="Silverlight"
+            />
+          </a>
+        </div>
+
+        <div class="inner-header-right">
+          <ul class="d-flex align-items-center">
+            <li class="">
+              <a href="https://silverlight.store/help/#tab_faq">
+                <i class="fa-regular fa-circle-question hide-icon" />
+              </a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/account/" class="">
+                <i class="fa-solid fa-user hide-icon" />
+              </a>
+            </li>
+            <li class="cart-box py-2">
+              <a
+                href=""
+                class="d1 py-2"
+                on:click|preventDefault={() => (canvas = true)}
+              >
+                <li
+                  class="cart-item"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasRight"
+                  aria-controls="offcanvasRight"
+                >
+                  <span class="cart-icon">
+                    {#if orders}
+                      <strong>{orders.length}</strong>
+                    {:else}
+                      <strong>{0}</strong>
+                    {/if}
+                  </span>
+                </li>
+
+                {#if totalprice != 0}
+                  <div class="d2">
+                    <div class="p-4 offcanvas-body">
+                      <div style="max-height:500px;overflow-y:scroll">
+                        {#each orders as order}
+                          <div
+                            class="cart-container d-flex justify-content-between"
+                            style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                          >
+                            <div>
+                              <img
+                                style="max-width: 100px;max-hight:100px"
+                                src={order.img}
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="d-flex flex-column align-items-start"
+                              style="color:#777777"
+                            >
+                              <div style="margin-bottom: 10px;margin:0 10px">
+                                <div class="text-left">
+                                  <h6>Silverlight Hiking Socks</h6>
+                                </div>
+                                <div class="text-left" style="font-size:13px">
+                                  <span>COLOR : {order.color}</span>
+                                  <span>TYPE : {order.type}</span>
+                                  <span>QUANTITY : {order.quantity} </span>
+                                  <span>PACK SIZE : {order.size}</span>
+                                </div>
+
+                                <div
+                                  class="text-left"
+                                  style="font-weight: bold; color: green; opacity: 0.8;"
+                                  class:d-none={order.discount == 0}
+                                >
+                                  <span>Save {order.discount}%</span>
+                                </div>
+
+                                <div class="text-left">
+                                  <span
+                                    >{order.qty} x ${order.discountedprice}.00</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-block mr-1">
+                              <button
+                                class="rounded-circle remove-item-button"
+                                on:click|preventDefault={() =>
+                                  handleDelete(order.id)}>x</button
+                              >
+                            </div>
+                          </div>
+                        {/each}
+                      </div>
+
+                      <div
+                        class="border border-right-0 border-left-0"
+                        style="color:#777777"
+                      >
+                        <h6 style="padding:15px 0;margin:0">
+                          Subtotal: ${totalprice}.00
+                        </h6>
+                      </div>
+                      <div class="d-flex flex-column mt-3">
+                        <button
+                          class="text-light bg-dark font-weight-bold"
+                          style="letter-spacing:1px">VIEW CART</button
+                        >
+                        <button
+                          class="mt-2 text-light font-weight-bold"
+                          style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                          >GO TO CHECKOUT <i
+                            class="fa fa-long-arrow-right mx-2"
+                            aria-hidden="true"
+                          /></button
+                        >
+                      </div>
+                    </div>
+                  </div>
+                {/if}
+              </a>
+            </li>
+            <li class="html custom html_top_right_text">
+              <select class="select-currency">
+                <option valuse="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option valuse="AUD">AUD</option>
+                <option value="NZD">NZD</option>
+                <option value="CAD">CAD</option>
+                <option valuse="DKK">DKK</option>
+                <option value="SEK">SEK</option>
+                <option value="NOK">NOK</option>
+                <option valuse="CHF">CHF</option>
+                <option value="PLN">PLN</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- HOME / SOCKS -->
@@ -1866,7 +2091,7 @@
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  .bar-icon{
+  .bar-icon {
     display: none;
   }
 
@@ -2605,7 +2830,7 @@
     .left-sidebar li {
       list-style: none;
       padding: 15px 0 15px 20px;
-      border-bottom: 1px solid #ffffff42 ;
+      border-bottom: 1px solid #ffffff42;
       font-size: 12px;
     }
 
