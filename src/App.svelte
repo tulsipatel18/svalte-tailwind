@@ -555,7 +555,236 @@
     />
   </video>
 
-  <div style="max-width:1080px" class="w-100 m-auto">
+  <div class="bg-white" style="height:70px">
+  <div
+  class="fixed-header header w-100 d-flex justify-content-between align-items-center"
+  style="max-width:1080px;margin:auto"
+>
+  <div class="d-flex inner-header-left">
+    <ul class="d-flex align-items-center">
+      <li class="">
+        <a
+          href="https://silverlight.store/product/silverlight-socks/"
+          class="">SOCKS</a
+        >
+      </li>
+      <li class="">
+        <a href="https://app.silverlight.store" class="">HIKE-TO-EARN</a>
+      </li>
+      <li class="">
+        <a href="https://silverlight.store/about/" class="">ABOUT</a>
+      </li>
+      <li class="">
+        <a href="https://silverlight.store/blog/" class="">BLOG</a>
+      </li>
+    </ul>
+  </div>
+  <div class="bar-icon">
+    <i
+      class="fa-solid fa-bars text-white"
+      style="font-size: 25px;margin-top:5px"
+    />
+  </div>
+  <div class="left-sidebar text-white">
+    <button> x </button>
+    <ul class="p-0">
+      <li>
+        <a
+          href="https://silverlight.store/product/silverlight-socks/"
+          class="nav-top-link">SOCKS</a
+        >
+      </li>
+      <li>
+        <a href="https://app.silverlight.store/" class="nav-top-link"
+          >HIKE-TO-EARN</a
+        >
+      </li>
+      <li>
+        <a href="https://silverlight.store/about/" class="nav-top-link"
+          >ABOUT</a
+        >
+      </li>
+      <li>
+        <a href="https://silverlight.store/help/" class="nav-top-link"
+          >FAQ</a
+        >
+      </li>
+      <li>
+        <a href="https://silverlight.store/blog/" class="nav-top-link"
+          >BLOG</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://silverlight.store/account/"
+          class="nav-top-link nav-top-not-logged-in"
+        >
+          <span class="header-account-title"> Login </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="inner-header-center d-flex align-items-center">
+    <a
+      href="https://silverlight.store/"
+      title="Silverlight - Discover Something New Today"
+    >
+      <!-- <img
+        width="150"
+        height="100"
+        src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
+        class=""
+        alt="Silverlight"
+      /> -->
+      <img
+        width="150"
+        height="41"
+        src="https://silverlight.store/wp-content/uploads/2020/03/Silverlight_Logo_dark-grey.png"
+        class="header-logo-dark"
+        alt="Silverlight"
+      />
+    </a>
+  </div>
+
+  <div class="inner-header-right position-relative">
+    <ul class="d-flex align-items-center">
+      <li class="">
+        <a href="https://silverlight.store/help/#tab_faq">
+          <i class="fa-regular fa-circle-question hide-icon" />
+        </a>
+      </li>
+      <li class="">
+        <a href="https://silverlight.store/account/" class="">
+          <i class="fa-solid fa-user hide-icon" />
+        </a>
+      </li>
+      <li class="fixed-cart-box py-2">
+        <a
+          href=""
+          class="d1 py-2"
+          on:click|preventDefault={() => (canvas = true)}
+        >
+          <li
+            class="cart-item"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            <span class="cart-icon">
+              {#if orders}
+                <strong>{orders.length}</strong>
+              {:else}
+                <strong>{0}</strong>
+              {/if}
+            </span>
+          </li>
+
+          {#if totalprice != 0}
+            <div class="fixed-d2">
+              <div class="p-4 offcanvas-body">
+                <div style="max-height:500px;overflow-y:scroll">
+                  {#each orders as order}
+                    <div
+                      class="cart-container d-flex justify-content-between"
+                      style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                    >
+                      <div>
+                        <img
+                          style="max-width: 100px;max-hight:100px"
+                          src={order.img}
+                          alt=""
+                        />
+                      </div>
+                      <div
+                        class="d-flex flex-column align-items-start"
+                        style="color:#777777"
+                      >
+                        <div style="margin-bottom: 10px;margin:0 10px">
+                          <div class="text-left">
+                            <h6>Silverlight Hiking Socks</h6>
+                          </div>
+                          <div class="text-left" style="font-size:13px">
+                            <span>COLOR : {order.color}</span>
+                            <span>TYPE : {order.type}</span>
+                            <span>QUANTITY : {order.quantity} </span>
+                            <span>PACK SIZE : {order.size}</span>
+                          </div>
+
+                          <div
+                            class="text-left"
+                            style="font-weight: bold; color: green; opacity: 0.8;"
+                            class:d-none={order.discount == 0}
+                          >
+                            <span>Save {order.discount}%</span>
+                          </div>
+
+                          <div class="text-left">
+                            <span
+                              >{order.qty} x ${order.discountedprice}.00</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="d-block mr-1">
+                        <button
+                          class="rounded-circle remove-item-button"
+                          on:click|preventDefault={() =>
+                            handleDelete(order.id)}>x</button
+                        >
+                      </div>
+                    </div>
+                  {/each}
+                </div>
+
+                <div
+                  class="border border-right-0 border-left-0"
+                  style="color:#777777"
+                >
+                  <h6 style="padding:15px 0;margin:0">
+                    Subtotal: ${totalprice}.00
+                  </h6>
+                </div>
+                <div class="d-flex flex-column mt-3">
+                  <button
+                    class="text-light bg-dark font-weight-bold"
+                    style="letter-spacing:1px">VIEW CART</button
+                  >
+                  <button
+                    class="mt-2 text-light font-weight-bold"
+                    style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                    >GO TO CHECKOUT <i
+                      class="fa fa-long-arrow-right mx-2"
+                      aria-hidden="true"
+                    /></button
+                  >
+                </div>
+              </div>
+            </div>
+          {/if}
+        </a>
+      </li>
+      <li class="html custom html_top_right_text">
+        <select class="select-currency">
+          <option valuse="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="GBP">GBP</option>
+          <option valuse="AUD">AUD</option>
+          <option value="NZD">NZD</option>
+          <option value="CAD">CAD</option>
+          <option valuse="DKK">DKK</option>
+          <option value="SEK">SEK</option>
+          <option value="NOK">NOK</option>
+          <option valuse="CHF">CHF</option>
+          <option value="PLN">PLN</option>
+        </select>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+
+  <div style="max-width:1080px" class="w-100 m-auto position-relative">
     <!-- TOP Header -->
     <div class="">
       <div class="top-header">
@@ -860,7 +1089,7 @@
                     <div class="text-left">
                       <h6>Silverlight Hiking Socks</h6>
                     </div>
-                    <div class="text-left" style="font-size:13px">
+                    <div class="text-left" style="font-size:12px; line-height:1">
                       <span>COLOR : {order.color}</span>
                       <span>TYPE : {order.type}</span>
                       <span>QUANTITY : {order.quantity} </span>
@@ -2142,6 +2371,74 @@
     display: none;
   }
 
+  .fixed-header{
+    display: flex;
+    color: #777777;
+    height: 70px !important;
+  }
+
+  .fixed-header img{
+    height: 20px;
+  }
+
+  .fixed-header li a{
+    color: #777777;
+  }
+
+  .fixed-cart-box li strong{
+    color: #777777;
+  }
+
+  .fixed-header li select{
+    color: #777777;
+  }
+
+  .fixed-cart-box li {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    position: relative;
+    margin: 0 7px;
+    transition: background-color 0.3s;
+    background-color: transparent;
+    border: 2px solid #777777;
+    width: 30px;
+    height: 30px;
+    text-align: -webkit-right;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .fixed-cart-box li:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .fixed-cart-box li a:hover{
+    color: #ffffff;
+  }
+
+  .fixed-cart-box li:hover .cart-icon strong:after {
+    height: 10px;
+  }
+
+  .fixed-cart-box li strong:after {
+    transition: height 0.1s ease-out;
+    bottom: 100%;
+    margin-bottom: 0;
+    margin-left: -7px;
+    height: 8px;
+    width: 14px;
+    left: 50%;
+    content: " ";
+    position: absolute;
+    pointer-events: none;
+    border: 2px solid #777777;
+    border-top-left-radius: 99px;
+    border-top-right-radius: 99px;
+    border-bottom: 0;
+  }
+
   .fixed-socks-selection {
     background-color: #ffffff;
     padding: 10px 20px;
@@ -2208,11 +2505,28 @@
     top: -5px;
     background-color: #dee2e6;
     transform: rotateY(0deg) rotate(45deg);
-    right: 98px;
+    right: 95px;
+    z-index: -1;
+  }
+
+  .fixed-d2::before {
+    content: "A";
+    color: #dee2e6;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -5px;
+    background-color: #dee2e6;
+    transform: rotateY(0deg) rotate(45deg);
+    right: 95px;
     z-index: -1;
   }
 
   .d2 {
+    display: none;
+  }
+
+  .fixed-d2 {
     display: none;
   }
 
@@ -2222,9 +2536,21 @@
     border: 1px solid #777777a4;
     color: black;
     position: absolute;
-    width: 30%;
+    width: 300px;
     margin-top: 8px;
-    right: -78px;
+    right: 5px;
+    text-align: center;
+  }
+
+  .d1:hover .fixed-d2 {
+    display: block;
+    background-color: white;
+    border: 1px solid #777777a4;
+    color: black;
+    position: absolute;
+    width: 300px;
+    margin-top: 8px;
+    right: -25px;
     text-align: center;
   }
 
@@ -2631,6 +2957,10 @@
     color: #777777;
   }
 
+  .cart-box li:hover .cart-icon strong:after {
+    height: 10px;
+  }
+
   .hide {
     display: block;
     color: red;
@@ -2656,10 +2986,6 @@
     border-top-left-radius: 99px;
     border-top-right-radius: 99px;
     border-bottom: 0;
-  }
-
-  .cart-box li:hover .cart-icon strong:after {
-    height: 10px;
   }
 
   .sidebar {
@@ -2891,7 +3217,7 @@
     }
 
     .bar-icon {
-      display:block;
+      display: block;
       flex: 1;
     }
 
@@ -2946,6 +3272,10 @@
     }
 
     .d2 {
+      display: none !important;
+    }
+
+    .fixes-d2 {
       display: none !important;
     }
 
