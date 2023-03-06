@@ -3,7 +3,6 @@
   import jQuery from "jquery";
   import { onMount } from "svelte";
   import { fade, slide, fly } from "svelte/transition";
-  import { beforeUpdate, afterUpdate } from "svelte";
   import Accordion from "./Accordion.svelte";
 
   export let blackCrewSocksImages;
@@ -30,6 +29,20 @@
   let totalprice = 0;
   let currentimageid = 1;
   let img;
+  let currency='USD';
+  let leftSidebar=true;
+  let currencyLogo='$';
+  let scroll=0;
+
+  window.addEventListener("scroll", () => {
+  scroll = window.pageYOffset;
+  })
+
+  $:console.log(scroll);
+
+ 
+
+  // console.log(scroll);
 
   color = localStorage.getItem("color");
   type = localStorage.getItem("type");
@@ -38,10 +51,16 @@
 
   $: orders = JSON.parse(localStorage.getItem("orders"));
   $: localStorage.setItem("orders", JSON.stringify(orders));
-  $: handleprice(type, quantity);
+
+  $: handleprice(type, quantity,currency);
+  
   $: handlephotos(color, type, quantity);
+  
   $: handlecarttotal(orders);
+  
   $: handleimg(color, type, quantity);
+  
+
 
   const handleimg = () => {
     if (color == "BLACK") {
@@ -79,12 +98,10 @@
   };
 
   $: {
-    console.log(orders), console.log(quantity);
+    console.log(orders), console.log(color,type,quantity,size);
   }
 
-  beforeUpdate(() => {});
-
-  afterUpdate(() => {});
+ 
 
   const handlecarttotal = () => {
     let total = 0;
@@ -144,24 +161,288 @@
     }
     if (type !== "undefined" && type == "ANKLE") {
       if (quantity == 1) {
-        fprice = 25;
+        if(currency=='USD'){
+          currencyLogo='$'
+          fprice = 25;
+        }
+        if(currency=='EUR'){
+          currencyLogo='€'
+          fprice = 25;
+        }
+        if(currency=='AUD'){
+          currencyLogo='A$'
+          fprice = 38;
+        }
+        if(currency=='GBP'){
+          currencyLogo='£'  
+          fprice = 28;
+        }
+        if(currency=='NZD'){
+          currencyLogo='NZ$'
+          fprice = 41;
+        }
+        if(currency=='CAD'){
+          currencyLogo='C$'
+          fprice = 35;
+        }
+        if(currency=='DKK'){
+          currencyLogo='kr.'
+          fprice = 176.00;
+        }
+        if(currency=='SEK'){
+          currencyLogo='kr'
+          fprice = 260.00;
+        }
+        if(currency=='NOK'){
+          currencyLogo='kr'
+          fprice = 260.00;
+        }
+        if(currency=='CHF'){
+          currencyLogo='$'
+          fprice = 112;
+        }
+        if(currency=='PLN'){
+          currencyLogo='$'
+          fprice = 112;
+        }
+        
       }
       if (quantity == 3) {
-        fprice = 75;
+        if(currency=='USD'){
+          currencyLogo='$'
+          fprice = 75;
+        }
+        if(currency=='EUR'){
+          currencyLogo='€'
+          fprice = 74;
+        }
+        if(currency=='AUD'){
+          currencyLogo='A$'
+          fprice = 114;
+        }
+        if(currency=='GBP'){
+          currencyLogo='£'  
+          fprice = 66;
+        }
+        if(currency=='NZD'){
+          currencyLogo='NZ$'
+          fprice = 123;
+        }
+        if(currency=='CAD'){
+          currencyLogo='C$'
+          fprice = 105;
+        }
+        if(currency=='DKK'){
+          currencyLogo='kr.'
+          fprice = 528.00;
+        }
+        if(currency=='SEK'){
+          currencyLogo='kr'
+          fprice = 791.00;
+        }
+        if(currency=='NOK'){
+          currencyLogo='kr'
+          fprice = 781.00;
+        }
+        if(currency=='CHF'){
+          currencyLogo='$'
+          fprice = 73;
+        }
+        if(currency=='PLN'){
+          currencyLogo='$'
+          fprice = 143;
+        }
+        
       }
       if (quantity == 5) {
-        fprice = 125;
+        if(currency=='USD'){
+          currencyLogo='$'
+          fprice = 125;
+        }
+        if(currency=='EUR'){
+          currencyLogo='€'
+          fprice = 123;
+        }
+        if(currency=='AUD'){
+          currencyLogo='A$'
+          fprice = 190;
+        }
+        if(currency=='GBP'){
+          currencyLogo='£'  
+          fprice = 110;
+        }
+        if(currency=='NZD'){
+          currencyLogo='NZ$'
+          fprice = 206;
+        }
+        if(currency=='CAD'){
+          currencyLogo='C$'
+          fprice = 175;
+        }
+        if(currency=='DKK'){
+          currencyLogo='kr.'
+          fprice = 879.00;
+        }
+        if(currency=='SEK'){
+          currencyLogo='kr'
+          fprice = 1318.00;
+        }
+        if(currency=='NOK'){
+          currencyLogo='kr'
+          fprice = 1302.00;
+        }
+        if(currency=='CHF'){
+          currencyLogo='$'
+          fprice = 122;
+        }
+        if(currency=='PLN'){
+          currencyLogo='$'
+          fprice = 429;
+        }
+        
       }
     }
     if (type !== "undefined" && type == "CREW") {
       if (quantity == 1) {
-        fprice = 32;
+        if(currency=='USD'){
+          currencyLogo='$'
+          fprice = 32;
+        }
+        if(currency=='EUR'){
+          currencyLogo='€'
+          fprice = 31;
+        }
+        if(currency=='AUD'){
+          currencyLogo='A$'
+          fprice = 49;
+        }
+        if(currency=='GBP'){
+          currencyLogo='£'  
+          fprice = 28;
+        }
+        if(currency=='NZD'){
+          currencyLogo='NZ$'
+          fprice = 53;
+        }
+        if(currency=='CAD'){
+          currencyLogo='C$'
+          fprice = 45;
+        }
+        if(currency=='DKK'){
+          currencyLogo='kr.'
+          fprice = 225.00;
+        }
+        if(currency=='SEK'){
+          currencyLogo='kr'
+          fprice = 337.00;
+        }
+        if(currency=='NOK'){
+          currencyLogo='kr'
+          fprice = 333;
+        }
+        if(currency=='CHF'){
+          currencyLogo='$'
+          fprice = 31;
+        }
+        if(currency=='PLN'){
+          currencyLogo='$'
+          fprice = 714;
+        }
+        
       }
       if (quantity == 3) {
-        fprice = 96;
+        if(currency=='USD'){
+          currencyLogo='$'
+          fprice = 96;
+        }
+        if(currency=='EUR'){
+          currencyLogo='€'
+          fprice = 94;
+        }
+        if(currency=='AUD'){
+          currencyLogo='A$'
+          fprice = 146;
+        }
+        if(currency=='GBP'){
+          currencyLogo='£'  
+          fprice = 69;
+        }
+        if(currency=='NZD'){
+          currencyLogo='NZ$'
+          fprice = 158;
+        }
+        if(currency=='CAD'){
+          currencyLogo='C$'
+          fprice = 134;
+        }
+        if(currency=='DKK'){
+          currencyLogo='kr.'
+          fprice = 675.00;
+        }
+        if(currency=='SEK'){
+          currencyLogo='kr'
+          fprice = 1012.00;
+        }
+        if(currency=='NOK'){
+          currencyLogo='kr'
+          fprice = 1000.00;
+        }
+        if(currency=='CHF'){
+          currencyLogo='$'
+          fprice = 94;
+        }
+        if(currency=='PLN'){
+          currencyLogo='$'
+          fprice = 25989;
+        }
+        
       }
       if (quantity == 5) {
-        fprice = 160;
+        if(currency=='USD'){
+          currencyLogo='$'
+          fprice = 160;
+        }
+        if(currency=='EUR'){
+          currencyLogo='€'
+          fprice = 157;
+        }
+        if(currency=='AUD'){
+          currencyLogo='A$'
+          fprice = 243;
+        }
+        if(currency=='GBP'){
+          currencyLogo='£'  
+          fprice = 140;
+        }
+        if(currency=='NZD'){
+          currencyLogo='NZ$'
+          fprice = 263;
+        }
+        if(currency=='CAD'){
+          currencyLogo='C$'
+          fprice = 224;
+        }
+        if(currency=='DKK'){
+          currencyLogo='kr.'
+          fprice = 1126.00;
+        }
+        if(currency=='SEK'){
+          currencyLogo='kr'
+          fprice = 1687.00;
+        }
+        if(currency=='NOK'){
+          currencyLogo='kr'
+          fprice =1667.00;
+        }
+        if(currency=='CHF'){
+          currencyLogo='$'
+          fprice = 156;
+        }
+        if(currency=='PLN'){
+          currencyLogo='$'
+          fprice = 25989;
+        }
+        
       }
     }
     discountedprice = fprice - (fprice * discount) / 100;
@@ -172,7 +453,7 @@
     localStorage.setItem("type", type);
     localStorage.setItem("quantity", quantity);
     localStorage.setItem("size", size);
-    //write calculation function again
+   
     total = 0;
     let newOrder = {
       color,
@@ -189,30 +470,13 @@
     let flag = false;
 
     if (orders) {
-      // for (let i = 0; i < orders.length; i++) {
-      //   let order = orders[i];
-      //   if (
-      //     order.color == color &&
-      //     order.type == type &&
-      //     order.quantity == quantity &&
-      //     order.size == size
-      //   ) {
-      //     flag = true;
-      //     order.qty += qty;
-      //   }
-      //   order = { ...order, id: Math.random() };
-      // }
-      // if (!flag) {
-      // orders = [...orders, newOrder];
-      // }
+      
       orders = [...orders, newOrder];
     } else {
       orders = [newOrder];
     }
 
-    // window.alert(
-    //   `color : ${color}  , type : ${type}  , quantity : ${quantity}  , size : ${size}  ,  price : ${total}`
-    // );
+   
   };
 
   const handleDelete = (id) => {
@@ -226,6 +490,8 @@
   const handleqtydec = () => {
     if (qty != 1) qty -= 1;
   };
+
+ 
 
   import PhotoSwipeLightbox from "photoswipe/lightbox";
   import "photoswipe/style.css";
@@ -288,12 +554,13 @@
       type="video/mp4"
     />
   </video>
-
-  <div class="bg-white" style="height:70px">
+  {#if scroll>=300}
+  <div class="bg-white fixed-header-container" style="height:70px"  transition:slide={{duration: 200 }} >
+  
   <div
-  class="fixed-header header w-100 d-flex justify-content-between align-items-center"
-  style="max-width:1080px;margin:auto"
->
+    class="fixed-header header w-100 d-flex justify-content-between align-items-center"
+    style="max-width:1080px;margin:auto"
+  >
   <div class="d-flex inner-header-left">
     <ul class="d-flex align-items-center">
       <li class="">
@@ -313,6 +580,7 @@
       </li>
     </ul>
   </div>
+  
   <div class="bar-icon">
     <i
       class="fa-solid fa-bars text-white"
@@ -516,6 +784,9 @@
   </div>
 </div>
 </div>
+{/if}
+
+
 
   <div style="max-width:1080px" class="w-100 m-auto position-relative">
     <!-- TOP Header -->
@@ -552,14 +823,18 @@
             </li>
           </ul>
         </div>
-        <div class="bar-icon">
+        <div class="bar-icon" >
           <i
+          on:click|preventDefault={()=>{leftSidebar=!leftSidebar}}
             class="fa-solid fa-bars text-white"
             style="font-size: 25px;margin-top:5px"
           />
         </div>
+        {#if leftSidebar}
         <div class="left-sidebar text-white">
-          <button> x </button>
+          <button on:click|preventDefault={() => {
+            leftSidebar = !leftSidebar;
+          }}> x </button>
           <ul class="p-0">
             <li>
               <a
@@ -597,6 +872,7 @@
             </li>
           </ul>
         </div>
+        {/if}
 
         <div class="inner-header-center d-flex align-items-center">
           <a
@@ -694,7 +970,7 @@
 
                                 <div class="text-left">
                                   <span
-                                    >{order.qty} x ${order.discountedprice}.00</span
+                                    >{order.qty} x {currencyLogo}{order.discountedprice}.00</span
                                   >
                                 </div>
                               </div>
@@ -715,7 +991,7 @@
                         style="color:#777777"
                       >
                         <h6 style="padding:15px 0;margin:0">
-                          Subtotal: ${totalprice}.00
+                          Subtotal: {currencyLogo}{totalprice}.00
                         </h6>
                       </div>
                       <div class="d-flex flex-column mt-3">
@@ -738,17 +1014,17 @@
               </a>
             </li>
             <li class="html custom html_top_right_text">
-              <select class="select-currency">
-                <option valuse="USD">USD</option>
+              <select class="select-currency" bind:value={currency}  >
+                <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
-                <option valuse="AUD">AUD</option>
+                <option value="AUD">AUD</option>
                 <option value="NZD">NZD</option>
                 <option value="CAD">CAD</option>
-                <option valuse="DKK">DKK</option>
+                <option value="DKK">DKK</option>
                 <option value="SEK">SEK</option>
                 <option value="NOK">NOK</option>
-                <option valuse="CHF">CHF</option>
+                <option value="CHF">CHF</option>
                 <option value="PLN">PLN</option>
               </select>
             </li>
@@ -833,7 +1109,7 @@
                     </div>
 
                     <div class="text-left">
-                      <span>{order.qty} x ${order.discountedprice}.00</span>
+                      <span>{order.qty} x {currencyLogo}{order.discountedprice}.00</span>
                     </div>
                   </div>
                 </div>
@@ -853,7 +1129,7 @@
             style="color:#777777"
           >
             <h6 style="padding:15px 0;margin:0">
-              Subtotal: ${totalprice}.00
+              Subtotal: {currencyLogo}{totalprice}.00
             </h6>
           </div>
           <div class="d-flex flex-column mt-3">
@@ -1011,7 +1287,7 @@
                       <li>
                         <div class="">
                           <button
-                            class={color == "BLACK" ? "selected" : ""}
+                            class={color =="BLACK" ? "selected" : ""}
                             on:click={() => {
                               (color = "BLACK"), (currentimageid = 1);
                             }}>Black</button
@@ -1182,13 +1458,13 @@
                         <del aria-hidden="true">
                           <span class="">
                             {#if discount != 0}
-                              <span><span class="">$</span>{fprice}</span>
+                              <span><span class="">{currencyLogo}</span>{fprice}</span>
                             {/if}
                           </span>
                         </del>
                         <ins style="text-decoration: none;">
                           <span>
-                            ${discountedprice}
+                            {currencyLogo}{discountedprice}
                           </span>
                         </ins>
                       </span>
@@ -1988,9 +2264,9 @@
       id="top-link"><i class="icon-angle-up" /></a
     > -->
   </footer>
-
+  {#if scroll>=200}
   <div
-    class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
+    class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap" transition:fade={{ duration: 200 }}
   >
     <div class="d-flex">
       <div
@@ -2008,12 +2284,12 @@
           <span style="margin-left: 10px;">
             {#if discount != 0}
               <del>
-                <span style="color:#777777"> ${fprice} </span>
+                <span style="color:#777777"> {currencyLogo}{fprice} </span>
               </del>
 
-              <span style="font-weight: 700">${discountedprice}</span>
+              <span style="font-weight: 700">{currencyLogo}{discountedprice}</span>
             {:else}
-              <span style="color:#777777"> ${fprice} </span>
+              <span style="color:#777777"> {currencyLogo}{fprice} </span>
             {/if}
           </span>
           {#if discount != 0}
@@ -2087,15 +2363,25 @@
       </div>
     </div>
   </div>
+  {/if}
 </div>
 
+
 <style>
+ 
   .main-container {
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  .bar-icon {
+  .bar-icon{
     display: none;
+  }
+  .fixed-header-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left:0;
+    z-index: 500;
   }
 
   .fixed-header{
@@ -2660,7 +2946,7 @@
   }
 
   .selected {
-    border: 2px solid #000000 !important;
+    border: 2.4px solid #000000 !important;
   }
 
   .cart-box li {
@@ -2930,7 +3216,7 @@
     .left-sidebar li {
       list-style: none;
       padding: 15px 0 15px 20px;
-      border-bottom: 1px solid #ffffff42;
+      border-bottom: 1px solid #ffffff42 ;
       font-size: 12px;
     }
 
