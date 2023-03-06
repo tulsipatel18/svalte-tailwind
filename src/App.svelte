@@ -381,7 +381,7 @@
     </a>
   </div>
 
-  <div class="inner-header-right">
+  <div class="inner-header-right position-relative">
     <ul class="d-flex align-items-center">
       <li class="">
         <a href="https://silverlight.store/help/#tab_faq">
@@ -415,7 +415,7 @@
           </li>
 
           {#if totalprice != 0}
-            <div class="d2">
+            <div class="fixed-d2">
               <div class="p-4 offcanvas-body">
                 <div style="max-height:500px;overflow-y:scroll">
                   {#each orders as order}
@@ -518,7 +518,7 @@
 </div>
 </div>
 
-  <div style="max-width:1080px" class="w-100 m-auto">
+  <div style="max-width:1080px" class="w-100 m-auto position-relative">
     <!-- TOP Header -->
     <div class="">
       <div class="top-header">
@@ -818,7 +818,7 @@
                     <div class="text-left">
                       <h6>Silverlight Hiking Socks</h6>
                     </div>
-                    <div class="text-left" style="font-size:13px">
+                    <div class="text-left" style="font-size:12px; line-height:1">
                       <span>COLOR : {order.color}</span>
                       <span>TYPE : {order.type}</span>
                       <span>QUANTITY : {order.quantity} </span>
@@ -2138,8 +2138,12 @@
   }
 
   .fixed-cart-box li:hover {
-    background-color: #ffffff;
-    color: #777777;
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .fixed-cart-box li a:hover{
+    color: #ffffff;
   }
 
   .fixed-cart-box li:hover .cart-icon strong:after {
@@ -2229,11 +2233,28 @@
     top: -5px;
     background-color: #dee2e6;
     transform: rotateY(0deg) rotate(45deg);
-    right: 98px;
+    right: 95px;
+    z-index: -1;
+  }
+
+  .fixed-d2::before {
+    content: "A";
+    color: #dee2e6;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -5px;
+    background-color: #dee2e6;
+    transform: rotateY(0deg) rotate(45deg);
+    right: 95px;
     z-index: -1;
   }
 
   .d2 {
+    display: none;
+  }
+
+  .fixed-d2 {
     display: none;
   }
 
@@ -2243,9 +2264,21 @@
     border: 1px solid #777777a4;
     color: black;
     position: absolute;
-    width: 30%;
+    width: 300px;
     margin-top: 8px;
-    right: -78px;
+    right: 5px;
+    text-align: center;
+  }
+
+  .d1:hover .fixed-d2 {
+    display: block;
+    background-color: white;
+    border: 1px solid #777777a4;
+    color: black;
+    position: absolute;
+    width: 300px;
+    margin-top: 8px;
+    right: -25px;
     text-align: center;
   }
 
@@ -2967,6 +3000,10 @@
     }
 
     .d2 {
+      display: none !important;
+    }
+
+    .fixes-d2 {
       display: none !important;
     }
 
