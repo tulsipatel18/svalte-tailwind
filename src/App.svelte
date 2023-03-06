@@ -661,10 +661,10 @@
           <i class="fa-solid fa-user hide-icon" />
         </a>
       </li>
-      <li class="fixed-cart-box py-2">
+      <li class="fixed-cart-box py-2 d1">
         <a
           href=""
-          class="d1 py-2"
+          class="py-2"
           on:click|preventDefault={() => (canvas = true)}
         >
           <li
@@ -909,10 +909,10 @@
                 <i class="fa-solid fa-user hide-icon" />
               </a>
             </li>
-            <li class="cart-box py-2">
+            <li class="cart-box py-2 d1">
               <a
                 href=""
-                class="d1 py-2"
+                class="py-2"
                 on:click|preventDefault={() => (canvas = true)}
               >
                 <li
