@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import { fade, slide, fly } from "svelte/transition";
   import Accordion from "./Accordion.svelte";
+  import {currencyValues} from './currencyValues.js'
 
   export let blackCrewSocksImages;
   export let blackCrewSocksImagesThreePack;
@@ -20,7 +21,7 @@
     discount = 0,
     discountedprice = 25,
     type,
-    quantity = 1,
+    quantity,
     size,
     total,
     qty = 1,
@@ -30,7 +31,8 @@
   let currentimageid = 1;
   let img;
   let currency='USD';
-  let leftSidebar=true;
+  let leftSidebar=false;
+  let leftSidebar2=false;
   let currencyLogo='$';
   let scroll=0;
 
@@ -38,7 +40,7 @@
   scroll = window.pageYOffset;
   })
 
-  $:console.log(scroll);
+  $:console.log(quantity,typeof(quantity));
 
  
 
@@ -48,6 +50,10 @@
   type = localStorage.getItem("type");
   quantity = localStorage.getItem("quantity");
   size = localStorage.getItem("size");
+  currency = localStorage.getItem("currency");
+  if(currency==undefined){
+    currency='USD'
+  }
 
   $: orders = JSON.parse(localStorage.getItem("orders"));
   $: localStorage.setItem("orders", JSON.stringify(orders));
@@ -59,6 +65,12 @@
   $: handlecarttotal(orders);
   
   $: handleimg(color, type, quantity);
+
+  $:handlecurrencychange(currency);
+
+  const handlecurrencychange=()=>{
+    localStorage.setItem("currency", currency);
+  }
   
 
 
@@ -97,9 +109,9 @@
     }
   };
 
-  $: {
-    console.log(orders), console.log(color,type,quantity,size);
-  }
+  // $: {
+  //   console.log(orders), console.log(color,type,quantity,size);
+  // }
 
  
 
@@ -346,7 +358,7 @@
         }
         if(currency=='PLN'){
           currencyLogo='$'
-          fprice = 714;
+          fprice = 143;
         }
         
       }
@@ -393,7 +405,7 @@
         }
         if(currency=='PLN'){
           currencyLogo='$'
-          fprice = 25989;
+          fprice = 429;
         }
         
       }
@@ -440,7 +452,7 @@
         }
         if(currency=='PLN'){
           currencyLogo='$'
-          fprice = 25989;
+          fprice = 714;
         }
         
       }
@@ -476,6 +488,8 @@
       orders = [newOrder];
     }
 
+    
+
    
   };
 
@@ -498,6 +512,25 @@
   let galleryID = "my-test-gallery";
 
   onMount(() => {
+
+    if(color==undefined){
+      color='BLACK'
+    }
+    if(type==undefined){
+      type='CREW'
+    }
+    if(quantity==undefined){
+      quantity='3'
+    }
+    if(size==undefined){
+      size='M' 
+    }
+   
+   
+
+   
+
+
     jQuery(".slider-single").slick({
       slidesToShow: 1,
       slidesToScroll: 1,
@@ -583,12 +616,15 @@
   
   <div class="bar-icon">
     <i
-      class="fa-solid fa-bars text-white"
+    on:click|preventDefault={()=>{leftSidebar2=!leftSidebar2}}
+      class="fa-solid fa-bars "
       style="font-size: 25px;margin-top:5px"
     />
   </div>
+  {#if leftSidebar2}
   <div class="left-sidebar text-white">
-    <button> x </button>
+    <button on:click|preventDefault={() => {
+      leftSidebar2 = !leftSidebar2}} > x </button>
     <ul class="p-0">
       <li>
         <a
@@ -626,6 +662,7 @@
       </li>
     </ul>
   </div>
+  {/if}
 
   <div class="inner-header-center d-flex align-items-center">
     <a
@@ -723,7 +760,7 @@
 
                           <div class="text-left">
                             <span
-                              >{order.qty} x ${order.discountedprice}.00</span
+                              >{order.qty} x {currencyLogo}{order.discountedprice}.00</span
                             >
                           </div>
                         </div>
@@ -744,7 +781,7 @@
                   style="color:#777777"
                 >
                   <h6 style="padding:15px 0;margin:0">
-                    Subtotal: ${totalprice}.00
+                    Subtotal: {currencyLogo}{totalprice}.00
                   </h6>
                 </div>
                 <div class="d-flex flex-column mt-3">
@@ -767,7 +804,7 @@
         </a>
       </li>
       <li class="html custom html_top_right_text">
-        <select class="select-currency">
+        <select class="select-currency" bind:value={currency}  on:change={() => window.location.reload()}>
           <option valuse="USD">USD</option>
           <option value="EUR">EUR</option>
           <option value="GBP">GBP</option>
@@ -1015,7 +1052,7 @@
               </a>
             </li>
             <li class="html custom html_top_right_text">
-              <select class="select-currency" bind:value={currency}  >
+              <select class="select-currency" bind:value={currency} on:change={() => window.location.reload()} >
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
@@ -1345,7 +1382,7 @@
                           <button
                             class={quantity == 1 ? "selected" : ""}
                             on:click={() => {
-                              (quantity = 1), (currentimageid = 1);
+                              (quantity = '1'), (currentimageid = 1);
                             }}>1 Pack</button
                           >
                         </div>
@@ -1355,7 +1392,7 @@
                           <button
                             class={quantity == 3 ? "selected" : ""}
                             on:click={() => {
-                              (quantity = 3), (currentimageid = 1);
+                              (quantity = '3'), (currentimageid = 1);
                             }}>3 Pack</button
                           >
                         </div>
@@ -1365,7 +1402,7 @@
                           <button
                             class={quantity == 5 ? "selected" : ""}
                             on:click={() => {
-                              (quantity = 5), (currentimageid = 1);
+                              (quantity ='5'), (currentimageid = 1);
                             }}>5 Pack</button
                           >
                         </div>
@@ -2320,11 +2357,11 @@
           <option value="ANKLE">Ankle</option>
           <option value="CREW">Crew</option>
         </select>
-        <select bind:value={quantity}>
+        <select bind:value={quantity} >
           <option disabled>Quantity</option>
-          <option value={1}>1 Pack</option>
-          <option value={3}>3 Pack</option>
-          <option value={5}>5 Pack</option>
+          <option value='1'>1 Pack</option>
+          <option value='3'>3 Pack</option>
+          <option value='5'>5 Pack</option>
         </select>
         <select bind:value={size}>
           <option disabled>Size</option>
@@ -2428,8 +2465,16 @@
     color: #ffffff;
   }
 
+  .fixed-cart-box li:hover strong{
+    color:#777777;
+  }
+
   .fixed-cart-box li a:hover{
     color: #ffffff;
+  }
+
+  .fixed-cart-box li:hover strong{
+    color:#ffffff;
   }
 
   .fixed-cart-box li:hover .cart-icon strong:after {
@@ -2459,6 +2504,7 @@
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);
     bottom: 0;
     display: none;
+    z-index: 499 !important;
   }
 
   .right-socks-selection select {
@@ -2663,6 +2709,7 @@
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    cursor: pointer;
   }
 
   .select-currency option {

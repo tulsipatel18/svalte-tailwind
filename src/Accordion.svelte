@@ -8,7 +8,7 @@
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="header" on:click|preventDefault={handleClick}>
     <button>
-      <i class="fa-solid fa-angle-down" />
+      <i class="fa-solid fa-angle-down" class:handlearrow={open==true} />
     </button>
     <div class="text mx-4">
       <slot name="head" />
@@ -25,6 +25,13 @@
 <style>
   div.accordion {
     border-top: 0.5px solid #7777776c;
+  }
+  .header button{
+    background: none !important;
+  }
+  .handlearrow{
+    transform: rotate(180deg);
+    transition: ease-in-out;
   }
 
   div.header {
