@@ -29,18 +29,16 @@
   let totalprice = 0;
   let currentimageid = 1;
   let img;
-  let currency='USD';
-  let leftSidebar=true;
-  let currencyLogo='$';
-  let scroll=0;
+  let currency = "USD";
+  let leftSidebar = true;
+  let currencyLogo = "$";
+  let scroll = 0;
 
   window.addEventListener("scroll", () => {
-  scroll = window.pageYOffset;
-  })
+    scroll = window.pageYOffset;
+  });
 
-  $:console.log(scroll);
-
- 
+  $: console.log(scroll);
 
   // console.log(scroll);
 
@@ -52,15 +50,13 @@
   $: orders = JSON.parse(localStorage.getItem("orders"));
   $: localStorage.setItem("orders", JSON.stringify(orders));
 
-  $: handleprice(type, quantity,currency);
-  
-  $: handlephotos(color, type, quantity);
-  
-  $: handlecarttotal(orders);
-  
-  $: handleimg(color, type, quantity);
-  
+  $: handleprice(type, quantity, currency);
 
+  $: handlephotos(color, type, quantity);
+
+  $: handlecarttotal(orders);
+
+  $: handleimg(color, type, quantity);
 
   const handleimg = () => {
     if (color == "BLACK") {
@@ -98,10 +94,8 @@
   };
 
   $: {
-    console.log(orders), console.log(color,type,quantity,size);
+    console.log(orders), console.log(color, type, quantity, size);
   }
-
- 
 
   const handlecarttotal = () => {
     let total = 0;
@@ -161,288 +155,282 @@
     }
     if (type !== "undefined" && type == "ANKLE") {
       if (quantity == 1) {
-        if(currency=='USD'){
-          currencyLogo='$'
+        if (currency == "USD") {
+          currencyLogo = "$";
           fprice = 25;
         }
-        if(currency=='EUR'){
-          currencyLogo='€'
+        if (currency == "EUR") {
+          currencyLogo = "€";
           fprice = 25;
         }
-        if(currency=='AUD'){
-          currencyLogo='A$'
+        if (currency == "AUD") {
+          currencyLogo = "A$";
           fprice = 38;
         }
-        if(currency=='GBP'){
-          currencyLogo='£'  
+        if (currency == "GBP") {
+          currencyLogo = "£";
           fprice = 28;
         }
-        if(currency=='NZD'){
-          currencyLogo='NZ$'
+        if (currency == "NZD") {
+          currencyLogo = "NZ$";
           fprice = 41;
         }
-        if(currency=='CAD'){
-          currencyLogo='C$'
+        if (currency == "CAD") {
+          currencyLogo = "C$";
           fprice = 35;
         }
-        if(currency=='DKK'){
-          currencyLogo='kr.'
-          fprice = 176.00;
+        if (currency == "DKK") {
+          currencyLogo = "kr.";
+          fprice = 176.0;
         }
-        if(currency=='SEK'){
-          currencyLogo='kr'
-          fprice = 260.00;
+        if (currency == "SEK") {
+          currencyLogo = "kr";
+          fprice = 260.0;
         }
-        if(currency=='NOK'){
-          currencyLogo='kr'
-          fprice = 260.00;
+        if (currency == "NOK") {
+          currencyLogo = "kr";
+          fprice = 260.0;
         }
-        if(currency=='CHF'){
-          currencyLogo='$'
+        if (currency == "CHF") {
+          currencyLogo = "$";
           fprice = 112;
         }
-        if(currency=='PLN'){
-          currencyLogo='$'
+        if (currency == "PLN") {
+          currencyLogo = "$";
           fprice = 112;
         }
-        
       }
       if (quantity == 3) {
-        if(currency=='USD'){
-          currencyLogo='$'
+        if (currency == "USD") {
+          currencyLogo = "$";
           fprice = 75;
         }
-        if(currency=='EUR'){
-          currencyLogo='€'
+        if (currency == "EUR") {
+          currencyLogo = "€";
           fprice = 74;
         }
-        if(currency=='AUD'){
-          currencyLogo='A$'
+        if (currency == "AUD") {
+          currencyLogo = "A$";
           fprice = 114;
         }
-        if(currency=='GBP'){
-          currencyLogo='£'  
+        if (currency == "GBP") {
+          currencyLogo = "£";
           fprice = 66;
         }
-        if(currency=='NZD'){
-          currencyLogo='NZ$'
+        if (currency == "NZD") {
+          currencyLogo = "NZ$";
           fprice = 123;
         }
-        if(currency=='CAD'){
-          currencyLogo='C$'
+        if (currency == "CAD") {
+          currencyLogo = "C$";
           fprice = 105;
         }
-        if(currency=='DKK'){
-          currencyLogo='kr.'
-          fprice = 528.00;
+        if (currency == "DKK") {
+          currencyLogo = "kr.";
+          fprice = 528.0;
         }
-        if(currency=='SEK'){
-          currencyLogo='kr'
-          fprice = 791.00;
+        if (currency == "SEK") {
+          currencyLogo = "kr";
+          fprice = 791.0;
         }
-        if(currency=='NOK'){
-          currencyLogo='kr'
-          fprice = 781.00;
+        if (currency == "NOK") {
+          currencyLogo = "kr";
+          fprice = 781.0;
         }
-        if(currency=='CHF'){
-          currencyLogo='$'
+        if (currency == "CHF") {
+          currencyLogo = "$";
           fprice = 73;
         }
-        if(currency=='PLN'){
-          currencyLogo='$'
+        if (currency == "PLN") {
+          currencyLogo = "$";
           fprice = 143;
         }
-        
       }
       if (quantity == 5) {
-        if(currency=='USD'){
-          currencyLogo='$'
+        if (currency == "USD") {
+          currencyLogo = "$";
           fprice = 125;
         }
-        if(currency=='EUR'){
-          currencyLogo='€'
+        if (currency == "EUR") {
+          currencyLogo = "€";
           fprice = 123;
         }
-        if(currency=='AUD'){
-          currencyLogo='A$'
+        if (currency == "AUD") {
+          currencyLogo = "A$";
           fprice = 190;
         }
-        if(currency=='GBP'){
-          currencyLogo='£'  
+        if (currency == "GBP") {
+          currencyLogo = "£";
           fprice = 110;
         }
-        if(currency=='NZD'){
-          currencyLogo='NZ$'
+        if (currency == "NZD") {
+          currencyLogo = "NZ$";
           fprice = 206;
         }
-        if(currency=='CAD'){
-          currencyLogo='C$'
+        if (currency == "CAD") {
+          currencyLogo = "C$";
           fprice = 175;
         }
-        if(currency=='DKK'){
-          currencyLogo='kr.'
-          fprice = 879.00;
+        if (currency == "DKK") {
+          currencyLogo = "kr.";
+          fprice = 879.0;
         }
-        if(currency=='SEK'){
-          currencyLogo='kr'
-          fprice = 1318.00;
+        if (currency == "SEK") {
+          currencyLogo = "kr";
+          fprice = 1318.0;
         }
-        if(currency=='NOK'){
-          currencyLogo='kr'
-          fprice = 1302.00;
+        if (currency == "NOK") {
+          currencyLogo = "kr";
+          fprice = 1302.0;
         }
-        if(currency=='CHF'){
-          currencyLogo='$'
+        if (currency == "CHF") {
+          currencyLogo = "$";
           fprice = 122;
         }
-        if(currency=='PLN'){
-          currencyLogo='$'
+        if (currency == "PLN") {
+          currencyLogo = "$";
           fprice = 429;
         }
-        
       }
     }
     if (type !== "undefined" && type == "CREW") {
       if (quantity == 1) {
-        if(currency=='USD'){
-          currencyLogo='$'
+        if (currency == "USD") {
+          currencyLogo = "$";
           fprice = 32;
         }
-        if(currency=='EUR'){
-          currencyLogo='€'
+        if (currency == "EUR") {
+          currencyLogo = "€";
           fprice = 31;
         }
-        if(currency=='AUD'){
-          currencyLogo='A$'
+        if (currency == "AUD") {
+          currencyLogo = "A$";
           fprice = 49;
         }
-        if(currency=='GBP'){
-          currencyLogo='£'  
+        if (currency == "GBP") {
+          currencyLogo = "£";
           fprice = 28;
         }
-        if(currency=='NZD'){
-          currencyLogo='NZ$'
+        if (currency == "NZD") {
+          currencyLogo = "NZ$";
           fprice = 53;
         }
-        if(currency=='CAD'){
-          currencyLogo='C$'
+        if (currency == "CAD") {
+          currencyLogo = "C$";
           fprice = 45;
         }
-        if(currency=='DKK'){
-          currencyLogo='kr.'
-          fprice = 225.00;
+        if (currency == "DKK") {
+          currencyLogo = "kr.";
+          fprice = 225.0;
         }
-        if(currency=='SEK'){
-          currencyLogo='kr'
-          fprice = 337.00;
+        if (currency == "SEK") {
+          currencyLogo = "kr";
+          fprice = 337.0;
         }
-        if(currency=='NOK'){
-          currencyLogo='kr'
+        if (currency == "NOK") {
+          currencyLogo = "kr";
           fprice = 333;
         }
-        if(currency=='CHF'){
-          currencyLogo='$'
+        if (currency == "CHF") {
+          currencyLogo = "$";
           fprice = 31;
         }
-        if(currency=='PLN'){
-          currencyLogo='$'
+        if (currency == "PLN") {
+          currencyLogo = "$";
           fprice = 714;
         }
-        
       }
       if (quantity == 3) {
-        if(currency=='USD'){
-          currencyLogo='$'
+        if (currency == "USD") {
+          currencyLogo = "$";
           fprice = 96;
         }
-        if(currency=='EUR'){
-          currencyLogo='€'
+        if (currency == "EUR") {
+          currencyLogo = "€";
           fprice = 94;
         }
-        if(currency=='AUD'){
-          currencyLogo='A$'
+        if (currency == "AUD") {
+          currencyLogo = "A$";
           fprice = 146;
         }
-        if(currency=='GBP'){
-          currencyLogo='£'  
+        if (currency == "GBP") {
+          currencyLogo = "£";
           fprice = 69;
         }
-        if(currency=='NZD'){
-          currencyLogo='NZ$'
+        if (currency == "NZD") {
+          currencyLogo = "NZ$";
           fprice = 158;
         }
-        if(currency=='CAD'){
-          currencyLogo='C$'
+        if (currency == "CAD") {
+          currencyLogo = "C$";
           fprice = 134;
         }
-        if(currency=='DKK'){
-          currencyLogo='kr.'
-          fprice = 675.00;
+        if (currency == "DKK") {
+          currencyLogo = "kr.";
+          fprice = 675.0;
         }
-        if(currency=='SEK'){
-          currencyLogo='kr'
-          fprice = 1012.00;
+        if (currency == "SEK") {
+          currencyLogo = "kr";
+          fprice = 1012.0;
         }
-        if(currency=='NOK'){
-          currencyLogo='kr'
-          fprice = 1000.00;
+        if (currency == "NOK") {
+          currencyLogo = "kr";
+          fprice = 1000.0;
         }
-        if(currency=='CHF'){
-          currencyLogo='$'
+        if (currency == "CHF") {
+          currencyLogo = "$";
           fprice = 94;
         }
-        if(currency=='PLN'){
-          currencyLogo='$'
+        if (currency == "PLN") {
+          currencyLogo = "$";
           fprice = 25989;
         }
-        
       }
       if (quantity == 5) {
-        if(currency=='USD'){
-          currencyLogo='$'
+        if (currency == "USD") {
+          currencyLogo = "$";
           fprice = 160;
         }
-        if(currency=='EUR'){
-          currencyLogo='€'
+        if (currency == "EUR") {
+          currencyLogo = "€";
           fprice = 157;
         }
-        if(currency=='AUD'){
-          currencyLogo='A$'
+        if (currency == "AUD") {
+          currencyLogo = "A$";
           fprice = 243;
         }
-        if(currency=='GBP'){
-          currencyLogo='£'  
+        if (currency == "GBP") {
+          currencyLogo = "£";
           fprice = 140;
         }
-        if(currency=='NZD'){
-          currencyLogo='NZ$'
+        if (currency == "NZD") {
+          currencyLogo = "NZ$";
           fprice = 263;
         }
-        if(currency=='CAD'){
-          currencyLogo='C$'
+        if (currency == "CAD") {
+          currencyLogo = "C$";
           fprice = 224;
         }
-        if(currency=='DKK'){
-          currencyLogo='kr.'
-          fprice = 1126.00;
+        if (currency == "DKK") {
+          currencyLogo = "kr.";
+          fprice = 1126.0;
         }
-        if(currency=='SEK'){
-          currencyLogo='kr'
-          fprice = 1687.00;
+        if (currency == "SEK") {
+          currencyLogo = "kr";
+          fprice = 1687.0;
         }
-        if(currency=='NOK'){
-          currencyLogo='kr'
-          fprice =1667.00;
+        if (currency == "NOK") {
+          currencyLogo = "kr";
+          fprice = 1667.0;
         }
-        if(currency=='CHF'){
-          currencyLogo='$'
+        if (currency == "CHF") {
+          currencyLogo = "$";
           fprice = 156;
         }
-        if(currency=='PLN'){
-          currencyLogo='$'
+        if (currency == "PLN") {
+          currencyLogo = "$";
           fprice = 25989;
         }
-        
       }
     }
     discountedprice = fprice - (fprice * discount) / 100;
@@ -453,7 +441,7 @@
     localStorage.setItem("type", type);
     localStorage.setItem("quantity", quantity);
     localStorage.setItem("size", size);
-   
+
     total = 0;
     let newOrder = {
       color,
@@ -470,13 +458,10 @@
     let flag = false;
 
     if (orders) {
-      
       orders = [...orders, newOrder];
     } else {
       orders = [newOrder];
     }
-
-   
   };
 
   const handleDelete = (id) => {
@@ -490,8 +475,6 @@
   const handleqtydec = () => {
     if (qty != 1) qty -= 1;
   };
-
- 
 
   import PhotoSwipeLightbox from "photoswipe/lightbox";
   import "photoswipe/style.css";
@@ -535,6 +518,53 @@
     };
     initZoomy(options);
   });
+
+
+
+  // Load the YouTube IFrame Player API script
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// Define the YouTube player object
+var player;
+// Called when the API code has downloaded
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: 'uxyMqq6Puuw',
+    playerVars: {
+      'autoplay': 1,
+      'controls': 1,
+      'modestbranding': 1,
+      'rel': 0,
+      'showinfo': 0
+    }
+  });
+}
+// Called when the image is clicked
+var el = document.getElementById('myImage');
+if(el){
+  el.addEventListener('click', function() {
+  // Hide the image
+  this.style.display = 'none';
+  // Show the YouTube player
+  document.getElementById('player').style.display = 'block';
+  // Start playing the video
+  player.playVideo();
+});
+}
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -554,256 +584,15 @@
       type="video/mp4"
     />
   </video>
-  {#if scroll>=300}
-  <div class="bg-white fixed-header-container" style="height:70px"  transition:slide={{duration: 200 }} >
-  
-  <div
-    class="fixed-header header w-100 d-flex justify-content-between align-items-center"
-    style="max-width:1080px;margin:auto"
-  >
-  <div class="d-flex inner-header-left">
-    <ul class="d-flex align-items-center">
-      <li class="">
-        <a
-          href="https://silverlight.store/product/silverlight-socks/"
-          class="">SOCKS</a
-        >
-      </li>
-      <li class="">
-        <a href="https://app.silverlight.store" class="">HIKE-TO-EARN</a>
-      </li>
-      <li class="">
-        <a href="https://silverlight.store/about/" class="">ABOUT</a>
-      </li>
-      <li class="">
-        <a href="https://silverlight.store/blog/" class="">BLOG</a>
-      </li>
-    </ul>
-  </div>
-  
-  <div class="bar-icon">
-    <i
-      class="fa-solid fa-bars text-white"
-      style="font-size: 25px;margin-top:5px"
-    />
-  </div>
-  <div class="left-sidebar text-white">
-    <button> x </button>
-    <ul class="p-0">
-      <li>
-        <a
-          href="https://silverlight.store/product/silverlight-socks/"
-          class="nav-top-link">SOCKS</a
-        >
-      </li>
-      <li>
-        <a href="https://app.silverlight.store/" class="nav-top-link"
-          >HIKE-TO-EARN</a
-        >
-      </li>
-      <li>
-        <a href="https://silverlight.store/about/" class="nav-top-link"
-          >ABOUT</a
-        >
-      </li>
-      <li>
-        <a href="https://silverlight.store/help/" class="nav-top-link"
-          >FAQ</a
-        >
-      </li>
-      <li>
-        <a href="https://silverlight.store/blog/" class="nav-top-link"
-          >BLOG</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://silverlight.store/account/"
-          class="nav-top-link nav-top-not-logged-in"
-        >
-          <span class="header-account-title"> Login </span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="inner-header-center d-flex align-items-center">
-    <a
-      href="https://silverlight.store/"
-      title="Silverlight - Discover Something New Today"
+  {#if scroll >= 300}
+    <div
+      class="bg-white fixed-header-container"
+      style="height:70px"
+      transition:slide={{ duration: 200 }}
     >
-      <!-- <img
-        width="150"
-        height="100"
-        src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
-        class=""
-        alt="Silverlight"
-      /> -->
-      <img
-        width="150"
-        height="41"
-        src="https://silverlight.store/wp-content/uploads/2020/03/Silverlight_Logo_dark-grey.png"
-        class="header-logo-dark"
-        alt="Silverlight"
-      />
-    </a>
-  </div>
-
-  <div class="inner-header-right position-relative">
-    <ul class="d-flex align-items-center">
-      <li class="">
-        <a href="https://silverlight.store/help/#tab_faq">
-          <i class="fa-regular fa-circle-question hide-icon" />
-        </a>
-      </li>
-      <li class="">
-        <a href="https://silverlight.store/account/" class="">
-          <i class="fa-solid fa-user hide-icon" />
-        </a>
-      </li>
-      <li class="fixed-cart-box py-2 d1">
-        <a
-          href=""
-          class="py-2"
-          on:click|preventDefault={() => (canvas = true)}
-        >
-          <li
-            class="cart-item"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          >
-            <span class="cart-icon">
-              {#if orders}
-                <strong>{orders.length}</strong>
-              {:else}
-                <strong>{0}</strong>
-              {/if}
-            </span>
-          </li>
-
-          {#if totalprice != 0}
-            <div class="fixed-d2">
-              <div class="p-4 offcanvas-body">
-                <div style="max-height:500px;overflow-y:scroll">
-                  {#each orders as order}
-                    <div
-                      class="cart-container d-flex justify-content-between"
-                      style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
-                    >
-                      <div>
-                        <img
-                          style="max-width: 100px;max-hight:100px"
-                          src={order.img}
-                          alt=""
-                        />
-                      </div>
-                      <div
-                        class="d-flex flex-column align-items-start"
-                        style="color:#777777"
-                      >
-                        <div style="margin-bottom: 10px;margin:0 10px">
-                          <div class="text-left">
-                            <h6>Silverlight Hiking Socks</h6>
-                          </div>
-                          <div class="text-left" style="font-size:13px">
-                            <span>COLOR : {order.color}</span>
-                            <span>TYPE : {order.type}</span>
-                            <span>QUANTITY : {order.quantity} </span>
-                            <span>PACK SIZE : {order.size}</span>
-                          </div>
-
-                          <div
-                            class="text-left"
-                            style="font-weight: bold; color: green; opacity: 0.8;"
-                            class:d-none={order.discount == 0}
-                          >
-                            <span>Save {order.discount}%</span>
-                          </div>
-
-                          <div class="text-left">
-                            <span
-                              >{order.qty} x ${order.discountedprice}.00</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="d-block mr-1">
-                        <button
-                          class="rounded-circle remove-item-button"
-                          on:click|preventDefault={() =>
-                            handleDelete(order.id)}>x</button
-                        >
-                      </div>
-                    </div>
-                  {/each}
-                </div>
-
-                <div
-                  class="border border-right-0 border-left-0"
-                  style="color:#777777"
-                >
-                  <h6 style="padding:15px 0;margin:0">
-                    Subtotal: ${totalprice}.00
-                  </h6>
-                </div>
-                <div class="d-flex flex-column mt-3">
-                  <button
-                    class="text-light bg-dark font-weight-bold"
-                    style="letter-spacing:1px">VIEW CART</button
-                  >
-                  <button
-                    class="mt-2 text-light font-weight-bold"
-                    style="background-color: {'#1cb9a2'}; letter-spacing:1px"
-                    >GO TO CHECKOUT <i
-                      class="fa fa-long-arrow-right mx-2"
-                      aria-hidden="true"
-                    /></button
-                  >
-                </div>
-              </div>
-            </div>
-          {/if}
-        </a>
-      </li>
-      <li class="html custom html_top_right_text">
-        <select class="select-currency">
-          <option valuse="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option valuse="AUD">AUD</option>
-          <option value="NZD">NZD</option>
-          <option value="CAD">CAD</option>
-          <option valuse="DKK">DKK</option>
-          <option value="SEK">SEK</option>
-          <option value="NOK">NOK</option>
-          <option valuse="CHF">CHF</option>
-          <option value="PLN">PLN</option>
-        </select>
-      </li>
-    </ul>
-  </div>
-</div>
-</div>
-{/if}
-
-
-
-  <div style="max-width:1080px" class="w-100 m-auto position-relative">
-    <!-- TOP Header -->
-    <div class="">
-      <div class="top-header">
-        <ul class="text-center">
-          <li class="text-white decoration-none">
-            <a href="" class="text-white">Worldwide Free Shipping</a>
-            ｜
-            <a href="" class="text-white">Lifetime Guarantee</a>
-          </li>
-        </ul>
-      </div>
-
       <div
-        class="header w-100 d-flex justify-content-between align-items-center"
+        class="fixed-header header w-100 d-flex justify-content-between align-items-center"
+        style="max-width:1080px;margin:auto"
       >
         <div class="d-flex inner-header-left">
           <ul class="d-flex align-items-center">
@@ -824,18 +613,15 @@
             </li>
           </ul>
         </div>
-        <div class="bar-icon" >
+
+        <div class="bar-icon">
           <i
-          on:click|preventDefault={()=>{leftSidebar=!leftSidebar}}
             class="fa-solid fa-bars text-white"
             style="font-size: 25px;margin-top:5px"
           />
         </div>
-        {#if leftSidebar}
         <div class="left-sidebar text-white">
-          <button on:click|preventDefault={() => {
-            leftSidebar = !leftSidebar;
-          }}> x </button>
+          <button> x </button>
           <ul class="p-0">
             <li>
               <a
@@ -873,6 +659,257 @@
             </li>
           </ul>
         </div>
+
+        <div class="inner-header-center d-flex align-items-center">
+          <a
+            href="https://silverlight.store/"
+            title="Silverlight - Discover Something New Today"
+          >
+            <!-- <img
+        width="150"
+        height="100"
+        src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
+        class=""
+        alt="Silverlight"
+      /> -->
+            <img
+              width="150"
+              height="41"
+              src="https://silverlight.store/wp-content/uploads/2020/03/Silverlight_Logo_dark-grey.png"
+              class="header-logo-dark"
+              alt="Silverlight"
+            />
+          </a>
+        </div>
+
+        <div class="inner-header-right position-relative">
+          <ul class="d-flex align-items-center">
+            <li class="">
+              <a href="https://silverlight.store/help/#tab_faq">
+                <i class="fa-regular fa-circle-question hide-icon" />
+              </a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/account/" class="">
+                <i class="fa-solid fa-user hide-icon" />
+              </a>
+            </li>
+            <li class="fixed-cart-box py-2 d1">
+              <a
+                href=""
+                class="py-2"
+                on:click|preventDefault={() => (canvas = true)}
+              >
+                <li
+                  class="cart-item"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasRight"
+                  aria-controls="offcanvasRight"
+                >
+                  <span class="cart-icon">
+                    {#if orders}
+                      <strong>{orders.length}</strong>
+                    {:else}
+                      <strong>{0}</strong>
+                    {/if}
+                  </span>
+                </li>
+
+                {#if totalprice != 0}
+                  <div class="fixed-d2">
+                    <div class="p-4 offcanvas-body">
+                      <div style="max-height:500px;overflow-y:scroll">
+                        {#each orders as order}
+                          <div
+                            class="cart-container d-flex justify-content-between"
+                            style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                          >
+                            <div>
+                              <img
+                                style="max-width: 100px;max-hight:100px"
+                                src={order.img}
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              class="d-flex flex-column align-items-start"
+                              style="color:#777777"
+                            >
+                              <div style="margin-bottom: 10px;margin:0 10px">
+                                <div class="text-left">
+                                  <h6>Silverlight Hiking Socks</h6>
+                                </div>
+                                <div class="text-left" style="font-size:13px">
+                                  <span>COLOR : {order.color}</span>
+                                  <span>TYPE : {order.type}</span>
+                                  <span>QUANTITY : {order.quantity} </span>
+                                  <span>PACK SIZE : {order.size}</span>
+                                </div>
+
+                                <div
+                                  class="text-left"
+                                  style="font-weight: bold; color: green; opacity: 0.8;"
+                                  class:d-none={order.discount == 0}
+                                >
+                                  <span>Save {order.discount}%</span>
+                                </div>
+
+                                <div class="text-left">
+                                  <span
+                                    >{order.qty} x ${order.discountedprice}.00</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-block mr-1">
+                              <button
+                                class="rounded-circle remove-item-button"
+                                on:click|preventDefault={() =>
+                                  handleDelete(order.id)}>x</button
+                              >
+                            </div>
+                          </div>
+                        {/each}
+                      </div>
+
+                      <div
+                        class="border border-right-0 border-left-0"
+                        style="color:#777777"
+                      >
+                        <h6 style="padding:15px 0;margin:0">
+                          Subtotal: ${totalprice}.00
+                        </h6>
+                      </div>
+                      <div class="d-flex flex-column mt-3">
+                        <button
+                          class="text-light bg-dark font-weight-bold"
+                          style="letter-spacing:1px">VIEW CART</button
+                        >
+                        <button
+                          class="mt-2 text-light font-weight-bold"
+                          style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                          >GO TO CHECKOUT <i
+                            class="fa fa-long-arrow-right mx-2"
+                            aria-hidden="true"
+                          /></button
+                        >
+                      </div>
+                    </div>
+                  </div>
+                {/if}
+              </a>
+            </li>
+            <li class="html custom html_top_right_text">
+              <select class="select-currency">
+                <option valuse="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option valuse="AUD">AUD</option>
+                <option value="NZD">NZD</option>
+                <option value="CAD">CAD</option>
+                <option valuse="DKK">DKK</option>
+                <option value="SEK">SEK</option>
+                <option value="NOK">NOK</option>
+                <option valuse="CHF">CHF</option>
+                <option value="PLN">PLN</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  {/if}
+
+  <div style="max-width:1080px" class="w-100 m-auto position-relative">
+    <!-- TOP Header -->
+    <div class="">
+      <div class="top-header">
+        <ul class="text-center">
+          <li class="text-white decoration-none">
+            <a href="" class="text-white">Worldwide Free Shipping</a>
+            ｜
+            <a href="" class="text-white">Lifetime Guarantee</a>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="header w-100 d-flex justify-content-between align-items-center"
+      >
+        <div class="d-flex inner-header-left">
+          <ul class="d-flex align-items-center">
+            <li class="">
+              <a
+                href="https://silverlight.store/product/silverlight-socks/"
+                class="">SOCKS</a
+              >
+            </li>
+            <li class="">
+              <a href="https://app.silverlight.store" class="">HIKE-TO-EARN</a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/about/" class="">ABOUT</a>
+            </li>
+            <li class="">
+              <a href="https://silverlight.store/blog/" class="">BLOG</a>
+            </li>
+          </ul>
+        </div>
+        <div class="bar-icon">
+          <i
+            on:click|preventDefault={() => {
+              leftSidebar = !leftSidebar;
+            }}
+            class="fa-solid fa-bars text-white"
+            style="font-size: 25px;margin-top:5px"
+          />
+        </div>
+        {#if leftSidebar}
+          <div class="left-sidebar text-white">
+            <button
+              on:click|preventDefault={() => {
+                leftSidebar = !leftSidebar;
+              }}
+            >
+              x
+            </button>
+            <ul class="p-0">
+              <li>
+                <a
+                  href="https://silverlight.store/product/silverlight-socks/"
+                  class="nav-top-link">SOCKS</a
+                >
+              </li>
+              <li>
+                <a href="https://app.silverlight.store/" class="nav-top-link"
+                  >HIKE-TO-EARN</a
+                >
+              </li>
+              <li>
+                <a href="https://silverlight.store/about/" class="nav-top-link"
+                  >ABOUT</a
+                >
+              </li>
+              <li>
+                <a href="https://silverlight.store/help/" class="nav-top-link"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a href="https://silverlight.store/blog/" class="nav-top-link"
+                  >BLOG</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://silverlight.store/account/"
+                  class="nav-top-link nav-top-not-logged-in"
+                >
+                  <span class="header-account-title"> Login </span>
+                </a>
+              </li>
+            </ul>
+          </div>
         {/if}
 
         <div class="inner-header-center d-flex align-items-center">
@@ -1015,7 +1052,7 @@
               </a>
             </li>
             <li class="html custom html_top_right_text">
-              <select class="select-currency" bind:value={currency}  >
+              <select class="select-currency" bind:value={currency}>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
@@ -1094,7 +1131,10 @@
                     <div class="text-left">
                       <h6>Silverlight Hiking Socks</h6>
                     </div>
-                    <div class="text-left" style="font-size:12px; line-height:1">
+                    <div
+                      class="text-left"
+                      style="font-size:12px; line-height:1"
+                    >
                       <span>COLOR : {order.color}</span>
                       <span>TYPE : {order.type}</span>
                       <span>QUANTITY : {order.quantity} </span>
@@ -1110,7 +1150,9 @@
                     </div>
 
                     <div class="text-left">
-                      <span>{order.qty} x {currencyLogo}{order.discountedprice}.00</span>
+                      <span
+                        >{order.qty} x {currencyLogo}{order.discountedprice}.00</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -1288,7 +1330,7 @@
                       <li>
                         <div class="">
                           <button
-                            class={color =="BLACK" ? "selected" : ""}
+                            class={color == "BLACK" ? "selected" : ""}
                             on:click={() => {
                               (color = "BLACK"), (currentimageid = 1);
                             }}>Black</button
@@ -1459,7 +1501,10 @@
                         <del aria-hidden="true">
                           <span class="">
                             {#if discount != 0}
-                              <span><span class="">{currencyLogo}</span>{fprice}</span>
+                              <span
+                                ><span class="">{currencyLogo}</span
+                                >{fprice}</span
+                              >
                             {/if}
                           </span>
                         </del>
@@ -1680,501 +1725,678 @@
       <!-- HOW SILVERLIGHT SOCKS COMPARE TO THE COMPETITION -->
       <div class="product-section">
         <div class="">
-          <div class="">
-            <div class="">
-              <h2 style="text-align: center">
-                HOW SILVERLIGHT SOCKS COMPARE TO THE COMPETITION
-              </h2>
-              <p>
-                <img
-                  style="width:100%"
-                  src="https://silverlight.store/wp-content/uploads/2019/10/Competitor-Comparison-5-pack.jpg"
-                  alt="Competitor-Comparison-5-pack"
-                />
-              </p>
-              <h2>
-                <img
-                  style="width:100%;margin-bottom:50px"
-                  src="https://silverlight.store/wp-content/uploads/2020/03/10th-Options-optimized.jpg"
-                  alt="men and women hiking socks"
-                />
-              </h2>
-              <div>
-                <div class="advantages-container">
-                  <ul class="advantage-list">
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon1.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>Stink—free feet</h3>
-                          <p>
-                            Silver ionss kill bacteria preventing odor from ever
-                            having a chance
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon3.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>Form Fits to the Shape of Your Foot</h3>
-                          <p>
-                            Keep the sock in place when youre taking on
-                            challenging terrain - like side-hills. No more
-                            slippage! No more bunching!
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon2.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>A Gentle Massage for Your Feet</h3>
-                          <p>
-                            The combination of merino wool softly caressing your
-                            feet mixed with seamless stitching creates the
-                            ultimate comfort on the trail. Your foot wont even
-                            notice the seams even after 6 hours of hiking.
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon7.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>Blister Blasting Tech</h3>
-                          <p>
-                            The entire sock is designed to prevent all the major
-                            causes of blisters on the trail.
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon4.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>Take Control of Foot Moisture</h3>
-                          <p>
-                            Soft, moisture wicking, static free, temperature
-                            regulating.
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon8.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>Two Socks in One</h3>
-                          <p>
-                            Dual layer construction ensure the best of all
-                            worlds while hiking.
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon6.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>Taking Care of Your Feet On The Trail</h3>
-                          <p>Support in all the right spots</p>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div class="advantage-image-icon">
-                          <img src="./images/icon5.png" alt="" />
-                        </div>
-                        <div class="content-area">
-                          <h3>No More Holes</h3>
-                          <p>
-                            High strength merino wool fibers expertly blended
-                            for maximum durability make sure your pair stay hole
-                            free and dont wear thin. Keeps the same compression,
-                            form, and fit after many many miles hiked and many
-                            hand/machine washes.
-                          </p>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon1.png"
-                      alt="stink free feet icon"
-                    />
-                  </div>
-                  <div class="text-area">
-                    <h3>STINK-FREE FEET</h3>
-                    <p>
-                      Silver ions kills bacteria preventing odor from ever
-                      having a chance.
-                    </p>
-                  </div>
-                </div>
-                <div style="color:#777777">
-                  The same tech used by astronauts and medical professionals to
-                  prevent bacteria build up and growth is in Silverlight hiking
-                  socks. Not only does bacteria cause the odor that’s starting
-                  to develop when you hike, but it also is a leading cause of
-                  foot-rot. With Silverlight socks we’re creating a
-                  bacteria-free zone around your feet for blister-free hiking
-                  bliss without the bad smell.
-                </div>
-                <p>&nbsp;</p>
-              </div>
-              <div>
-                <img
-                  style="width:100%;margin-bottom:32px"
-                  class="alignnone wp-image-21732 size-full"
-                  src="https://silverlight.store/wp-content/uploads/2020/03/17th-Silver-thread-1-optimized.jpg"
-                  alt="Silverlight silver yarn"
-                />
-              </div>
-              <div id="icon4" class="heading-area">
-                <div class="img-sec">
-                  <img
-                    class=""
-                    src="./images/icon7.png"
-                    alt="blister prevention icon"
-                  />
-                </div>
-                <div class="text-area">
-                  <h3>BLISTER BLASTING TECH</h3>
-                  <p>
-                    The entire sock is designed to prevent all the major causes
-                    of blisters on the trail.
-                  </p>
-                </div>
-              </div>
-              <div style="color:#777777">
-                To prevent blisters from having a chance, you need a sock that
-                dries fast &amp; wicks sweat, doesn’t ever move (no bunching,
-                slipping, rubbing), has support and padding and keeps bacteria
-                away from your feet. With Silverlight socks we are the first to
-                be able to solve all this problems at once in a single sock. By
-                creating a padded-dual-layer sock with compression to prevent
-                movement, with silver yarns to keep bacteria at bay and
-                sweat-wicking and faster drying time than traditional merino
-                wool hiking socks, thanks to a deliberate balance of a merino
-                wool and silver yarn inner layer and nylon and spandex outer
-                layer.
-              </div>
-              <div />
-              <p>&nbsp;</p>
-              <div style="color:#777777">
-                Gone are the days of taking your socks off after a days hike –
-                to give your feet a rest – only to reveal painful blisters. Our
-                struggle in creating the Silverlight socks was in creating a
-                sock that could do all the work in preventing blisters from ever
-                having the chance to form. We are proud to say that Silverlight
-                socks completely eliminate every major cause of blisters,
-                whether you’re running or hiking.
-              </div>
-              <div />
-              <div />
-              <div>
-                <div class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon2.png"
-                      alt="gentle massage icon"
-                    />
-                  </div>
-                  <div class="text-area">
-                    <h3>A GENTLE MASSAGE FOR YOUR FEET</h3>
-                    <p>
-                      The combination of merino wool softly caressing your feet
-                      mixed with seamless stitching creates the ultimate comfort
-                      on the trail. Your foot will feel comfortable throughout,
-                      even after 6 hours of hiking or treks that last for a
-                      week.
-                    </p>
-                  </div>
-                </div>
-                <p style="color:#777777">
-                  Seamless stitching in the toe box reduces rubbing in sensitive
-                  areas keeping your skin free of painful blisters that can
-                  throw off your hiking schedule. And, no more hard hits on the
-                  trail, our light padding provides just enough cushion to make
-                  long hikes barely noticeable on your feet.
-                </p>
-                <!-- <p>&nbsp;</p> -->
-                <div class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon5.png"
-                      alt="no more holes"
-                    />
-                  </div>
-                  <div class="text-area">
-                    <h3>NO MORE HOLES</h3>
-                    <p>
-                      High strength merino wool fibers expertly blended for
-                      maximum durability makes sure your pair stay hole free and
-                      don’t wear thin. Keeps the same compression, form, and fit
-                      after many miles hiked and many hand/machine washes.
-                    </p>
-                  </div>
-                </div>
-                <p style="color:#777777">
-                  We used the Martindale Wear and Abrasion tester to measure the
-                  strength, durability, and longevity of the Silverlight sock
-                  fabric. After being rubbed by the device (simulating stepping)
-                  for 100’s upon 100’s of miles the Silverlight sock did not
-                  give in or show signs of wear. We passed the top 1% of sock
-                  durability. Then we had to stop the machine to give it a
-                  break.
-                </p>
-                <div class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon6.png"
-                      alt="tacking care of your feet on the trail"
-                    />
-                  </div>
-                  <div id="icon7" class="text-area">
-                    <h3>TAKING CARE OF YOUR FEET ON THE TRAIL</h3>
-                    <p>Support in all the right places.</p>
-                  </div>
-                </div>
-                <p style="color:#777777">
-                  With 3 core areas of support. Your heel, toe, and mid-foot are
-                  amply fortified for long hikes on the trail. A slight
-                  breathable compression around the midsection that lifts up,
-                  holds the arch. Padding in both the heel and the toe that
-                  stays soft and cushioned after 1000’s of miles. Ankle socks
-                  are great for warm weather, trail running and when wearing
-                  trail runners and other lighter footwear, while the crew socks
-                  are designed to be worn with hiking boots.
-                </p>
-                <div class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon8.png"
-                      alt="two socks in one"
-                    />
-                  </div>
-                  <div id="icon6" class="text-area">
-                    <h3>TWO SOCKS IN ONE</h3>
-                    <p>
-                      Dual layer construction for compression &amp; moisture
-                      wicking
-                    </p>
-                  </div>
-                </div>
-                <p style="color:#777777">
-                  To elevate the traditional hiking sock it was clear we had to
-                  double up to get the best of both worlds, compression AND
-                  moisture-wicking technology. The challenge here was creating a
-                  dual layer sock that was thin enough to not cause pain from
-                  overcrowding in the shoe and at the same time constructed to
-                  exacting standards that both layers would work in tandem to
-                  support, aerate, and comfort the foot. We’re happy to say
-                  after hundreds of hours of testing with some serious time on
-                  the trail we have custom designed that perfect balance.
-                </p>
-                <div class="img-sec1">
-                  <img
-                    style="width: 100%;"
-                    class=""
-                    src="https://silverlight.store/wp-content/uploads/2019/10/20th-Double-layers_newphoto_Angle.gif"
-                    alt="dual layer hiking socks"
-                  />
-                </div>
-                <p>&nbsp;</p>
-                <div class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon4.png"
-                      alt="take control of foot moisture on the trail"
-                    />
-                  </div>
-                  <div id="icon5" class="text-area">
-                    <h3>TAKE CONTROL OF FOOT MOISTURE ON THE TRAIL</h3>
-                    <p>Soft, moisture wicking, and temperature regulating.</p>
-                  </div>
-                </div>
-                <p style="color:#777777">
-                  The Silverlight socks inner layer uses Merino Wool sourced
-                  from Australian merino sheep. The wool from this unique sheep
-                  has an incredible capability to pull moisture (including
-                  sweat) away from the skin and bring it to the surface of the
-                  sock. Keeping your foot dry and closer to being completely
-                  blister free. Thanks to the outer Nylon layer, Silverlight
-                  socks dry faster than hiking socks available from competitors.
-                  Thanks to the compression they also feel more comfortable
-                  while they are wet than comparable hiking socks.
-                </p>
-                <div id="icon2" class="heading-area">
-                  <div class="img-sec">
-                    <img
-                      class=""
-                      src="./images/icon3.png"
-                      alt="form fits to the shape of your foot"
-                    />
-                  </div>
-                  <div class="text-area">
-                    <h3>FORM FITS TO THE SHAPE OF YOUR FOOT</h3>
-                    <p>
-                      Keep the sock in place when you’re taking on challenging
-                      terrain – like side-hills.<br />
-                      No more slippage! No more bunching!
-                    </p>
-                  </div>
-                </div>
-                <p style="color:#777777">
-                  We applied a gentle blend of spandex to the outer nylon layer
-                  of the Silverlight socks. This provides much-needed arch
-                  support (great for people with Plantar Fasciitis) but it also
-                  serves the purpose of keeping your sock in place and provides
-                  light compression for those long days of hiking on the trail.
-                  Snug on your foot and no more slippage or bunching up inside
-                  the shoe causing discomfort on the trail.
-                </p>
-              </div>
-              <p style="color:#777777">
-                We believe 100% in the quality of the products we make, that’s
-                why we have a crazy return guarantee. If for any reason at all
-                you’re not satisfied with your Silverlight socks, we’ll replace
-                them or give you a refund.
-              </p>
-              <p>
-                <img
-                  style="width: 100%;"
-                  class="crop-border alignnone wp-image-21730 size-full"
-                  src="https://silverlight.store/wp-content/uploads/2020/03/Guarantee-2-optimized.jpg"
-                  alt="Lifetime Guarantee"
-                />
-              </p>
-              <h2 style="text-align: center;">FREQUENTLY ASKED QUESTIONS</h2>
-              <!-- accordian -->
-              <Accordion>
-                <span slot="head">Where are they made?</span>
-                <div slot="details">
-                  <p>
-                    There are very few factories in the world who are able to
-                    work with silver yarns and can produce dual-layer socks with
-                    compression at the same time. It requires state of the art
-                    machinery, that’s just been available in the last few years
-                    as well as knowledge how to blend silver yarns into the
-                    socks, a delicate process.
-                  </p>
-                  <p>
-                    We have been testing factories throughout the world and we
-                    found only one that was able to produce Silverlight socks in
-                    the quality we require, a small specialized factory in
-                    China. Out of 15 factories, 8 of them in China, we were left
-                    only with one who is able to produce the socks that so many
-                    of our customers fell in love with. For a more detailed
-                    explanation, we wrote a blog post about <a
-                      style="color:#1cb9a2;text-decoration:none"
-                      href="https://silverlight.store/made-in-china/"
-                      >Why Silverlight socks are made in China</a
-                    ><br />
-                  </p>
-                </div>
-              </Accordion>
-              <Accordion>
-                <span slot="head"
-                  >Why are Silverlight socks slightly more expensive than other
-                  hiking sock brands?</span
-                >
-                <div slot="details">
-                  <p>
-                    Our production price is about twice as high as for socks
-                    that don’t contain silver. Silver is a very expensive
-                    material, but we believe strongly that to make the best
-                    hiking socks possible, silver yarn has to be part of the
-                    equation. Unlike most other brands we offer free worldwide
-                    shipping even for the first pair. By utilizing a direct to
-                    consumer (DTC) model without middlemen and savings for
-                    shipping when sending multiple pairs in one package, we are
-                    able to offer our socks for a similar price as other
-                    high-end hiking sock brands, for purchases of 3 pairs, even
-                    though we have much higher production cost. We sell 5-packs
-                    at an even greater discount, keeping pricing aligned with
-                    our true cost.<br />
-                  </p>
-                </div>
-              </Accordion>
-              <Accordion>
-                <span slot="head"
-                  >What makes them different from the brand I'm wearing now?</span
-                >
-                <div slot="details">
-                  <p>
-                    Our socks are the only dual-layer compression hiking socks
-                    with silver yarns on the market. Compared to most hiking
-                    socks available, this is how Silverlight socks are
-                    different:
-                  </p>
-                  <ul>
-                    <li>
-                      They dry faster, thanks to the dual-layer blend of merino
-                      wool and nylon/spandex
-                    </li>
-                    <li>
-                      They don’t smell. Merino wool is naturally anti-bacterial,
-                      however it doesn’t actively kill bacteria like silver
-                      does.
-                    </li>
-                    <li>
-                      They fit snug and never move, because of the outer
-                      compression layer.
-                    </li>
-                    <li>
-                      Silverlight socks are designed to prevent blisters better
-                      than any other sock.
-                    </li>
-                  </ul>
-                </div>
-              </Accordion>
-              <Accordion>
-                <span slot="head"
-                  >How to recognize which sock is for left and which is for
-                  right?</span
-                >
-                <div slot="details">
-                  <p>
-                    Silverlight socks have a different text inside the rib top
-                    front for left and right socks. “Venture” on left socks and
-                    “Out” for the right side.
-                  </p>
-                </div>
-              </Accordion>
+          <h2 style="text-align: center">
+            HOW SILVERLIGHT SOCKS COMPARE TO THE COMPETITION
+          </h2>
+          <p>
+            <img
+              style="width:100%"
+              src="https://silverlight.store/wp-content/uploads/2019/10/Competitor-Comparison-5-pack.jpg"
+              alt="Competitor-Comparison-5-pack"
+            />
+          </p>
+          <h2>
+            <img
+              style="width:100%;margin-bottom:50px"
+              src="https://silverlight.store/wp-content/uploads/2020/03/10th-Options-optimized.jpg"
+              alt="men and women hiking socks"
+            />
+          </h2>
+          <div>
+            <div class="advantages-container">
+              <ul class="advantage-list">
+                <li>
+                  <a href="#icon1">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon1.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>Stink—free feet</h3>
+                      <p>
+                        Silver ionss kill bacteria preventing odor from ever
+                        having a chance
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon8">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon3.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>Form Fits to the Shape of Your Foot</h3>
+                      <p>
+                        Keep the sock in place when youre taking on challenging
+                        terrain - like side-hills. No more slippage! No more
+                        bunching!
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon3">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon2.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>A Gentle Massage for Your Feet</h3>
+                      <p>
+                        The combination of merino wool softly caressing your
+                        feet mixed with seamless stitching creates the ultimate
+                        comfort on the trail. Your foot wont even notice the
+                        seams even after 6 hours of hiking.
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon2">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon7.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>Blister Blasting Tech</h3>
+                      <p>
+                        The entire sock is designed to prevent all the major
+                        causes of blisters on the trail.
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon7">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon4.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>Take Control of Foot Moisture</h3>
+                      <p>
+                        Soft, moisture wicking, static free, temperature
+                        regulating.
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon6">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon8.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>Two Socks in One</h3>
+                      <p>
+                        Dual layer construction ensure the best of all worlds
+                        while hiking.
+                      </p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon5">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon6.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>Taking Care of Your Feet On The Trail</h3>
+                      <p>Support in all the right spots</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#icon4">
+                    <div class="advantage-image-icon">
+                      <img src="./images/icon5.png" alt="" />
+                    </div>
+                    <div class="content-area">
+                      <h3>No More Holes</h3>
+                      <p>
+                        High strength merino wool fibers expertly blended for
+                        maximum durability make sure your pair stay hole free
+                        and dont wear thin. Keeps the same compression, form,
+                        and fit after many many miles hiked and many
+                        hand/machine washes.
+                      </p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
             </div>
+            <div class="heading-area" id="icon1">
+              <div class="img-sec">
+                <img
+                  class=""
+                  src="./images/icon1.png"
+                  alt="stink free feet icon"
+                />
+              </div>
+              <div class="text-area">
+                <h3>STINK-FREE FEET</h3>
+                <p>
+                  Silver ions kills bacteria preventing odor from ever having a
+                  chance.
+                </p>
+              </div>
+            </div>
+            <div style="color:#777777">
+              The same tech used by astronauts and medical professionals to
+              prevent bacteria build up and growth is in Silverlight hiking
+              socks. Not only does bacteria cause the odor that’s starting to
+              develop when you hike, but it also is a leading cause of foot-rot.
+              With Silverlight socks we’re creating a bacteria-free zone around
+              your feet for blister-free hiking bliss without the bad smell.
+            </div>
+            <p>&nbsp;</p>
+          </div>
+          <div>
+            <img
+              style="width:100%;margin-bottom:32px"
+              class="alignnone wp-image-21732 size-full"
+              src="https://silverlight.store/wp-content/uploads/2020/03/17th-Silver-thread-1-optimized.jpg"
+              alt="Silverlight silver yarn"
+            />
+          </div>
+          <div class="heading-area" id="icon2">
+            <div class="img-sec">
+              <img
+                class=""
+                src="./images/icon7.png"
+                alt="blister prevention icon"
+              />
+            </div>
+            <div class="text-area">
+              <h3>BLISTER BLASTING TECH</h3>
+              <p>
+                The entire sock is designed to prevent all the major causes of
+                blisters on the trail.
+              </p>
+            </div>
+          </div>
+          <div style="color:#777777">
+            To prevent blisters from having a chance, you need a sock that dries
+            fast &amp; wicks sweat, doesn’t ever move (no bunching, slipping,
+            rubbing), has support and padding and keeps bacteria away from your
+            feet. With Silverlight socks we are the first to be able to solve
+            all this problems at once in a single sock. By creating a
+            padded-dual-layer sock with compression to prevent movement, with
+            silver yarns to keep bacteria at bay and sweat-wicking and faster
+            drying time than traditional merino wool hiking socks, thanks to a
+            deliberate balance of a merino wool and silver yarn inner layer and
+            nylon and spandex outer layer.
+          </div>
+          <div />
+          <p>&nbsp;</p>
+          <div style="color:#777777">
+            Gone are the days of taking your socks off after a days hike – to
+            give your feet a rest – only to reveal painful blisters. Our
+            struggle in creating the Silverlight socks was in creating a sock
+            that could do all the work in preventing blisters from ever having
+            the chance to form. We are proud to say that Silverlight socks
+            completely eliminate every major cause of blisters, whether you’re
+            running or hiking.
+          </div>
+          <div />
+          <div />
+          <div>
+            <div class="heading-area" id="icon3">
+              <div class="img-sec">
+                <img
+                  class=""
+                  src="./images/icon2.png"
+                  alt="gentle massage icon"
+                />
+              </div>
+              <div class="text-area">
+                <h3>A GENTLE MASSAGE FOR YOUR FEET</h3>
+                <p>
+                  The combination of merino wool softly caressing your feet
+                  mixed with seamless stitching creates the ultimate comfort on
+                  the trail. Your foot will feel comfortable throughout, even
+                  after 6 hours of hiking or treks that last for a week.
+                </p>
+              </div>
+            </div>
+            <p style="color:#777777">
+              Seamless stitching in the toe box reduces rubbing in sensitive
+              areas keeping your skin free of painful blisters that can throw
+              off your hiking schedule. And, no more hard hits on the trail, our
+              light padding provides just enough cushion to make long hikes
+              barely noticeable on your feet.
+            </p>
+            <!-- <p>&nbsp;</p> -->
+            <div class="heading-area" id="icon4">
+              <div class="img-sec">
+                <img class="" src="./images/icon5.png" alt="no more holes" />
+              </div>
+              <div class="text-area">
+                <h3>NO MORE HOLES</h3>
+                <p>
+                  High strength merino wool fibers expertly blended for maximum
+                  durability makes sure your pair stay hole free and don’t wear
+                  thin. Keeps the same compression, form, and fit after many
+                  miles hiked and many hand/machine washes.
+                </p>
+              </div>
+            </div>
+            <p style="color:#777777">
+              We used the Martindale Wear and Abrasion tester to measure the
+              strength, durability, and longevity of the Silverlight sock
+              fabric. After being rubbed by the device (simulating stepping) for
+              100’s upon 100’s of miles the Silverlight sock did not give in or
+              show signs of wear. We passed the top 1% of sock durability. Then
+              we had to stop the machine to give it a break.
+            </p>
+            <div class="heading-area" id="icon5">
+              <div class="img-sec">
+                <img
+                  class=""
+                  src="./images/icon6.png"
+                  alt="tacking care of your feet on the trail"
+                />
+              </div>
+              <div id="icon7" class="text-area">
+                <h3>TAKING CARE OF YOUR FEET ON THE TRAIL</h3>
+                <p>Support in all the right places.</p>
+              </div>
+            </div>
+            <p style="color:#777777">
+              With 3 core areas of support. Your heel, toe, and mid-foot are
+              amply fortified for long hikes on the trail. A slight breathable
+              compression around the midsection that lifts up, holds the arch.
+              Padding in both the heel and the toe that stays soft and cushioned
+              after 1000’s of miles. Ankle socks are great for warm weather,
+              trail running and when wearing trail runners and other lighter
+              footwear, while the crew socks are designed to be worn with hiking
+              boots.
+            </p>
+            <div class="heading-area" id="icon6">
+              <div class="img-sec">
+                <img class="" src="./images/icon8.png" alt="two socks in one" />
+              </div>
+              <div class="text-area">
+                <h3>TWO SOCKS IN ONE</h3>
+                <p>
+                  Dual layer construction for compression &amp; moisture wicking
+                </p>
+              </div>
+            </div>
+            <p style="color:#777777">
+              To elevate the traditional hiking sock it was clear we had to
+              double up to get the best of both worlds, compression AND
+              moisture-wicking technology. The challenge here was creating a
+              dual layer sock that was thin enough to not cause pain from
+              overcrowding in the shoe and at the same time constructed to
+              exacting standards that both layers would work in tandem to
+              support, aerate, and comfort the foot. We’re happy to say after
+              hundreds of hours of testing with some serious time on the trail
+              we have custom designed that perfect balance.
+            </p>
+            <div class="img-sec1">
+              <img
+                style="width: 100%;"
+                class=""
+                src="https://silverlight.store/wp-content/uploads/2019/10/20th-Double-layers_newphoto_Angle.gif"
+                alt="dual layer hiking socks"
+              />
+            </div>
+            <p>&nbsp;</p>
+            <div class="heading-area" id="icon7">
+              <div class="img-sec">
+                <img
+                  class=""
+                  src="./images/icon4.png"
+                  alt="take control of foot moisture on the trail"
+                />
+              </div>
+              <div class="text-area">
+                <h3>TAKE CONTROL OF FOOT MOISTURE ON THE TRAIL</h3>
+                <p>Soft, moisture wicking, and temperature regulating.</p>
+              </div>
+            </div>
+            <p style="color:#777777">
+              The Silverlight socks inner layer uses Merino Wool sourced from
+              Australian merino sheep. The wool from this unique sheep has an
+              incredible capability to pull moisture (including sweat) away from
+              the skin and bring it to the surface of the sock. Keeping your
+              foot dry and closer to being completely blister free. Thanks to
+              the outer Nylon layer, Silverlight socks dry faster than hiking
+              socks available from competitors. Thanks to the compression they
+              also feel more comfortable while they are wet than comparable
+              hiking socks.
+            </p>
+            <div class="heading-area" id="icon8">
+              <div class="img-sec">
+                <img
+                  class=""
+                  src="./images/icon3.png"
+                  alt="form fits to the shape of your foot"
+                />
+              </div>
+              <div class="text-area">
+                <h3>FORM FITS TO THE SHAPE OF YOUR FOOT</h3>
+                <p>
+                  Keep the sock in place when you’re taking on challenging
+                  terrain – like side-hills.<br />
+                  No more slippage! No more bunching!
+                </p>
+              </div>
+            </div>
+            <p style="color:#777777">
+              We applied a gentle blend of spandex to the outer nylon layer of
+              the Silverlight socks. This provides much-needed arch support
+              (great for people with Plantar Fasciitis) but it also serves the
+              purpose of keeping your sock in place and provides light
+              compression for those long days of hiking on the trail. Snug on
+              your foot and no more slippage or bunching up inside the shoe
+              causing discomfort on the trail.
+            </p>
+          </div>
+          <p style="color:#777777">
+            We believe 100% in the quality of the products we make, that’s why
+            we have a crazy return guarantee. If for any reason at all you’re
+            not satisfied with your Silverlight socks, we’ll replace them or
+            give you a refund.
+          </p>
+          <p>
+            <img
+              style="width: 100%;margin-bottom:20px;"
+              class="crop-border alignnone wp-image-21730 size-full"
+              src="https://silverlight.store/wp-content/uploads/2020/03/Guarantee-2-optimized.jpg"
+              alt="Lifetime Guarantee"
+            />
+          </p>
+          <h2 style="text-align: center;font-size:24px;color:#555555">
+            FREQUENTLY ASKED QUESTIONS
+          </h2>
+          <!-- accordian -->
+          <div class="accordion-container" style="padding-bottom:24px">
+            <Accordion>
+              <span slot="head">Where are they made?</span>
+              <div slot="details">
+                <p>
+                  There are very few factories in the world who are able to work
+                  with silver yarns and can produce dual-layer socks with
+                  compression at the same time. It requires state of the art
+                  machinery, that’s just been available in the last few years as
+                  well as knowledge how to blend silver yarns into the socks, a
+                  delicate process.
+                </p>
+                <p>
+                  We have been testing factories throughout the world and we
+                  found only one that was able to produce Silverlight socks in
+                  the quality we require, a small specialized factory in China.
+                  Out of 15 factories, 8 of them in China, we were left only
+                  with one who is able to produce the socks that so many of our
+                  customers fell in love with. For a more detailed explanation,
+                  we wrote a blog post about <a
+                    style="color:#1cb9a2;text-decoration:none"
+                    href="https://silverlight.store/made-in-china/"
+                    >Why Silverlight socks are made in China</a
+                  ><br />
+                </p>
+              </div>
+            </Accordion>
+            <Accordion>
+              <span slot="head"
+                >Why are Silverlight socks slightly more expensive than other
+                hiking sock brands?</span
+              >
+              <div slot="details">
+                <p>
+                  Our production price is about twice as high as for socks that
+                  don’t contain silver. Silver is a very expensive material, but
+                  we believe strongly that to make the best hiking socks
+                  possible, silver yarn has to be part of the equation. Unlike
+                  most other brands we offer free worldwide shipping even for
+                  the first pair. By utilizing a direct to consumer (DTC) model
+                  without middlemen and savings for shipping when sending
+                  multiple pairs in one package, we are able to offer our socks
+                  for a similar price as other high-end hiking sock brands, for
+                  purchases of 3 pairs, even though we have much higher
+                  production cost. We sell 5-packs at an even greater discount,
+                  keeping pricing aligned with our true cost.<br />
+                </p>
+              </div>
+            </Accordion>
+            <Accordion>
+              <span slot="head"
+                >What makes them different from the brand I'm wearing now?</span
+              >
+              <div slot="details">
+                <p>
+                  Our socks are the only dual-layer compression hiking socks
+                  with silver yarns on the market. Compared to most hiking socks
+                  available, this is how Silverlight socks are different:
+                </p>
+                <ul>
+                  <li>
+                    They dry faster, thanks to the dual-layer blend of merino
+                    wool and nylon/spandex
+                  </li>
+                  <li>
+                    They don’t smell. Merino wool is naturally anti-bacterial,
+                    however it doesn’t actively kill bacteria like silver does.
+                  </li>
+                  <li>
+                    They fit snug and never move, because of the outer
+                    compression layer.
+                  </li>
+                  <li>
+                    Silverlight socks are designed to prevent blisters better
+                    than any other sock.
+                  </li>
+                </ul>
+              </div>
+            </Accordion>
+            <Accordion>
+              <span slot="head"
+                >How to recognize which sock is for left and which is for right?</span
+              >
+              <div slot="details">
+                <p>
+                  Silverlight socks have a different text inside the rib top
+                  front for left and right socks. “Venture” on left socks and
+                  “Out” for the right side.
+                </p>
+              </div>
+            </Accordion>
           </div>
         </div>
       </div>
+
+      <!-- CUSTOMER REVIEWS -->
+      <!-- <div class="customer-reviews" style="color:#777777">
+        <div class="d-flex">
+          <div style="width:250px" class="">
+            <div class="d-flex align-items-center">
+              <span class="" style="font-size:37px;font-weight:600"> 4.9 </span>
+              <span class="mx-2">
+                <i class="fa-solid fa-star" style="color:gold;font-size:20px" />
+                <i class="fa-solid fa-star" style="color:gold;font-size:20px" />
+                <i class="fa-solid fa-star" style="color:gold;font-size:20px" />
+                <i class="fa-solid fa-star" style="color:gold;font-size:20px" />
+                <i class="fa-solid fa-star" style="color:gold;font-size:20px" />
+              </span>
+            </div>
+            <span class=""> Based on 497 Reviews </span>
+          </div>
+          <div class="flex-grow-1" style="margin-top: 10px;">
+            <div class="d-flex">
+              <span class="">
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+              </span>
+              <div class="mx-3" style="">88%&nbsp;</div>
+              <div class="">437</div>
+            </div>
+            <div class="d-flex">
+              <span class="">
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-regular fa-star" />
+              </span>
+              <div class="mx-3" style="">9%&nbsp;</div>
+              <div class="">47</div>
+            </div>
+            <div class="d-flex">
+              <span class="">
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-regular fa-star" />
+                <i class="fa-regular fa-star" />
+              </span>
+              <div class="mx-3" style="">2%&nbsp;</div>
+              <div class="">12</div>
+            </div>
+            <div class="d-flex">
+              <span class="">
+                <i class="fa-solid fa-star" />
+                <i class="fa-solid fa-star" />
+                <i class="fa-regular fa-star" />
+                <i class="fa-regular fa-star" />
+                <i class="fa-regular fa-star" />
+              </span>
+              <div class="mx-3" style="">0%&nbsp;</div>
+              <div class="">1</div>
+            </div>
+            <div class="d-flex">
+              <span class="">
+                <i class="fa-solid fa-star" />
+                <i class="fa-regular fa-star" />
+                <i class="fa-regular fa-star" />
+                <i class="fa-regular fa-star" />
+                <i class="fa-regular fa-star" />
+              </span>
+              <div class="mx-3" style="">0%&nbsp;</div>
+              <div class="">0</div>
+            </div>
+          </div>
+          <div class="">
+            <span class="border border-4 m-2">
+              <i class="fa-regular fa-pen-to-square" />
+              <span class="">Write a Review</span>
+            </span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- PEOPLE LOVE US -->
+      <h2 style="text-align: center;font-size:25px;color:#555555">
+        PEOPLE LOVE US
+      </h2>
+      <div class="testimonial-slider d-flex">
+        <div id="" class="testimonial-container" style="padding-right:15px;">
+          <div class="author-image">
+            <img
+              src="https://silverlight.store/wp-content/uploads/2020/01/Deanna-Vickers-optimized.jpg"
+              alt=""
+            />
+            <span class="tool">Testimonial 3</span>
+          </div>
+
+          <div class="testimonials-text flex-grow-1">
+            <p>
+              "The fit and feel is just what I was hoping for. I have worn them
+              to the gym twice and 2 hikes of around 5-7 miles each. They smell
+              and feel as fresh as when I received them. On a scale of 1- to 10
+              with 10 being best I would give them an 11! <span class="il"
+                >Love</span
+              >&nbsp;<span class="il">everything</span> about this sock."
+            </p>
+          </div>
+          <div class="author-name">
+            <strong>Deana Vickers</strong>
+          </div>
+
+          <div class="testimonial-rate">
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+          </div>
+        </div>
+        <div
+          id=""
+          class="testimonial-container"
+          style="padding:0 7.5px 0 7.5px;"
+        >
+          <div class="author-image">
+            <img
+              src="https://silverlight.store/wp-content/uploads/2020/01/Andy-Politz-optimized.jpg"
+              alt=""
+            />
+            <span class="tool">Testimonial 2</span>
+          </div>
+          <div class="testimonials-text flex-grow-1">
+            <p>
+              "I'm not sure if I had ever had a sock match a walker's needs so
+              well: stay in place, cushioning, comfort... In my 45 years of
+              adventure activities. They are a highly valued innovation and will
+              be on my feet from here on out. I have a new favorite gift for
+              friends!"
+            </p>
+          </div>
+          <div class="author-name">
+            <strong>Andy Politz</strong>
+          </div>
+
+          <div class="testimonial-rate">
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+          </div>
+        </div>
+        <div id="" class="testimonial-container" style="padding-left:15px;">
+          <div class="author-image">
+            <!-- <a
+              href="https://www.youtube.com/watch?v=uxyMqq6Puuw"
+              class="popup-youtube"
+            > -->
+              <!-- <img
+                src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg"
+                alt=""
+                onclick="playVideo()"
+              /> -->
+              <img src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg" id="myImage">
+              <div id="player"></div>
+              <span class="play-icon">
+                <img src="./images/play-icon.png" alt="" />
+              </span>
+            <!-- </a> -->
+            <span class="tool">Testimonial 1</span>
+          </div>
+          <div class="testimonials-text flex-grow-1">
+            <p>
+              "I wore them every single days for 7 days on the trail. I never
+              washed them and they do not smell. I'm a fan, I think these are
+              great socks. They were pretty dry most of the time and they dry
+              out quick if we had to go through stream, so good job. I love
+              them."
+            </p>
+          </div>
+          <div class="author-name">
+            <strong>Guy Vennero</strong>
+          </div>
+
+          <div class="testimonial-rate">
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+            <i class="fa-sharp fa-solid fa-star" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="video-popup-conf">{"video_url":"true"}</div> -->
     </div>
     {#if sizechart}
       <div transition:fade={{ duration: 200 }} class="size-chart-center">
@@ -2265,145 +2487,149 @@
       id="top-link"><i class="icon-angle-up" /></a
     > -->
   </footer>
-  {#if scroll>=200}
-  <div
-    class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap" transition:fade={{ duration: 200 }}
-  >
-    <div class="d-flex">
-      <div
-        class="d-flex left-socks-selection justify-content-center align-items-center"
-      >
-        <div style="width:48px; height:48px">
-          <img src=".././images/crew-1.jpg" alt="" class="w-100" />
-        </div>
-        <div style="margin-left:10px; font-size:14px">
-          <div>Silverlight Hiking Socks</div>
-        </div>
-      </div>
-      <div class="center-socks-selection d-flex align-items-center">
-        <div class="d-flex flex-wrap" style="padding-left:10px; font-size:14px">
-          <span style="margin-left: 10px;">
-            {#if discount != 0}
-              <del>
-                <span style="color:#777777"> {currencyLogo}{fprice} </span>
-              </del>
-
-              <span style="font-weight: 700">{currencyLogo}{discountedprice}</span>
-            {:else}
-              <span style="color:#777777"> {currencyLogo}{fprice} </span>
-            {/if}
-          </span>
-          {#if discount != 0}
-            <span
-              class="save d-flex"
-              style="margin-left:10px; font-size:14px; font-weight:700"
-              >Save {discount}%
-            </span>
-          {/if}
-        </div>
-      </div>
-    </div>
+  {#if scroll >= 200}
     <div
-      class="right-socks-selection d-flex align-items-center justify-content-center flex-wrap "
+      class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
+      transition:fade={{ duration: 200 }}
     >
-      <div
-        class="d-flex justify-content-center flex-wrap"
-        style="font-size: 14px;"
-      >
-        <select bind:value={color}>
-          <option disabled>Color</option>
-          <option value="BLACK">Black</option>
-          <option value="BLUE">Blue</option>
-        </select>
-        <select bind:value={type}>
-          <option disabled>Type</option>
-          <option value="ANKLE">Ankle</option>
-          <option value="CREW">Crew</option>
-        </select>
-        <select bind:value={quantity}>
-          <option disabled>Quantity</option>
-          <option value={1}>1 Pack</option>
-          <option value={3}>3 Pack</option>
-          <option value={5}>5 Pack</option>
-        </select>
-        <select bind:value={size}>
-          <option disabled>Size</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
-          <option value="XXL">XXL</option>
-        </select>
-      </div>
-      <div class="" style="margin:0 5px">
-        <div class="quantity d-flex round-pill">
-          <input type="button" value="-" class="" on:click={handleqtydec} />
-          <input
-            type="number"
-            class="qty"
-            style="background-color: #ffffff;"
-            step="1"
-            min="1"
-            max="15"
-            name="quantity"
-            bind:value={qty}
-            title="Qty"
-            size="4"
-            pattern="[0-9]*"
-            inputmode="numeric"
-          />
-          <input type="button" value="+" class="" on:click={handleqty} />
+      <div class="d-flex">
+        <div
+          class="d-flex left-socks-selection justify-content-center align-items-center"
+        >
+          <div style="width:48px; height:48px">
+            <img src=".././images/crew-1.jpg" alt="" class="w-100" />
+          </div>
+          <div style="margin-left:10px; font-size:14px">
+            <div>Silverlight Hiking Socks</div>
+          </div>
+        </div>
+        <div class="center-socks-selection d-flex align-items-center">
+          <div
+            class="d-flex flex-wrap"
+            style="padding-left:10px; font-size:14px"
+          >
+            <span style="margin-left: 10px;">
+              {#if discount != 0}
+                <del>
+                  <span style="color:#777777"> {currencyLogo}{fprice} </span>
+                </del>
+
+                <span style="font-weight: 700"
+                  >{currencyLogo}{discountedprice}</span
+                >
+              {:else}
+                <span style="color:#777777"> {currencyLogo}{fprice} </span>
+              {/if}
+            </span>
+            {#if discount != 0}
+              <span
+                class="save d-flex"
+                style="margin-left:10px; font-size:14px; font-weight:700"
+                >Save {discount}%
+              </span>
+            {/if}
+          </div>
         </div>
       </div>
-      <div class="d-flex">
-        <button
-          type="submit"
-          class="add-to-cart-button button alt mr-2"
-          on:click={handleCart}>ADD TO CART</button
+      <div
+        class="right-socks-selection d-flex align-items-center justify-content-center flex-wrap "
+      >
+        <div
+          class="d-flex justify-content-center flex-wrap"
+          style="font-size: 14px;"
         >
+          <select bind:value={color}>
+            <option disabled>Color</option>
+            <option value="BLACK">Black</option>
+            <option value="BLUE">Blue</option>
+          </select>
+          <select bind:value={type}>
+            <option disabled>Type</option>
+            <option value="ANKLE">Ankle</option>
+            <option value="CREW">Crew</option>
+          </select>
+          <select bind:value={quantity}>
+            <option disabled>Quantity</option>
+            <option value={1}>1 Pack</option>
+            <option value={3}>3 Pack</option>
+            <option value={5}>5 Pack</option>
+          </select>
+          <select bind:value={size}>
+            <option disabled>Size</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+        </div>
+        <div class="" style="margin:0 5px">
+          <div class="quantity d-flex round-pill">
+            <input type="button" value="-" class="" on:click={handleqtydec} />
+            <input
+              type="number"
+              class="qty"
+              style="background-color: #ffffff;"
+              step="1"
+              min="1"
+              max="15"
+              name="quantity"
+              bind:value={qty}
+              title="Qty"
+              size="4"
+              pattern="[0-9]*"
+              inputmode="numeric"
+            />
+            <input type="button" value="+" class="" on:click={handleqty} />
+          </div>
+        </div>
+        <div class="d-flex">
+          <button
+            type="submit"
+            class="add-to-cart-button button alt mr-2"
+            on:click={handleCart}>ADD TO CART</button
+          >
+        </div>
       </div>
     </div>
-  </div>
   {/if}
 </div>
 
-
 <style>
- 
   .main-container {
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  .bar-icon{
+  .bar-icon {
     display: none;
   }
-  .fixed-header-container{
+  .fixed-header-container {
     position: fixed;
     top: 0;
     right: 0;
-    left:0;
+    left: 0;
     z-index: 500;
   }
 
-  .fixed-header{
+  .fixed-header {
     display: flex;
     color: #777777;
     height: 70px !important;
   }
 
-  .fixed-header img{
+  .fixed-header img {
     height: 20px;
   }
 
-  .fixed-header li a{
+  .fixed-header li a {
     color: #777777;
   }
 
-  .fixed-cart-box li strong{
+  .fixed-cart-box li strong {
     color: #777777;
   }
 
-  .fixed-header li select{
+  .fixed-header li select {
     color: #777777;
   }
 
@@ -2428,11 +2654,11 @@
     color: #ffffff !important;
   }
 
-  .fixed-cart-box li a:hover{
+  .fixed-cart-box li a:hover {
     color: #ffffff;
   }
 
-  .fixed-cart-box li:hover strong{
+  .fixed-cart-box li:hover strong {
     color: #ffffff;
   }
 
@@ -3180,6 +3406,103 @@
     margin: 10px 5px;
   }
 
+  .customer-reviews {
+    padding: 0 13px;
+  }
+
+  .testimonial-slider {
+    margin-top: 40px;
+  }
+
+  .testimonial-container {
+    width: 33.33%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-image {
+    position: relative;
+  }
+
+  .author-image img {
+    width: 100%;
+  }
+
+  .testimonials-text {
+    padding: 20px 0;
+    font-size: 15px;
+    color: #777777;
+  }
+
+  .testimonials-text p {
+    margin: 0;
+  }
+
+  .author-name {
+    font-size: 16px;
+  }
+
+  .testimonial-rate {
+    color: gold;
+    padding: 10px 0;
+  }
+
+  .testimonial-rate i {
+    width: 16px;
+    height: 16px;
+  }
+
+  .play-icon {
+    position: absolute;
+    background: url(https://silverlight.store/wp-content/uploads/2019/10/play-icon.png)
+      center center no-repeat;
+    background-size: 50px 50px !important;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    margin-left: -25px;
+    top: 50%;
+    margin-top: -25px;
+  }
+
+  .play-icon img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+  .tool {
+    visibility: hidden;
+    font-size: 10px;
+    position: absolute;
+    right: 10%;
+    top: 80%;
+    border: 1px solid;
+    background: #ffffff;
+    padding: 5px;
+    text-decoration: none;
+  }
+
+  .author-image:hover .tool {
+    visibility: visible;
+  }
+
+  @media screen and (min-width: 1200px) {
+    .advantage-list li:nth-child(3) {
+      width: 62%;
+    }
+    .advantage-list li:nth-child(4) {
+      width: 37%;
+    }
+    .advantage-list li:nth-child(7) {
+      width: 37%;
+    }
+    .advantage-list li:nth-child(8) {
+      width: 62%;
+    }
+  }
+
   @media screen and (max-width: 850px) {
     .video-bg {
       background: -webkit-linear-gradient(
@@ -3221,7 +3544,7 @@
     .left-sidebar li {
       list-style: none;
       padding: 15px 0 15px 20px;
-      border-bottom: 1px solid #ffffff42 ;
+      border-bottom: 1px solid #ffffff42;
       font-size: 12px;
     }
 
