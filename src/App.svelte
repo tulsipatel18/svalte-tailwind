@@ -664,55 +664,7 @@
     </ul>
   </div>
   
-  <div class="bar-icon">
-    <i
-    on:click|preventDefault={()=>{leftSidebar2=!leftSidebar2}}
-      class="fa-solid fa-bars "
-      style="font-size: 25px;margin-top:5px"
-    />
-  </div>
-  {#if leftSidebar2}
-  <div class="left-sidebar text-white">
-    <button on:click|preventDefault={() => {
-      leftSidebar2 = !leftSidebar2}} > x </button>
-    <ul class="p-0">
-      <li>
-        <a
-          href="https://silverlight.store/product/silverlight-socks/"
-          class="nav-top-link">SOCKS</a
-        >
-      </li>
-      <li>
-        <a href="https://app.silverlight.store/" class="nav-top-link"
-          >HIKE-TO-EARN</a
-        >
-      </li>
-      <li>
-        <a href="https://silverlight.store/about/" class="nav-top-link"
-          >ABOUT</a
-        >
-      </li>
-      <li>
-        <a href="https://silverlight.store/help/" class="nav-top-link"
-          >FAQ</a
-        >
-      </li>
-      <li>
-        <a href="https://silverlight.store/blog/" class="nav-top-link"
-          >BLOG</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://silverlight.store/account/"
-          class="nav-top-link nav-top-not-logged-in"
-        >
-          <span class="header-account-title"> Login </span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  {/if}
+
 
   <div class="inner-header-center d-flex align-items-center">
     <a
@@ -910,12 +862,56 @@
           </ul>
         </div>
 
+       
         <div class="bar-icon">
           <i
-            class="fa-solid fa-bars text-white"
+          on:click|preventDefault={()=>{leftSidebar2=!leftSidebar2}}
+            class="fa-solid fa-bars "
             style="font-size: 25px;margin-top:5px"
           />
         </div>
+        {#if leftSidebar2}
+        <div class="left-sidebar text-white">
+          <button on:click|preventDefault={() => {
+            leftSidebar2 = !leftSidebar2}} > x </button>
+          <ul class="p-0">
+            <li>
+              <a
+                href="https://silverlight.store/product/silverlight-socks/"
+                class="nav-top-link">SOCKS</a
+              >
+            </li>
+            <li>
+              <a href="https://app.silverlight.store/" class="nav-top-link"
+                >HIKE-TO-EARN</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/about/" class="nav-top-link"
+                >ABOUT</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/help/" class="nav-top-link"
+                >FAQ</a
+              >
+            </li>
+            <li>
+              <a href="https://silverlight.store/blog/" class="nav-top-link"
+                >BLOG</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://silverlight.store/account/"
+                class="nav-top-link nav-top-not-logged-in"
+              >
+                <span class="header-account-title"> Login </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        {/if}
         <!-- <div class="left-sidebar text-white">
           <button> x </button>
           <ul class="p-0">
@@ -3930,7 +3926,7 @@
     }
 
     .bar-icon {
-      display: block;
+      display: block !important;
       flex: 1;
     }
 
