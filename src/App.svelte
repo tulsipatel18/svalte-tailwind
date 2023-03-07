@@ -519,52 +519,40 @@
     initZoomy(options);
   });
 
-
-
   // Load the YouTube IFrame Player API script
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-// Define the YouTube player object
-var player;
-// Called when the API code has downloaded
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: '360',
-    width: '640',
-    videoId: 'uxyMqq6Puuw',
-    playerVars: {
-      'autoplay': 1,
-      'controls': 1,
-      'modestbranding': 1,
-      'rel': 0,
-      'showinfo': 0
-    }
-  });
-}
-// Called when the image is clicked
-var el = document.getElementById('myImage');
-if(el){
-  el.addEventListener('click', function() {
-  // Hide the image
-  this.style.display = 'none';
-  // Show the YouTube player
-  document.getElementById('player').style.display = 'block';
-  // Start playing the video
-  player.playVideo();
-});
-}
-
-
-
-
-
-
-
-
-
-
+  var tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName("script")[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  // Define the YouTube player object
+  var player;
+  // Called when the API code has downloaded
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      height: "360",
+      width: "640",
+      videoId: "uxyMqq6Puuw",
+      playerVars: {
+        autoplay: 1,
+        controls: 1,
+        modestbranding: 1,
+        rel: 0,
+        showinfo: 0,
+      },
+    });
+  }
+  // Called when the image is clicked
+  var el = document.getElementById("myImage");
+  if (el) {
+    el.addEventListener("click", function () {
+      // Hide the image
+      this.style.display = "none";
+      // Show the YouTube player
+      document.getElementById("player").style.display = "block";
+      // Start playing the video
+      player.playVideo();
+    });
+  }
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -620,7 +608,7 @@ if(el){
             style="font-size: 25px;margin-top:5px"
           />
         </div>
-        <div class="left-sidebar text-white">
+        <!-- <div class="left-sidebar text-white">
           <button> x </button>
           <ul class="p-0">
             <li>
@@ -658,7 +646,7 @@ if(el){
               </a>
             </li>
           </ul>
-        </div>
+        </div> -->
 
         <div class="inner-header-center d-flex align-items-center">
           <a
@@ -865,7 +853,7 @@ if(el){
           />
         </div>
         {#if leftSidebar}
-          <div class="left-sidebar text-white">
+          <div class="left-sidebar  text-white">
             <button
               on:click|preventDefault={() => {
                 leftSidebar = !leftSidebar;
@@ -2361,16 +2349,19 @@ if(el){
               href="https://www.youtube.com/watch?v=uxyMqq6Puuw"
               class="popup-youtube"
             > -->
-              <!-- <img
+            <!-- <img
                 src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg"
                 alt=""
                 onclick="playVideo()"
               /> -->
-              <img src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg" id="myImage">
-              <div id="player"></div>
-              <span class="play-icon">
-                <img src="./images/play-icon.png" alt="" />
-              </span>
+            <img
+              src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg"
+              id="myImage"
+            />
+            <div id="player" />
+            <span class="play-icon">
+              <img src="./images/play-icon.png" alt="" />
+            </span>
             <!-- </a> -->
             <span class="tool">Testimonial 1</span>
           </div>
@@ -2422,7 +2413,7 @@ if(el){
   </div>
 
   <footer class="footer-wrapper">
-    <div class="copyright-footer text-center text-white">
+    <div class="copyright-footer text-center">
       <div class="social-icon">
         <a
           href="https://www.facebook.com/shopsilverlight"
@@ -2445,7 +2436,7 @@ if(el){
         <a href="https://discord.gg/9kuEeHEp4Y" data-label="Discord">
           <i class="fa-brands fa-discord" />
         </a>
-        ｜ <span class="text-white">Download App:</span>
+        <span>｜</span> <span class="text-white">Download App:</span>
         <a
           href="https://play.google.com/store/apps/details?id=com.silverlight.store.silverlight"
           data-label="Android"
@@ -2463,11 +2454,21 @@ if(el){
           <i class="fa-brands fa-apple" />
         </a>
       </div>
-      <a href=" https://silverlight.store/legal/#tab_privacy">Privacy</a>｜
-      <a href=" https://silverlight.store/legal/#tab_terms">Terms</a>｜
-      <a href=" https://silverlight.store/help/#tab_contact">Contact</a>｜
-      <a href=" https://silverlight.store/help/#tab_faq">Shipping</a>｜
-      <a href=" https://silverlight.store/help/#tab_faq">Returns</a>｜
+      <a href=" https://silverlight.store/legal/#tab_privacy">Privacy</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/legal/#tab_terms">Terms</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/help/#tab_contact">Contact</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/help/#tab_faq">Shipping</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/help/#tab_faq">Returns</a><span
+        >｜</span
+      >
       <a href="https://silverlight.store/community/#tab_affiliates"
         >Affiliates</a
       >
@@ -3390,12 +3391,26 @@ if(el){
   }
 
   .copyright-footer a {
+    color: #ffffffcc;
+    text-decoration: none;
+  }
+
+  .copyright-footer a:hover {
     color: #ffffff;
     text-decoration: none;
   }
 
-  .social-icon a {
+  .copyright-footer span{
+    color: #ffffff;
+  }
+
+  .social-icon a i {
+    color: #ffffffcc !important;
     margin: 0 5px;
+  }
+
+  .social-icon a i:hover {
+    color: #ffffff !important;
   }
 
   .social-icon img {
@@ -3691,6 +3706,18 @@ if(el){
     .footer-wrapper {
       background-color: #000000;
       padding: 40px 0 165px 0;
+    }
+
+    .advantage-list li {
+      width: 100%;
+    }
+
+    .testimonial-slider {
+      display: block !important;
+    }
+
+    .testimonial-container {
+      width: 100%;
     }
   }
 
