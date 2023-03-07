@@ -664,6 +664,7 @@
       <li class="fixed-cart-box py-2 d1">
         <a
           href=""
+          class="py-2"
           on:click|preventDefault={() => (canvas = true)}
         >
           <li
@@ -2424,10 +2425,14 @@
 
   .fixed-cart-box li:hover {
     background-color: #000000;
-    color: #ffffff;
+    color: #ffffff !important;
   }
 
   .fixed-cart-box li a:hover{
+    color: #ffffff;
+  }
+
+  .fixed-cart-box li:hover strong{
     color: #ffffff;
   }
 
