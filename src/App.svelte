@@ -916,7 +916,7 @@
             style="font-size: 25px;margin-top:5px"
           />
         </div>
-        <div class="left-sidebar text-white">
+        <!-- <div class="left-sidebar text-white">
           <button> x </button>
           <ul class="p-0">
             <li>
@@ -954,7 +954,7 @@
               </a>
             </li>
           </ul>
-        </div>
+        </div> -->
 
         <div class="inner-header-center d-flex align-items-center">
           <a
@@ -1161,7 +1161,7 @@
           />
         </div>
         {#if leftSidebar}
-          <div class="left-sidebar text-white">
+          <div class="left-sidebar  text-white">
             <button
               on:click|preventDefault={() => {
                 leftSidebar = !leftSidebar;
@@ -2658,6 +2658,8 @@
               class="popup-youtube"
             >
               <img
+            > -->
+            <!-- <img
                 src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg"
                 alt=""
                 onclick="playVideo()"
@@ -2722,7 +2724,7 @@
   </div>
 
   <footer class="footer-wrapper">
-    <div class="copyright-footer text-center text-white">
+    <div class="copyright-footer text-center">
       <div class="social-icon">
         <a
           href="https://www.facebook.com/shopsilverlight"
@@ -2745,7 +2747,7 @@
         <a href="https://discord.gg/9kuEeHEp4Y" data-label="Discord">
           <i class="fa-brands fa-discord" />
         </a>
-        ｜ <span class="text-white">Download App:</span>
+        <span>｜</span> <span class="text-white">Download App:</span>
         <a
           href="https://play.google.com/store/apps/details?id=com.silverlight.store.silverlight"
           data-label="Android"
@@ -2763,11 +2765,21 @@
           <i class="fa-brands fa-apple" />
         </a>
       </div>
-      <a href=" https://silverlight.store/legal/#tab_privacy">Privacy</a>｜
-      <a href=" https://silverlight.store/legal/#tab_terms">Terms</a>｜
-      <a href=" https://silverlight.store/help/#tab_contact">Contact</a>｜
-      <a href=" https://silverlight.store/help/#tab_faq">Shipping</a>｜
-      <a href=" https://silverlight.store/help/#tab_faq">Returns</a>｜
+      <a href=" https://silverlight.store/legal/#tab_privacy">Privacy</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/legal/#tab_terms">Terms</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/help/#tab_contact">Contact</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/help/#tab_faq">Shipping</a><span
+        >｜</span
+      >
+      <a href=" https://silverlight.store/help/#tab_faq">Returns</a><span
+        >｜</span
+      >
       <a href="https://silverlight.store/community/#tab_affiliates"
         >Affiliates</a
       >
@@ -3705,12 +3717,26 @@
   }
 
   .copyright-footer a {
+    color: #ffffffcc;
+    text-decoration: none;
+  }
+
+  .copyright-footer a:hover {
     color: #ffffff;
     text-decoration: none;
   }
 
-  .social-icon a {
+  .copyright-footer span{
+    color: #ffffff;
+  }
+
+  .social-icon a i {
+    color: #ffffffcc !important;
     margin: 0 5px;
+  }
+
+  .social-icon a i:hover {
+    color: #ffffff !important;
   }
 
   .social-icon img {
@@ -4037,6 +4063,18 @@
     .footer-wrapper {
       background-color: #000000;
       padding: 40px 0 165px 0;
+    }
+
+    .advantage-list li {
+      width: 100%;
+    }
+
+    .testimonial-slider {
+      display: block !important;
+    }
+
+    .testimonial-container {
+      width: 100%;
     }
   }
 
