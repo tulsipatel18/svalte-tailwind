@@ -40,7 +40,7 @@
     scroll = window.pageYOffset;
   });
 
-  $:console.log(quantity,typeof(quantity));
+  // $:console.log(quantity,typeof(quantity));
 
  
 
@@ -519,6 +519,17 @@
     if(size==undefined){
       size='M' 
     }
+
+
+    
+
+    // Load the YouTube IFrame Player API script
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
    
    
 
@@ -565,43 +576,41 @@
 
 
 
-  // Load the YouTube IFrame Player API script
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-// Define the YouTube player object
-var player;
-// Called when the API code has downloaded
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('player', {
-    height: '360',
-    width: '640',
-    videoId: 'uxyMqq6Puuw',
-    playerVars: {
-      'autoplay': 1,
-      'controls': 1,
-      'modestbranding': 1,
-      'rel': 0,
-      'showinfo': 0
-    }
-  });
-}
-// Called when the image is clicked
-var el = document.getElementById('myImage');
-if(el){
-  el.addEventListener('click', function() {
-  // Hide the image
-  this.style.display = 'none';
-  // Show the YouTube player
-  document.getElementById('player').style.display = 'block';
-  // Start playing the video
-  player.playVideo();
-});
-}
 
+  let player;
+  let showVideo = function() {
+      let videoOverlay = document.getElementById("video-overlay");
+      videoOverlay.style.display = "flex";
+       player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: 'uxyMqq6Puuw',
+        playerVars: {
+          'autoplay': 1,
+          'controls': 1,
+          'modestbranding': 1,
+          'rel': 0,
+          'showinfo': 0
+        },
+        events: {
+          'onStateChange': function(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+              hideVideo();
+            }
+          }
+        }
+      });
+    };
 
-
+    let hideVideo = function() {
+      if (player) {
+        player.pauseVideo();
+        player.destroy();
+        player = null;
+      }
+      let videoOverlay = document.getElementById("video-overlay");
+      videoOverlay.style.display = "none";
+    };
 
 
 
@@ -864,21 +873,12 @@ if(el){
 </div>
 </div>
 {/if}
-
-
+</div>
 
   <div style="max-width:1080px" class="w-100 m-auto position-relative">
     <!-- TOP Header -->
-    <div class="">
-      <div class="top-header">
-        <ul class="text-center">
-          <li class="text-white decoration-none">
-            <a href="" class="text-white">Worldwide Free Shipping</a>
-            ｜
-            <a href="" class="text-white">Lifetime Guarantee</a>
-          </li>
-        </ul>
-      </div>
+   
+
 
   {#if scroll >= 300}
     <div
@@ -2656,14 +2656,18 @@ if(el){
             <!-- <a
               href="https://www.youtube.com/watch?v=uxyMqq6Puuw"
               class="popup-youtube"
-            > -->
-              <!-- <img
+            >
+              <img
                 src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg"
                 alt=""
                 onclick="playVideo()"
               /> -->
-              <img src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg" id="myImage">
-              <div id="player"></div>
+              <img src="https://silverlight.store/wp-content/uploads/2020/01/Guy-Vennero-optimizied.jpg" alt="img" on:click|preventDefault={showVideo} class="image-testimonial">
+              <div id="video-overlay" class="overlay">
+                <span id="close-button" on:click|preventDefault={hideVideo}>X</span>
+                <div id="player"></div>
+                </div>
+              
               <span class="play-icon">
                 <img src="./images/play-icon.png" alt="" />
               </span>
@@ -2788,53 +2792,6 @@ if(el){
       class="fixed-socks-selection fixed-bottom d-flex justify-content-around flex-wrap"
       transition:fade={{ duration: 200 }}
     >
-      <div
-        class="d-flex justify-content-center flex-wrap"
-        style="font-size: 14px;"
-      >
-        <select bind:value={color}>
-          <option disabled>Color</option>
-          <option value="BLACK">Black</option>
-          <option value="BLUE">Blue</option>
-        </select>
-        <select bind:value={type}>
-          <option disabled>Type</option>
-          <option value="ANKLE">Ankle</option>
-          <option value="CREW">Crew</option>
-        </select>
-        <select bind:value={quantity} >
-          <option disabled>Quantity</option>
-          <option value='1'>1 Pack</option>
-          <option value='3'>3 Pack</option>
-          <option value='5'>5 Pack</option>
-        </select>
-        <select bind:value={size}>
-          <option disabled>Size</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
-          <option value="XXL">XXL</option>
-        </select>
-      </div>
-      <div class="" style="margin:0 5px">
-        <div class="quantity d-flex round-pill">
-          <input type="button" value="-" class="" on:click={handleqtydec} />
-          <input
-            type="number"
-            class="qty"
-            style="background-color: #ffffff;"
-            step="1"
-            min="1"
-            max="15"
-            name="quantity"
-            bind:value={qty}
-            title="Qty"
-            size="4"
-            pattern="[0-9]*"
-            inputmode="numeric"
-          />
-          <input type="button" value="+" class="" on:click={handleqty} />
       <div class="d-flex">
         <div
           class="d-flex left-socks-selection justify-content-center align-items-center"
@@ -2856,7 +2813,6 @@ if(el){
                 <del>
                   <span style="color:#777777"> {currencyLogo}{fprice} </span>
                 </del>
-
                 <span style="font-weight: 700"
                   >{currencyLogo}{discountedprice}</span
                 >
@@ -2891,11 +2847,11 @@ if(el){
             <option value="ANKLE">Ankle</option>
             <option value="CREW">Crew</option>
           </select>
-          <select bind:value={quantity}>
+          <select bind:value={quantity} >
             <option disabled>Quantity</option>
-            <option value={1}>1 Pack</option>
-            <option value={3}>3 Pack</option>
-            <option value={5}>5 Pack</option>
+            <option value='1'>1 Pack</option>
+            <option value='3'>3 Pack</option>
+            <option value='5'>5 Pack</option>
           </select>
           <select bind:value={size}>
             <option disabled>Size</option>
@@ -2912,7 +2868,7 @@ if(el){
             <input
               type="number"
               class="qty"
-              style="background-color: #ffffff;"
+              style="background-color: #FFFFFF;"
               step="1"
               min="1"
               max="15"
@@ -2936,9 +2892,15 @@ if(el){
       </div>
     </div>
   {/if}
-</div>
+
+ </div>  
+
 
 <style>
+
+
+
+
   .main-container {
     background-color: rgba(0, 0, 0, 0.3);
   }
@@ -3840,6 +3802,37 @@ if(el){
   .author-image:hover .tool {
     visibility: visible;
   }
+
+
+    .image-testimonial{
+    cursor:pointer;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #player {
+      width: 640px;
+      height: 360px;
+    }
+
+    #close-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
 
   @media screen and (min-width: 1200px) {
     .advantage-list li:nth-child(3) {
