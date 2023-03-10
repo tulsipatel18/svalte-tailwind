@@ -114,6 +114,44 @@
     }
   };
 
+  const handleCurrency=()=>{
+
+    loading =true;   
+   
+
+    if(orders){
+
+   
+   
+    for(let i=0;i<orders.length;i++){
+      let order=orders[i];
+      let type=order.type;
+      let q=order.quantity;
+      let num;
+      if(q==1)
+      {
+        num=0;
+      }else if(q==3){
+        num=1;
+      }else{
+        num=2;
+      }
+     
+      let newprice=currencyValues[currency][type][num];
+      orders[i].discountedprice=newprice;
+
+    }
+  }
+
+  //  setTimeout(() => {
+  //   loading =false;    
+  //  }, 1000);
+  loading =false;
+      
+  
+   
+  }
+
   // $: {
   //   console.log(orders), console.log(color,type,quantity,size);
   // }
@@ -563,6 +601,7 @@
   });
 
   import { initZoomy } from "./initZoomy";
+  
 
   document.addEventListener("DOMContentLoaded", function () {
     var options = {
@@ -612,8 +651,8 @@
       videoOverlay.style.display = "none";
     };
 
-
-
+    import Loader from "./Loader.svelte";
+    let loading =false
 
 
 
@@ -621,6 +660,20 @@
 </script>
 
 <!-- svelte-ignore missing-declaration -->
+
+<!-- {#if loading}
+<Loader/>
+
+{:else} -->
+<div class:blur={loading}>
+  <div class="loader" style="{loading ? 'display:block' : 'display:none'}">
+      <Loader/>
+
+    <!-- Loader component here -->
+  </div>
+  
+  <!-- Content here -->
+
 
 <div class="main-container">
   <video
@@ -641,7 +694,7 @@
   <div class="bg-white fixed-header-container" style="height:70px"  transition:slide={{duration: 200 }} >
   
   <div
-    class="fixed-header header w-100 d-flex justify-content-between align-items-center"
+    class="fixed-header  header w-100 d-flex justify-content-between align-items-center"
     style="max-width:1080px;margin:auto"
   >
   <div class="d-flex inner-header-left">
@@ -688,140 +741,7 @@
     </a>
   </div>
 
-  <div class="inner-header-right position-relative">
-    <ul class="d-flex align-items-center">
-      <li class="">
-        <a href="https://silverlight.store/help/#tab_faq">
-          <i class="fa-regular fa-circle-question hide-icon" />
-        </a>
-      </li>
-      <li class="">
-        <a href="https://silverlight.store/account/" class="">
-          <i class="fa-solid fa-user hide-icon" />
-        </a>
-      </li>
-      <li class="fixed-cart-box py-2 d1">
-        <a
-          href=""
-          class="py-2"
-          on:click|preventDefault={() => (canvas = true)}
-        >
-          <li
-            class="cart-item"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          >
-            <span class="cart-icon">
-              {#if orders}
-                <strong>{orders.length}</strong>
-              {:else}
-                <strong>{0}</strong>
-              {/if}
-            </span>
-          </li>
-
-          {#if totalprice != 0}
-            <div class="fixed-d2">
-              <div class="p-4 offcanvas-body">
-                <div style="max-height:500px;overflow-y:scroll">
-                  {#each orders as order}
-                    <div
-                      class="cart-container d-flex justify-content-between"
-                      style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
-                    >
-                      <div>
-                        <img
-                          style="max-width: 100px;max-hight:100px"
-                          src={order.img}
-                          alt=""
-                        />
-                      </div>
-                      <div
-                        class="d-flex flex-column align-items-start"
-                        style="color:#777777"
-                      >
-                        <div style="margin-bottom: 10px;margin:0 10px">
-                          <div class="text-left">
-                            <h6>Silverlight Hiking Socks</h6>
-                          </div>
-                          <div class="text-left" style="font-size:13px">
-                            <span>COLOR : {order.color}</span>
-                            <span>TYPE : {order.type}</span>
-                            <span>QUANTITY : {order.quantity} </span>
-                            <span>PACK SIZE : {order.size}</span>
-                          </div>
-
-                          <div
-                            class="text-left"
-                            style="font-weight: bold; color: green; opacity: 0.8;"
-                            class:d-none={order.discount == 0}
-                          >
-                            <span>Save {order.discount}%</span>
-                          </div>
-
-                          <div class="text-left">
-                            <span
-                              >{order.qty} x {currencyLogo}{order.discountedprice}.00</span
-                            >
-                          </div>
-                        </div>
-                      </div>
-                      <div class="d-block mr-1">
-                        <button
-                          class="rounded-circle remove-item-button"
-                          on:click|preventDefault={() =>
-                            handleDelete(order.id)}>x</button
-                        >
-                      </div>
-                    </div>
-                  {/each}
-                </div>
-
-                <div
-                  class="border border-right-0 border-left-0"
-                  style="color:#777777"
-                >
-                  <h6 style="padding:15px 0;margin:0">
-                    Subtotal: {currencyLogo}{totalprice}.00
-                  </h6>
-                </div>
-                <div class="d-flex flex-column mt-3">
-                  <button
-                    class="text-light bg-dark font-weight-bold"
-                    style="letter-spacing:1px">VIEW CART</button
-                  >
-                  <button
-                    class="mt-2 text-light font-weight-bold"
-                    style="background-color: {'#1cb9a2'}; letter-spacing:1px"
-                    >GO TO CHECKOUT <i
-                      class="fa fa-long-arrow-right mx-2"
-                      aria-hidden="true"
-                    /></button
-                  >
-                </div>
-              </div>
-            </div>
-          {/if}
-        </a>
-      </li>
-      <li class="html custom html_top_right_text">
-        <select class="select-currency" bind:value={currency}  on:change={() => window.location.reload()}>
-          <option valuse="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option valuse="AUD">AUD</option>
-          <option value="NZD">NZD</option>
-          <option value="CAD">CAD</option>
-          <option valuse="DKK">DKK</option>
-          <option value="SEK">SEK</option>
-          <option value="NOK">NOK</option>
-          <option valuse="CHF">CHF</option>
-          <option value="PLN">PLN</option>
-        </select>
-      </li>
-    </ul>
-  </div>
+  
 </div>
 </div>
 {/if}
@@ -839,7 +759,7 @@
       transition:slide={{ duration: 200 }}
     >
       <div
-        class="fixed-header header w-100 d-flex justify-content-between align-items-center"
+        class="fixed-header  header w-100 d-flex justify-content-between align-items-center "
         style="max-width:1080px;margin:auto"
       >
         <div class="d-flex inner-header-left">
@@ -912,58 +832,14 @@
           </ul>
         </div>
         {/if}
-        <!-- <div class="left-sidebar text-white">
-          <button> x </button>
-          <ul class="p-0">
-            <li>
-              <a
-                href="https://silverlight.store/product/silverlight-socks/"
-                class="nav-top-link">SOCKS</a
-              >
-            </li>
-            <li>
-              <a href="https://app.silverlight.store/" class="nav-top-link"
-                >HIKE-TO-EARN</a
-              >
-            </li>
-            <li>
-              <a href="https://silverlight.store/about/" class="nav-top-link"
-                >ABOUT</a
-              >
-            </li>
-            <li>
-              <a href="https://silverlight.store/help/" class="nav-top-link"
-                >FAQ</a
-              >
-            </li>
-            <li>
-              <a href="https://silverlight.store/blog/" class="nav-top-link"
-                >BLOG</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://silverlight.store/account/"
-                class="nav-top-link nav-top-not-logged-in"
-              >
-                <span class="header-account-title"> Login </span>
-              </a>
-            </li>
-          </ul>
-        </div> -->
+       
 
         <div class="inner-header-center d-flex align-items-center">
           <a
             href="https://silverlight.store/"
             title="Silverlight - Discover Something New Today"
           >
-            <!-- <img
-        width="150"
-        height="100"
-        src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
-        class=""
-        alt="Silverlight"
-      /> -->
+        
             <img
               width="150"
               height="41"
@@ -974,7 +850,7 @@
           </a>
         </div>
 
-        <div class="inner-header-right position-relative">
+        <div class="inner-header-right  position-relative">
           <ul class="d-flex align-items-center">
             <li class="">
               <a href="https://silverlight.store/help/#tab_faq">
@@ -1069,7 +945,7 @@
                         style="color:#777777"
                       >
                         <h6 style="padding:15px 0;margin:0">
-                          Subtotal: ${totalprice}.00
+                          Subtotal: {currencyLogo}{totalprice}.00
                         </h6>
                       </div>
                       <div class="d-flex flex-column mt-3">
@@ -1091,8 +967,8 @@
                 {/if}
               </a>
             </li>
-            <li class="html custom html_top_right_text">
-              <select class="select-currency">
+            <li class="html custom html_top_right_text ">
+              <select class="select-currency 2" bind:value={currency}   on:change={() => {handleCurrency()}}>
                 <option valuse="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
@@ -1226,7 +1102,7 @@
           </a>
         </div>
 
-        <div class="inner-header-right">
+        <div class="inner-header-right ">
           <ul class="d-flex align-items-center">
             <li class="">
               <a href="https://silverlight.store/help/#tab_faq">
@@ -1344,7 +1220,7 @@
               </a>
             </li>
             <li class="html custom html_top_right_text">
-              <select class="select-currency" bind:value={currency} on:change={() => window.location.reload()} >
+              <select class="select-currency 3" bind:value={currency} on:change={() => {handleCurrency()}} >
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
@@ -2903,8 +2779,20 @@
 
  </div>  
 
+</div>
 
 <style>
+
+.blur {
+    filter: blur(0.35px);
+  }
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
 
 
 
@@ -3951,11 +3839,20 @@
       padding: 20px;
       width: 260px;
       background-color: rgba(255, 255, 255, 0.95);
-      z-index: 1;
+      z-index: 1200;
       bottom: 0;
       overflow: scroll;
       scroll-behavior: smooth;
+      
     }
+
+    .fixed-d2{
+      display: none !important;
+    }
+
+
+
+ 
 
     .is-divider {
       height: 3px;
