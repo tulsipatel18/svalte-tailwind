@@ -3,7 +3,6 @@
   import jQuery from "jquery";
   import { onMount } from "svelte";
   import { fade, slide, fly } from "svelte/transition";
-  // import Accordion from "./Accordion.svelte";
   import TopHeader from "./components/TopHeader.svelte";
   import { currencyValues } from "./currencyValues.js";
 
@@ -40,10 +39,6 @@
   window.addEventListener("scroll", () => {
     scroll = window.pageYOffset;
   });
-
-  // $:console.log(quantity,typeof(quantity));
-
-  // console.log(scroll);
 
   color = localStorage.getItem("color");
   type = localStorage.getItem("type");
@@ -134,15 +129,8 @@
       }
     }
 
-    //  setTimeout(() => {
-    //   loading =false;
-    //  }, 1000);
     loading = false;
   };
-
-  // $: {
-  //   console.log(orders), console.log(color,type,quantity,size);
-  // }
 
   const handlecarttotal = () => {
     let total = 0;
@@ -585,41 +573,6 @@
     initZoomy(options);
   });
 
-  let player;
-  let showVideo = function () {
-    let videoOverlay = document.getElementById("video-overlay");
-    videoOverlay.style.display = "flex";
-    player = new YT.Player("player", {
-      height: "360",
-      width: "640",
-      videoId: "uxyMqq6Puuw",
-      playerVars: {
-        autoplay: 1,
-        controls: 1,
-        modestbranding: 1,
-        rel: 0,
-        showinfo: 0,
-      },
-      events: {
-        onStateChange: function (event) {
-          if (event.data == YT.PlayerState.ENDED) {
-            hideVideo();
-          }
-        },
-      },
-    });
-  };
-
-  let hideVideo = function () {
-    if (player) {
-      player.pauseVideo();
-      player.destroy();
-      player = null;
-    }
-    let videoOverlay = document.getElementById("video-overlay");
-    videoOverlay.style.display = "none";
-  };
-
   import Loader from "./Loader.svelte";
   let loading = false;
 
@@ -1039,13 +992,6 @@
               href="https://silverlight.store/"
               title="Silverlight - Discover Something New Today"
             >
-              <!-- <img
-              width="150"
-              height="100"
-              src="https://silverlight.store/wp-content/uploads/2022/05/silverlight-logo-white.svg"
-              class=""
-              alt="Silverlight"
-            /> -->
               <img
                 width="150"
                 height="41"
@@ -2492,37 +2438,6 @@
     font-size: 14px;
   }
 
-  /* .copyright-footer a {
-    color: #ffffffcc;
-    text-decoration: none;
-  }
-
-  .copyright-footer a:hover {
-    color: #ffffff;
-    text-decoration: none;
-  }
-
-  .copyright-footer span {
-    color: #ffffff;
-  }
-
-  .social-icon a i {
-    color: #ffffffcc !important;
-    margin: 0 5px;
-  }
-
-  .social-icon a i:hover {
-    color: #ffffff !important;
-  }
-
-  .social-icon img {
-    margin-bottom: 2px;
-  }
-
-  .payment-logos img {
-    margin: 10px 5px;
-  } */
-
   @media screen and (max-width: 850px) {
     .left-sidebar {
       display: block;
@@ -2543,7 +2458,6 @@
       background: #000000;
       color: #ffffff;
       border: none;
-      /* margin-left: 10px; */
       outline: none;
     }
 
