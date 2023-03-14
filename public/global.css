@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("https://fonts.google.com/?query=lato&category=Sans+Serif");
 html,
 body {

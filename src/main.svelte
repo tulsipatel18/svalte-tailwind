@@ -15,9 +15,9 @@
   import { blueCrewSocksImages} from './images'
   import { blueAnkleSocksImages} from './images'
 
-  
+  import {cartContents} from './store'
 
-  
+  $:console.log($cartContents);
 
   let color,
     canvas = false,
@@ -44,11 +44,10 @@
     scroll = window.pageYOffset;
   });
 
-  // $:console.log(quantity,typeof(quantity));
 
  
 
-  // console.log(scroll);
+ 
 
   color = localStorage.getItem("color");
   type = localStorage.getItem("type");
@@ -59,14 +58,11 @@
     currency='USD'
   }
 
-  $: orders = JSON.parse(localStorage.getItem("orders"));
-  $: localStorage.setItem("orders", JSON.stringify(orders));
-
   $: handleprice(type, quantity,currency);
   
   $: handlephotos(color, type, quantity);
   
-  $: handlecarttotal(orders);
+  $: handlecarttotal($cartContents);
   
   $: handleimg(color, type, quantity);
 
@@ -75,11 +71,10 @@
   const handlecurrencychange=()=>{
     localStorage.setItem("currency", currency);
   }
-  
 
   $: handlephotos(color, type, quantity);
 
-  $: handlecarttotal(orders);
+  $: handlecarttotal($cartContents);
 
   $: handleimg(color, type, quantity);
 
@@ -121,14 +116,10 @@
   const handleCurrency=()=>{
 
     loading =true;   
-   
+    if($cartContents){
 
-    if(orders){
-
-   
-   
-    for(let i=0;i<orders.length;i++){
-      let order=orders[i];
+    for(let i=0;i<$cartContents.length;i++){
+      let order=$cartContents[i];
       let type=order.type;
       let q=order.quantity;
       let num;
@@ -140,31 +131,25 @@
       }else{
         num=2;
       }
-     
       let newprice=currencyValues[currency][type][num];
-      orders[i].discountedprice=newprice;
+      $cartContents[i].discountedprice=newprice;
+      $cartContents[i].currency=currency;
+      $cartContents[i].currencyLogo=currencyLogo;
 
     }
   }
-
-  //  setTimeout(() => {
-  //   loading =false;    
-  //  }, 1000);
+ 
   loading =false;
-      
-  
-   
-  }
 
-  // $: {
-  //   console.log(orders), console.log(color,type,quantity,size);
-  // }
+}
+
+ 
 
   const handlecarttotal = () => {
     let total = 0;
-    if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
+    if ($cartContents) {
+      for (let i = 0; i < $cartContents.length; i++) {
+        let order = $cartContents[i];
         total += order.discountedprice * order.qty;
       }
     }
@@ -514,26 +499,26 @@
       total,
       qty,
       img,
+      currency,
+      currencyLogo,
       discount,
       discountedprice,
       id: Math.random(),
     };
     let flag = false;
 
-    if (orders) {
-      orders = [...orders, newOrder];
+    if ($cartContents) {
+      $cartContents = [...$cartContents, newOrder];
     } else {
-      orders = [newOrder];
+      $cartContents = [newOrder];
     }
-
     
-
-   
   };
 
   const handleDelete = (id) => {
     console.log(id);
-    orders = orders.filter((order) => order.id !== id);
+    $cartContents = $cartContents.filter((order) => order.id !== id);
+   
   };
 
   const handleqty = () => {
@@ -562,21 +547,11 @@
       size='M' 
     }
 
-
-    
-
     // Load the YouTube IFrame Player API script
     let tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     let firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-   
-   
-
-   
-
 
     jQuery(".slider-single").slick({
       slidesToShow: 1,
@@ -616,9 +591,6 @@
     };
     initZoomy(options);
   });
-
-
-
 
   let player;
   let showVideo = function() {
@@ -665,16 +637,11 @@
       navigate('/cart')
     }
 
-
-
 </script>
 
 <!-- svelte-ignore missing-declaration -->
 
-<!-- {#if loading}
-<Loader/>
 
-{:else} -->
 <div class:blur={loading}>
   <div class="loader" style="{loading ? 'display:block' : 'display:none'}">
       <Loader/>
@@ -685,7 +652,9 @@
   <!-- Content here -->
 
 
+
 <div class="main-container">
+ 
   <video
     class="video-bg"
     preload="playsinline"
@@ -885,8 +854,8 @@
                   aria-controls="offcanvasRight"
                 >
                   <span class="cart-icon">
-                    {#if orders}
-                      <strong>{orders.length}</strong>
+                    {#if $cartContents}
+                      <strong>{$cartContents.length}</strong>
                     {:else}
                       <strong>{0}</strong>
                     {/if}
@@ -897,7 +866,7 @@
                   <div class="fixed-d2">
                     <div class="p-4 offcanvas-body">
                       <div style="max-height:500px;overflow-y:scroll">
-                        {#each orders as order}
+                        {#each $cartContents as order}
                           <div
                             class="cart-container d-flex justify-content-between"
                             style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
@@ -1138,8 +1107,8 @@
                   aria-controls="offcanvasRight"
                 >
                   <span class="cart-icon">
-                    {#if orders}
-                      <strong>{orders.length}</strong>
+                    {#if $cartContents}
+                      <strong>{$cartContents.length}</strong>
                     {:else}
                       <strong>{0}</strong>
                     {/if}
@@ -1150,7 +1119,7 @@
                   <div class="d2">
                     <div class="p-4 offcanvas-body">
                       <div style="max-height:500px;overflow-y:scroll">
-                        {#each orders as order}
+                        {#each $cartContents as order}
                           <div
                             class="cart-container d-flex justify-content-between"
                             style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
@@ -1291,7 +1260,7 @@
         >
         <div class="offcanvas-body">
           <div>
-            {#each orders as order}
+            {#each $cartContents as order}
               <div
                 class="cart-container d-flex justify-content-between"
                 style="border-bottom: 1px solid #dee2e6;margin: 10px 10px 0 0;"
