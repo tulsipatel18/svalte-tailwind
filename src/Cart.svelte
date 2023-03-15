@@ -730,12 +730,6 @@
                     class="cart-container d-flex justify-content-between"
                     style="margin-left: -15px;margin-top:10px"
                   >
-                    <!-- <img
-                        style="max-width: 100px;max-hight:100px"
-                        href="https://silverlight.store/product/silverlight-socks/?attribute_pa_color=black&amp;attribute_type=Crew&amp;attribute_quantity=3+Pack&amp;attribute_pa_size=medium"
-                        alt=""
-                      /> -->
-
                     <div
                       class="d-flex flex-column align-items-start"
                       style="color:#777777;margin-bottom: 10px;margin:0 10px"
@@ -1151,6 +1145,9 @@
   }
 
   @media screen and (max-width: 850px) {
+    .header {
+      background-color: #2b6079;
+    }
     .inner-header-left {
       display: none !important;
     }
