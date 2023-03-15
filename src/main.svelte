@@ -81,7 +81,7 @@
 
   $: handlephotos(color, type, quantity);
 
-  $: handlecarttotal($cartContents);
+  $: handlecarttotal(orders);
 
   $: handleimg(color, type, quantity);
 
@@ -151,9 +151,9 @@
 
   const handlecarttotal = () => {
     let total = 0;
-    if ($cartContents) {
-      for (let i = 0; i < $cartContents.length; i++) {
-        let order = $cartContents[i];
+    if (orders) {
+      for (let i = 0; i < orders.length; i++) {
+        let order = orders[i];
         total += order.discountedprice * order.qty;
       }
     }
@@ -511,10 +511,10 @@
     };
     let flag = false;
 
-    if ($cartContents) {
-      $cartContents = [...$cartContents, newOrder];
+    if (orders) {
+      orders = [...orders, newOrder];
     } else {
-      $cartContents = [newOrder];
+      orders = [newOrder];
     }
   };
 
