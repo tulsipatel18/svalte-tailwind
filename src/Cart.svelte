@@ -1,140 +1,108 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
-  import { Link } from 'svelte-routing';
-
-  
-  import {cartContents} from './store'
-
  
-   
- $:console.log($cartContents);
-
- const handleclear=()=>{
-  $cartContents=[]
- }
-  import jQuery from "jquery";
-  import { onMount } from "svelte";
-  import { fade, slide, fly } from "svelte/transition";
-  import TopHeader from "./components/TopHeader.svelte";
-  import { currencyValues } from "./currencyValues.js";
-
-  import { blackCrewSocksImages } from "./images";
-  import { blackCrewSocksImagesThreePack } from "./images";
-  import { blackCrewSocksImagesFivePack } from "./images";
-  import { blackAnkleSocksImages } from "./images";
-  import { blackAnkleSocksImagesThreePack } from "./images";
-  import { blackAnkleSocksImagesFivePack } from "./images";
-  import { blueCrewSocksImages } from "./images";
-  import { blueAnkleSocksImages } from "./images";
+  //svelte functions
   import Loader from "./Loader.svelte";
 
-  import { navigate } from "svelte-routing";
+
+  //components
   import BackgroundVideo from "./components/BackgroundVideo.svelte";
   import Facility from "./components/Facility.svelte";
-  import ProductSection from "./components/ProductSection.svelte";
-  import CustomerReviews from "./components/CustomerReviews.svelte";
-  import Testimonial from "./components/Testimonial.svelte";
   import CopyrightFooter from "./components/CopyrightFooter.svelte";
+  
 
+  //utils
+  import {CurrencyLogo} from './components/CurrencyLogo'
+  import { currencyValues } from "./currencyValues.js";
+  
+
+
+  //global variables
+  import {cartContents,cartTotal} from './store'
+
+
+  //local variables
+  let tax=0;
   let loading = false;
-  let color,
-    canvas = false,
-    fprice = 25,
-    discount = 0,
-    discountedprice = 25,
-    type,
-    quantity,
-    size,
-    total,
-    qty = 1,
-    sizechart = false;
-  let photos = blackCrewSocksImages;
-  let totalprice = 0;
-  let currentimageid = 1;
-  let img;
   let currency = "USD";
-  let leftSidebar = false;
-  let leftSidebar2 = false;
-  let currencyLogo = "$";
-  let scroll = 0;
+  let currencyLogo='$';
+  
+  
+  //testing logs
+  // $:{
+  //   console.log($cartContents),
+  //   console.log($cartTotal),
+  //   console.log(currency);
+  // }
 
-  window.addEventListener("scroll", () => {
-    scroll = window.pageYOffset;
-  });
 
-  color = localStorage.getItem("color");
-  type = localStorage.getItem("type");
-  quantity = localStorage.getItem("quantity");
-  size = localStorage.getItem("size");
-  currency = localStorage.getItem("currency");
-  if (currency == undefined) {
-    currency = "USD";
+  if($cartContents.length!=0){
+
+    currency=$cartContents[0].currency
+
+    currencyLogo=$cartContents[0].currencyLogo
+
   }
 
-  $: orders = JSON.parse(localStorage.getItem("orders"));
-  $: localStorage.setItem("orders", JSON.stringify(orders));
 
-  $: handleprice(type, quantity, currency);
 
-  $: handlephotos(color, type, quantity);
 
-  $: handlecarttotal(orders);
 
-  $: handleimg(color, type, quantity);
 
-  $: handlecurrencychange(currency);
 
-  const handlecurrencychange = () => {
-    localStorage.setItem("currency", currency);
-  };
 
-  $: handlephotos(color, type, quantity);
+  $:handleCartprice($cartContents)
+  
 
-  $: handlecarttotal(orders);
-
-  $: handleimg(color, type, quantity);
-
-  const handleimg = () => {
-    if (color == "BLACK") {
-      if (type == "ANKLE") {
-        if (quantity == 1) {
-          img = blackAnkleSocksImages[0].thumbImg;
-        }
-        if (quantity == 3) {
-          img = blackAnkleSocksImagesThreePack[0].thumbImg;
-        }
-        if (quantity == 5) {
-          img = blackAnkleSocksImagesFivePack[0].thumbImg;
-        }
-      }
-      if (type == "CREW") {
-        if (quantity == 1) {
-          img = blackCrewSocksImages[0].thumbImg;
-        }
-        if (quantity == 3) {
-          img = blackCrewSocksImagesThreePack[0].thumbImg;
-        }
-        if (quantity == 5) {
-          img = blackCrewSocksImagesFivePack[0].thumbImg;
-        }
+  const handleCartprice=()=>{
+    let total=0;
+    if($cartContents){
+      for(let i=0;i<$cartContents.length;i++){
+        let order=$cartContents[i];
+        total+=order.discountedprice*order.qty
       }
     }
-    if (color == "BLUE") {
-      if (type == "ANKLE") {
-        img = blueAnkleSocksImages[0].thumbImg;
-      }
-      if (type == "CREW") {
-        img = blueCrewSocksImages[0].thumbImg;
+    $cartTotal=total;
+  }
+
+  const handleDelete = (id) => {
+    console.log(id);
+    $cartContents = $cartContents.filter((order) => order.id !== id);
+  };
+
+  const handleqty = (id) => {
+    if($cartContents){
+      for (let i = 0; i < $cartContents.length; i++) {
+        
+        if($cartContents[i].id==id){
+          $cartContents[i].qty+=1;
+        }
       }
     }
   };
 
-  const handleCurrency = () => {
+  const handleqtydec = (id) => {
+    if($cartContents){
+      for (let i = 0; i < $cartContents.length; i++) {
+        
+        if($cartContents[i].id==id){
+          if($cartContents[i].qty!=1){
+            $cartContents[i].qty-=1;
+              }   
+          }
+        }
+      }
+  };
+
+
+
+
+
+const handleCurrency = () => {
     loading = true;
-
-    if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
+    if ($cartContents) {
+      for (let i = 0; i < $cartContents.length; i++) {
+        let order = $cartContents[i];
         let type = order.type;
         let q = order.quantity;
         let num;
@@ -145,459 +113,16 @@
         } else {
           num = 2;
         }
-
+        currencyLogo=CurrencyLogo[currency];
         let newprice = currencyValues[currency][type][num];
-        orders[i].discountedprice = newprice;
+        $cartContents[i].discountedprice = newprice;
+        $cartContents[i].currency = currency;
+        $cartContents[i].currencyLogo = currencyLogo;
       }
     }
-
     loading = false;
   };
 
-  const handlecarttotal = () => {
-    let total = 0;
-    if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
-        total += order.discountedprice * order.qty;
-      }
-    }
-    totalprice = total;
-  };
-
-  const handlephotos = () => {
-    if (color == "BLACK") {
-      if (type == "CREW") {
-        if (quantity == 1) {
-          photos = blackCrewSocksImages;
-        }
-        if (quantity == 3) {
-          photos = blackCrewSocksImagesThreePack;
-        }
-        if (quantity == 5) {
-          photos = blackCrewSocksImagesFivePack;
-        }
-      }
-      if (type == "ANKLE") {
-        if (quantity == 1) {
-          photos = blackAnkleSocksImages;
-        }
-        if (quantity == 3) {
-          photos = blackAnkleSocksImagesThreePack;
-        }
-        if (quantity == 5) {
-          photos = blackAnkleSocksImagesFivePack;
-        }
-      }
-    }
-    if (color == "BLUE") {
-      if (type == "CREW") {
-        photos = blueCrewSocksImages;
-      }
-      if (type == "ANKLE") {
-        photos = blueAnkleSocksImages;
-      }
-    }
-  };
-
-  const handleprice = () => {
-    if (quantity == 1) {
-      discount = 0;
-    }
-    if (quantity == 3) {
-      discount = 21;
-    }
-    if (quantity == 5) {
-      discount = 26;
-    }
-    if (type !== "undefined" && type == "ANKLE") {
-      if (quantity == 1) {
-        if (currency == "USD") {
-          currencyLogo = "$";
-          fprice = 25;
-        }
-        if (currency == "EUR") {
-          currencyLogo = "€";
-          fprice = 25;
-        }
-        if (currency == "AUD") {
-          currencyLogo = "A$";
-          fprice = 38;
-        }
-        if (currency == "GBP") {
-          currencyLogo = "£";
-          fprice = 28;
-        }
-        if (currency == "NZD") {
-          currencyLogo = "NZ$";
-          fprice = 41;
-        }
-        if (currency == "CAD") {
-          currencyLogo = "C$";
-          fprice = 35;
-        }
-        if (currency == "DKK") {
-          currencyLogo = "kr.";
-          fprice = 176.0;
-        }
-        if (currency == "SEK") {
-          currencyLogo = "kr";
-          fprice = 260.0;
-        }
-        if (currency == "NOK") {
-          currencyLogo = "kr";
-          fprice = 260.0;
-        }
-        if (currency == "CHF") {
-          currencyLogo = "$";
-          fprice = 112;
-        }
-        if (currency == "PLN") {
-          currencyLogo = "$";
-          fprice = 112;
-        }
-      }
-      if (quantity == 3) {
-        if (currency == "USD") {
-          currencyLogo = "$";
-          fprice = 75;
-        }
-        if (currency == "EUR") {
-          currencyLogo = "€";
-          fprice = 74;
-        }
-        if (currency == "AUD") {
-          currencyLogo = "A$";
-          fprice = 114;
-        }
-        if (currency == "GBP") {
-          currencyLogo = "£";
-          fprice = 66;
-        }
-        if (currency == "NZD") {
-          currencyLogo = "NZ$";
-          fprice = 123;
-        }
-        if (currency == "CAD") {
-          currencyLogo = "C$";
-          fprice = 105;
-        }
-        if (currency == "DKK") {
-          currencyLogo = "kr.";
-          fprice = 528.0;
-        }
-        if (currency == "SEK") {
-          currencyLogo = "kr";
-          fprice = 791.0;
-        }
-        if (currency == "NOK") {
-          currencyLogo = "kr";
-          fprice = 781.0;
-        }
-        if (currency == "CHF") {
-          currencyLogo = "$";
-          fprice = 73;
-        }
-        if (currency == "PLN") {
-          currencyLogo = "$";
-          fprice = 143;
-        }
-      }
-      if (quantity == 5) {
-        if (currency == "USD") {
-          currencyLogo = "$";
-          fprice = 125;
-        }
-        if (currency == "EUR") {
-          currencyLogo = "€";
-          fprice = 123;
-        }
-        if (currency == "AUD") {
-          currencyLogo = "A$";
-          fprice = 190;
-        }
-        if (currency == "GBP") {
-          currencyLogo = "£";
-          fprice = 110;
-        }
-        if (currency == "NZD") {
-          currencyLogo = "NZ$";
-          fprice = 206;
-        }
-        if (currency == "CAD") {
-          currencyLogo = "C$";
-          fprice = 175;
-        }
-        if (currency == "DKK") {
-          currencyLogo = "kr.";
-          fprice = 879.0;
-        }
-        if (currency == "SEK") {
-          currencyLogo = "kr";
-          fprice = 1318.0;
-        }
-        if (currency == "NOK") {
-          currencyLogo = "kr";
-          fprice = 1302.0;
-        }
-        if (currency == "CHF") {
-          currencyLogo = "$";
-          fprice = 122;
-        }
-        if (currency == "PLN") {
-          currencyLogo = "$";
-          fprice = 429;
-        }
-      }
-    }
-    if (type !== "undefined" && type == "CREW") {
-      if (quantity == 1) {
-        if (currency == "USD") {
-          currencyLogo = "$";
-          fprice = 32;
-        }
-        if (currency == "EUR") {
-          currencyLogo = "€";
-          fprice = 31;
-        }
-        if (currency == "AUD") {
-          currencyLogo = "A$";
-          fprice = 49;
-        }
-        if (currency == "GBP") {
-          currencyLogo = "£";
-          fprice = 28;
-        }
-        if (currency == "NZD") {
-          currencyLogo = "NZ$";
-          fprice = 53;
-        }
-        if (currency == "CAD") {
-          currencyLogo = "C$";
-          fprice = 45;
-        }
-        if (currency == "DKK") {
-          currencyLogo = "kr.";
-          fprice = 225.0;
-        }
-        if (currency == "SEK") {
-          currencyLogo = "kr";
-          fprice = 337.0;
-        }
-        if (currency == "NOK") {
-          currencyLogo = "kr";
-          fprice = 333;
-        }
-        if (currency == "CHF") {
-          currencyLogo = "$";
-          fprice = 31;
-        }
-        if (currency == "PLN") {
-          currencyLogo = "$";
-          fprice = 143;
-        }
-      }
-      if (quantity == 3) {
-        if (currency == "USD") {
-          currencyLogo = "$";
-          fprice = 96;
-        }
-        if (currency == "EUR") {
-          currencyLogo = "€";
-          fprice = 94;
-        }
-        if (currency == "AUD") {
-          currencyLogo = "A$";
-          fprice = 146;
-        }
-        if (currency == "GBP") {
-          currencyLogo = "£";
-          fprice = 69;
-        }
-        if (currency == "NZD") {
-          currencyLogo = "NZ$";
-          fprice = 158;
-        }
-        if (currency == "CAD") {
-          currencyLogo = "C$";
-          fprice = 134;
-        }
-        if (currency == "DKK") {
-          currencyLogo = "kr.";
-          fprice = 675.0;
-        }
-        if (currency == "SEK") {
-          currencyLogo = "kr";
-          fprice = 1012.0;
-        }
-        if (currency == "NOK") {
-          currencyLogo = "kr";
-          fprice = 1000.0;
-        }
-        if (currency == "CHF") {
-          currencyLogo = "$";
-          fprice = 94;
-        }
-        if (currency == "PLN") {
-          currencyLogo = "$";
-          fprice = 429;
-        }
-      }
-      if (quantity == 5) {
-        if (currency == "USD") {
-          currencyLogo = "$";
-          fprice = 160;
-        }
-        if (currency == "EUR") {
-          currencyLogo = "€";
-          fprice = 157;
-        }
-        if (currency == "AUD") {
-          currencyLogo = "A$";
-          fprice = 243;
-        }
-        if (currency == "GBP") {
-          currencyLogo = "£";
-          fprice = 140;
-        }
-        if (currency == "NZD") {
-          currencyLogo = "NZ$";
-          fprice = 263;
-        }
-        if (currency == "CAD") {
-          currencyLogo = "C$";
-          fprice = 224;
-        }
-        if (currency == "DKK") {
-          currencyLogo = "kr.";
-          fprice = 1126.0;
-        }
-        if (currency == "SEK") {
-          currencyLogo = "kr";
-          fprice = 1687.0;
-        }
-        if (currency == "NOK") {
-          currencyLogo = "kr";
-          fprice = 1667.0;
-        }
-        if (currency == "CHF") {
-          currencyLogo = "$";
-          fprice = 156;
-        }
-        if (currency == "PLN") {
-          currencyLogo = "$";
-          fprice = 714;
-        }
-      }
-    }
-    discountedprice = fprice - (fprice * discount) / 100;
-    discountedprice = Math.floor(discountedprice);
-  };
-  const handleCart = () => {
-    localStorage.setItem("color", color);
-    localStorage.setItem("type", type);
-    localStorage.setItem("quantity", quantity);
-    localStorage.setItem("size", size);
-
-    total = 0;
-    let newOrder = {
-      color,
-      type,
-      quantity,
-      size,
-      total,
-      qty,
-      img,
-      discount,
-      discountedprice,
-      id: Math.random(),
-    };
-    let flag = false;
-
-    if (orders) {
-      orders = [...orders, newOrder];
-    } else {
-      orders = [newOrder];
-    }
-  };
-
-  const handleDelete = (id) => {
-    console.log(id);
-    orders = orders.filter((order) => order.id !== id);
-  };
-
-  const handleqty = () => {
-    qty += 1;
-  };
-  const handleqtydec = () => {
-    if (qty != 1) qty -= 1;
-  };
-
-  import PhotoSwipeLightbox from "photoswipe/lightbox";
-  import "photoswipe/style.css";
-  let galleryID = "my-test-gallery";
-
-  onMount(() => {
-    if (color == undefined) {
-      color = "BLACK";
-    }
-    if (type == undefined) {
-      type = "CREW";
-    }
-    if (quantity == undefined) {
-      quantity = "3";
-    }
-    if (size == undefined) {
-      size = "M";
-    }
-
-    // Load the YouTube IFrame Player API script
-    let tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    let firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    jQuery(".slider-single").slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      fade: true,
-      useTransform: false,
-    });
-
-    jQuery(".slider-nav").slick({
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      asNavFor: ".slider-single",
-      dots: false,
-      centerMode: false,
-      focusOnSelect: true,
-      draggable: false,
-    });
-
-    let lightbox = new PhotoSwipeLightbox({
-      gallery: "#" + galleryID,
-      children: "a",
-      pswpModule: () => import("photoswipe"),
-    });
-    lightbox.init();
-  });
-
-  import { initZoomy } from "./initZoomy";
-
-  document.addEventListener("DOMContentLoaded", function () {
-    var options = {
-      zoomFactor: 2,
-      class: "zoomy",
-      direction: "both",
-      cursor: true,
-    };
-    initZoomy(options);
-  });
-
-  const handleViewCart = () => {
-    navigate("/cart");
-  };
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -690,6 +215,7 @@
         <div class="product-container">
           <table class="product-details-table">
             <thead class="product-details-heading">
+             
               <tr>
                 <th
                   class="product-name"
@@ -713,10 +239,12 @@
             </thead>
 
             <tbody>
+              {#each $cartContents as order}
               <tr class="">
                 <td class="">
                   <div class="d-block mr-1">
                     <button
+                    on:click|preventDefault={()=>{handleDelete(order.id)}}
                       class="rounded-circle remove-item-button product-delete"
                       >x</button
                     >
@@ -726,10 +254,10 @@
                 <td class="product-thumbnail">
                   <div class="product-image">
                     <a
-                      href="https://silverlight.store/product/silverlight-socks/?attribute_pa_color=black&amp;attribute_type=Crew&amp;attribute_quantity=3+Pack&amp;attribute_pa_size=medium"
+                      href=""
                     >
                       <img
-                        src="https://silverlight.store/wp-content/uploads/2020/03/crew-3-pack-247x296.jpg"
+                        src={order.img}
                         class="w-100"
                         alt="Silverlight Crew Socks 3 Pack"
                       />
@@ -762,22 +290,24 @@
                         class="text-left d-flex flex-column"
                         style="font-size:12px;margin:6px 0;color:#666666;line-height:1.3"
                       >
-                        <span>COLOR : BLACK</span>
-                        <span>TYPE : CREW</span>
-                        <span>QUANTITY : 3 PACK </span>
-                        <span>PACK SIZE : XL</span>
+                        <span>COLOR : {order.color}</span>
+                        <span>TYPE : {order.type}</span>
+                        <span>QUANTITY : {order.qty} PACK </span>
+                        <span>PACK SIZE : {order.size}</span>
                         <div class="show-550">
                           <div
                             class="text-left "
                             style="font-weight: bold; color: #21a921; opacity: 0.8;"
                           >
-                            <span>Save&nbsp;15%</span>
+                          {#if order.discount!=0}
+                            <span>Save&nbsp;{order.discount}%</span>
+                          {/if}  
                           </div>
                           <div class="text-left">
-                            <span>$300.00</span>
+                            <span>{order.currencyLogo}{order.discountedprice}</span>
                           </div>
                           <div class="woocommerce-Price-currencySymbol">
-                            A$488.00
+                            {order.currencyLogo}{order.discountedprice}
                           </div>
                         </div>
                       </div>
@@ -790,11 +320,13 @@
                     class="text-left"
                     style="font-weight: bold; color: #21a921; opacity: 0.8;"
                   >
-                    <span>Save&nbsp;15%</span>
+                  {#if order.discount!=0}
+                    <span>Save&nbsp;{order.discount}%</span>
+                {/if}  
                   </div>
 
                   <div class="text-left">
-                    <span>$300.00</span>
+                    <span>{order.currencyLogo}{order.discountedprice}</span>
                   </div>
                 </td>
 
@@ -804,44 +336,38 @@
                       type="button"
                       value="-"
                       class="minus button is-form"
-                      on:click={handleqtydec}
+                      on:click={()=>{handleqtydec(order.id)}}
                     />
 
-                    <input
-                      type="number"
-                      class="input-text qty text"
-                      step="1"
-                      min="1"
-                      max="15"
-                      name="quantity"
-                      bind:value={qty}
-                      title="Qty"
-                      size="4"
-                      pattern="[0-9]*"
-                      inputmode="numeric"
-                    />
+                   
+                    <input type="number" class="qty svelte-1oguz22" step="1" min="1" max="15" name="quantity" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="background-color: rgb(255, 255, 255);"
+                    bind:value={order.qty}
+                    >
+
+                  
                     <input
                       type="button"
                       value="+"
                       class="plus button is-form"
-                      on:click={handleqty}
+                      on:click={()=>{handleqty(order.id)}}
                     />
                   </div>
                 </td>
 
                 <td class="product-subtotal hide-550" data-title="Total">
                   <span class="woocommerce-Price-currencySymbol">
-                    A$488.00
+                    {order.currencyLogo}{order.discountedprice}
                   </span>
                 </td>
               </tr>
+              {/each}
 
               <tr>
                 <td colspan="6" style="padding: 25px 0 15px 0;">
                   <span class="continue-shopping px-2 py-1">
                     <a
                       class=""
-                      href="/product/silverlight-socks/"
+                      href='/'
                       style="margin:0 14px 14px 0;font-size:12px"
                     >
                       <i class="fa fa-long-arrow-left mx-2" />
@@ -873,7 +399,7 @@
                     class="cart-subtotal d-flex justify-content-between py-3 pr-3"
                   >
                     <div>Subtotal</div>
-                    <span> A$488.00 </span>
+                    <span> {currencyLogo}{$cartTotal} </span>
                   </div>
 
                   <div
@@ -891,14 +417,14 @@
                     <div>
                       VAT <small>(estimated for Andorra)</small>
                     </div>
-                    <span>A$0.00</span>
+                    <span>{currencyLogo}{tax}</span>
                   </div>
 
                   <div
                     class="order-total d-flex justify-content-between py-3 pr-3"
                   >
                     <div>Total</div>
-                    <span> A$488.00 </span>
+                    <span> {currencyLogo}{$cartTotal+tax} </span>
                   </div>
                 </div>
               </div>
@@ -1163,6 +689,10 @@
   }
 
   @media screen and (max-width: 850px) {
+
+    .header{
+      background-color: #2b6079;
+    }
     .inner-header-left {
       display: none !important;
     }

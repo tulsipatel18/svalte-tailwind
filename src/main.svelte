@@ -24,10 +24,12 @@
   import Testimonial from "./components/Testimonial.svelte";
   import CopyrightFooter from "./components/CopyrightFooter.svelte";
 
-  import {cartContents} from './store'
+  import {cartContents ,cartTotal} from './store'
 
-  $:console.log($cartContents);
-  
+  $:{
+    console.log($cartContents),
+    console.log($cartTotal)
+  }
   let loading = false;
   let color,
     canvas = false,
@@ -81,7 +83,7 @@
 
   $: handlephotos(color, type, quantity);
 
-  $: handlecarttotal(orders);
+  $: handlecarttotal($cartContents);
 
   $: handleimg(color, type, quantity);
 
@@ -151,13 +153,13 @@
 
   const handlecarttotal = () => {
     let total = 0;
-    if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
+    if ($cartContents) {
+      for (let i = 0; i < $cartContents.length; i++) {
+        let order = $cartContents[i];
         total += order.discountedprice * order.qty;
       }
     }
-    totalprice = total;
+    $cartTotal = total;
   };
 
   const handlephotos = () => {
@@ -511,10 +513,10 @@
     };
     let flag = false;
 
-    if (orders) {
-      orders = [...orders, newOrder];
+    if ($cartContents) {
+      $cartContents = [...$cartContents, newOrder];
     } else {
-      orders = [newOrder];
+      $cartContents = [newOrder];
     }
   };
 
@@ -660,7 +662,7 @@
     {/if}
   </div>
 
-  <div style="max-width:1080px" class="w-100 m-auto position-relative">
+  <div style="max-width:1080px" class="w-100 m-auto position-relative main-wrapper">
     <!-- TOP Header -->
     {#if scroll >= 300}
       <div
@@ -799,7 +801,7 @@
                     </span>
                   </li>
 
-                  {#if totalprice != 0}
+                  {#if $cartTotal != 0}
                     <div class="fixed-d2">
                       <div class="p-4 offcanvas-body">
                         <div style="max-height:500px;overflow-y:scroll">
@@ -847,7 +849,7 @@
                               </div>
                               <div class="d-block mr-1">
                                 <button
-                                  class="rounded-circle remove-item-button"
+                                  class="rounded-circle remove-item-button product-delete"
                                   on:click|preventDefault={() =>
                                     handleDelete(order.id)}>x</button
                                 >
@@ -861,7 +863,7 @@
                           style="color:#777777"
                         >
                           <h6 style="padding:15px 0;margin:0">
-                            Subtotal: {currencyLogo}{totalprice}.00
+                            Subtotal: {currencyLogo}{$cartTotal}.00
                           </h6>
                         </div>
                         <div class="d-flex flex-column mt-3">
@@ -1047,7 +1049,7 @@
                     </span>
                   </li>
 
-                  {#if totalprice != 0}
+                  {#if $cartTotal != 0}
                     <div class="d2">
                       <div class="p-4 offcanvas-body">
                         <div style="max-height:500px;overflow-y:scroll">
@@ -1095,7 +1097,7 @@
                               </div>
                               <div class="d-block mr-1">
                                 <button
-                                  class="rounded-circle remove-item-button"
+                                  class="rounded-circle remove-item-button product-delete"
                                   on:click|preventDefault={() =>
                                     handleDelete(order.id)}>x</button
                                 >
@@ -1109,7 +1111,7 @@
                           style="color:#777777"
                         >
                           <h6 style="padding:15px 0;margin:0">
-                            Subtotal: {currencyLogo}{totalprice}.00
+                            Subtotal: {currencyLogo}{$cartTotal}.00
                           </h6>
                         </div>
                         <div class="d-flex flex-column mt-3">
@@ -1169,7 +1171,7 @@
           href="https://silverlight.store/product-category/socks/">SOCKS</a
         >
       </div>
-      {#if totalprice != 0 && canvas == true}
+      {#if $cartTotal != 0 && canvas == true}
         <div
           transition:fly={{ x: 200, duration: 200 }}
           class="sidebar offcanvas offcanvas-end"
@@ -1247,7 +1249,7 @@
                   </div>
                   <div class="d-block mr-1">
                     <button
-                      class="rounded-circle remove-item-button"
+                      class="rounded-circle remove-item-button product-delete"
                       on:click|preventDefault={() => handleDelete(order.id)}
                       >x</button
                     >
@@ -1261,7 +1263,7 @@
               style="color:#777777"
             >
               <h6 style="padding:15px 0;margin:0">
-                Subtotal: {currencyLogo}{totalprice}.00
+                Subtotal: {currencyLogo}{$cartTotal}.00
               </h6>
             </div>
             <div class="d-flex flex-column mt-3">
@@ -2061,6 +2063,24 @@
     justify-content: center;
   }
 
+  .product-delete {
+    display: block;
+    width: 25px;
+    height: 25px;
+    font-size: 15px !important;
+    line-height: 1.9px !important;
+    border-radius: 100%;
+    color: #ccc;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid currentColor;
+    align-items: center;
+  }
+
+  .product-delete:hover {
+    color: #000000;
+  }
+
   .header {
     padding: 0 28px;
     height: 100px;
@@ -2451,6 +2471,11 @@
   }
 
   @media screen and (max-width: 850px) {
+
+    .main-wrapper{
+      background-color: #2b6079;
+    }
+   
     .left-sidebar {
       display: block;
       width: 260px;
