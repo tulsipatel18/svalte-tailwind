@@ -5,7 +5,7 @@
   import { fade, slide, fly } from "svelte/transition";
   import TopHeader from "./components/TopHeader.svelte";
   import { currencyValues } from "./currencyValues.js";
-
+  
   import { blackCrewSocksImages } from "./images";
   import { blackCrewSocksImagesThreePack } from "./images";
   import { blackCrewSocksImagesFivePack } from "./images";
@@ -14,7 +14,17 @@
   import { blackAnkleSocksImagesFivePack } from "./images";
   import { blueCrewSocksImages } from "./images";
   import { blueAnkleSocksImages } from "./images";
-
+  import Loader from "./Loader.svelte";
+  
+  import { navigate } from "svelte-routing";
+  import BackgroundVideo from "./components/BackgroundVideo.svelte";
+  import Facility from "./components/Facility.svelte";
+  import ProductSection from "./components/ProductSection.svelte";
+  import CustomerReviews from "./components/CustomerReviews.svelte";
+  import Testimonial from "./components/Testimonial.svelte";
+  import CopyrightFooter from "./components/CopyrightFooter.svelte";
+  
+  let loading = false;
   let color,
     canvas = false,
     fprice = 25,
@@ -573,16 +583,6 @@
     initZoomy(options);
   });
 
-  import Loader from "./Loader.svelte";
-  let loading = false;
-
-  import { navigate } from "svelte-routing";
-  import BackgroundVideo from "./components/BackgroundVideo.svelte";
-  import Facility from "./components/Facility.svelte";
-  import ProductSection from "./components/ProductSection.svelte";
-  import CustomerReviews from "./components/CustomerReviews.svelte";
-  import Testimonial from "./components/Testimonial.svelte";
-  import CopyrightFooter from "./components/CopyrightFooter.svelte";
 
   const handleViewCart = () => {
     navigate("/cart");
