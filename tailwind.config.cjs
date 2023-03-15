@@ -1,8 +1,7 @@
 module.exports = {
-  purge: [
-           "./**/*.svelte",  // Look for .svelte files
-           "./**/*.html" // Look for .html files
-        ],
+  mode: 'jit',
+  purge: ['./src/**/*.svelte'],
+  darkMode: false,
   theme: {
     extend: {},
   },
