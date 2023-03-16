@@ -21,13 +21,6 @@
   let currency = "USD";
   let currencyLogo = "$";
 
-  //testing logs
-  // $:{
-  //   console.log($cartContents),
-  //   console.log($cartTotal),
-  //   console.log(currency);
-  // }
-
   if ($cartContents.length != 0) {
     currency = $cartContents[0].currency;
 
