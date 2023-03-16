@@ -5,7 +5,7 @@
   import { fade, slide, fly } from "svelte/transition";
   import TopHeader from "./components/TopHeader.svelte";
   import { currencyValues } from "./currencyValues.js";
-  
+
   import { blackCrewSocksImages } from "./images";
   import { blackCrewSocksImagesThreePack } from "./images";
   import { blackCrewSocksImagesFivePack } from "./images";
@@ -15,7 +15,7 @@
   import { blueCrewSocksImages } from "./images";
   import { blueAnkleSocksImages } from "./images";
   import Loader from "./Loader.svelte";
-  
+
   import { navigate } from "svelte-routing";
   import BackgroundVideo from "./components/BackgroundVideo.svelte";
   import Facility from "./components/Facility.svelte";
@@ -24,11 +24,10 @@
   import Testimonial from "./components/Testimonial.svelte";
   import CopyrightFooter from "./components/CopyrightFooter.svelte";
 
-  import {cartContents ,cartTotal} from './store'
+  import { cartContents, cartTotal } from "./store";
 
-  $:{
-    console.log($cartContents),
-    console.log($cartTotal)
+  $: {
+    console.log($cartContents), console.log($cartTotal);
   }
   let loading = false;
   let color,
@@ -64,8 +63,6 @@
   if (currency == undefined) {
     currency = "USD";
   }
-
- 
 
   $: handleprice(type, quantity, currency);
 
@@ -143,8 +140,6 @@
         $cartContents[i].discountedprice = newprice;
         $cartContents[i].currency = currency;
         $cartContents[i].currencyLogo = currencyLogo;
-
-
       }
     }
 
@@ -594,14 +589,10 @@
     initZoomy(options);
   });
 
-
   const handleViewCart = () => {
     navigate("/cart");
   };
 </script>
-
-
-
 
 <!-- svelte-ignore missing-declaration -->
 <div class:blur={loading}>
@@ -662,7 +653,10 @@
     {/if}
   </div>
 
-  <div style="max-width:1080px" class="w-100 m-auto position-relative main-wrapper">
+  <div
+    style="max-width:1080px"
+    class="w-100 m-auto position-relative main-wrapper"
+  >
     <!-- TOP Header -->
     {#if scroll >= 300}
       <div
@@ -1761,11 +1755,11 @@
                   <del>
                     <span style="color:#777777"> {currencyLogo}{fprice} </span>
                   </del>
-                  <span style="font-weight: 700"
+                  <span style="font-weight: 500"
                     >{currencyLogo}{discountedprice}</span
                   >
                 {:else}
-                  <span style="color:#777777"> {currencyLogo}{fprice} </span>
+                  <span style="font-weight: 500"> {currencyLogo}{fprice} </span>
                 {/if}
               </span>
               {#if discount != 0}
@@ -1812,7 +1806,12 @@
           </div>
           <div class="" style="margin:0 5px">
             <div class="quantity d-flex round-pill">
-              <input type="button" value="-" class="" on:click={handleqtydec} />
+              <input
+                type="button"
+                value="-"
+                style="min-width:25px"
+                on:click={handleqtydec}
+              />
               <input
                 type="number"
                 class="qty"
@@ -1827,7 +1826,12 @@
                 pattern="[0-9]*"
                 inputmode="numeric"
               />
-              <input type="button" value="+" class="" on:click={handleqty} />
+              <input
+                type="button"
+                value="+"
+                style="min-width:25px"
+                on:click={handleqty}
+              />
             </div>
           </div>
           <div class="d-flex">
@@ -2390,12 +2394,14 @@
   }
 
   .minus {
+    min-width: 25px;
     border-radius: 99px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
   .plus {
+    min-width: 25px;
     border-radius: 99px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -2477,15 +2483,19 @@
   
 
   @media screen and (max-width: 850px) {
+<<<<<<< HEAD
 
    
 
    
 
     .main-wrapper{
+=======
+    .main-wrapper {
+>>>>>>> 26a74945f924d6402fec46b7f8304e60ed6b9471
       background-color: #2b6079;
     }
-   
+
     .left-sidebar {
       display: block;
       width: 260px;

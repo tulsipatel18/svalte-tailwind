@@ -1,33 +1,26 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <script>
- 
   //svelte functions
   import Loader from "./Loader.svelte";
-
 
   //components
   import BackgroundVideo from "./components/BackgroundVideo.svelte";
   import Facility from "./components/Facility.svelte";
   import CopyrightFooter from "./components/CopyrightFooter.svelte";
-  
 
   //utils
-  import {CurrencyLogo} from './components/CurrencyLogo'
+  import { CurrencyLogo } from "./components/CurrencyLogo";
   import { currencyValues } from "./currencyValues.js";
-  
-
 
   //global variables
-  import {cartContents,cartTotal} from './store'
-
+  import { cartContents, cartTotal } from "./store";
 
   //local variables
-  let tax=0;
+  let tax = 0;
   let loading = false;
   let currency = "USD";
-  let currencyLogo='$';
-  
-  
+  let currencyLogo = "$";
+
   //testing logs
   // $:{
   //   console.log($cartContents),
@@ -35,35 +28,24 @@
   //   console.log(currency);
   // }
 
+  if ($cartContents.length != 0) {
+    currency = $cartContents[0].currency;
 
-  if($cartContents.length!=0){
-
-    currency=$cartContents[0].currency
-
-    currencyLogo=$cartContents[0].currencyLogo
-
+    currencyLogo = $cartContents[0].currencyLogo;
   }
 
+  $: handleCartprice($cartContents);
 
-
-
-
-
-
-
-  $:handleCartprice($cartContents)
-  
-
-  const handleCartprice=()=>{
-    let total=0;
-    if($cartContents){
-      for(let i=0;i<$cartContents.length;i++){
-        let order=$cartContents[i];
-        total+=order.discountedprice*order.qty
+  const handleCartprice = () => {
+    let total = 0;
+    if ($cartContents) {
+      for (let i = 0; i < $cartContents.length; i++) {
+        let order = $cartContents[i];
+        total += order.discountedprice * order.qty;
       }
     }
-    $cartTotal=total;
-  }
+    $cartTotal = total;
+  };
 
   const handleDelete = (id) => {
     console.log(id);
@@ -71,34 +53,28 @@
   };
 
   const handleqty = (id) => {
-    if($cartContents){
+    if ($cartContents) {
       for (let i = 0; i < $cartContents.length; i++) {
-        
-        if($cartContents[i].id==id){
-          $cartContents[i].qty+=1;
+        if ($cartContents[i].id == id) {
+          $cartContents[i].qty += 1;
         }
       }
     }
   };
 
   const handleqtydec = (id) => {
-    if($cartContents){
+    if ($cartContents) {
       for (let i = 0; i < $cartContents.length; i++) {
-        
-        if($cartContents[i].id==id){
-          if($cartContents[i].qty!=1){
-            $cartContents[i].qty-=1;
-              }   
+        if ($cartContents[i].id == id) {
+          if ($cartContents[i].qty != 1) {
+            $cartContents[i].qty -= 1;
           }
         }
       }
+    }
   };
 
-
-
-
-
-const handleCurrency = () => {
+  const handleCurrency = () => {
     loading = true;
     if ($cartContents) {
       for (let i = 0; i < $cartContents.length; i++) {
@@ -113,7 +89,7 @@ const handleCurrency = () => {
         } else {
           num = 2;
         }
-        currencyLogo=CurrencyLogo[currency];
+        currencyLogo = CurrencyLogo[currency];
         let newprice = currencyValues[currency][type][num];
         $cartContents[i].discountedprice = newprice;
         $cartContents[i].currency = currency;
@@ -122,7 +98,6 @@ const handleCurrency = () => {
     }
     loading = false;
   };
-
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -169,10 +144,7 @@ const handleCurrency = () => {
       </div>
 
       <div class="inner-header-center d-flex align-items-center">
-        <a
-          href="https://silverlight.store/"
-          title="Silverlight - Discover Something New Today"
-        >
+        <a href="" title="Silverlight - Discover Something New Today">
           <img
             width="150"
             height="41"
@@ -215,7 +187,6 @@ const handleCurrency = () => {
         <div class="product-container">
           <table class="product-details-table">
             <thead class="product-details-heading">
-             
               <tr>
                 <th
                   class="product-name"
@@ -240,134 +211,148 @@ const handleCurrency = () => {
 
             <tbody>
               {#each $cartContents as order}
-              <tr class="">
-                <td class="">
-                  <div class="d-block mr-1">
-                    <button
-                    on:click|preventDefault={()=>{handleDelete(order.id)}}
-                      class="rounded-circle remove-item-button product-delete"
-                      >x</button
-                    >
-                  </div>
-                </td>
+                <tr class="">
+                  <td class="">
+                    <div class="d-block mr-1">
+                      <button
+                        on:click|preventDefault={() => {
+                          handleDelete(order.id);
+                        }}
+                        class="rounded-circle remove-item-button product-delete"
+                        >x</button
+                      >
+                    </div>
+                  </td>
 
-                <td class="product-thumbnail">
-                  <div class="product-image">
-                    <a
-                      href=""
-                    >
-                      <img
-                        src={order.img}
-                        class="w-100"
-                        alt="Silverlight Crew Socks 3 Pack"
-                      />
-                    </a>
-                  </div>
-                </td>
+                  <td class="product-thumbnail">
+                    <div class="product-image">
+                      <a href="">
+                        <img
+                          src={order.img}
+                          class="w-100"
+                          alt="Silverlight Crew Socks 3 Pack"
+                        />
+                      </a>
+                    </div>
+                  </td>
 
-                <td class="product-name" data-title="Product">
-                  <div
-                    class="cart-container d-flex justify-content-between"
-                    style="margin-left: -15px;margin-top:10px"
-                  >
-                    <!-- <img
-                        style="max-width: 100px;max-hight:100px"
-                        href="https://silverlight.store/product/silverlight-socks/?attribute_pa_color=black&amp;attribute_type=Crew&amp;attribute_quantity=3+Pack&amp;attribute_pa_size=medium"
-                        alt=""
-                      /> -->
-
+                  <td class="product-name" data-title="Product">
                     <div
-                      class="d-flex flex-column align-items-start"
-                      style="color:#777777;margin-bottom: 10px;margin:0 10px"
+                      class="cart-container d-flex justify-content-between"
+                      style="margin-left: -15px;margin-top:10px"
                     >
                       <div
-                        class="text-left silverlight-socks"
-                        style="color:#777777;font-weight:600;line-height:1.2"
+                        class="d-flex flex-column align-items-start"
+                        style="color:#777777;margin-bottom: 10px;margin:0 10px"
                       >
-                        <a href="">Silverlight Hiking Socks</a>
-                      </div>
-                      <div
-                        class="text-left d-flex flex-column"
-                        style="font-size:12px;margin:6px 0;color:#666666;line-height:1.3"
-                      >
-                        <span>COLOR : {order.color}</span>
-                        <span>TYPE : {order.type}</span>
-                        <span>QUANTITY : {order.qty} PACK </span>
-                        <span>PACK SIZE : {order.size}</span>
-                        <div class="show-550">
-                          <div
-                            class="text-left "
-                            style="font-weight: bold; color: #21a921; opacity: 0.8;"
-                          >
-                          {#if order.discount!=0}
-                            <span>Save&nbsp;{order.discount}%</span>
-                          {/if}  
-                          </div>
-                          <div class="text-left">
-                            <span>{order.currencyLogo}{order.discountedprice}</span>
-                          </div>
-                          <div class="woocommerce-Price-currencySymbol">
-                            {order.currencyLogo}{order.discountedprice}
+                        <div
+                          class="text-left silverlight-socks"
+                          style="color:#777777;font-weight:600;line-height:1.2"
+                        >
+                          <a href="">Silverlight Hiking Socks</a>
+                        </div>
+                        <div
+                          class="text-left d-flex flex-column"
+                          style="font-size:12px;margin:6px 0;color:#666666;line-height:1.3"
+                        >
+                          <span>COLOR : {order.color}</span>
+                          <span>TYPE : {order.type}</span>
+                          <span>QUANTITY : {order.qty} PACK </span>
+                          <span>PACK SIZE : {order.size}</span>
+                          <div class="show-550">
+                            <div
+                              class="text-left "
+                              style="font-weight: bold; color: #21a921; opacity: 0.8;"
+                            >
+                              {#if order.discount != 0}
+                                <span>Save&nbsp;{order.discount}%</span>
+                              {/if}
+                            </div>
+                            <div class="text-left">
+                              <span
+                                >{order.currencyLogo}{order.discountedprice}</span
+                              >
+                            </div>
+                            <div class="woocommerce-Price-currencySymbol">
+                              {order.currencyLogo}{order.discountedprice}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td class="product-price hide-550" data-title="Price">
-                  <div
-                    class="text-left"
-                    style="font-weight: bold; color: #21a921; opacity: 0.8;"
-                  >
-                  {#if order.discount!=0}
-                    <span>Save&nbsp;{order.discount}%</span>
-                {/if}  
-                  </div>
-
-                  <div class="text-left">
-                    <span>{order.currencyLogo}{order.discountedprice}</span>
-                  </div>
-                </td>
-
-                <td class="product-quantity" data-title="Quantity">
-                  <div class="quantity d-flex round-pill">
-                    <input
-                      type="button"
-                      value="-"
-                      class="minus button is-form"
-                      on:click={()=>{handleqtydec(order.id)}}
-                    />
-
-                   
-                    <input type="number" class="qty svelte-1oguz22" step="1" min="1" max="15" name="quantity" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" style="background-color: rgb(255, 255, 255);"
-                    bind:value={order.qty}
+                  <td class="product-price hide-550" data-title="Price">
+                    <div
+                      class="text-left"
+                      style="font-weight: bold; color: #21a921; opacity: 0.8;"
                     >
+                      {#if order.discount != 0}
+                        <span>Save&nbsp;{order.discount}%</span>
+                      {/if}
+                    </div>
 
-                  
-                    <input
-                      type="button"
-                      value="+"
-                      class="plus button is-form"
-                      on:click={()=>{handleqty(order.id)}}
-                    />
-                  </div>
-                </td>
+                    <div class="text-left">
+                      <span style="font-weight:500"
+                        >{order.currencyLogo}{order.discountedprice}</span
+                      >
+                    </div>
+                  </td>
 
-                <td class="product-subtotal hide-550" data-title="Total">
-                  <span class="woocommerce-Price-currencySymbol">
-                    {order.currencyLogo}{order.discountedprice}
-                  </span>
-                </td>
-              </tr>
+                  <td class="product-quantity" data-title="Quantity">
+                    <div class="quantity d-flex round-pill">
+                      <input
+                        type="button"
+                        value="-"
+                        class="minus button is-form"
+                        on:click={() => {
+                          handleqtydec(order.id);
+                        }}
+                      />
+
+                      <input
+                        type="number"
+                        class="qty svelte-1oguz22"
+                        step="1"
+                        min="1"
+                        max="15"
+                        name="quantity"
+                        title="Qty"
+                        size="4"
+                        pattern="[0-9]*"
+                        inputmode="numeric"
+                        style="background-color: rgb(255, 255, 255);"
+                        bind:value={order.qty}
+                      />
+
+                      <input
+                        type="button"
+                        value="+"
+                        class="plus button is-form"
+                        on:click={() => {
+                          handleqty(order.id);
+                        }}
+                      />
+                    </div>
+                  </td>
+
+                  <td class="product-subtotal hide-550" data-title="Total">
+                    <span
+                      class="woocommerce-Price-currencySymbol"
+                      style="font-weight:500"
+                    >
+                      {order.currencyLogo}{order.discountedprice}
+                    </span>
+                  </td>
+                </tr>
               {/each}
 
-              <tr>
+              <tr style="border-bottom: none;">
                 <td colspan="6" style="padding: 25px 0 15px 0;">
                   <span class="continue-shopping px-2 py-1">
                     <a
                       class=""
-                      href='/'
+                      href="/"
                       style="margin:0 14px 14px 0;font-size:12px"
                     >
                       <i class="fa fa-long-arrow-left mx-2" />
@@ -397,40 +382,58 @@ const handleCurrency = () => {
                 <div>
                   <div
                     class="cart-subtotal d-flex justify-content-between py-3 pr-3"
+                    style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>Subtotal</div>
-                    <span> {currencyLogo}{$cartTotal} </span>
+                    <span style="font-weight:500;color:#000000">
+                      {currencyLogo}{$cartTotal}
+                    </span>
                   </div>
 
                   <div
                     class="shipping d-flex justify-content-between py-3 pr-3"
+                    style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>Shipping</div>
-                    <span style="font-size: 13px;color:#21a921">
+                    <span style="font-weight:500;font-size: 13px;color:#21a921">
                       Free shipping
                     </span>
                   </div>
 
                   <div
                     class="tax-total d-flex justify-content-between py-3 pr-3"
+                    style="border-bottom: 2px solid rgb(236, 236, 236);"
+                  >
+                    <div>PayPal Fee</div>
+                    <span style="font-weight:500;color:#000000">3.65%</span>
+                  </div>
+
+                  <div
+                    class="tax-total d-flex justify-content-between py-3 pr-3"
+                    style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>
                       VAT <small>(estimated for Andorra)</small>
                     </div>
-                    <span>{currencyLogo}{tax}</span>
+                    <span style="font-weight:500;color:#000000"
+                      >{currencyLogo}{tax}</span
+                    >
                   </div>
 
                   <div
                     class="order-total d-flex justify-content-between py-3 pr-3"
+                    style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>Total</div>
-                    <span> {currencyLogo}{$cartTotal+tax} </span>
+                    <span style="font-weight:500;color:#000000">
+                      {currencyLogo}{$cartTotal + tax}
+                    </span>
                   </div>
                 </div>
               </div>
               <div class="proceed-to-checkout py-2" style="margin:24px 0">
                 <a
-                  href="https://silverlight.store/checkout/"
+                  href=""
                   class="checkout-button button alt wc-forward wp-element-button"
                 >
                   PROCEED TO CHECKOUT</a
@@ -469,7 +472,7 @@ const handleCurrency = () => {
         </div>
       </div>
       <!--- Facility Container --->
-      <div style="margin:25px 0">
+      <div style="margin:25px -15px">
         <Facility />
       </div>
     </div>
@@ -577,6 +580,10 @@ const handleCurrency = () => {
     margin-top: 20px;
   }
 
+  .product-details-table tr {
+    border-bottom: 2px solid rgb(236, 236, 236);
+  }
+
   .product-details-table td {
     padding: 15px 6px;
   }
@@ -679,20 +686,34 @@ const handleCurrency = () => {
     outline: none;
   }
 
+  .plus {
+    min-width: 25px;
+  }
+
+  .minus {
+    min-width: 25px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   input[type="number"] {
     -moz-appearance: textfield;
   }
 
   .footer-wrapper {
-    padding: 40px 0 110px 0;
+    padding: 40px 0 40px 0;
     font-size: 14px;
   }
 
   @media screen and (max-width: 850px) {
-
-    .header{
+    .header {
       background-color: #2b6079;
     }
+
     .inner-header-left {
       display: none !important;
     }
@@ -731,7 +752,7 @@ const handleCurrency = () => {
 
     .footer-wrapper {
       background-color: #000000;
-      padding: 40px 0 130px 0;
+      padding: 40px 0 40px 0;
     }
   }
 
@@ -754,7 +775,7 @@ const handleCurrency = () => {
   @media screen and (max-width: 620px) {
     .footer-wrapper {
       background-color: #000000;
-      padding: 40px 0 165px 0;
+      padding: 40px 0 40px 0;
     }
   }
 
@@ -774,7 +795,7 @@ const handleCurrency = () => {
   @media screen and (max-width: 370px) {
     .footer-wrapper {
       background-color: #000000;
-      padding: 40px 0 200px 0;
+      padding: 40px 0 40px 0;
     }
 
     .inner-header-center img {
