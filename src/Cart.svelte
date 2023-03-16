@@ -20,6 +20,9 @@
   let loading = false;
   let currency = "USD";
   let currencyLogo = "$";
+  let paypalfee=0;
+  let totalcheckout=0;
+
 
   //testing logs
   // $:{
@@ -35,6 +38,14 @@
   }
 
   $: handleCartprice($cartContents);
+  $:handleTotalCheckout($cartContents);
+
+  const handleTotalCheckout=()=>{
+    paypalfee=($cartTotal*3.65)/100;
+    paypalfee=Number(paypalfee.toFixed(2));
+
+    totalcheckout=$cartTotal+paypalfee;
+  }
 
   const handleCartprice = () => {
     let total = 0;
@@ -45,11 +56,13 @@
       }
     }
     $cartTotal = total;
+    
   };
 
   const handleDelete = (id) => {
     console.log(id);
     $cartContents = $cartContents.filter((order) => order.id !== id);
+    
   };
 
   const handleqty = (id) => {
@@ -98,6 +111,11 @@
     }
     loading = false;
   };
+
+
+
+
+
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -270,11 +288,11 @@
                             </div>
                             <div class="text-left">
                               <span
-                                >{order.currencyLogo}{order.discountedprice}</span
+                                >{order.currencyLogo} {order.discountedprice}</span
                               >
                             </div>
                             <div class="woocommerce-Price-currencySymbol">
-                              {order.currencyLogo}{order.discountedprice}
+                              {order.currencyLogo} {order.discountedprice}
                             </div>
                           </div>
                         </div>
@@ -294,7 +312,7 @@
 
                     <div class="text-left">
                       <span style="font-weight:500"
-                        >{order.currencyLogo}{order.discountedprice}</span
+                        >{order.currencyLogo} {order.discountedprice}</span
                       >
                     </div>
                   </td>
@@ -341,7 +359,7 @@
                       class="woocommerce-Price-currencySymbol"
                       style="font-weight:500"
                     >
-                      {order.currencyLogo}{order.discountedprice}
+                      {order.currencyLogo} {order.discountedprice}
                     </span>
                   </td>
                 </tr>
@@ -386,7 +404,7 @@
                   >
                     <div>Subtotal</div>
                     <span style="font-weight:500;color:#000000">
-                      {currencyLogo}{$cartTotal}
+                      {currencyLogo} {$cartTotal}
                     </span>
                   </div>
 
@@ -405,7 +423,7 @@
                     style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>PayPal Fee</div>
-                    <span style="font-weight:500;color:#000000">3.65%</span>
+                    <span style="font-weight:500;color:#000000">{currencyLogo} {paypalfee}</span>
                   </div>
 
                   <div
@@ -416,7 +434,7 @@
                       VAT <small>(estimated for Andorra)</small>
                     </div>
                     <span style="font-weight:500;color:#000000"
-                      >{currencyLogo}{tax}</span
+                      >{currencyLogo} {tax}</span
                     >
                   </div>
 
@@ -426,7 +444,7 @@
                   >
                     <div>Total</div>
                     <span style="font-weight:500;color:#000000">
-                      {currencyLogo}{$cartTotal + tax}
+                      {currencyLogo} {totalcheckout + tax}
                     </span>
                   </div>
                 </div>
