@@ -144,10 +144,7 @@
       </div>
 
       <div class="inner-header-center d-flex align-items-center">
-        <a
-          href=""
-          title="Silverlight - Discover Something New Today"
-        >
+        <a href="" title="Silverlight - Discover Something New Today">
           <img
             width="150"
             height="41"
@@ -296,7 +293,9 @@
                     </div>
 
                     <div class="text-left">
-                      <span style="font-weight:500">{order.currencyLogo}{order.discountedprice}</span>
+                      <span style="font-weight:500"
+                        >{order.currencyLogo}{order.discountedprice}</span
+                      >
                     </div>
                   </td>
 
@@ -338,7 +337,10 @@
                   </td>
 
                   <td class="product-subtotal hide-550" data-title="Total">
-                    <span class="woocommerce-Price-currencySymbol" style="font-weight:500">
+                    <span
+                      class="woocommerce-Price-currencySymbol"
+                      style="font-weight:500"
+                    >
                       {order.currencyLogo}{order.discountedprice}
                     </span>
                   </td>
@@ -383,7 +385,9 @@
                     style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>Subtotal</div>
-                    <span style="font-weight:500;color:#000000"> {currencyLogo}{$cartTotal} </span>
+                    <span style="font-weight:500;color:#000000">
+                      {currencyLogo}{$cartTotal}
+                    </span>
                   </div>
 
                   <div
@@ -411,7 +415,9 @@
                     <div>
                       VAT <small>(estimated for Andorra)</small>
                     </div>
-                    <span style="font-weight:500;color:#000000">{currencyLogo}{tax}</span>
+                    <span style="font-weight:500;color:#000000"
+                      >{currencyLogo}{tax}</span
+                    >
                   </div>
 
                   <div
@@ -419,7 +425,9 @@
                     style="border-bottom: 2px solid rgb(236, 236, 236);"
                   >
                     <div>Total</div>
-                    <span style="font-weight:500;color:#000000"> {currencyLogo}{$cartTotal + tax} </span>
+                    <span style="font-weight:500;color:#000000">
+                      {currencyLogo}{$cartTotal + tax}
+                    </span>
                   </div>
                 </div>
               </div>
