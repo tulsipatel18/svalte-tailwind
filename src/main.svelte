@@ -612,54 +612,6 @@
 
   <div class="main-container">
     <BackgroundVideo />
-    {#if scroll >= 300}
-      <div
-        class="bg-white fixed-header-container"
-        style="height:70px"
-        transition:slide={{ duration: 200 }}
-      >
-        <div
-          class="fixed-header  header w-100 d-flex justify-content-between align-items-center"
-          style="max-width:1080px;margin:auto"
-        >
-          <div class="d-flex inner-header-left">
-            <ul class="d-flex align-items-center">
-              <li class="">
-                <a
-                  href="https://silverlight.store/product/silverlight-socks/"
-                  class="">SOCKS</a
-                >
-              </li>
-              <li class="">
-                <a href="https://app.silverlight.store" class="">HIKE-TO-EARN</a
-                >
-              </li>
-              <li class="">
-                <a href="https://silverlight.store/about/" class="">ABOUT</a>
-              </li>
-              <li class="">
-                <a href="https://silverlight.store/blog/" class="">BLOG</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="inner-header-center d-flex align-items-center">
-            <a
-              href="https://silverlight.store/"
-              title="Silverlight - Discover Something New Today"
-            >
-              <img
-                width="150"
-                height="41"
-                src="https://silverlight.store/wp-content/uploads/2020/03/Silverlight_Logo_dark-grey.png"
-                class="header-logo-dark"
-                alt="Silverlight"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    {/if}
   </div>
 
   <div style="max-width:1080px" class="w-100 m-auto position-relative main-wrapper">
@@ -671,7 +623,7 @@
         transition:slide={{ duration: 200 }}
       >
         <div
-          class="fixed-header  header w-100 d-flex justify-content-between align-items-center "
+          class="fixed-header  header w-100 d-flex justify-content-between align-items-center 2"
           style="max-width:1080px;margin:auto"
         >
           <div class="d-flex inner-header-left">
@@ -780,7 +732,118 @@
                   <i class="fa-solid fa-user hide-icon" />
                 </a>
               </li>
-              <li class="fixed-cart-box py-2 d1">
+              <li
+                class="fixed-cart-box py-2 d1 show-850"
+                on:click|preventDefault={() => navigate("/cart")}
+              >
+                <a
+                  href=""
+                  class="py-2"
+                  on:click|preventDefault={() => (canvas = true)}
+                >
+                  <li
+                    class="cart-item"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight"
+                  >
+                    <span class="cart-icon">
+                      {#if $cartContents}
+                        <strong>{$cartContents.length}</strong>
+                      {:else}
+                        <strong>{0}</strong>
+                      {/if}
+                    </span>
+                  </li>
+
+                  {#if $cartTotal != 0}
+                    <div class="fixed-d2">
+                      <div class="p-4 offcanvas-body">
+                        <div style="max-height:500px;overflow-y:scroll">
+                          {#each $cartContents as order}
+                            <div
+                              class="cart-container d-flex justify-content-between"
+                              style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                            >
+                              <div>
+                                <img
+                                  style="max-width: 100px;max-hight:100px"
+                                  src={order.img}
+                                  alt=""
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column align-items-start"
+                                style="color:#777777"
+                              >
+                                <div style="margin-bottom: 10px;margin:0 10px">
+                                  <div class="text-left">
+                                    <h6>Silverlight Hiking Socks</h6>
+                                  </div>
+                                  <div class="text-left" style="font-size:13px">
+                                    <span>COLOR : {order.color}</span>
+                                    <span>TYPE : {order.type}</span>
+                                    <span>QUANTITY : {order.quantity} </span>
+                                    <span>PACK SIZE : {order.size}</span>
+                                  </div>
+
+                                  <div
+                                    class="text-left"
+                                    style="font-weight: bold; color: green; opacity: 0.8;"
+                                    class:d-none={order.discount == 0}
+                                  >
+                                    <span>Save {order.discount}%</span>
+                                  </div>
+
+                                  <div class="text-left">
+                                    <span
+                                      >{order.qty} x ${order.discountedprice}.00</span
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="d-block mr-1">
+                                <button
+                                  class="rounded-circle remove-item-button product-delete"
+                                  on:click|preventDefault={() =>
+                                    handleDelete(order.id)}>x</button
+                                >
+                              </div>
+                            </div>
+                          {/each}
+                        </div>
+
+                        <div
+                          class="border border-right-0 border-left-0"
+                          style="color:#777777"
+                        >
+                          <h6 style="padding:15px 0;margin:0">
+                            Subtotal: {currencyLogo}{$cartTotal}.00
+                          </h6>
+                        </div>
+                        <div class="d-flex flex-column mt-3">
+                          <button
+                            on:click|preventDefault={() => {
+                              handleViewCart();
+                            }}
+                            class="text-light bg-dark font-weight-bold"
+                            style="letter-spacing:1px">VIEW CART</button
+                          >
+                          <button
+                            class="mt-2 text-light font-weight-bold"
+                            style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                            >GO TO CHECKOUT <i
+                              class="fa fa-long-arrow-right mx-2"
+                              aria-hidden="true"
+                            /></button
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  {/if}
+                </a>
+              </li>
+              <li class="fixed-cart-box py-2 d1 hide-850">
                 <a
                   href=""
                   class="py-2"
@@ -924,7 +987,7 @@
         <TopHeader />
 
         <div
-          class="header w-100 d-flex justify-content-between align-items-center"
+          class="header w-100 d-flex justify-content-between align-items-center 3"
         >
           <div class="d-flex inner-header-left">
             <ul class="d-flex align-items-center">
@@ -1031,7 +1094,118 @@
                   <i class="fa-solid fa-user hide-icon" />
                 </a>
               </li>
-              <li class="cart-box py-2 d1">
+              <li
+                class="cart-box py-2 d1 show-850"
+                on:click|preventDefault={() => navigate("/cart")}
+              >
+                <a
+                  href=""
+                  class="py-2"
+                  on:click|preventDefault={() => (canvas = true)}
+                >
+                  <li
+                    class="cart-item"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight"
+                  >
+                    <span class="cart-icon">
+                      {#if $cartContents}
+                        <strong>{$cartContents.length}</strong>
+                      {:else}
+                        <strong>{0}</strong>
+                      {/if}
+                    </span>
+                  </li>
+
+                  {#if $cartTotal != 0}
+                    <div class="d2">
+                      <div class="p-4 offcanvas-body">
+                        <div style="max-height:500px;overflow-y:scroll">
+                          {#each $cartContents as order}
+                            <div
+                              class="cart-container d-flex justify-content-between"
+                              style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
+                            >
+                              <div>
+                                <img
+                                  style="max-width: 100px;max-hight:100px"
+                                  src={order.img}
+                                  alt=""
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column align-items-start"
+                                style="color:#777777"
+                              >
+                                <div style="margin-bottom: 10px;margin:0 10px">
+                                  <div class="text-left">
+                                    <h6>Silverlight Hiking Socks</h6>
+                                  </div>
+                                  <div class="text-left" style="font-size:13px">
+                                    <span>COLOR : {order.color}</span>
+                                    <span>TYPE : {order.type}</span>
+                                    <span>QUANTITY : {order.quantity} </span>
+                                    <span>PACK SIZE : {order.size}</span>
+                                  </div>
+
+                                  <div
+                                    class="text-left"
+                                    style="font-weight: bold; color: green; opacity: 0.8;"
+                                    class:d-none={order.discount == 0}
+                                  >
+                                    <span>Save {order.discount}%</span>
+                                  </div>
+
+                                  <div class="text-left">
+                                    <span
+                                      >{order.qty} x {currencyLogo}{order.discountedprice}.00</span
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="d-block mr-1">
+                                <button
+                                  class="rounded-circle remove-item-button product-delete"
+                                  on:click|preventDefault={() =>
+                                    handleDelete(order.id)}>x</button
+                                >
+                              </div>
+                            </div>
+                          {/each}
+                        </div>
+
+                        <div
+                          class="border border-right-0 border-left-0"
+                          style="color:#777777"
+                        >
+                          <h6 style="padding:15px 0;margin:0">
+                            Subtotal: {currencyLogo}{$cartTotal}.00
+                          </h6>
+                        </div>
+                        <div class="d-flex flex-column mt-3">
+                          <button
+                            on:click|preventDefault={() => {
+                              handleViewCart();
+                            }}
+                            class="text-light bg-dark font-weight-bold"
+                            style="letter-spacing:1px">VIEW CART</button
+                          >
+                          <button
+                            class="mt-2 text-light font-weight-bold"
+                            style="background-color: {'#1cb9a2'}; letter-spacing:1px"
+                            >GO TO CHECKOUT <i
+                              class="fa fa-long-arrow-right mx-2"
+                              aria-hidden="true"
+                            /></button
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  {/if}
+                </a>
+              </li>
+              <li class="cart-box py-2 d1 hide-850">
                 <a
                   href=""
                   class="py-2"
@@ -2468,6 +2642,14 @@
     display: none;
   }
 
+  .hide-850 {
+    display: none;
+  }
+
+  .show-850 {
+    display: block;
+  }
+
   .footer-wrapper {
     padding: 40px 0 110px 0;
     font-size: 14px;
@@ -2477,12 +2659,15 @@
   
 
   @media screen and (max-width: 850px) {
+    .hide-850 {
+      display: block;
+    }
 
-   
+    .show-850 {
+      display: none;
+    }
 
-   
-
-    .main-wrapper{
+    .main-wrapper {
       background-color: #2b6079;
     }
    
