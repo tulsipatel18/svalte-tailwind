@@ -23,7 +23,13 @@
   import CustomerReviews from "./components/CustomerReviews.svelte";
   import Testimonial from "./components/Testimonial.svelte";
   import CopyrightFooter from "./components/CopyrightFooter.svelte";
-  
+
+  import {cartContents ,cartTotal} from './store'
+
+  $:{
+    console.log($cartContents),
+    console.log($cartTotal)
+  }
   let loading = false;
   let color,
     canvas = false,
@@ -59,14 +65,13 @@
     currency = "USD";
   }
 
-  $: orders = JSON.parse(localStorage.getItem("orders"));
-  $: localStorage.setItem("orders", JSON.stringify(orders));
+ 
 
   $: handleprice(type, quantity, currency);
 
   $: handlephotos(color, type, quantity);
 
-  $: handlecarttotal(orders);
+  $: handlecarttotal($cartContents);
 
   $: handleimg(color, type, quantity);
 
@@ -78,7 +83,7 @@
 
   $: handlephotos(color, type, quantity);
 
-  $: handlecarttotal(orders);
+  $: handlecarttotal($cartContents);
 
   $: handleimg(color, type, quantity);
 
@@ -120,9 +125,9 @@
   const handleCurrency = () => {
     loading = true;
 
-    if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
+    if ($cartContents) {
+      for (let i = 0; i < $cartContents.length; i++) {
+        let order = $cartContents[i];
         let type = order.type;
         let q = order.quantity;
         let num;
@@ -135,7 +140,11 @@
         }
 
         let newprice = currencyValues[currency][type][num];
-        orders[i].discountedprice = newprice;
+        $cartContents[i].discountedprice = newprice;
+        $cartContents[i].currency = currency;
+        $cartContents[i].currencyLogo = currencyLogo;
+
+
       }
     }
 
@@ -144,13 +153,13 @@
 
   const handlecarttotal = () => {
     let total = 0;
-    if (orders) {
-      for (let i = 0; i < orders.length; i++) {
-        let order = orders[i];
+    if ($cartContents) {
+      for (let i = 0; i < $cartContents.length; i++) {
+        let order = $cartContents[i];
         total += order.discountedprice * order.qty;
       }
     }
-    totalprice = total;
+    $cartTotal = total;
   };
 
   const handlephotos = () => {
@@ -494,6 +503,8 @@
       quantity,
       size,
       total,
+      currency,
+      currencyLogo,
       qty,
       img,
       discount,
@@ -502,16 +513,16 @@
     };
     let flag = false;
 
-    if (orders) {
-      orders = [...orders, newOrder];
+    if ($cartContents) {
+      $cartContents = [...$cartContents, newOrder];
     } else {
-      orders = [newOrder];
+      $cartContents = [newOrder];
     }
   };
 
   const handleDelete = (id) => {
     console.log(id);
-    orders = orders.filter((order) => order.id !== id);
+    $cartContents = $cartContents.filter((order) => order.id !== id);
   };
 
   const handleqty = () => {
@@ -589,6 +600,9 @@
   };
 </script>
 
+
+
+
 <!-- svelte-ignore missing-declaration -->
 <div class:blur={loading}>
   <div class="loader" style={loading ? "display:block" : "display:none"}>
@@ -648,7 +662,7 @@
     {/if}
   </div>
 
-  <div style="max-width:1080px" class="w-100 m-auto position-relative">
+  <div style="max-width:1080px" class="w-100 m-auto position-relative main-wrapper">
     <!-- TOP Header -->
     {#if scroll >= 300}
       <div
@@ -779,19 +793,19 @@
                     aria-controls="offcanvasRight"
                   >
                     <span class="cart-icon">
-                      {#if orders}
-                        <strong>{orders.length}</strong>
+                      {#if $cartContents}
+                        <strong>{$cartContents.length}</strong>
                       {:else}
                         <strong>{0}</strong>
                       {/if}
                     </span>
                   </li>
 
-                  {#if totalprice != 0}
+                  {#if $cartTotal != 0}
                     <div class="fixed-d2">
                       <div class="p-4 offcanvas-body">
                         <div style="max-height:500px;overflow-y:scroll">
-                          {#each orders as order}
+                          {#each $cartContents as order}
                             <div
                               class="cart-container d-flex justify-content-between"
                               style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
@@ -835,7 +849,7 @@
                               </div>
                               <div class="d-block mr-1">
                                 <button
-                                  class="rounded-circle remove-item-button"
+                                  class="rounded-circle remove-item-button product-delete"
                                   on:click|preventDefault={() =>
                                     handleDelete(order.id)}>x</button
                                 >
@@ -849,7 +863,7 @@
                           style="color:#777777"
                         >
                           <h6 style="padding:15px 0;margin:0">
-                            Subtotal: {currencyLogo}{totalprice}.00
+                            Subtotal: {currencyLogo}{$cartTotal}.00
                           </h6>
                         </div>
                         <div class="d-flex flex-column mt-3">
@@ -1027,19 +1041,19 @@
                     aria-controls="offcanvasRight"
                   >
                     <span class="cart-icon">
-                      {#if orders}
-                        <strong>{orders.length}</strong>
+                      {#if $cartContents}
+                        <strong>{$cartContents.length}</strong>
                       {:else}
                         <strong>{0}</strong>
                       {/if}
                     </span>
                   </li>
 
-                  {#if totalprice != 0}
+                  {#if $cartTotal != 0}
                     <div class="d2">
                       <div class="p-4 offcanvas-body">
                         <div style="max-height:500px;overflow-y:scroll">
-                          {#each orders as order}
+                          {#each $cartContents as order}
                             <div
                               class="cart-container d-flex justify-content-between"
                               style="margin-left: -15px;border-bottom: 1px solid #dee2e6;margin-top:10px"
@@ -1083,7 +1097,7 @@
                               </div>
                               <div class="d-block mr-1">
                                 <button
-                                  class="rounded-circle remove-item-button"
+                                  class="rounded-circle remove-item-button product-delete"
                                   on:click|preventDefault={() =>
                                     handleDelete(order.id)}>x</button
                                 >
@@ -1097,7 +1111,7 @@
                           style="color:#777777"
                         >
                           <h6 style="padding:15px 0;margin:0">
-                            Subtotal: {currencyLogo}{totalprice}.00
+                            Subtotal: {currencyLogo}{$cartTotal}.00
                           </h6>
                         </div>
                         <div class="d-flex flex-column mt-3">
@@ -1157,7 +1171,7 @@
           href="https://silverlight.store/product-category/socks/">SOCKS</a
         >
       </div>
-      {#if totalprice != 0 && canvas == true}
+      {#if $cartTotal != 0 && canvas == true}
         <div
           transition:fly={{ x: 200, duration: 200 }}
           class="sidebar offcanvas offcanvas-end"
@@ -1188,7 +1202,7 @@
           >
           <div class="offcanvas-body">
             <div>
-              {#each orders as order}
+              {#each $cartContents as order}
                 <div
                   class="cart-container d-flex justify-content-between"
                   style="border-bottom: 1px solid #dee2e6;margin: 10px 10px 0 0;"
@@ -1235,7 +1249,7 @@
                   </div>
                   <div class="d-block mr-1">
                     <button
-                      class="rounded-circle remove-item-button"
+                      class="rounded-circle remove-item-button product-delete"
                       on:click|preventDefault={() => handleDelete(order.id)}
                       >x</button
                     >
@@ -1249,7 +1263,7 @@
               style="color:#777777"
             >
               <h6 style="padding:15px 0;margin:0">
-                Subtotal: {currencyLogo}{totalprice}.00
+                Subtotal: {currencyLogo}{$cartTotal}.00
               </h6>
             </div>
             <div class="d-flex flex-column mt-3">
@@ -2049,6 +2063,24 @@
     justify-content: center;
   }
 
+  .product-delete {
+    display: block;
+    width: 25px;
+    height: 25px;
+    font-size: 15px !important;
+    line-height: 1.9px !important;
+    border-radius: 100%;
+    color: #ccc;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid currentColor;
+    align-items: center;
+  }
+
+  .product-delete:hover {
+    color: #000000;
+  }
+
   .header {
     padding: 0 28px;
     height: 100px;
@@ -2439,6 +2471,11 @@
   }
 
   @media screen and (max-width: 850px) {
+
+    .main-wrapper{
+      background-color: #2b6079;
+    }
+   
     .left-sidebar {
       display: block;
       width: 260px;
