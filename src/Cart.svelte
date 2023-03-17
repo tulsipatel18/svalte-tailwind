@@ -268,7 +268,7 @@
                         >
                           <span>COLOR : {order.color}</span>
                           <span>TYPE : {order.type}</span>
-                          <span>QUANTITY : {order.qty} PACK </span>
+                          <span>QUANTITY : {order.qty==null?0:order.qty} PACK </span>
                           <span>PACK SIZE : {order.size}</span>
                           <div class="show-550">
                             <div
@@ -324,8 +324,7 @@
                       <input
                         type="number"
                         class="qty svelte-1oguz22"
-                        step="1"
-                        min="1"
+                        
                         max="15"
                         name="quantity"
                         title="Qty"
@@ -334,6 +333,17 @@
                         inputmode="numeric"
                         style="background-color: rgb(255, 255, 255);"
                         bind:value={order.qty}
+                        on:input={() => {
+                          console.log(order.qty);
+                          if(order.qty<1 && order.qty!=null){
+                            order.qty=1;
+                          }
+                        }}
+                        on:focusout={()=>{
+                          if(order.qty==null){
+                            order.qty=1;
+                          }
+                        }}
                       />
 
                       <input

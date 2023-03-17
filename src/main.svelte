@@ -611,6 +611,8 @@
   </div>
 
   <div class="main-container">
+   
+    
     <BackgroundVideo />
   </div>
 
@@ -1822,6 +1824,16 @@
                       pattern="[0-9]*"
                       inputmode="numeric"
                       aria-labelledby="Silverlight Hiking Socks quantity"
+                      on:input={() => {
+                        if(qty<1 && qty!=null){
+                          qty=1;
+                        }
+                      }}
+                      on:focusout={()=>{
+                        if(qty==null){
+                          qty=1;
+                        }
+                      }}
                     />
                     <input
                       type="button"
@@ -2000,6 +2012,16 @@
                 size="4"
                 pattern="[0-9]*"
                 inputmode="numeric"
+                on:input={() => {
+                  if(qty<1 && qty!=null){
+                    qty=1;
+                  }
+                }}
+                on:focusout={()=>{
+                  if(qty==null){
+                    qty=1;
+                  }
+                }}
               />
               <input type="button" value="+" class="" on:click={handleqty} />
             </div>
